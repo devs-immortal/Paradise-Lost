@@ -40,7 +40,6 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.StructureBlock;
 import net.minecraft.world.level.block.entity.StructureBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.block.state.properties.RailShape;
@@ -411,6 +410,53 @@ public final class LevitaTests {
         return steps;
     }
 
+    private static final List<String> valleyPoseWrong = new ArrayList<>();
+
+    @ClientTest("a valley of descending powered rail and levita climbs is drawn like vanilla while on rails")
+    private static List<Step> valleyLevitaDrawnLikeVanillaOnRails() {
+        return List.of(
+                setup(world -> {
+                    valleyPoseWrong.clear();
+                    dir = Direction.SOUTH;
+                    valleyLadder(world, start, true);
+                    ticks = 0;
+                    seen = 0;
+                }),
+                Step.run(2, () -> onServer(server -> {
+                    lockValleyShapes(world(server), start);
+                    BlockState descent = world(server).getBlockState(start);
+                    check(descent.getBlock() instanceof BaseRailBlock rail
+                                    && descent.getValue(rail.getShapeProperty()) == ascending(dir.getOpposite()),
+                            "setup: descent rail at " + start.toShortString() + " is " + descent);
+                    entityId = launch(world(server), EntityType.MINECART, start, 0.4);
+                })),
+                Step.run(0, () -> onServer(server -> standAside(player(server), world(server), 6, 3))),
+                Step.until("client to see the cart", 40, () -> client().level.getEntity(entityId) != null),
+                Step.until("cart to leave the valley rails", 50, () -> {
+                    if (client().level.getEntity(entityId) instanceof AbstractMinecart cart) {
+                        BlockPos at = cart.blockPosition();
+                        boolean onDescent = at.equals(start) || at.equals(start.below());
+                        if (onDescent && MinecartFloatingHelper.isCartOnRail(cart)
+                                && !MinecartFloatingHelper.isOffRail(cart)) {
+                            seen = 1;
+                            if (MinecartFloatingHelper.shouldUseFloatRenderPose(cart)) {
+                                float[] vanilla = vanillaRenderPose(cart);
+                                valleyPoseWrong.add("tick " + ticks + ": float pose on the descending rail, vanilla="
+                                        + (vanilla == null ? "none" : fmt(vanilla[0]) + "/" + fmt(vanilla[1]))
+                                        + describe(cart) + floatState(cart));
+                            }
+                        }
+                    }
+                    return fromServer(server -> along(serverCart(server, entityId)) > 2.2) || ++ticks >= 40;
+                }),
+                Step.run(0, () -> {
+                    check(seen == 1, "setup: client never saw the cart on the descending rail");
+                    check(valleyPoseWrong.isEmpty(), "levita valley rotated early on the rails: "
+                            + String.join(" | ", valleyPoseWrong.subList(0, Math.min(8, valleyPoseWrong.size()))));
+                })
+        );
+    }
+
     private static Direction ascendingToward(RailShape shape) {
         return switch (shape) {
             case ASCENDING_NORTH -> Direction.NORTH;
@@ -431,7 +477,9 @@ public final class LevitaTests {
                 Mth.lerp(partial, cart.xOld, cart.getX()),
                 Mth.lerp(partial, cart.yOld, cart.getY()),
                 Mth.lerp(partial, cart.zOld, cart.getZ()));
-        return vanilla != null ? vanilla : new float[]{Mth.rotLerp(partial, cart.yRotO, cart.getYRot()), cart.getXRot()};
+        return vanilla != null
+                ? vanilla
+                : new float[]{Mth.rotLerp(partial, cart.yRotO, cart.getYRot()), cart.getXRot()};
     }
 
     private static MinecartFloatingHelper.RenderYawFilter levelFilter = new MinecartFloatingHelper.RenderYawFilter();

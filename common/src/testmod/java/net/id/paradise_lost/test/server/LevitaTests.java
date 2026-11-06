@@ -154,7 +154,9 @@ public final class LevitaTests {
                 level().setBlockAndUpdate(flat, BlockRegistry.LEVITA_RAIL.get().defaultBlockState());
                 BlockPos slope = flat.relative(dir).below();
                 level().setBlockAndUpdate(slope.below(), Blocks.STONE.defaultBlockState());
-                level().setBlockAndUpdate(slope.relative(towardPower ? dir.getOpposite() : dir), Blocks.STONE.defaultBlockState());
+                level().setBlockAndUpdate(slope.relative(towardPower
+                        ? dir.getOpposite()
+                        : dir), Blocks.STONE.defaultBlockState());
                 level().setBlockAndUpdate(slope, BlockRegistry.LEVITA_RAIL.get().defaultBlockState());
                 forceShape(level(), slope, ascending(towardPower ? dir.getOpposite() : dir));
                 pos = slope;
@@ -1261,6 +1263,40 @@ public final class LevitaTests {
                 && MinecartFloatingHelper.isSettledOnRail(cart, railPos)
                 && MinecartFloatingHelper.getIncline(cart) == 0
                 && along(cart) > landAlong - 0.6;
+    }
+
+    @ServerTest("a valley of descending powered rail and levita climbs does not flip incline early")
+    private static List<Step> valleyLevitaDoesNotFlipInclineEarly() {
+        return List.of(
+                setup(world -> {
+                    valleyLadder(world, start, true);
+                    ticks = 0;
+                    seen = 0;
+                }),
+                Step.run(2, () -> {
+                    lockValleyShapes(level(), start);
+                    entityId = launch(level(), EntityType.MINECART, start, 0.4);
+                }),
+                Step.until("cart to climb out of the valley", 50, () -> {
+                    AbstractMinecart cart = serverCart(entityId);
+                    BlockPos at = cart.blockPosition();
+                    boolean onDescent = at.equals(start) || at.equals(start.below());
+                    if (onDescent) {
+                        check(MinecartFloatingHelper.getIncline(cart) <= 0,
+                                "incline flipped to climb while still on the descending powered rail"
+                                        + describe(cart) + floatState(cart));
+                    }
+                    if (MinecartFloatingHelper.getIncline(cart) > 0) {
+                        seen = 1;
+                    }
+                    return along(cart) > 2.2 || ++ticks >= 40;
+                }),
+                Step.run(0, () -> {
+                    AbstractMinecart cart = serverCart(entityId);
+                    check(seen == 1 || along(cart) > 1.5, "cart never reached the levita climbs"
+                            + describe(cart) + floatState(cart));
+                })
+        );
     }
 
     // ---- pistons next to a floating cart must push it, not make it climb ----

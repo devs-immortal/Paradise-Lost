@@ -126,6 +126,35 @@ public final class LevitaTrack {
         world.setBlockAndUpdate(at, BlockRegistry.LEVITA_RAIL.get().defaultBlockState());
     }
 
+    /**
+     * Valley of one descending powered rail and two ascending rails, the in-game "asymmetrical V-shaped ladder" that
+     * used to rotate early when the ascents were levita.
+     */
+    public static void valleyLadder(ServerLevel world, BlockPos from, boolean levitaAscents) {
+        BlockPos climb0 = from.relative(dir);
+        BlockPos climb1 = from.relative(dir, 2).above();
+        world.setBlockAndUpdate(from.relative(dir.getOpposite()), Blocks.STONE.defaultBlockState());
+        world.setBlockAndUpdate(climb1.relative(dir), Blocks.STONE.defaultBlockState());
+        if (levitaAscents) {
+            placePoweredLevitaRail(world, climb0);
+            placePoweredLevitaRail(world, climb1);
+        } else {
+            world.setBlockAndUpdate(climb0.below(), Blocks.REDSTONE_BLOCK.defaultBlockState());
+            world.setBlockAndUpdate(climb0, Blocks.POWERED_RAIL.defaultBlockState());
+            world.setBlockAndUpdate(climb1.below(), Blocks.REDSTONE_BLOCK.defaultBlockState());
+            world.setBlockAndUpdate(climb1, Blocks.POWERED_RAIL.defaultBlockState());
+        }
+        world.setBlockAndUpdate(from.below(), Blocks.REDSTONE_BLOCK.defaultBlockState());
+        world.setBlockAndUpdate(from, Blocks.POWERED_RAIL.defaultBlockState());
+        lockValleyShapes(world, from);
+    }
+
+    public static void lockValleyShapes(ServerLevel world, BlockPos from) {
+        forceShape(world, from, ascending(dir.getOpposite()));
+        forceShape(world, from.relative(dir), ascending(dir));
+        forceShape(world, from.relative(dir, 2).above(), ascending(dir));
+    }
+
     public static void trench(ServerLevel world, int from, int to) {
         Direction side = dir.getClockWise();
         fill(world, start.relative(dir, from).relative(side).below(3), start.relative(dir, to).relative(side.getOpposite()).below(), Blocks.AIR.defaultBlockState());

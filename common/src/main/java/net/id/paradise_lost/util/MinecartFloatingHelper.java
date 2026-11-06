@@ -1051,7 +1051,8 @@ public final class MinecartFloatingHelper {
     }
 
     /**
-     * Still under the pier of a flat landing. Noclip belongs here; clipping the rail from above must collide so we seat.
+     * Still under the pier of a flat landing. Noclip belongs here; clipping the rail from above must collide so we
+     * seat.
      */
     private static boolean isBelowContinuingFlatLanding(AbstractMinecart cart) {
         BlockPos ahead = findUnsettledFlatLandingAhead(cart);
@@ -2177,6 +2178,20 @@ public final class MinecartFloatingHelper {
     }
 
     /**
+     * Seated on a rail and still riding it. Vanilla offs already have the slope and the valley blend; our 45-degree
+     * pose snaps as soon as levita charges or incline flips.
+     */
+    private static boolean isRidingRailLikeVanilla(AbstractMinecart cart) {
+        if (isOffRail(cart)) {
+            return false;
+        }
+        BlockPos railPos = findRailPos(cart);
+        return railPos != null
+                && isSettledOnRail(cart, railPos)
+                && !isMidairAboveRail(cart, railPos, false);
+    }
+
+    /**
      * Client only. True while the cart sits on a curve that vanilla would pick up by itself. The server incline for the
      * slope next to the curve arrives early, and our axis-snapped yaw would turn the cart before the curve does.
      */
@@ -2220,7 +2235,7 @@ public final class MinecartFloatingHelper {
         if (!isFloating(cart)) {
             return false;
         }
-        if (isRidingCurveLikeVanilla(cart)) {
+        if (isRidingCurveLikeVanilla(cart) || isRidingRailLikeVanilla(cart)) {
             return false;
         }
         BlockPos railPos = findRailPos(cart);
