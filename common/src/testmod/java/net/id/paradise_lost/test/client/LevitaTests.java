@@ -41,6 +41,7 @@ import net.minecraft.world.level.block.StructureBlock;
 import net.minecraft.world.level.block.entity.StructureBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.block.state.properties.RailShape;
 import net.minecraft.world.level.block.state.properties.StructureMode;
@@ -325,6 +326,112 @@ public final class LevitaTests {
                             + " samples): " + String.join(" | ", climbViolations.subList(0, Math.min(8, climbViolations.size()))));
                 })
         );
+    }
+
+    private static final List<String> placedViolations = new ArrayList<>();
+    private static final java.util.Set<String> placedSeen = new java.util.HashSet<>();
+
+    @ClientTest("a cart placed on a powered levita rail is drawn along the rail from the first frame")
+    private static List<Step> placedCartDrawnAlongRail() {
+        List<Step> steps = new ArrayList<>();
+        steps.add(setup(world -> {
+            placedViolations.clear();
+            placedSeen.clear();
+        }));
+        steps.add(Step.run(0, () -> onServer(server -> standAside(player(server), world(server), 6, 3))));
+        RailShape[] shapes = {RailShape.NORTH_SOUTH, RailShape.EAST_WEST, RailShape.ASCENDING_NORTH,
+                RailShape.ASCENDING_EAST, RailShape.ASCENDING_SOUTH, RailShape.ASCENDING_WEST};
+        for (RailShape shape : shapes) {
+            for (float yaw : new float[]{0, 90}) {
+                steps.add(Step.run(0, () -> onServer(server -> {
+                    ServerLevel world = world(server);
+                    world.setBlockAndUpdate(start, Blocks.AIR.defaultBlockState());
+                    for (Direction side : Direction.Plane.HORIZONTAL) {
+                        world.setBlockAndUpdate(start.relative(side), Blocks.AIR.defaultBlockState());
+                    }
+                    if (shape.isAscending()) {
+                        // an ascending rail pops without a solid block at its high end
+                        world.setBlockAndUpdate(start.relative(ascendingToward(shape)), Blocks.STONE.defaultBlockState());
+                    }
+                    track(world, start, "L");
+                    forceShape(world, start, shape);
+                })));
+                // let the client have the rail before the cart shows up
+                steps.add(Step.run(5, () -> onServer(server -> {
+                    ServerLevel world = world(server);
+                    AbstractMinecart cart = EntityType.MINECART.create(world);
+                    cart.moveTo(start.getX() + 0.5, start.getY(), start.getZ() + 0.5, yaw, 0);
+                    cart.setDeltaMovement(Vec3.ZERO);
+                    world.addFreshEntity(cart);
+                    entityId = cart.getId();
+                    ticks = 0;
+                })));
+                steps.add(Step.until("placed cart to be sampled", 40, () -> {
+                    if (client().level.getEntity(entityId) instanceof AbstractMinecart cart) {
+                        boolean sloped = shape.isAscending();
+                        boolean alongX = shape == RailShape.EAST_WEST || shape == RailShape.ASCENDING_EAST
+                                || shape == RailShape.ASCENDING_WEST;
+                        for (int frame = 0; frame < 4; frame++) {
+                            float[] pose = placedRenderPose(cart, frame / 4.0F);
+                            double rad = Math.toRadians(pose[0]);
+                            double facing = Math.abs(alongX ? Math.cos(rad) : Math.sin(rad));
+                            String why = null;
+                            if (facing < 0.85) {
+                                why = "yaw " + fmt(pose[0]) + " is across the rail";
+                            } else if (sloped && Math.abs(pose[1]) < 20.0F) {
+                                why = "pitch " + fmt(pose[1]) + " on a slope";
+                            } else if (!sloped && Math.abs(pose[1]) > 3.0F) {
+                                why = "pitch " + fmt(pose[1]) + " on a flat rail";
+                            }
+                            if (why != null && ticks <= 8 && placedSeen.add(shape + " " + yaw + " " + why.split(" ")[0] + " " + ticks)) {
+                                placedViolations.add(shape + " placed yaw " + yaw + " tick " + ticks + "." + frame
+                                        + ": " + why + " floatPose=" + MinecartFloatingHelper.shouldUseFloatRenderPose(cart)
+                                        + " skipSnap=" + MinecartFloatingHelper.shouldSkipRailRenderSnap(cart)
+                                        + " railPos=" + MinecartFloatingHelper.findRailPos(cart)
+                                        + " climbMemory=" + MinecartFloatingHelper.isClimbMemory(cart)
+                                        + " syncPitch=" + fmt(MinecartFloatingHelper.getSyncedFloatPitch(cart))
+                                        + " hasPose=" + ((MinecartFloatPoseAccess) cart).paradiseLost$hasRailRenderPose()
+                                        + describe(cart) + floatState(cart));
+                            }
+                        }
+                    }
+                    return ++ticks >= 30;
+                }));
+                steps.add(Step.run(0, () -> onServer(server -> {
+                    Entity cart = world(server).getEntity(entityId);
+                    if (cart != null) {
+                        cart.discard();
+                    }
+                })));
+            }
+        }
+        steps.add(Step.run(0, () -> check(placedViolations.isEmpty(), "cart was drawn wrongly on the rail ("
+                + placedViolations.size() + " samples): "
+                + String.join(" | ", placedViolations.subList(0, Math.min(40, placedViolations.size()))))));
+        return steps;
+    }
+
+    private static Direction ascendingToward(RailShape shape) {
+        return switch (shape) {
+            case ASCENDING_NORTH -> Direction.NORTH;
+            case ASCENDING_SOUTH -> Direction.SOUTH;
+            case ASCENDING_EAST -> Direction.EAST;
+            default -> Direction.WEST;
+        };
+    }
+
+    /**
+     * Yaw and pitch as the renderer would draw the cart.
+     */
+    private static float[] placedRenderPose(AbstractMinecart cart, float partial) {
+        if (MinecartFloatingHelper.shouldUseFloatRenderPose(cart)) {
+            return new float[]{MinecartFloatingHelper.getFloatRenderYaw(cart), MinecartFloatingHelper.getFloatRenderPitch(cart)};
+        }
+        float[] vanilla = vanillaRenderPose(cart,
+                Mth.lerp(partial, cart.xOld, cart.getX()),
+                Mth.lerp(partial, cart.yOld, cart.getY()),
+                Mth.lerp(partial, cart.zOld, cart.getZ()));
+        return vanilla != null ? vanilla : new float[]{Mth.rotLerp(partial, cart.yRotO, cart.getYRot()), cart.getXRot()};
     }
 
     private static MinecartFloatingHelper.RenderYawFilter levelFilter = new MinecartFloatingHelper.RenderYawFilter();
@@ -1076,7 +1183,13 @@ public final class LevitaTests {
             why = "yaw " + fmt(pose[0]) + " is " + fmt(Math.toDegrees(Math.acos(Math.min(1.0, Math.abs(facing)))))
                     + "deg off the travel direction";
         } else if (steep && Math.abs(pose[1]) < 10.0F) {
-            why = "pitch " + fmt(pose[1]) + " while dy=" + fmt(move.y);
+            RailShape stored = MinecartFloatingHelper.getRailShape(cart);
+            boolean onFlatLanding = MinecartFloatingHelper.getIncline(cart) == 0
+                    && !MinecartFloatingHelper.isOffRail(cart)
+                    && (stored == RailShape.NORTH_SOUTH || stored == RailShape.EAST_WEST);
+            if (!onFlatLanding) {
+                why = "pitch " + fmt(pose[1]) + " while dy=" + fmt(move.y);
+            }
         } else if (steep && Math.abs(pose[1]) >= 10.0F
                 && Math.signum(pose[1]) != Math.signum(move.y)
                 && Math.signum(pose[1]) != Math.signum(move.y) * Math.signum(facing)) {
@@ -2216,6 +2329,81 @@ public final class LevitaTests {
                     return done;
                 }),
                 Step.run(0, () -> checkAll(g953Wrong))
+        );
+    }
+
+    private static final double[] PISTON_FIRE_AT = {6.5, 7.5, 8.5};
+    private static final int[] pistonIds = new int[PISTON_FIRE_AT.length];
+    private static final boolean[] pistonFired = new boolean[PISTON_FIRE_AT.length];
+    private static final boolean[] pistonFailed = new boolean[PISTON_FIRE_AT.length];
+    private static final List<String> pistonWrong = new ArrayList<>();
+
+    /**
+     * A piston that pushes a floating cart up moves it much faster than the cart travels forward. The client used to
+     * read that as a climb and drew the cart at 45 degrees until the piston was done, although it never left level
+     * flight.
+     */
+    @ClientTest("client keeps drawing a floating cart level while pistons push it up")
+    private static List<Step> clientCartPushedByPistonsStaysLevel() {
+        return List.of(
+                setup(world -> {
+                    pistonWrong.clear();
+                    Arrays.fill(pistonFired, false);
+                    Arrays.fill(pistonFailed, false);
+                    Direction side = dir.getClockWise();
+                    for (int lane = 0; lane < PISTON_FIRE_AT.length; lane++) {
+                        BlockPos lane0 = start.relative(side, 3 * lane);
+                        fill(world, lane0.relative(dir, -3).below(3).relative(side, -1), lane0.relative(dir, 20).above(4).relative(side, 1), Blocks.AIR.defaultBlockState());
+                        fill(world, lane0.relative(dir, -3).below(), lane0.relative(dir, 20).below(), Blocks.STONE.defaultBlockState());
+                        track(world, lane0, "rrLL");
+                        for (int i = 7; i < 10; i++) {
+                            world.setBlockAndUpdate(lane0.relative(dir, i).below(),
+                                    Blocks.PISTON.defaultBlockState().setValue(BlockStateProperties.FACING, Direction.UP));
+                        }
+                        pistonIds[lane] = launch(world, EntityType.MINECART, lane0, 0.4);
+                    }
+                }),
+                Step.run(0, () -> onServer(server -> lookFrom(player(server), world(server),
+                        Vec3.atBottomCenterOf(start).relative(dir, 8).relative(dir.getCounterClockWise(), 12).add(0, 3, 0),
+                        Vec3.atBottomCenterOf(start).relative(dir, 8).relative(dir.getClockWise(), 6).add(0, 1, 0)))),
+                Step.until("client to know all the carts", 40, () -> {
+                    for (int id : pistonIds) {
+                        if (client().level.getEntity(id) == null) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }),
+                Step.until("client carts to fly over the pistons", 160, () -> {
+                    Direction side = dir.getClockWise();
+                    boolean done = true;
+                    for (int lane = 0; lane < PISTON_FIRE_AT.length; lane++) {
+                        AbstractMinecart cart = clientCart(pistonIds[lane]);
+                        double a = along(cart);
+                        done &= a > 14;
+                        if (!pistonFired[lane] && a > PISTON_FIRE_AT[lane]) {
+                            pistonFired[lane] = true;
+                            int fired = lane;
+                            onServer(server -> {
+                                BlockPos lane0 = start.relative(side, 3 * fired);
+                                for (int i = 7; i < 10; i++) {
+                                    world(server).setBlockAndUpdate(lane0.relative(dir, i).below().relative(side), Blocks.REDSTONE_BLOCK.defaultBlockState());
+                                }
+                            });
+                        }
+                        if (a < 3 || a > 14 || pistonFailed[lane]) {
+                            continue;
+                        }
+                        float[] pose = clientRenderPose(cart);
+                        if (Math.abs(pose[1]) > 3.0F) {
+                            pistonFailed[lane] = true;
+                            pistonWrong.add("pistons extend when the cart is at " + PISTON_FIRE_AT[lane] + ": cart drawn with pitch " + fmt(pose[1])
+                                    + describe(cart) + floatState(cart));
+                        }
+                    }
+                    return done;
+                }),
+                Step.run(0, () -> checkAll(pistonWrong))
         );
     }
 

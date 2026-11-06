@@ -58,6 +58,17 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
     @Shadow
     protected abstract double getMaxSpeed();
 
+    /**
+     * A floating cart is not driving over the block below it, so honey and soul sand must not drag it to a halt.
+     */
+    @Override
+    public float getBlockSpeedFactor() {
+        if (MinecartFloatingHelper.isFloating((AbstractMinecart) (Object) this)) {
+            return 1.0F;
+        }
+        return super.getBlockSpeedFactor();
+    }
+
     @Override
     public void paradiseLost$setRailRenderPose(float yaw, float pitch) {
         this.paradiseLost$railRenderYaw = yaw;

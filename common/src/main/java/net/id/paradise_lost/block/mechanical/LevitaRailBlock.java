@@ -38,13 +38,20 @@ public class LevitaRailBlock extends PoweredRailBlock {
 
     @Override
     protected void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
-        if (!world.isClientSide && entity instanceof AbstractMinecart cart && isOnRail(cart, pos)) {
+        // A lifted rail calls this too, as a floating block entity, for carts in the cell it left. It is not in the world
+        // then, so it must neither charge a cart nor write its state back as a copy of the rail.
+        if (!world.isClientSide && world.getBlockState(pos).is(this) && entity instanceof AbstractMinecart cart
+                && isOnRail(cart, pos)) {
             apply(state, world, pos, cart);
         }
     }
 
     private void apply(BlockState state, Level world, BlockPos pos, AbstractMinecart cart) {
-        MinecartFloatingHelper.updateInclineFromRail(cart, state.getValue(SHAPE), cart.getDeltaMovement());
+        // AABB overlap is enough to charge, but not to adopt the rail. A climbing cart that only clips a
+        // flat landing used to get incline 0 here and fly into the pier instead of seating.
+        if (MinecartFloatingHelper.isSettledOnRail(cart, pos)) {
+            MinecartFloatingHelper.updateInclineFromRail(cart, state.getValue(SHAPE), cart.getDeltaMovement());
+        }
         if (!state.getValue(POWERED)) {
             MinecartFloatingHelper.stopFloating(cart);
         } else if (!state.getValue(TRIGGERED)) {

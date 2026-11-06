@@ -1,7 +1,9 @@
 package net.id.paradise_lost.test.server;
 
+import net.id.paradise_lost.api.FloatingBlockHelper;
 import net.id.paradise_lost.block.mechanical.LevitaRailBlock;
 import net.id.paradise_lost.entity.MinecartFloatPoseAccess;
+import net.id.paradise_lost.entity.block.FloatingBlockEntity;
 import net.id.paradise_lost.registry.BlockRegistry;
 import net.id.paradise_lost.test.Step;
 import net.id.paradise_lost.util.MinecartFloatingHelper;
@@ -14,11 +16,14 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import net.minecraft.world.entity.vehicle.Minecart;
 import net.minecraft.world.entity.vehicle.MinecartFurnace;
+import net.minecraft.world.level.block.BaseRailBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeverBlock;
 import net.minecraft.world.level.block.PoweredRailBlock;
 import net.minecraft.world.level.block.state.properties.AttachFace;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.RailShape;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.ArrayList;
@@ -125,6 +130,140 @@ public final class LevitaTests {
                     checkAll(wrong);
                 })
         );
+    }
+
+    private static final List<String> launchedWrong = new ArrayList<>();
+    private static boolean launchedCopy;
+    private static boolean launchedFloated;
+
+    @ServerTest("a lifted powered levita slope neither charges a cart in its old cell nor leaves a copy behind")
+    private static List<Step> cartUnderLaunchedSlope() {
+        List<Step> steps = new ArrayList<>();
+        steps.add(setup(world -> launchedWrong.clear()));
+        for (boolean towardPower : new boolean[]{true, false}) {
+            String which = towardPower ? "slope rising towards the power" : "slope rising away from the power";
+            steps.add(Step.run(0, () -> {
+                for (FloatingBlockEntity old : level().getEntitiesOfClass(FloatingBlockEntity.class, new AABB(start).inflate(40))) {
+                    old.discard();
+                }
+                fill(level(), start.relative(dir, -3).relative(dir.getClockWise(), -2),
+                        start.relative(dir, 6).relative(dir.getClockWise(), 2).above(14), Blocks.AIR.defaultBlockState());
+                // powered flat rail on a redstone block, the slope next to it one block lower
+                BlockPos flat = start.above(2);
+                level().setBlockAndUpdate(flat.below(), Blocks.REDSTONE_BLOCK.defaultBlockState());
+                level().setBlockAndUpdate(flat, BlockRegistry.LEVITA_RAIL.get().defaultBlockState());
+                BlockPos slope = flat.relative(dir).below();
+                level().setBlockAndUpdate(slope.below(), Blocks.STONE.defaultBlockState());
+                level().setBlockAndUpdate(slope.relative(towardPower ? dir.getOpposite() : dir), Blocks.STONE.defaultBlockState());
+                level().setBlockAndUpdate(slope, BlockRegistry.LEVITA_RAIL.get().defaultBlockState());
+                forceShape(level(), slope, ascending(towardPower ? dir.getOpposite() : dir));
+                pos = slope;
+                // walls on both sides, the cart has to stay between them
+                Direction side = dir.getClockWise();
+                fill(level(), slope.relative(dir, 4).relative(side, -2).below(), slope.relative(dir, 4).relative(side, 2).above(6), Blocks.STONE.defaultBlockState());
+                fill(level(), slope.relative(dir, -5).relative(side, -2).below(), slope.relative(dir, -5).relative(side, 2).above(6), Blocks.STONE.defaultBlockState());
+                check(FloatingBlockHelper.ANY.tryCreate(level(), slope), "setup: the wand did not lift the rail at " + slope.toShortString());
+                // the lifted rail would take minutes to come back down, make it drop after a moment
+                FloatingBlockEntity lifted = level().getEntitiesOfClass(FloatingBlockEntity.class, new AABB(slope).inflate(2)).get(0);
+                lifted.setDropState(() -> lifted.tickCount > 30);
+            }));
+            // the cart shows up while the rail is already in the air
+            steps.add(Step.run(4, () -> {
+                AbstractMinecart cart = EntityType.MINECART.create(level());
+                cart.moveTo(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0, 0);
+                level().addFreshEntity(cart);
+                entityId = cart.getId();
+                ticks = 0;
+                seen = 0;
+                launchedCopy = false;
+                launchedFloated = false;
+            }));
+            steps.add(Step.until("rail to land and the cart to settle", 400, () -> {
+                AbstractMinecart cart = (AbstractMinecart) level().getEntity(entityId);
+                if (cart == null) {
+                    launchedWrong.add(which + ": cart is gone at tick " + ticks);
+                    return true;
+                }
+                boolean rail = level().getBlockState(pos).is(BlockRegistry.LEVITA_RAIL.get());
+                boolean airborne = !level().getEntitiesOfClass(FloatingBlockEntity.class, new AABB(pos).inflate(3, 400, 3)).isEmpty();
+                if (airborne && ticks > 1 && rail && !launchedCopy) {
+                    launchedCopy = true;
+                    launchedWrong.add(which + ": the lifted rail left a copy of itself at tick " + ticks + ": " + level().getBlockState(pos));
+                }
+                if (airborne && MinecartFloatingHelper.isFloating(cart) && !launchedFloated) {
+                    launchedFloated = true;
+                    launchedWrong.add(which + ": the cart floats at tick " + ticks + " while the rail is still in the air" + at(cart) + floatState(cart));
+                }
+                double alongPos = cart.position().subtract(Vec3.atCenterOf(pos)).dot(Vec3.atLowerCornerOf(dir.getNormal()));
+                if ((alongPos > 3.4 || alongPos < -4.4) && seen == 0) {
+                    seen = ticks;
+                    launchedWrong.add(which + ": cart went through the wall at tick " + ticks + at(cart) + floatState(cart)
+                            + (cart.noPhysics ? " noclip" : ""));
+                }
+                return ++ticks >= 200;
+            }));
+            steps.add(Step.run(0, () -> {
+                // nothing to report here, the checks above did it
+                Entity cart = level().getEntity(entityId);
+                if (cart != null) {
+                    cart.discard();
+                }
+            }));
+        }
+        steps.add(Step.run(0, () -> checkAll(launchedWrong)));
+        return steps;
+    }
+
+    private static String at(Entity entity) {
+        return "(" + fmt(entity.getX() - pos.getX()) + "," + fmt(entity.getY() - pos.getY()) + "," + fmt(entity.getZ() - pos.getZ()) + ")";
+    }
+
+    private static final List<String> honeyWrong = new ArrayList<>();
+
+    @ServerTest("honey below a floating cart does not slow it")
+    private static List<Step> honeyDoesNotSlowFloatingCart() {
+        List<Step> steps = new ArrayList<>();
+        steps.add(setup(world -> honeyWrong.clear()));
+        for (boolean honey : new boolean[]{false, true}) {
+            for (boolean rails : new boolean[]{true, false}) {
+                steps.add(Step.run(0, () -> {
+                    fill(level(), start.relative(dir, -3).relative(dir.getClockWise(), -1),
+                            start.relative(dir, 16).relative(dir.getClockWise(), 1).above(4), Blocks.AIR.defaultBlockState());
+                    fill(level(), start.relative(dir, -3).below().relative(dir.getClockWise(), -1),
+                            start.relative(dir, 16).below().relative(dir.getClockWise(), 1), Blocks.STONE.defaultBlockState());
+                    // honey only after the powered rails, the launch itself is not what is being tested
+                    fill(level(), start.relative(dir, 4).below().relative(dir.getClockWise(), -1),
+                            start.relative(dir, 16).below().relative(dir.getClockWise(), 1),
+                            honey ? Blocks.HONEY_BLOCK.defaultBlockState() : Blocks.STONE.defaultBlockState());
+                    // rails over honey are the usual way to meet it, the open air above it is the other
+                    track(level(), start, rails ? "rLLLrrrrrrrrrrrr" : "rLLL");
+                    entityId = launch(level(), EntityType.MINECART, start, 0.4);
+                    ticks = 0;
+                    seen = 0;
+                }));
+                steps.add(Step.until("cart to fly past the honey", 120, () -> {
+                    AbstractMinecart cart = (AbstractMinecart) level().getEntity(entityId);
+                    if (cart == null) {
+                        return true;
+                    }
+                    seen = Math.max(seen, along(cart));
+                    return seen > 8 || ++ticks >= 100;
+                }));
+                steps.add(Step.run(0, () -> {
+                    AbstractMinecart cart = (AbstractMinecart) level().getEntity(entityId);
+                    String which = (honey ? "honey" : "stone") + (rails ? " with rails" : " without rails");
+                    if (seen <= 8) {
+                        honeyWrong.add(which + ": cart only got " + fmt(seen) + " blocks"
+                                + (cart == null ? "" : describe(cart) + floatState(cart)));
+                    }
+                    if (cart != null) {
+                        cart.discard();
+                    }
+                }));
+            }
+        }
+        steps.add(Step.run(0, () -> checkAll(honeyWrong)));
+        return steps;
     }
 
     @ServerTest("an unpowered levita rail ends the float")
@@ -398,6 +537,26 @@ public final class LevitaTests {
                 setup(world -> {
                     singleSlope(world, false);
                     wall(world, 4);
+                    entityId = launch(world, EntityType.MINECART, start.relative(dir, -2), 0.4);
+                    ticks = 0;
+                    seen = 0;
+                    speedA = 0;
+                }),
+                Step.until("cart to hit the wall", 60, () -> hitWall(entityId)),
+                Step.until("2 ticks at the wall", 10, () -> ++ticks >= 2),
+                Step.run(0, () -> checkFlatAtWall(serverCart(entityId), 4, "climbing"))
+        );
+    }
+
+    @ServerTest("a wall still flattens a climbing cart when a rail sits past it")
+    private static List<Step> wallFlattensClimbingCartPastDistantRail() {
+        return List.of(
+                setup(world -> {
+                    singleSlope(world, false);
+                    wall(world, 4);
+                    // A rail several blocks past the wall used to keep the climb alive because the look-ahead went
+                    // through the wall and treated that rail as the rest of the slope.
+                    track(world, start.relative(dir, 10), "rrrr");
                     entityId = launch(world, EntityType.MINECART, start.relative(dir, -2), 0.4);
                     ticks = 0;
                     seen = 0;
@@ -1020,6 +1179,166 @@ public final class LevitaTests {
                     return done;
                 }),
                 Step.run(0, () -> checkAll(ghostWrong))
+        );
+    }
+
+    // ---- climb onto a powered levita flat (the landing itself is levita, not a vanilla rail) ----
+
+    private static final String[] LEVITA_LAND_LANES = {"parallel levita landing", "perpendicular levita landing"};
+    private static final List<String> landWrong = new ArrayList<>();
+    private static final int LAND_STAIRS = 3;
+    private static final int LAND_GAP = 1;
+
+    @ServerTest("a climbing cart seats on a powered levita flat along the track and across it")
+    private static List<Step> climbingCartSeatsOnLevitaFlat() {
+        List<Step> steps = new ArrayList<>();
+        steps.add(setup(world -> landWrong.clear()));
+        for (int lane = 0; lane < LEVITA_LAND_LANES.length; lane++) {
+            boolean perp = lane == 1;
+            int which = lane;
+            int landAlong = LAND_STAIRS + LAND_GAP;
+            steps.add(Step.run(0, () -> {
+                start = ahead(2, which * 8);
+                for (int i = 0; i < LAND_STAIRS; i++) {
+                    placePoweredLevitaRail(level(), start.relative(dir, i).above(i));
+                }
+                level().setBlockAndUpdate(start.relative(dir, -1).below(), Blocks.STONE.defaultBlockState());
+                level().setBlockAndUpdate(start.relative(dir, -1), Blocks.RAIL.defaultBlockState());
+                // Dummy rails so the last slope keeps its shape, then they come out as the gap.
+                for (int g = 0; g < LAND_GAP; g++) {
+                    BlockPos lip = start.relative(dir, LAND_STAIRS + g).above(LAND_STAIRS + g);
+                    level().setBlockAndUpdate(lip.below(), Blocks.STONE.defaultBlockState());
+                    level().setBlockAndUpdate(lip, Blocks.RAIL.defaultBlockState());
+                }
+                for (int i = 0; i < LAND_STAIRS; i++) {
+                    slope(level(), start.relative(dir, i).above(i));
+                }
+                for (int g = 0; g < LAND_GAP; g++) {
+                    BlockPos gap = start.relative(dir, LAND_STAIRS + g).above(LAND_STAIRS + g);
+                    level().setBlockAndUpdate(gap, Blocks.AIR.defaultBlockState());
+                    level().setBlockAndUpdate(gap.below(), Blocks.AIR.defaultBlockState());
+                }
+                BlockPos exitLip = start.relative(dir, LAND_STAIRS - 1).above(LAND_STAIRS - 1);
+                if (level().getBlockState(exitLip).getBlock() instanceof BaseRailBlock) {
+                    slope(level(), exitLip);
+                }
+                BlockPos land = start.relative(dir, landAlong).above(landAlong);
+                RailShape flat = perp ? RailShape.EAST_WEST : RailShape.NORTH_SOUTH;
+                Direction alongLand = perp ? Direction.EAST : dir;
+                int from = perp ? -1 : 0;
+                for (int i = from; i < from + 6; i++) {
+                    placePoweredLevitaRail(level(), land.relative(alongLand, i));
+                }
+                for (int i = from; i < from + 6; i++) {
+                    forceShape(level(), land.relative(alongLand, i), flat);
+                }
+                entityId = launch(level(), EntityType.MINECART, start, 0.4);
+                ticks = 0;
+            }));
+            steps.add(Step.until("cart to seat on the " + LEVITA_LAND_LANES[lane], 160, () -> {
+                AbstractMinecart cart = serverCart(entityId);
+                return seatedOnLevitaLanding(cart, landAlong) || ++ticks >= 140;
+            }));
+            steps.add(Step.run(0, () -> {
+                AbstractMinecart cart = serverCart(entityId);
+                if (!seatedOnLevitaLanding(cart, landAlong)) {
+                    landWrong.add(LEVITA_LAND_LANES[which] + ": cart never seated"
+                            + describe(cart) + floatState(cart));
+                }
+                cart.discard();
+            }));
+        }
+        steps.add(Step.run(0, () -> checkAll(landWrong)));
+        return steps;
+    }
+
+    private static boolean seatedOnLevitaLanding(AbstractMinecart cart, int landAlong) {
+        BlockPos railPos = MinecartFloatingHelper.findRailPos(cart);
+        return railPos != null
+                && railPos.getY() == start.getY() + landAlong
+                && MinecartFloatingHelper.isCartOnRail(cart)
+                && !MinecartFloatingHelper.isOffRail(cart)
+                && MinecartFloatingHelper.isSettledOnRail(cart, railPos)
+                && MinecartFloatingHelper.getIncline(cart) == 0
+                && along(cart) > landAlong - 0.6;
+    }
+
+    // ---- pistons next to a floating cart must push it, not make it climb ----
+
+
+    // The reported build: two plain and two levita rails, a gap of three blocks, then three upward pistons that
+    // are flush with the floor. They extend when the cart has flown the given distance along the track, so while it
+    // is over them. Extended before the cart gets there they are a wall, which stops it like any other.
+    private static final double[] PISTON_FIRE_AT = {6.5, 7.0, 7.5, 8.0, 8.5, 9.5};
+    private static final int PISTON_FIRST = 7;
+    private static final int PISTON_COUNT = 3;
+    private static final int[] pistonIds = new int[PISTON_FIRE_AT.length];
+    private static final boolean[] pistonFailed = new boolean[PISTON_FIRE_AT.length];
+    private static final boolean[] pistonFired = new boolean[PISTON_FIRE_AT.length];
+    private static final List<String> pistonWrong = new ArrayList<>();
+
+    @ServerTest("a floating cart over pistons that extend is pushed and keeps its state")
+    private static List<Step> floatingCartOverPistons() {
+        return List.of(
+                setup(world -> {
+                    pistonWrong.clear();
+                    Arrays.fill(pistonFailed, false);
+                    Arrays.fill(pistonFired, false);
+                    ticks = 0;
+                    Direction side = dir.getClockWise();
+                    for (int lane = 0; lane < PISTON_FIRE_AT.length; lane++) {
+                        BlockPos lane0 = start.relative(side, 3 * lane);
+                        fill(world, lane0.relative(dir, -3).below(3).relative(side, -1), lane0.relative(dir, 20).above(4).relative(side, 1), Blocks.AIR.defaultBlockState());
+                        fill(world, lane0.relative(dir, -3).below(), lane0.relative(dir, 20).below(), Blocks.STONE.defaultBlockState());
+                        track(world, lane0, "rrLL");
+                        for (int i = PISTON_FIRST; i < PISTON_FIRST + PISTON_COUNT; i++) {
+                            world.setBlockAndUpdate(lane0.relative(dir, i).below(),
+                                    Blocks.PISTON.defaultBlockState().setValue(BlockStateProperties.FACING, Direction.UP));
+                        }
+                        pistonIds[lane] = launch(world, EntityType.MINECART, lane0, 0.4);
+                    }
+                }),
+                Step.until("carts to fly over the pistons", 150, () -> {
+                    Direction side = dir.getClockWise();
+                    boolean done = true;
+                    ticks++;
+                    for (int lane = 0; lane < PISTON_FIRE_AT.length; lane++) {
+                        AbstractMinecart cart = serverCart(pistonIds[lane]);
+                        double a = along(cart);
+                        done &= a > 16 || pistonFailed[lane];
+                        String where = "pistons extend when the cart is at " + PISTON_FIRE_AT[lane];
+                        if (ticks > 100 && a <= 16 && !pistonFailed[lane]) {
+                            pistonFailed[lane] = true;
+                            pistonWrong.add(where + ": cart did not get through" + describe(cart) + floatState(cart));
+                        }
+                        if (!pistonFired[lane] && a > PISTON_FIRE_AT[lane]) {
+                            pistonFired[lane] = true;
+                            BlockPos lane0 = start.relative(side, 3 * lane);
+                            for (int i = PISTON_FIRST; i < PISTON_FIRST + PISTON_COUNT; i++) {
+                                level().setBlockAndUpdate(lane0.relative(dir, i).below().relative(side), Blocks.REDSTONE_BLOCK.defaultBlockState());
+                            }
+                        }
+                        if (a < 3 || a > 16 || pistonFailed[lane]) {
+                            continue;
+                        }
+                        String problem = null;
+                        if (!MinecartFloatingHelper.isFloating(cart)) {
+                            problem = "cart stopped floating";
+                        } else if (MinecartFloatingHelper.getIncline(cart) != 0) {
+                            problem = "cart switched to climb/dive mode";
+                        } else if (Math.abs(cart.getXRot()) > 2) {
+                            problem = "cart tilted";
+                        } else if (Math.abs(side(cart) - 3 * lane) > 0.25) {
+                            problem = "cart swerved";
+                        }
+                        if (problem != null) {
+                            pistonFailed[lane] = true;
+                            pistonWrong.add(where + ": " + problem + describe(cart) + floatState(cart));
+                        }
+                    }
+                    return done;
+                }),
+                Step.run(0, () -> checkAll(pistonWrong))
         );
     }
 
