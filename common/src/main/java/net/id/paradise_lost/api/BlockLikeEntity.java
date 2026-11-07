@@ -1,8 +1,6 @@
 package net.id.paradise_lost.api;
 
-import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.entity.util.PostTickEntity;
-import net.id.paradise_lost.registry.BlockRegistry;
 import net.minecraft.CrashReportCategory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -32,6 +30,7 @@ import net.minecraft.world.level.block.AnvilBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ConcretePowderBlock;
+import net.minecraft.world.level.block.Fallable;
 import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.PointedDripstoneBlock;
@@ -44,9 +43,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
-
 import java.util.List;
-
 
 public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
     private static final EntityDataAccessor<BlockPos> ORIGIN = SynchedEntityData.defineId(BlockLikeEntity.class, EntityDataSerializers.BLOCK_POS);
@@ -116,10 +113,11 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
     public abstract void postTickMovement();
 
     public void postTickEntityCollision(Entity entity) {
-        //fix tripwire crash, other redstone blocks
-        if(blockState.is(Blocks.TRIPWIRE) || blockState.is(BlockTags.PRESSURE_PLATES) || blockState.is(Blocks.DETECTOR_RAIL)) {blockState.setValue(BlockStateProperties.POWERED, true); return;}
-        // levita rails (Someday make them levitate carts as they go by)
-        if(blockState.is(BlockRegistry.LEVITA_RAIL.get())) {blockState.setValue(BlockStateProperties.TRIGGERED, true); return;}
+        // These read or write the block at their position, which is not them while they float:
+        // tripwire crashes on the missing property, the others place a copy of themselves.
+        if (this.blockState.is(Blocks.TRIPWIRE) || this.blockState.is(BlockTags.PRESSURE_PLATES) || this.blockState.is(Blocks.DETECTOR_RAIL)) {
+            return;
+        }
         if (!(entity instanceof BlockLikeEntity ble && ble.partOfSet)) {
             this.blockState.entityInside(level(), this.blockPosition(), entity);
         }
@@ -204,30 +202,17 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
         boolean flagDripstone = this.blockState.is(Blocks.POINTED_DRIPSTONE) && this.blockState.getValue(PointedDripstoneBlock.TIP_DIRECTION) == Direction.DOWN;
 
         int i = flagDripstone ? Mth.ceil(distance - 2.0F) : Mth.ceil(distance - 1.0F);
-        // override it, make it say dripstone is ow
-        if (flagDripstone) this.hurtEntities = true;
-        //if not a danger block, and/or no damage, return false
-        if (!this.hurtEntities || i <= 0) {
+        if (!(this.hurtEntities || flagDripstone) || i <= 0) {
             return false;
         }
-        DamageSource damageSource2;
-        if (flagDripstone) { //is it a falling dripstone and is it facing down?
-            damageSource2 = this.level().damageSources().fallingStalactite(this);
-        } else if (this.blockState.is(BlockTags.ANVIL)) {  // If not, is it an anvil?
-            damageSource2 = this.level().damageSources().anvil(this);
-        } else { //if not, just use normal falling block
-            damageSource2 = this.level().damageSources().fallingBlock(this);
 
-        }
-        //if it's falling dripstone, diffferent math
-        float f = flagDripstone
-                ? Math.min(Mth.floor((float) (i) * 6), this.fallHurtMax)
-                : Math.min(Mth.floor((float) i * this.fallHurtAmount), this.fallHurtMax);
+        DamageSource damageSource2 = this.blockState.getBlock() instanceof Fallable fallable
+                ? fallable.getFallDamageSource(this)
+                : this.level().damageSources().fallingBlock(this);
+        float f = Math.min(Mth.floor((float) i * (flagDripstone ? 6 : this.fallHurtAmount)), this.fallHurtMax);
 
-        //get entities in the damage area and hurt them
         this.level().getEntities(this, getBoundingBox().minmax(getBoundingBox().move(0, 1 + -2 * this.getDeltaMovement().y(), 0))).forEach(entity -> entity.hurt(damageSource2, f));
 
-        //damage the anvil if anvil
         if (this.blockState.is(BlockTags.ANVIL) && f > 0.0F && this.random.nextFloat() < 0.05F + i * 0.05F) {
             BlockState blockstate = AnvilBlock.damage(this.blockState);
             if (blockstate == null) {
@@ -258,9 +243,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
             this.hurtEntities = compound.getBoolean("HurtEntities");
             this.fallHurtAmount = compound.getFloat("FallHurtAmount");
             this.fallHurtMax = compound.getInt("FallHurtMax");
-            //if anvil or dripstone, mark as dangerous
         } else if (this.blockState.is(BlockTags.ANVIL)) {
-
             this.hurtEntities = true;
         }
 
@@ -318,16 +301,11 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
 
         if (!this.canSetBlock || !canPlace || !canReplace)
             return false;
-        //if can waterlog and block is water, set waterlogged
-        if (this.blockState.hasProperty(BlockStateProperties.WATERLOGGED)) {
-            if (this.level().getFluidState(blockPos).getType() == Fluids.WATER) {
-                this.blockState = this.blockState.setValue(BlockStateProperties.WATERLOGGED, true);
-                // if the saved state is waterlogged, but the new spot isn't watered, no water for u
-            } else if (this.blockState.getValue(BlockStateProperties.WATERLOGGED)) {
-                this.blockState = this.blockState.setValue(BlockStateProperties.WATERLOGGED, false);
-            }
-        }
 
+        if (this.blockState.hasProperty(BlockStateProperties.WATERLOGGED)) {
+            boolean water = this.level().getFluidState(blockPos).getType() == Fluids.WATER;
+            this.blockState = this.blockState.setValue(BlockStateProperties.WATERLOGGED, water);
+        }
 
         if (this.level().setBlock(blockPos, this.blockState, Block.UPDATE_ALL)) {
             this.discard();
@@ -383,9 +361,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
 
     @Override
     public Packet<ClientGamePacketListener> getAddEntityPacket(ServerEntity entityTrackerEntry) {
-        return new ClientboundAddEntityPacket(this, entityTrackerEntry, Block.getId(this.getBlockState()) * (this.partOfSet
-                ? -1
-                : 1));
+        return new ClientboundAddEntityPacket(this, entityTrackerEntry, Block.getId(this.getBlockState()) * (this.partOfSet ? -1 : 1));
     }
 
     @Override
