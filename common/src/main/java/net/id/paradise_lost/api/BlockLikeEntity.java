@@ -113,11 +113,6 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
     public abstract void postTickMovement();
 
     public void postTickEntityCollision(Entity entity) {
-        // These read or write the block at their position, which is not them while they float:
-        // tripwire crashes on the missing property, the others place a copy of themselves.
-        if (this.blockState.is(Blocks.TRIPWIRE) || this.blockState.is(BlockTags.PRESSURE_PLATES) || this.blockState.is(Blocks.DETECTOR_RAIL)) {
-            return;
-        }
         if (!(entity instanceof BlockLikeEntity ble && ble.partOfSet)) {
             this.blockState.entityInside(level(), this.blockPosition(), entity);
         }
