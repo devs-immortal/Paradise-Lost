@@ -1,17 +1,17 @@
-* text eol=lf
+# Line endings
+* text=auto eol=lf
 *.bat text eol=crlf
-*.patch text eol=lf
-*.java text eol=lf
-*.gradle text eol=crlf
-*.cfg text eol=lf
+
+# Binary files
 *.png binary
-*.gif binary
-*.exe binary
-*.dll binary
-*.jar binary
-*.lzma binary
-*.zip binary
-*.pyd binary
-*.jks binary
 *.ogg binary
 *.nbt binary
+*.jar binary
+
+# Language-aware diffs
+*.java diff=java
+*.kts diff=kotlin
+*.md diff=markdown
+
+# GitHub Linguist
+common/src/generated/** linguist-generated
