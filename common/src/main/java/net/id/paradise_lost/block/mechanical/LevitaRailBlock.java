@@ -14,14 +14,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.RailShape;
 import net.minecraft.world.phys.AABB;
 
 public class LevitaRailBlock extends PoweredRailBlock {
 
     public static final BooleanProperty TRIGGERED = BlockStateProperties.TRIGGERED;
-    public static final IntegerProperty TICKS = IntegerProperty.create("ticks", 0, 80);
+
     private static final int TRIGGER_DELAY_TICKS = 80;
 
     private static final double DETECTION_INSET = 0.4D;
@@ -34,13 +33,11 @@ public class LevitaRailBlock extends PoweredRailBlock {
                         .setValue(POWERED, Boolean.valueOf(false))
                         .setValue(WATERLOGGED, Boolean.valueOf(false))
                         .setValue(TRIGGERED, Boolean.valueOf(false))
-                        .setValue(TICKS, Integer.valueOf(0))
         );
     }
 
     @Override
     protected void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
-        world.scheduleTick(pos, this, 1);
         // A lifted rail calls this too, as a floating block entity, for carts in the cell it left. It is not in the world
         // then, so it must neither charge a cart nor write its state back as a copy of the rail.
         if (!world.isClientSide && world.getBlockState(pos).is(this) && entity instanceof AbstractMinecart cart
@@ -64,8 +61,17 @@ public class LevitaRailBlock extends PoweredRailBlock {
             MinecartFloatingHelper.addFloating(cart);
             // Clients need TRIGGERED, neighbors must not: UPDATE_ALL reshaped a descending powered
             // rail in a valley into a climb, which looked like an early rotation on the cart.
-            world.setBlock(pos, state.setValue(TRIGGERED, true).setValue(TICKS, TRIGGER_DELAY_TICKS), Block.UPDATE_CLIENTS);
-            world.scheduleTick(pos, this, 1);
+            world.setBlock(pos, state.setValue(TRIGGERED, true), Block.UPDATE_CLIENTS);
+            world.scheduleTick(pos, this, TRIGGER_DELAY_TICKS);
+        }
+    }
+
+    @Override
+    protected void onPlace(BlockState state, Level world, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+        super.onPlace(state, world, pos, oldState, movedByPiston);
+        // A rail lifted while TRIGGERED loses its scheduled tick, so it would stay off for good after it lands.
+        if (!oldState.is(this) && state.getValue(TRIGGERED)) {
+            world.scheduleTick(pos, this, TRIGGER_DELAY_TICKS);
         }
     }
 
@@ -74,16 +80,9 @@ public class LevitaRailBlock extends PoweredRailBlock {
         if (!state.getValue(TRIGGERED)) {
             return;
         }
-
-        int remainingTicks = state.getValue(TICKS) - 1;
-        if (remainingTicks <= 0) {
-            world.setBlock(pos, state.setValue(TRIGGERED, false).setValue(TICKS, 0), Block.UPDATE_CLIENTS);
-        } else {
-            world.setBlock(pos, state.setValue(TICKS, remainingTicks), Block.UPDATE_CLIENTS);
-            world.scheduleTick(pos, this, 1);
-        }
-
-        if (!state.getValue(POWERED)) {
+        BlockState reset = state.setValue(TRIGGERED, false);
+        world.setBlock(pos, reset, Block.UPDATE_CLIENTS);
+        if (!reset.getValue(POWERED)) {
             return;
         }
         for (AbstractMinecart cart : world.getEntitiesOfClass(AbstractMinecart.class, detectionBox(pos))) {
@@ -107,6 +106,6 @@ public class LevitaRailBlock extends PoweredRailBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(SHAPE, POWERED, WATERLOGGED, TRIGGERED, TICKS);
+        builder.add(SHAPE, POWERED, WATERLOGGED, TRIGGERED);
     }
 }
