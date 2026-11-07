@@ -1,5 +1,6 @@
 package net.id.paradise_lost.api;
 
+import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.entity.util.PostTickEntity;
 import net.minecraft.CrashReportCategory;
 import net.minecraft.core.BlockPos;
@@ -32,6 +33,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ConcretePowderBlock;
 import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.LevelEvent;
+import net.minecraft.world.level.block.PointedDripstoneBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -41,7 +43,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
+
 import java.util.List;
+
 
 public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
     private static final EntityDataAccessor<BlockPos> ORIGIN = SynchedEntityData.defineId(BlockLikeEntity.class, EntityDataSerializers.BLOCK_POS);
@@ -192,19 +196,32 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
 
     @Override
     public boolean causeFallDamage(float distance, float multiplier, DamageSource damageSource) {
-        int i = Mth.ceil(distance - 1.0F);
+        boolean flagDripstone = this.blockState.is(Blocks.POINTED_DRIPSTONE) && this.blockState.getValue(PointedDripstoneBlock.TIP_DIRECTION) == Direction.DOWN;
 
+        int i = flagDripstone ? Mth.ceil(distance - 2.0F) : Mth.ceil(distance - 1.0F);
+        // override it, make it say dripstone is ow
+        if (flagDripstone) this.hurtEntities = true;
+        //if not a danger block, and/or no damage, return false
         if (!this.hurtEntities || i <= 0) {
             return false;
         }
+        DamageSource damageSource2;
+        if (flagDripstone) { //is it a falling dripstone and is it facing down?
+            damageSource2 = this.level().damageSources().fallingStalactite(this);
+        } else if (this.blockState.is(BlockTags.ANVIL)) {  // If not, is it an anvil?
+            damageSource2 = this.level().damageSources().anvil(this);
+        } else { //if not, just use normal falling block
+            damageSource2 = this.level().damageSources().fallingBlock(this);
 
-        boolean flag = this.blockState.is(BlockTags.ANVIL);
-        DamageSource damageSource2 = flag ? this.level().damageSources().anvil(this) : this.level().damageSources().fallingBlock(this);
-        float f = Math.min(Mth.floor((float) i * this.fallHurtAmount), this.fallHurtMax);
+        }
+        //if it's falling dripstone, diffferent math
+        float f = flagDripstone ? Math.min(Mth.floor((float) (i) * 6), this.fallHurtMax) : Math.min(Mth.floor((float) i * this.fallHurtAmount), this.fallHurtMax);
 
+        //get entities in the damage area and hurt them
         this.level().getEntities(this, getBoundingBox().minmax(getBoundingBox().move(0, 1 + -2 * this.getDeltaMovement().y(), 0))).forEach(entity -> entity.hurt(damageSource2, f));
 
-        if (flag && f > 0.0F && this.random.nextFloat() < 0.05F + i * 0.05F) {
+        //damage the anvil if anvil
+        if (this.blockState.is(BlockTags.ANVIL) && f > 0.0F && this.random.nextFloat() < 0.05F + i * 0.05F) {
             BlockState blockstate = AnvilBlock.damage(this.blockState);
             if (blockstate == null) {
                 this.canSetBlock = false;
@@ -234,7 +251,9 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
             this.hurtEntities = compound.getBoolean("HurtEntities");
             this.fallHurtAmount = compound.getFloat("FallHurtAmount");
             this.fallHurtMax = compound.getInt("FallHurtMax");
-        } else if (this.blockState.is(BlockTags.ANVIL)) {
+            //if anvil or dripstone, mark as dangerous
+        } else if (this.blockState.is(BlockTags.ANVIL) ) {
+
             this.hurtEntities = true;
         }
 
@@ -351,7 +370,9 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
 
     @Override
     public Packet<ClientGamePacketListener> getAddEntityPacket(ServerEntity entityTrackerEntry) {
-        return new ClientboundAddEntityPacket(this, entityTrackerEntry, Block.getId(this.getBlockState()) * (this.partOfSet ? -1 : 1));
+        return new ClientboundAddEntityPacket(this, entityTrackerEntry, Block.getId(this.getBlockState()) * (this.partOfSet
+                ? -1
+                : 1));
     }
 
     @Override
