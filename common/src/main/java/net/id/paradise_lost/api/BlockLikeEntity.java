@@ -2,6 +2,7 @@ package net.id.paradise_lost.api;
 
 import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.entity.util.PostTickEntity;
+import net.id.paradise_lost.registry.BlockRegistry;
 import net.minecraft.CrashReportCategory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -115,6 +116,10 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
     public abstract void postTickMovement();
 
     public void postTickEntityCollision(Entity entity) {
+        //fix tripwire crash, other redstone blocks
+        if(blockState.is(Blocks.TRIPWIRE) || blockState.is(BlockTags.PRESSURE_PLATES) || blockState.is(Blocks.DETECTOR_RAIL)) {blockState.setValue(BlockStateProperties.POWERED, true); return;}
+        // levita rails (Someday make them levitate carts as they go by)
+        if(blockState.is(BlockRegistry.LEVITA_RAIL.get())) {blockState.setValue(BlockStateProperties.TRIGGERED, true); return;}
         if (!(entity instanceof BlockLikeEntity ble && ble.partOfSet)) {
             this.blockState.entityInside(level(), this.blockPosition(), entity);
         }
