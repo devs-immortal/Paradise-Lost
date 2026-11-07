@@ -1,6 +1,7 @@
 package net.id.paradise_lost.client.sound;
 
-import net.id.paradise_lost.util.MinecartFloatingHelper;
+import net.id.paradise_lost.util.minecart.MinecartFloatStateHelper;
+import net.id.paradise_lost.util.minecart.MinecartRailLocatorHelper;
 import net.id.paradise_lost.util.ParadiseLostSoundEvents;
 import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
@@ -42,7 +43,7 @@ public class LevitaMovingMinecartSoundInstance extends AbstractTickableSoundInst
             this.y = this.minecart.getY();
             this.z = this.minecart.getZ();
             float f = (float) this.minecart.getDeltaMovement().horizontalDistance();
-            if (f >= 0.01F && this.minecart.level().tickRateManager().runsNormally() && MinecartFloatingHelper.isFloating(minecart) && !MinecartFloatingHelper.isCartOnRail(this.minecart)) {
+            if (f >= 0.01F && this.minecart.level().tickRateManager().runsNormally() && MinecartFloatStateHelper.isFloating(minecart) && !MinecartRailLocatorHelper.isCartOnRail(this.minecart)) {
                 this.distance = Mth.clamp(this.distance + 0.0025F, 0.0F, 1.0F);
                 this.volume = Mth.lerp(Mth.clamp(f, 0.0F, 0.5F), 0.0F, 0.7F);
             } else {

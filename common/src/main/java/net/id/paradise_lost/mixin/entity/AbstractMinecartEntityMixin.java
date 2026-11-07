@@ -1,6 +1,15 @@
 package net.id.paradise_lost.mixin.entity;
 
-import net.id.paradise_lost.util.MinecartFloatingHelper;
+import net.id.paradise_lost.util.minecart.MinecartFloatDebugHelper;
+import net.id.paradise_lost.util.minecart.MinecartFlightHelper;
+import net.id.paradise_lost.util.minecart.MinecartFloatPoseHelper;
+import net.id.paradise_lost.util.minecart.MinecartFloatRenderHelper;
+import net.id.paradise_lost.util.minecart.MinecartFloatRotationHelper;
+import net.id.paradise_lost.util.minecart.MinecartFloatStateHelper;
+import net.id.paradise_lost.util.minecart.MinecartRailConnectHelper;
+import net.id.paradise_lost.util.minecart.MinecartRailLocatorHelper;
+import net.id.paradise_lost.util.minecart.MinecartRailLookaheadHelper;
+import net.id.paradise_lost.util.minecart.MinecartRailMotionHelper;
 import net.id.paradise_lost.entity.MinecartFloatPoseAccess;
 import net.id.paradise_lost.particle.ParadiseLostParticleTypes;
 import net.minecraft.core.BlockPos;
@@ -51,6 +60,24 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
     @Unique
     private int paradiseLost$openAirClimbGrace;
 
+    @Unique
+    private boolean paradiseLost$vanillaTrack;
+
+    @Unique
+    private boolean paradiseLost$cornerNoclip;
+
+    @Unique
+    private double paradiseLost$enterX;
+
+    @Unique
+    private double paradiseLost$enterY;
+
+    @Unique
+    private double paradiseLost$enterZ;
+
+    @Unique
+    private Vec3 paradiseLost$enterMotion = Vec3.ZERO;
+
     public AbstractMinecartEntityMixin(EntityType<?> entityType, Level world) {
         super(entityType, world);
     }
@@ -63,7 +90,7 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
      */
     @Override
     public float getBlockSpeedFactor() {
-        if (MinecartFloatingHelper.isFloating((AbstractMinecart) (Object) this)) {
+        if (MinecartFloatStateHelper.isFloating((AbstractMinecart) (Object) this)) {
             return 1.0F;
         }
         return super.getBlockSpeedFactor();
@@ -110,7 +137,7 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
 
     @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
     private void paradiseLost$loadLegacyFloating(CompoundTag tag, CallbackInfo ci) {
-        MinecartFloatingHelper.loadLegacyNbt((AbstractMinecart) (Object) this, tag);
+        MinecartFloatStateHelper.loadLegacyNbt((AbstractMinecart) (Object) this, tag);
     }
 
     /**
@@ -120,7 +147,7 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
      */
     @Inject(method = "getPos(DDD)Lnet/minecraft/world/phys/Vec3;", at = @At("HEAD"), cancellable = true)
     private void paradiseLost$skipFloatingRailSnap(double x, double y, double z, CallbackInfoReturnable<Vec3> cir) {
-        if (MinecartFloatingHelper.shouldSkipRailRenderSnap((AbstractMinecart) (Object) this)) {
+        if (MinecartFloatRenderHelper.shouldSkipRailRenderSnap((AbstractMinecart) (Object) this)) {
             cir.setReturnValue(null);
         }
     }
@@ -128,7 +155,7 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
     @Inject(method = "getPosOffs(DDDD)Lnet/minecraft/world/phys/Vec3;", at = @At("HEAD"), cancellable = true)
     private void paradiseLost$skipFloatingRailOffs(
             double x, double y, double z, double offset, CallbackInfoReturnable<Vec3> cir) {
-        if (MinecartFloatingHelper.shouldSkipRailRenderSnap((AbstractMinecart) (Object) this)) {
+        if (MinecartFloatRenderHelper.shouldSkipRailRenderSnap((AbstractMinecart) (Object) this)) {
             cir.setReturnValue(null);
         }
     }
@@ -136,65 +163,110 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
     @Inject(method = "moveAlongTrack", at = @At("HEAD"), cancellable = true)
     private void paradiseLost$skipMidairRailResnap(BlockPos pos, BlockState state, CallbackInfo ci) {
         AbstractMinecart cart = (AbstractMinecart) (Object) this;
+        this.paradiseLost$vanillaTrack = false;
+        this.paradiseLost$enterX = this.getX();
+        this.paradiseLost$enterY = this.getY();
+        this.paradiseLost$enterZ = this.getZ();
+        this.paradiseLost$enterMotion = this.getDeltaMovement();
         boolean leftRails = this.level().isClientSide()
-                ? MinecartFloatingHelper.isOffRail(cart)
+                ? MinecartFloatStateHelper.isOffRail(cart)
                 : this.paradiseLost$wasOffRail;
         if (!this.level().isClientSide()
                 && this.paradiseLost$wasOffRail
-                && MinecartFloatingHelper.isFloating(cart)
-                && !MinecartFloatingHelper.isMidairAboveRail(cart, pos, true)) {
+                && MinecartFloatStateHelper.isFloating(cart)
+                && !MinecartRailLocatorHelper.isMidairAboveRail(cart, pos, true)) {
             // Still climbing past a floor/corner, don't seat yet or the tilt drops out.
-            if (MinecartFloatingHelper.shouldDeferSlopeToCornerHardSeat(cart, pos, state)) {
-                MinecartFloatingHelper.keepSlopeFloatThroughCorner(cart, pos, state);
-                MinecartFloatingHelper.debugEvent(cart, "deferSeat",
+            if (MinecartFloatRotationHelper.shouldDeferSlopeToCornerHardSeat(cart, pos, state)) {
+                MinecartFloatRotationHelper.keepSlopeFloatThroughCorner(cart, pos, state);
+                MinecartFloatDebugHelper.debugEvent(cart, "deferSeat",
                         "keep slope over corner/flat at " + pos
-                                + " shape=" + MinecartFloatingHelper.getRailShapeName(cart));
+                                + " shape=" + MinecartFloatStateHelper.getRailShapeName(cart));
+                this.paradiseLost$moveFloating(cart, false);
+                ci.cancel();
+                return;
+            }
+            if (MinecartRailConnectHelper.shouldWaitToEnterRail(cart, pos, state)) {
+                // Just clipping the corner. Keep the heading we had.
                 this.paradiseLost$moveFloating(cart, false);
                 ci.cancel();
                 return;
             }
             // Close enough: snap onto the rail and hand off to vanilla.
             this.paradiseLost$exitGrace = 0;
-            MinecartFloatingHelper.prepareReconnect(cart);
-            if (MinecartFloatingHelper.isOffRail(cart)) {
+            MinecartRailConnectHelper.prepareReconnect(cart);
+            if (MinecartFloatStateHelper.isOffRail(cart)) {
                 // prepareReconnect decided this isn't a real landing yet.
                 this.paradiseLost$wasOffRail = true;
-                MinecartFloatingHelper.debugEvent(cart, "deferSeat",
+                MinecartFloatDebugHelper.debugEvent(cart, "deferSeat",
                         "reconnect kept float at " + pos
-                                + " shape=" + MinecartFloatingHelper.getRailShapeName(cart));
+                                + " shape=" + MinecartFloatStateHelper.getRailShapeName(cart));
                 this.paradiseLost$moveFloating(cart, false);
                 ci.cancel();
                 return;
             }
             this.paradiseLost$wasOffRail = false;
-            MinecartFloatingHelper.debugEvent(cart, "reconnect",
-                    "hard seat at " + pos + " shape=" + MinecartFloatingHelper.getRailShapeName(cart));
+            this.paradiseLost$beginCornerNoclip(state);
+            MinecartFloatDebugHelper.debugEvent(cart, "reconnect",
+                    "hard seat at " + pos + " shape=" + MinecartFloatStateHelper.getRailShapeName(cart));
             return;
         }
-        if (MinecartFloatingHelper.shouldCancelTrackWhileFloating(cart, pos, state, leftRails)) {
+        if (MinecartRailConnectHelper.shouldCancelTrackWhileFloating(cart, pos, state, leftRails)) {
             // Too high to seat, keep floating. Also catches client desync where offRail is already false.
-            if (MinecartFloatingHelper.isFlatRailConnectTooEarly(cart, pos, state)) {
+            if (MinecartRailConnectHelper.isFlatRailConnectTooEarly(cart, pos, state)) {
                 this.paradiseLost$moveFloating(cart, false);
                 ci.cancel();
                 return;
             }
-            if (!this.level().isClientSide() && !MinecartFloatingHelper.isGhostSlopeBelow(cart, pos, state)) {
-                MinecartFloatingHelper.adaptFloatWhileGhosting(cart, state);
+            if (!this.level().isClientSide() && !MinecartRailLocatorHelper.isGhostSlopeBelow(cart, pos, state)) {
+                MinecartRailConnectHelper.adaptFloatWhileGhosting(cart, state);
             }
-            MinecartFloatingHelper.debugEvent(cart, "skipTrack",
+            MinecartFloatDebugHelper.debugEvent(cart, "skipTrack",
                     "midair cancel moveAlongTrack at " + pos + " leftRails=" + leftRails
-                            + " unsettledFlat=" + MinecartFloatingHelper.isUnsettledAboveFlatRail(cart));
+                            + " unsettledFlat=" + MinecartRailLocatorHelper.isUnsettledAboveFlatRail(cart));
+            this.paradiseLost$moveFloating(cart, false);
+            ci.cancel();
+        } else if (MinecartRailConnectHelper.shouldWaitToEnterRail(cart, pos, state)) {
             this.paradiseLost$moveFloating(cart, false);
             ci.cancel();
         } else {
-            MinecartFloatingHelper.resolveSidewaysSlopeEntry(cart, state);
+            this.paradiseLost$vanillaTrack = true;
+            this.paradiseLost$beginCornerNoclip(state);
+            MinecartRailMotionHelper.resolveSidewaysSlopeEntry(cart, state);
         }
+    }
+
+    /**
+     * Corner curve clips the inside fence post, and that collision kills the new heading.
+     * Ignore blocks for this one move.
+     */
+    @Unique
+    private void paradiseLost$beginCornerNoclip(BlockState state) {
+        if (!MinecartRailConnectHelper.isCornerShape(state)) {
+            return;
+        }
+        this.noPhysics = true;
+        this.paradiseLost$cornerNoclip = true;
+    }
+
+    @Inject(method = "moveAlongTrack", at = @At("RETURN"))
+    private void paradiseLost$correctVanillaTrackSnap(BlockPos pos, BlockState state, CallbackInfo ci) {
+        if (this.paradiseLost$cornerNoclip) {
+            this.noPhysics = false;
+            this.paradiseLost$cornerNoclip = false;
+        }
+        if (!this.paradiseLost$vanillaTrack) {
+            return;
+        }
+        this.paradiseLost$vanillaTrack = false;
+        MinecartRailConnectHelper.correctVanillaTrackSnap((AbstractMinecart) (Object) this,
+                this.paradiseLost$enterX, this.paradiseLost$enterY, this.paradiseLost$enterZ,
+                this.paradiseLost$enterMotion);
     }
 
     @Inject(method = "comeOffTrack", at = @At("HEAD"), cancellable = true)
     protected void moveOffRail(CallbackInfo ci) {
         AbstractMinecart cart = (AbstractMinecart) (Object) this;
-        if (!MinecartFloatingHelper.isFloating(cart) || MinecartFloatingHelper.getFloatTime(cart) <= 0) {
+        if (!MinecartFloatStateHelper.isFloating(cart) || MinecartFloatStateHelper.getFloatTime(cart) <= 0) {
             return;
         }
         if (!this.level().isClientSide()) {
@@ -203,10 +275,10 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
             this.paradiseLost$moveFloating(cart, true);
             if (!alreadyOff && !this.paradiseLost$wasOffRail) {
                 // Takeoff was held; don't leave a stale offRail flag.
-                MinecartFloatingHelper.setOffRail(cart, false);
+                MinecartFloatStateHelper.setOffRail(cart, false);
             }
             ci.cancel();
-        } else if (MinecartFloatingHelper.isOffRail(cart) || MinecartFloatingHelper.isFloating(cart)) {
+        } else if (MinecartFloatStateHelper.isOffRail(cart) || MinecartFloatStateHelper.isFloating(cart)) {
             // Client: kill vanilla come-off even if offRail hasn't synced yet.
             this.paradiseLost$moveFloating(cart, false);
             ci.cancel();
@@ -225,23 +297,23 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
         // A cart that has basically stopped isn't taking off, so don't lock in a flat takeoff.
         Vec3 exitMotion = this.getDeltaMovement();
         if (exitMotion.horizontalDistanceSqr() <= 0.0025D) {
-            MinecartFloatingHelper.debugEvent(cart, reason, "hold takeoff near-zero motion");
+            MinecartFloatDebugHelper.debugEvent(cart, reason, "hold takeoff near-zero motion");
             return;
         }
         // Capture incline before prepareTakeoff; flat takeoff clears it.
-        int inclineAtExit = MinecartFloatingHelper.getIncline(cart);
-        MinecartFloatingHelper.prepareTakeoff(cart);
+        int inclineAtExit = MinecartFloatStateHelper.getIncline(cart);
+        MinecartFlightHelper.prepareTakeoff(cart);
         // Slightly longer grace when leaving a descent lip.
         int grace = inclineAtExit < 0
-                ? MinecartFloatingHelper.slopeDescentExitGraceTicks()
+                ? MinecartRailConnectHelper.slopeDescentExitGraceTicks()
                 : EXIT_GRACE_TICKS;
         this.paradiseLost$exitGrace = grace;
         this.paradiseLost$wasOffRail = true;
-        MinecartFloatingHelper.setOffRail(cart, true);
-        MinecartFloatingHelper.debugEvent(cart, reason,
+        MinecartFloatStateHelper.setOffRail(cart, true);
+        MinecartFloatDebugHelper.debugEvent(cart, reason,
                 "first exit grace=" + grace
                         + " incline=" + inclineAtExit
-                        + " shape=" + MinecartFloatingHelper.getRailShapeName(cart)
+                        + " shape=" + MinecartFloatStateHelper.getRailShapeName(cart)
                         + " motion=" + this.getDeltaMovement());
     }
 
@@ -251,52 +323,52 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
             this.paradiseLost$openAirClimbGrace--;
         }
         // Stair collision can zero xz; nudge enough to keep the diagonal.
-        MinecartFloatingHelper.assistOpenAirSlopeTravel(cart);
-        MinecartFloatingHelper.maintainClimbTowardFlatLanding(cart);
+        MinecartFlightHelper.assistOpenAirSlopeTravel(cart);
+        MinecartFlightHelper.maintainClimbTowardFlatLanding(cart);
         double d = this.getMaxSpeed();
         Vec3 vec3d = this.getDeltaMovement();
         double x = Mth.clamp(vec3d.x, -d, d);
         double z = Mth.clamp(vec3d.z, -d, d);
         double y = 0.0D;
-        int incline = MinecartFloatingHelper.getIncline(cart);
+        int incline = MinecartFloatStateHelper.getIncline(cart);
         if (incline != 0) {
-            boolean openAir = MinecartFloatingHelper.findRailPos(cart) == null;
+            boolean openAir = MinecartRailLocatorHelper.findRailPos(cart) == null;
             // Descending into empty air, hold height a bit, then level if nothing shows up.
-            if (incline < 0 && openAir && !MinecartFloatingHelper.shouldKeepOpenAirDescent(cart)) {
+            if (incline < 0 && openAir && !MinecartRailLookaheadHelper.shouldKeepOpenAirDescent(cart)) {
                 y = 0.0D;
                 if (++this.paradiseLost$noDescentPathTicks >= 4) {
-                    MinecartFloatingHelper.levelOpenAirFlight(cart);
+                    MinecartFlightHelper.levelOpenAirFlight(cart);
                     incline = 0;
                     this.paradiseLost$noDescentPathTicks = 0;
                 }
-            } else if (incline > 0 && openAir && !MinecartFloatingHelper.shouldKeepOpenAirClimb(cart)) {
+            } else if (incline > 0 && openAir && !MinecartRailLookaheadHelper.shouldKeepOpenAirClimb(cart)) {
                 // Past the last slope/solid stair: the climb is over, so let the cart drop
                 // instead of coasting level for the rest of the float.
                 y = 0.0D;
                 if (++this.paradiseLost$noDescentPathTicks >= 2) {
-                    MinecartFloatingHelper.levelOpenAirFlight(cart);
-                    MinecartFloatingHelper.stopFloating(cart);
+                    MinecartFlightHelper.levelOpenAirFlight(cart);
+                    MinecartFloatStateHelper.stopFloating(cart);
                     incline = 0;
                     this.paradiseLost$noDescentPathTicks = 0;
                 }
             } else {
                 this.paradiseLost$noDescentPathTicks = 0;
                 y = incline * Math.sqrt(x * x + z * z);
-                y = MinecartFloatingHelper.softenSlopeDescentOntoFlat(cart, y);
-                y = MinecartFloatingHelper.softenSlopeAscentOntoFlat(cart, y);
+                y = MinecartRailConnectHelper.softenSlopeDescentOntoFlat(cart, y);
+                y = MinecartRailConnectHelper.softenSlopeAscentOntoFlat(cart, y);
             }
         } else {
             this.paradiseLost$noDescentPathTicks = 0;
-            BlockPos railPos = MinecartFloatingHelper.findRailPos(cart);
+            BlockPos railPos = MinecartRailLocatorHelper.findRailPos(cart);
             if (railPos != null) {
-                y = MinecartFloatingHelper.descentSpeedOntoFlatRail(cart, railPos);
+                y = MinecartRailConnectHelper.descentSpeedOntoFlatRail(cart, railPos);
             }
         }
         this.setDeltaMovement(x, y, z);
 
         Vec3 intended = this.getDeltaMovement();
-        boolean noclip = MinecartFloatingHelper.shouldUseSlopeNoclip(cart)
-                || (this.paradiseLost$exitGrace > 0 && MinecartFloatingHelper.shouldUseExitGraceNoclip(cart));
+        boolean noclip = MinecartRailConnectHelper.shouldUseSlopeNoclip(cart)
+                || (this.paradiseLost$exitGrace > 0 && MinecartRailConnectHelper.shouldUseExitGraceNoclip(cart));
         if (this.paradiseLost$exitGrace > 0) {
             this.paradiseLost$exitGrace--;
         }
@@ -314,116 +386,119 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
 
         // Hit a floor, ceiling or wall with nothing to land on, level out and coast.
         if (!this.level().isClientSide()
-                && MinecartFloatingHelper.shouldLevelAgainstSolidBarrier(cart, this.onGround(), this.verticalCollision,
+                && MinecartFlightHelper.shouldLevelAgainstSolidBarrier(cart, this.onGround(), this.verticalCollision,
                 this.horizontalCollision, intended)) {
-            MinecartFloatingHelper.levelOpenAirFlight(cart);
-            MinecartFloatingHelper.debugEvent(cart, "solidBarrier",
+            MinecartFlightHelper.levelOpenAirFlight(cart);
+            MinecartFloatDebugHelper.debugEvent(cart, "solidBarrier",
                     "onGround=" + this.onGround() + " vertCol=" + this.verticalCollision
                             + " horCol=" + this.horizontalCollision);
         }
 
         if (tickFloatTime) {
-            MinecartFloatingHelper.tick(cart);
+            MinecartFloatStateHelper.tick(cart);
         }
     }
 
     @Inject(method = "tick", at = @At("RETURN"))
     public void tick(CallbackInfo ci) {
         AbstractMinecart cart = (AbstractMinecart) (Object) this;
-        if (!MinecartFloatingHelper.isFloating(cart)) {
+        if (!MinecartFloatStateHelper.isFloating(cart)) {
             this.paradiseLost$exitGrace = 0;
             this.paradiseLost$noDescentPathTicks = 0;
             this.paradiseLost$wasOffRail = false;
-            MinecartFloatingHelper.setOffRail(cart, false);
+            MinecartFloatStateHelper.setOffRail(cart, false);
             this.paradiseLost$clearRailRenderPose();
             return;
         }
 
         // comeOffTrack owns takeoff, don't flip offRail from a one-tick !onRail blip.
 
-        boolean offRailNow = MinecartFloatingHelper.isOffRail(cart);
+        boolean offRailNow = MinecartFloatStateHelper.isOffRail(cart);
 
-        if (MinecartFloatingHelper.isCartOnRail(cart)) {
+        if (MinecartRailLocatorHelper.isCartOnRail(cart)) {
             boolean leftRails = this.level().isClientSide()
                     ? offRailNow
                     : (this.paradiseLost$wasOffRail || offRailNow);
-            BlockPos railPos = MinecartFloatingHelper.findRailPos(cart);
+            BlockPos railPos = MinecartRailLocatorHelper.findRailPos(cart);
             if (!this.level().isClientSide() && railPos != null) {
-                MinecartFloatingHelper.assistFloatingSlopeTravel(cart, this.level().getBlockState(railPos));
+                MinecartRailMotionHelper.assistFloatingSlopeTravel(cart, this.level().getBlockState(railPos));
             }
-            boolean midair = railPos != null && MinecartFloatingHelper.isMidairAboveRail(cart, railPos, leftRails);
+            boolean midair = railPos != null && MinecartRailLocatorHelper.isMidairAboveRail(cart, railPos, leftRails);
             // Client can clear offRail while still a block or two above the pier.
-            boolean unsettledFlat = MinecartFloatingHelper.isUnsettledAboveFlatRail(cart);
+            boolean unsettledFlat = MinecartRailLocatorHelper.isUnsettledAboveFlatRail(cart);
             boolean keepFloat = midair || unsettledFlat;
 
             if (offRailNow) {
-                boolean settled = railPos != null && MinecartFloatingHelper.isSettledOnRail(cart, railPos);
+                boolean settled = railPos != null && MinecartRailLocatorHelper.isSettledOnRail(cart, railPos);
                 if (settled && !this.level().isClientSide()) {
                     BlockState seatState = this.level().getBlockState(railPos);
-                    if (MinecartFloatingHelper.shouldDeferSlopeToCornerHardSeat(cart, railPos, seatState)) {
-                        MinecartFloatingHelper.keepSlopeFloatThroughCorner(cart, railPos, seatState);
-                        MinecartFloatingHelper.applyFloatingRotation(cart);
-                        MinecartFloatingHelper.debugTick(cart, leftRails, midair, "deferSeatTick");
+                    if (MinecartFloatRotationHelper.shouldDeferSlopeToCornerHardSeat(cart, railPos, seatState)
+                            || MinecartRailConnectHelper.shouldWaitToEnterRail(cart, railPos, seatState)) {
+                        if (MinecartFloatRotationHelper.shouldDeferSlopeToCornerHardSeat(cart, railPos, seatState)) {
+                            MinecartFloatRotationHelper.keepSlopeFloatThroughCorner(cart, railPos, seatState);
+                        }
+                        MinecartFloatRotationHelper.applyFloatingRotation(cart);
+                        MinecartFloatDebugHelper.debugTick(cart, leftRails, midair, "deferSeatTick");
                     } else {
                         this.paradiseLost$exitGrace = 0;
-                        MinecartFloatingHelper.prepareReconnect(cart);
-                        if (MinecartFloatingHelper.isOffRail(cart)) {
+                        MinecartRailConnectHelper.prepareReconnect(cart);
+                        if (MinecartFloatStateHelper.isOffRail(cart)) {
                             this.paradiseLost$wasOffRail = true;
-                            MinecartFloatingHelper.applyFloatingRotation(cart);
-                            MinecartFloatingHelper.debugTick(cart, leftRails, midair, "deferSeatTick");
+                            MinecartFloatRotationHelper.applyFloatingRotation(cart);
+                            MinecartFloatDebugHelper.debugTick(cart, leftRails, midair, "deferSeatTick");
                         } else {
                             this.paradiseLost$wasOffRail = false;
-                            MinecartFloatingHelper.debugTick(cart, false, false, "reconnect");
+                            MinecartFloatDebugHelper.debugTick(cart, false, false, "reconnect");
                         }
                     }
                 } else {
                     if (!this.level().isClientSide()) {
                         if (railPos != null) {
-                            MinecartFloatingHelper.adaptFloatToFlatRailBelow(cart, this.level().getBlockState(railPos));
+                            MinecartRailConnectHelper.adaptFloatToFlatRailBelow(cart, this.level().getBlockState(railPos));
                         }
-                        MinecartFloatingHelper.applyFloatingRotation(cart);
+                        MinecartFloatRotationHelper.applyFloatingRotation(cart);
                     } else {
                         paradiseLost$applyClientFloatPose(cart);
                     }
-                    MinecartFloatingHelper.debugTick(cart, leftRails, midair,
+                    MinecartFloatDebugHelper.debugTick(cart, leftRails, midair,
                             settled ? "ghostRailLerp" : (midair ? "ghostRail" : "ghostRailLerp"));
                 }
             } else if (keepFloat) {
                 // Still high even though offRail is already false, keep the float pose.
                 if (!this.level().isClientSide()) {
                     if (railPos != null) {
-                        MinecartFloatingHelper.adaptFloatToFlatRailBelow(cart, this.level().getBlockState(railPos));
+                        MinecartRailConnectHelper.adaptFloatToFlatRailBelow(cart, this.level().getBlockState(railPos));
                     }
-                    MinecartFloatingHelper.applyFloatingRotation(cart);
+                    MinecartFloatRotationHelper.applyFloatingRotation(cart);
                 } else {
                     paradiseLost$applyClientFloatPose(cart);
                 }
-                MinecartFloatingHelper.debugTick(cart, leftRails, true,
+                MinecartFloatDebugHelper.debugTick(cart, leftRails, true,
                         unsettledFlat ? "ghostRailDesync" : "ghostRailPending");
             } else {
                 this.paradiseLost$exitGrace = 0;
                 this.paradiseLost$wasOffRail = false;
                 if (!this.level().isClientSide()) {
-                    MinecartFloatingHelper.captureRailState(cart);
-                    if (MinecartFloatingHelper.getIncline(cart) != 0) {
-                        MinecartFloatingHelper.captureRailRenderPose(cart);
+                    MinecartFloatPoseHelper.captureRailState(cart);
+                    if (MinecartFloatStateHelper.getIncline(cart) != 0) {
+                        MinecartFloatPoseHelper.captureRailRenderPose(cart);
                         // Offs can spit out garbage near mixed geometry, clamp back to 45 degrees.
-                        MinecartFloatingHelper.maintainSlopeFloatPose(cart);
-                        if (MinecartFloatingHelper.shouldSkipRailRenderSnap(cart)) {
-                            MinecartFloatingHelper.maintainSlopeEntityPitch(cart);
+                        MinecartFloatPoseHelper.maintainSlopeFloatPose(cart);
+                        if (MinecartFloatRenderHelper.shouldSkipRailRenderSnap(cart)) {
+                            MinecartFloatRotationHelper.maintainSlopeEntityPitch(cart);
                         } else {
-                            MinecartFloatingHelper.publishSlopePoseToSync(cart);
+                            MinecartFloatRotationHelper.publishSlopePoseToSync(cart);
                         }
                     } else {
-                        MinecartFloatingHelper.syncFlatFloatYawFromMotion(cart);
+                        MinecartFloatPoseHelper.syncFlatFloatYawFromMotion(cart);
                     }
                 } else {
                     paradiseLost$applyClientFloatPose(cart);
                 }
-                MinecartFloatingHelper.debugTick(cart, false, false, "onRail");
+                MinecartFloatDebugHelper.debugTick(cart, false, false, "onRail");
             }
             if (!this.level().isClientSide()) {
-                MinecartFloatingHelper.tick(cart);
+                MinecartFloatStateHelper.tick(cart);
             }
             return;
         }
@@ -434,10 +509,10 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
             this.paradiseLost$beginFloatTakeoff(cart, "airTakeoff");
             if (firstExit && this.paradiseLost$wasOffRail) {
                 Vec3 motion = this.getDeltaMovement();
-                int incline = MinecartFloatingHelper.getIncline(cart);
+                int incline = MinecartFloatStateHelper.getIncline(cart);
                 if (incline > 0
-                        || (incline < 0 && (MinecartFloatingHelper.findRailPos(cart) != null
-                        || MinecartFloatingHelper.shouldKeepOpenAirDescent(cart)))) {
+                        || (incline < 0 && (MinecartRailLocatorHelper.findRailPos(cart) != null
+                        || MinecartRailLookaheadHelper.shouldKeepOpenAirDescent(cart)))) {
                     this.setDeltaMovement(motion.x, incline * motion.horizontalDistance(), motion.z);
                 } else if (incline < 0) {
                     // No landing in sight, hold height, keep incline for the next look-ahead tick.
@@ -445,17 +520,17 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
                 }
             }
             if (this.paradiseLost$wasOffRail) {
-                MinecartFloatingHelper.applyFloatingRotation(cart);
+                MinecartFloatRotationHelper.applyFloatingRotation(cart);
                 if (firstExit) {
                     // comeOffTrack was skipped this tick (left during moveAlongTrack).
                     // Move now with slope noclip so we don't stick on the next stair pier.
                     this.paradiseLost$moveFloating(cart, true);
                 }
             }
-        } else if (MinecartFloatingHelper.isOffRail(cart) || MinecartFloatingHelper.isFloating(cart)) {
+        } else if (MinecartFloatStateHelper.isOffRail(cart) || MinecartFloatStateHelper.isFloating(cart)) {
             paradiseLost$applyClientFloatPose(cart);
         }
-        MinecartFloatingHelper.debugTick(cart, this.paradiseLost$wasOffRail, false, "air");
+        MinecartFloatDebugHelper.debugTick(cart, this.paradiseLost$wasOffRail, false, "air");
         if (this.level().isClientSide()) {
             Vec3 motion = this.getDeltaMovement();
             if (motion.lengthSqr() > 1.0E-4) {
@@ -473,10 +548,10 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
      */
     @Unique
     private void paradiseLost$applyClientFloatPose(AbstractMinecart cart) {
-        if (MinecartFloatingHelper.clientShouldHoldSlopePose(cart)) {
-            MinecartFloatingHelper.maintainSlopeFloatPose(cart);
+        if (MinecartFloatRenderHelper.clientShouldHoldSlopePose(cart)) {
+            MinecartFloatPoseHelper.maintainSlopeFloatPose(cart);
         } else {
-            MinecartFloatingHelper.applySyncedFloatingRotation(cart);
+            MinecartFloatRotationHelper.applySyncedFloatingRotation(cart);
         }
     }
 }

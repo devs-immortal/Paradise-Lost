@@ -2,7 +2,8 @@ package net.id.paradise_lost.mixin.debug;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.id.paradise_lost.debug.MinecartRotationDebug;
-import net.id.paradise_lost.util.MinecartFloatingHelper;
+import net.id.paradise_lost.util.minecart.MinecartFloatRenderHelper;
+import net.id.paradise_lost.util.minecart.MinecartFloatStateHelper;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.MinecartRenderer;
 import net.minecraft.util.Mth;
@@ -25,12 +26,12 @@ public abstract class MinecartRendererRotationDebugMixin {
             MultiBufferSource buffer,
             int packedLight,
             CallbackInfo ci) {
-        if (!MinecartFloatingHelper.isFloating(entity)) {
+        if (!MinecartFloatStateHelper.isFloating(entity)) {
             return;
         }
-        boolean floatPose = MinecartFloatingHelper.shouldUseFloatRenderPose(entity);
-        float wanted = floatPose ? MinecartFloatingHelper.getFloatRenderYaw(entity) : Float.NaN;
-        float drawnDegrees = MinecartFloatingHelper.renderYawFilterValue(entity);
+        boolean floatPose = MinecartFloatRenderHelper.shouldUseFloatRenderPose(entity);
+        float wanted = floatPose ? MinecartFloatRenderHelper.getFloatRenderYaw(entity) : Float.NaN;
+        float drawnDegrees = MinecartFloatRenderHelper.renderYawFilterValue(entity);
         boolean moved = MinecartRotationDebug.moved(entity, "renderWanted", wanted, THRESHOLD);
         moved |= MinecartRotationDebug.moved(entity, "renderDrawn", drawnDegrees, THRESHOLD);
         if (!moved) {

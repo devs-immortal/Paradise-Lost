@@ -1,7 +1,7 @@
 package net.id.paradise_lost.mixin.debug;
 
 import net.id.paradise_lost.debug.MinecartRotationDebug;
-import net.id.paradise_lost.util.MinecartFloatingHelper;
+import net.id.paradise_lost.util.minecart.MinecartFloatStateHelper;
 import net.minecraft.server.level.ServerEntity;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -40,7 +40,7 @@ public abstract class ServerEntityRotationDebugMixin {
 
     @Inject(method = "sendChanges", at = @At("RETURN"))
     private void paradiseLost$logRotation(CallbackInfo ci) {
-        if (!(this.entity instanceof AbstractMinecart cart) || !MinecartFloatingHelper.isFloating(cart)) {
+        if (!(this.entity instanceof AbstractMinecart cart) || !MinecartFloatStateHelper.isFloating(cart)) {
             return;
         }
         int entityByte = Mth.floor(cart.getYRot() * 256.0F / 360.0F);
