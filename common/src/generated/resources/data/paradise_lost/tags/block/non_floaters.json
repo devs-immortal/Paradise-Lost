@@ -1,3 +1,9 @@
 {
-  "values": []
+  "values": [
+    "#minecraft:pressure_plates",
+    "minecraft:detector_rail",
+    "minecraft:big_dripleaf",
+    "minecraft:tripwire",
+    "paradise_lost:levita_rail"
+  ]
 }
