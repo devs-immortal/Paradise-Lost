@@ -1,0 +1,276 @@
+package net.id.paradise_lost.util.minecart;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.vehicle.AbstractMinecart;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseRailBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.RailShape;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
+
+/**
+ * Finds the rail under a floating cart and whether the cart is actually seated on it.
+ */
+public final class MinecartRailLocatorHelper {
+    private MinecartRailLocatorHelper() {
+    }
+
+    /**
+     * Max Y above an ascending rail block while still on its seat curve (~0 at low end, ~1 at high).
+     */
+    static final double ASCENDING_SEAT_HEIGHT = 1.05D;
+
+    /**
+     * Roughly over the rail cell (within half a block sideways).
+     */
+    static boolean isOverRailCell(AbstractMinecart cart, BlockPos railPos, RailShape shape) {
+        double cx = railPos.getX() + 0.5D;
+        double cz = railPos.getZ() + 0.5D;
+        if (shape == RailShape.EAST_WEST) {
+            return Math.abs(cart.getZ() - cz) <= 0.45D
+                    && Math.abs(cart.getX() - cx) <= 0.75D;
+        }
+        if (shape == RailShape.NORTH_SOUTH) {
+            return Math.abs(cart.getX() - cx) <= 0.45D
+                    && Math.abs(cart.getZ() - cz) <= 0.75D;
+        }
+        return Math.abs(cart.getX() - cx) <= 0.55D && Math.abs(cart.getZ() - cz) <= 0.55D;
+    }
+
+    public static boolean isUnsettledAboveFlatRail(AbstractMinecart cart) {
+        BlockPos railPos = findRailPos(cart);
+        if (railPos == null) {
+            return false;
+        }
+        BlockState railState = cart.level().getBlockState(railPos);
+        if (!(railState.getBlock() instanceof BaseRailBlock rail)
+                || railState.getValue(rail.getShapeProperty()).isAscending()) {
+            return false;
+        }
+        return !isSettledOnRail(cart, railPos);
+    }
+
+    /**
+     * Slope one block under a cart flying level, not hooked up to the cart's height. The seat fills the whole
+     * block, so this used to look occupied and the cart climbed or turned on a rail it never touched. Already on
+     * a slope, or diving onto one, is real. The high end of a slope we're riding stays in that block. A rail up
+     * there only counts once we're at it and heading down.
+     */
+
+    public static boolean isGhostSlopeBelow(AbstractMinecart cart, BlockPos railPos, BlockState railState) {
+        return isGhostSlopeBelow(cart, railPos, railState, cart.getX(), cart.getY(), cart.getZ(), cart.getDeltaMovement());
+    }
+
+    /**
+     * Same check, using the position from before vanilla snapped us down onto the slope.
+     */
+    public static boolean isGhostSlopeBelow(AbstractMinecart cart, BlockPos railPos, BlockState railState,
+                                            double x, double y, double z, Vec3 motion) {
+        if (!MinecartFloatStateHelper.isFloating(cart) || MinecartFloatStateHelper.getIncline(cart) != 0) {
+            return false;
+        }
+        if (!(railState.getBlock() instanceof BaseRailBlock rail)) {
+            return false;
+        }
+        RailShape shape = railState.getValue(rail.getShapeProperty());
+        // High end of a slope we're on is still inside that block. Ghost means the block above it.
+        if (!shape.isAscending() || Mth.floor(y) <= railPos.getY()) {
+            return false;
+        }
+        if (motion.y < -0.05D) {
+            return false;
+        }
+        Direction high = switch (shape) {
+            case ASCENDING_EAST -> Direction.EAST;
+            case ASCENDING_WEST -> Direction.WEST;
+            case ASCENDING_NORTH -> Direction.NORTH;
+            default -> Direction.SOUTH;
+        };
+        BlockPos junction = railPos.relative(high).above();
+        if (!BaseRailBlock.isRail(cart.level().getBlockState(junction))) {
+            return true;
+        }
+        // Rail at the high end. Ours only if we're actually there and already heading down.
+        // Otherwise it's just a slope sitting under the flight path.
+        double dx = x - (junction.getX() + 0.5D);
+        double dz = z - (junction.getZ() + 0.5D);
+        boolean atJunction = dx * dx + dz * dz <= 0.8D * 0.8D;
+        if (!atJunction) {
+            return true;
+        }
+        boolean headingDown = switch (shape) {
+            case ASCENDING_EAST -> motion.x < -MinecartRailMotionHelper.MOTION_EPSILON;
+            case ASCENDING_WEST -> motion.x > MinecartRailMotionHelper.MOTION_EPSILON;
+            case ASCENDING_NORTH -> motion.z > MinecartRailMotionHelper.MOTION_EPSILON;
+            case ASCENDING_SOUTH -> motion.z < -MinecartRailMotionHelper.MOTION_EPSILON;
+            default -> false;
+        };
+        return !headingDown;
+    }
+
+    /**
+     * Rail here, or the one directly below. Same pick as getPos.
+     */
+    @Nullable
+    public static BlockPos railAtOrBelow(Level level, double x, double y, double z) {
+        BlockPos pos = BlockPos.containing(x, y, z);
+        if (BaseRailBlock.isRail(level.getBlockState(pos))) {
+            return pos;
+        }
+        BlockPos below = pos.below();
+        if (BaseRailBlock.isRail(level.getBlockState(below))) {
+            return below;
+        }
+        return null;
+    }
+
+    public static boolean isSettledOnRail(AbstractMinecart cart, BlockPos railPos) {
+        BlockState railState = cart.level().getBlockState(railPos);
+        if (!(railState.getBlock() instanceof BaseRailBlock rail)) {
+            return false;
+        }
+        if (isGhostSlopeBelow(cart, railPos, railState)) {
+            return false;
+        }
+        double height = cart.getY() - railPos.getY();
+        // Under the rail is never seated.
+        if (height < 0.0D) {
+            return false;
+        }
+        if (railState.getValue(rail.getShapeProperty()).isAscending()) {
+            // Ascending seat Y spans ~0..1 within the rail cell. 0.45 only covers the low end.
+            return height <= ASCENDING_SEAT_HEIGHT;
+        }
+        // A diving cart drops this far in its next tick. If it had to be within 0.16 to count as seated, it could step right
+        // over a one-block rail across its path (a perpendicular landing) without ever being counted as seated.
+        double limit = 0.16D;
+        Vec3 motion = cart.getDeltaMovement();
+        if (MinecartFloatStateHelper.isFloating(cart) && motion.y < -0.05D) {
+            limit = Math.max(limit, -motion.y + 0.02D);
+        }
+        return height <= limit;
+    }
+
+    @Nullable
+    public static BlockPos findRailPos(AbstractMinecart cart) {
+        BlockPos pos = cart.blockPosition();
+        boolean climbFloat = MinecartFloatStateHelper.isFloating(cart) && MinecartFloatStateHelper.getIncline(cart) > 0;
+        BlockState at = cart.level().getBlockState(pos);
+        if (BaseRailBlock.isRail(at) && !isGhostSlopeBelow(cart, pos, at)) {
+            // High above a through-flat with a higher target, ignore it. Otherwise it's the landing.
+            if (!(climbFloat && isFlatStraightRail(at) && cart.getY() - pos.getY() > 0.45D
+                    && hasHigherClimbTarget(cart, pos))) {
+                return pos;
+            }
+        }
+        BlockPos below = pos.below();
+        BlockState belowState = cart.level().getBlockState(below);
+        if (BaseRailBlock.isRail(belowState) && !isGhostSlopeBelow(cart, below, belowState)) {
+            // Ignore rails far below so a floor track can't kill climb Y.
+            // Ascending underfoot is different: seat Y spans ~0..1 in the same cell.
+            if (climbFloat) {
+                double height = cart.getY() - below.getY();
+                boolean ascendingBelow = belowState.getBlock() instanceof BaseRailBlock belowRail
+                        && belowState.getValue(belowRail.getShapeProperty()).isAscending();
+                if (ascendingBelow ? height <= ASCENDING_SEAT_HEIGHT : height <= 0.45D) {
+                    return below;
+                }
+            } else {
+                return below;
+            }
+        }
+        // Might be under a pier, look up a couple blocks.
+        if (climbFloat) {
+            for (int dy = 1; dy <= 2; dy++) {
+                BlockPos above = pos.above(dy);
+                if (BaseRailBlock.isRail(cart.level().getBlockState(above))) {
+                    return above;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Higher ascending beyond this flat. Don't call findRailPos from here.
+     */
+    static boolean hasHigherClimbTarget(AbstractMinecart cart, BlockPos flatPos) {
+        var level = cart.level();
+        if (BaseRailBlock.isRail(level.getBlockState(flatPos.above()))) {
+            return true;
+        }
+        Vec3 motion = cart.getDeltaMovement();
+        if (motion.horizontalDistanceSqr() <= MinecartRailMotionHelper.MOTION_EPSILON * MinecartRailMotionHelper.MOTION_EPSILON) {
+            return false;
+        }
+        int dx;
+        int dz;
+        if (Math.abs(motion.x) >= Math.abs(motion.z)) {
+            dx = motion.x > 0.0D ? 1 : -1;
+            dz = 0;
+        } else {
+            dx = 0;
+            dz = motion.z > 0.0D ? 1 : -1;
+        }
+        for (int step = 1; step <= 4; step++) {
+            // dy from 1, same-level ascending later isn't a "higher" target.
+            for (int dy = 1; dy <= 3; dy++) {
+                BlockState state = level.getBlockState(flatPos.offset(dx * step, dy, dz * step));
+                if (state.getBlock() instanceof BaseRailBlock rail
+                        && state.getValue(rail.getShapeProperty()).isAscending()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static boolean isFlatStraightRail(BlockState state) {
+        if (!(state.getBlock() instanceof BaseRailBlock rail)) {
+            return false;
+        }
+        RailShape shape = state.getValue(rail.getShapeProperty());
+        return !shape.isAscending() && !MinecartRailMotionHelper.isCornerRail(shape);
+    }
+
+    public static boolean isMidairAboveRail(AbstractMinecart cart, BlockPos railPos, boolean alreadyLeftRails) {
+        if (!MinecartFloatStateHelper.isFloating(cart)) {
+            return false;
+        }
+        if (isGhostSlopeBelow(cart, railPos, cart.level().getBlockState(railPos))) {
+            return true;
+        }
+        double height = cart.getY() - railPos.getY();
+        // Still under the rail.
+        if (height < 0.0D) {
+            return alreadyLeftRails || MinecartFloatStateHelper.getIncline(cart) != 0 || MinecartFloatStateHelper.isClimbMemory(cart);
+        }
+        BlockState railState = cart.level().getBlockState(railPos);
+        boolean ascendingUnder = railState.getBlock() instanceof BaseRailBlock rail
+                && railState.getValue(rail.getShapeProperty()).isAscending();
+        // High above underfoot rail, treat as midair even if offRail hasn't synced.
+        boolean slopeFloat = MinecartFloatStateHelper.getIncline(cart) != 0 || MinecartFloatStateHelper.isClimbMemory(cart) || MinecartFloatRotationHelper.poseHasSlopePitch(cart);
+        if (!alreadyLeftRails && !slopeFloat) {
+            return false;
+        }
+        if (ascendingUnder) {
+            // On-rail climb uses the full ~0..1 seat curve; only treat as midair above the crest.
+            return height > ASCENDING_SEAT_HEIGHT;
+        }
+        return !isSettledOnRail(cart, railPos);
+    }
+
+    public static boolean isCartOnRail(AbstractMinecart cart) {
+        int i = Mth.floor(cart.getX());
+        int j = Mth.floor(cart.getY());
+        int k = Mth.floor(cart.getZ());
+        BlockState blockState = cart.level().getBlockState(new BlockPos(i, j, k));
+        if (BaseRailBlock.isRail(blockState)) {
+            return true;
+        }
+        return BaseRailBlock.isRail(cart.level().getBlockState(new BlockPos(i, j - 1, k)));
+    }
+}

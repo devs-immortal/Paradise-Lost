@@ -1,0 +1,566 @@
+package net.id.paradise_lost.util.minecart;
+
+import com.mojang.datafixers.util.Pair;
+import net.id.paradise_lost.entity.MinecartFloatPoseAccess;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Vec3i;
+import net.minecraft.world.entity.vehicle.AbstractMinecart;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseRailBlock;
+import net.minecraft.world.level.block.piston.MovingPistonBlock;
+import net.minecraft.world.level.block.piston.PistonBaseBlock;
+import net.minecraft.world.level.block.piston.PistonHeadBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.RailShape;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
+
+/**
+ * Looks along the cart's travel for rails, landings, stairs, walls, and ceilings.
+ */
+public final class MinecartRailLookaheadHelper {
+    private MinecartRailLookaheadHelper() {
+    }
+
+    @Nullable
+    static BlockPos findUnsettledFlatClimbTarget(AbstractMinecart cart) {
+        BlockPos railPos = MinecartRailLocatorHelper.findRailPos(cart);
+        if (railPos != null) {
+            BlockState state = cart.level().getBlockState(railPos);
+            if (state.getBlock() instanceof BaseRailBlock rail) {
+                RailShape shape = state.getValue(rail.getShapeProperty());
+                if (!shape.isAscending() && !MinecartRailMotionHelper.isCornerRail(shape) && !MinecartRailLocatorHelper.isSettledOnRail(cart, railPos)) {
+                    return railPos;
+                }
+            }
+        }
+        BlockPos ahead = findContinuingRailAhead(cart, false);
+        if (ahead == null) {
+            return null;
+        }
+        BlockState state = cart.level().getBlockState(ahead);
+        if (!(state.getBlock() instanceof BaseRailBlock rail)) {
+            return null;
+        }
+        RailShape shape = state.getValue(rail.getShapeProperty());
+        if (shape.isAscending() || MinecartRailMotionHelper.isCornerRail(shape)) {
+            return null;
+        }
+        if (MinecartRailLocatorHelper.isSettledOnRail(cart, ahead)) {
+            return null;
+        }
+        // Must be at/above the cart, a floor flat below is not an ascend-flat target.
+        if (ahead.getY() + 1 < cart.blockPosition().getY()) {
+            return null;
+        }
+        return ahead;
+    }
+
+    @Nullable
+    private static BlockPos findUnsettledFlatLandingAhead(AbstractMinecart cart) {
+        BlockPos ahead = findContinuingRailAhead(cart, false);
+        if (ahead == null) {
+            return null;
+        }
+        BlockState state = cart.level().getBlockState(ahead);
+        if (!(state.getBlock() instanceof BaseRailBlock rail)
+                || state.getValue(rail.getShapeProperty()).isAscending()
+                || MinecartRailMotionHelper.isCornerRail(state.getValue(rail.getShapeProperty()))) {
+            return null;
+        }
+        if (MinecartRailLocatorHelper.isSettledOnRail(cart, ahead)) {
+            return null;
+        }
+        return ahead;
+    }
+
+    /**
+     * Unseated straight flat within a block of the cart: the landing we are climbing onto, whether we are still under
+     * the pier or already clipping it from above.
+     */
+    static boolean hasNearUnsettledFlatLanding(AbstractMinecart cart) {
+        BlockPos ahead = findUnsettledFlatLandingAhead(cart);
+        if (ahead == null) {
+            return false;
+        }
+        double height = cart.getY() - ahead.getY();
+        return height > -1.0D && height <= 1.0D;
+    }
+
+    /**
+     * Still under the pier of a flat landing. Noclip belongs here; clipping the rail from above must collide so we
+     * seat.
+     */
+    static boolean isBelowContinuingFlatLanding(AbstractMinecart cart) {
+        BlockPos ahead = findUnsettledFlatLandingAhead(cart);
+        return ahead != null && cart.getY() < ahead.getY() + 0.0625D;
+    }
+
+    /**
+     * Solid in front of the cart at its own height that it cannot get over or past.
+     * <ul>
+     *     <li>Two blocks high or more: always a wall. Rails or stairs seen beyond it are no way forward.</li>
+     *     <li>One block high: may be the tread of a stair path, so a stair or a rail still leading on (or a landing
+     *     the climb is heading for) means it is not a wall. A diving cart cannot step up a tread, so for it the stair
+     *     path is the only exception.</li>
+     * </ul>
+     */
+    static boolean isWallAhead(AbstractMinecart cart, Vec3 moving) {
+        double reach = cart.getBbWidth() / 2.0D + 0.1D;
+        double dx = 0.0D;
+        double dz = 0.0D;
+        if (Math.abs(moving.x) >= Math.abs(moving.z)) {
+            dx = Math.signum(moving.x) * reach;
+        } else {
+            dz = Math.signum(moving.z) * reach;
+        }
+        BlockPos ahead = BlockPos.containing(cart.getX() + dx, cart.getY() + cart.getBbHeight() / 2.0D, cart.getZ() + dz);
+        if (!isBlockingSolid(cart.level(), ahead)) {
+            BlockPos top = BlockPos.containing(cart.getX() + dx, cart.getY() + cart.getBbHeight() - 0.05D, cart.getZ() + dz);
+            return !top.equals(ahead) && isBlockingSolid(cart.level(), top) && !hasContinuingRailAhead(cart);
+        }
+        if (isBlockingSolid(cart.level(), ahead.above())) {
+            return true;
+        }
+        if (hasContinuingSlopeSolidAhead(cart)) {
+            return false;
+        }
+        return MinecartFloatStateHelper.getIncline(cart) < 0
+                || (!hasContinuingRailAhead(cart) && !hasNearUnsettledFlatLanding(cart)
+                && !isBelowContinuingFlatLanding(cart));
+    }
+
+    /**
+     * Any rail continues ahead (slope, flat landing, or short gap).
+     */
+    public static boolean hasContinuingRailAhead(AbstractMinecart cart) {
+        return findContinuingRailAhead(cart, false) != null;
+    }
+
+    /**
+     * Ascending rail continues ahead. Flats don't count, those need a real takeoff + seat.
+     */
+    public static boolean hasContinuingAscendingRailAhead(AbstractMinecart cart) {
+        return findContinuingRailAhead(cart, true) != null;
+    }
+
+    @Nullable
+    static BlockPos findContinuingRailAhead(AbstractMinecart cart, boolean ascendingOnly) {
+        BlockPos underfoot = MinecartRailLocatorHelper.findRailPos(cart);
+        if (underfoot != null) {
+            BlockState underState = cart.level().getBlockState(underfoot);
+            if (underState.getBlock() instanceof BaseRailBlock underRail) {
+                RailShape underShape = underState.getValue(underRail.getShapeProperty());
+                // Underfoot ascending counts. Flat underfoot isn't "ascending ahead".
+                if (!ascendingOnly || underShape.isAscending()) {
+                    return underfoot;
+                }
+            } else if (!ascendingOnly) {
+                return underfoot;
+            }
+        }
+        int dx = 0;
+        int dz = 0;
+        Vec3 motion = cart.getDeltaMovement();
+        if (motion.horizontalDistanceSqr() > MinecartRailMotionHelper.MOTION_EPSILON * MinecartRailMotionHelper.MOTION_EPSILON) {
+            if (Math.abs(motion.x) >= Math.abs(motion.z)) {
+                dx = motion.x > 0.0D ? 1 : -1;
+            } else {
+                dz = motion.z > 0.0D ? 1 : -1;
+            }
+        } else {
+            // Float yaw is 0=east, not look-yaw (Direction.fromYRot would face the wrong way).
+            float railYaw = MinecartFloatStateHelper.getSyncedFloatYaw(cart);
+            MinecartFloatPoseAccess pose = (MinecartFloatPoseAccess) cart;
+            if (pose.paradiseLost$hasRailRenderPose()) {
+                railYaw = pose.paradiseLost$getRailRenderYaw();
+            }
+            Vec3 along = MinecartFloatPoseHelper.railYawDirection(railYaw);
+            if (along.lengthSqr() > 1.0E-8D) {
+                if (Math.abs(along.x) >= Math.abs(along.z)) {
+                    dx = along.x > 0.0D ? 1 : -1;
+                } else {
+                    dz = along.z > 0.0D ? 1 : -1;
+                }
+            } else {
+                RailShape shape = MinecartFloatStateHelper.getRailShape(cart);
+                if (shape != null) {
+                    Pair<Vec3i, Vec3i> exits = MinecartRailMotionHelper.RAIL_EXITS.get(shape);
+                    if (exits != null) {
+                        Vec3i upper = exits.getFirst().getY() >= exits.getSecond().getY()
+                                ? exits.getFirst() : exits.getSecond();
+                        Vec3i lower = exits.getFirst().getY() < exits.getSecond().getY()
+                                ? exits.getFirst() : exits.getSecond();
+                        Vec3i pick = MinecartFloatStateHelper.getIncline(cart) < 0 ? lower : upper;
+                        dx = Integer.signum(pick.getX());
+                        dz = Integer.signum(pick.getZ());
+                    }
+                }
+            }
+        }
+        if (dx == 0 && dz == 0) {
+            return null;
+        }
+        BlockPos base = cart.blockPosition();
+        var level = cart.level();
+        // Look far enough for stair gaps; a wall on the path still stops the search.
+        RailShape currentShape = MinecartFloatStateHelper.getRailShape(cart);
+        boolean slopePath = MinecartFloatStateHelper.getIncline(cart) != 0 || (currentShape != null && currentShape.isAscending());
+        boolean descending = MinecartFloatStateHelper.getIncline(cart) < 0;
+        boolean ascending = MinecartFloatStateHelper.getIncline(cart) > 0;
+        int maxStep = slopePath ? 8 : 3;
+        int maxDyUp = slopePath ? 4 : 1;
+        int maxDyDown = descending ? 8 : (ascending ? 1 : (slopePath ? 4 : 1));
+        for (int step = 1; step <= maxStep; step++) {
+            if (isFullWallOnPath(cart, dx, dz, step)) {
+                break;
+            }
+            for (int dy = -maxDyDown; dy <= maxDyUp; dy++) {
+                BlockPos ahead = base.offset(dx * step, dy, dz * step);
+                BlockState state = level.getBlockState(ahead);
+                if (!BaseRailBlock.isRail(state)) {
+                    continue;
+                }
+                if (ascending && isDeepFlatBelowClimb(cart, ahead, state)) {
+                    continue;
+                }
+                if (!countsAsContinuingRail(cart, ahead, state, step, dx, dz)) {
+                    continue;
+                }
+                if (!ascendingOnly) {
+                    return ahead;
+                }
+                if (state.getBlock() instanceof BaseRailBlock rail
+                        && state.getValue(rail.getShapeProperty()).isAscending()) {
+                    return ahead;
+                }
+            }
+        }
+        for (int dy = -maxDyDown; dy <= maxDyUp; dy++) {
+            if (dy == 0) {
+                continue;
+            }
+            BlockPos ahead = base.offset(0, dy, 0);
+            BlockState state = level.getBlockState(ahead);
+            if (!BaseRailBlock.isRail(state)) {
+                continue;
+            }
+            if (ascending && isDeepFlatBelowClimb(cart, ahead, state)) {
+                continue;
+            }
+            if (!countsAsContinuingRail(cart, ahead, state, Math.abs(dy), 0, 0)) {
+                continue;
+            }
+            if (!ascendingOnly) {
+                return ahead;
+            }
+            if (state.getBlock() instanceof BaseRailBlock rail
+                    && state.getValue(rail.getShapeProperty()).isAscending()) {
+                return ahead;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Ahead rail only counts if we can actually ride it. A slope buried in the ground or ceiling, or one we'd have
+     * to noclip through a solid to reach, isn't a continuation.
+     */
+    private static boolean countsAsContinuingRail(AbstractMinecart cart, BlockPos railPos, BlockState state,
+                                                  int step, int dx, int dz) {
+        if (buriedSlopeTarget(cart.level(), railPos, state, dx, dz)) {
+            return false;
+        }
+        // Climbs noclip stair piers and the stone under a landing, so the straight line hits those on purpose.
+        // Only a descent treats ground in the way as unreachable.
+        if (MinecartFloatStateHelper.getIncline(cart) < 0 && !pathToRailOpen(cart, railPos, step, dx, dz)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Downhill end is solid (runs into the ground), or the block above an uphill rail is solid (ceiling).
+     * A real stair has the next rail on that exit, so that one isn't buried.
+     */
+    private static boolean buriedSlopeTarget(Level level, BlockPos railPos, BlockState state, int dx, int dz) {
+        if (!(state.getBlock() instanceof BaseRailBlock rail) || !state.getValue(rail.getShapeProperty()).isAscending()) {
+            return false;
+        }
+        Pair<Vec3i, Vec3i> exits = MinecartRailMotionHelper.RAIL_EXITS.get(state.getValue(rail.getShapeProperty()));
+        if (exits == null) {
+            return false;
+        }
+        Vec3i first = exits.getFirst();
+        Vec3i second = exits.getSecond();
+        Vec3i low = first.getY() <= second.getY() ? first : second;
+        Vec3i high = first.getY() >= second.getY() ? first : second;
+        if (sameHorizontal(high, dx, dz)) {
+            BlockPos into = railPos.offset(high);
+            // Next stair step is the rail above the high side. Solid there, and no rail, is a ceiling.
+            if (BaseRailBlock.isRail(level.getBlockState(into)) || BaseRailBlock.isRail(level.getBlockState(into.above()))) {
+                return false;
+            }
+            return isBlockingSolid(level, into) || isBlockingSolid(level, railPos.above());
+        }
+        if (!sameHorizontal(low, dx, dz)) {
+            return false;
+        }
+        BlockPos into = railPos.offset(low);
+        return !BaseRailBlock.isRail(level.getBlockState(into)) && isBlockingSolid(level, into);
+    }
+
+    private static boolean sameHorizontal(Vec3i exit, int dx, int dz) {
+        return (dx != 0 || dz != 0) && Integer.signum(exit.getX()) == dx && Integer.signum(exit.getZ()) == dz;
+    }
+
+    /**
+     * Solid on the straight line to the rail. Stair treads sit above their piers, so a real staircase still counts.
+     */
+    private static boolean pathToRailOpen(AbstractMinecart cart, BlockPos railPos, int step, int dx, int dz) {
+        if (step <= 1) {
+            return columnToRailOpen(cart, railPos);
+        }
+        Level level = cart.level();
+        double y0 = cart.getY() + 0.2D;
+        double y1 = railPos.getY() + 0.5D;
+        for (int s = 1; s < step; s++) {
+            double y = y0 + (y1 - y0) * (s / (double) step);
+            double x = dx == 0 && dz == 0 ? railPos.getX() + 0.5D : cart.getX() + dx * s;
+            double z = dx == 0 && dz == 0 ? railPos.getZ() + 0.5D : cart.getZ() + dz * s;
+            if (isBlockingSolid(level, BlockPos.containing(x, y, z))) {
+                return false;
+            }
+        }
+        return columnToRailOpen(cart, railPos);
+    }
+
+    private static boolean columnToRailOpen(AbstractMinecart cart, BlockPos railPos) {
+        int from = Math.min(cart.blockPosition().getY(), railPos.getY()) + 1;
+        int to = Math.max(cart.blockPosition().getY(), railPos.getY()) - 1;
+        for (int y = from; y <= to; y++) {
+            if (isBlockingSolid(cart.level(), new BlockPos(railPos.getX(), y, railPos.getZ()))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Next move would put us inside a floor. A tread with air above is a stair lip and doesn't count.
+     * Ground under an open descent does, or noclip carries the cart through it.
+     */
+    static boolean descendingIntoFloor(AbstractMinecart cart) {
+        if (MinecartFloatStateHelper.getIncline(cart) >= 0) {
+            return false;
+        }
+        Vec3 motion = cart.getDeltaMovement();
+        BlockPos next = BlockPos.containing(cart.getX() + motion.x, cart.getY() + motion.y, cart.getZ() + motion.z);
+        Level level = cart.level();
+        if (!isBlockingSolid(level, next) || BaseRailBlock.isRail(level.getBlockState(next.above()))) {
+            return false;
+        }
+        BlockPos chest = BlockPos.containing(
+                cart.getX() + motion.x, cart.getY() + cart.getBbHeight() * 0.5D, cart.getZ() + motion.z);
+        if (!next.equals(chest) && !isBlockingSolid(level, chest)) {
+            return true;
+        }
+        return isBlockingSolid(level, next.above());
+    }
+
+    /**
+     * Flat more than a block below, not a climb target.
+     */
+    static boolean isDeepFlatBelowClimb(AbstractMinecart cart, BlockPos ahead, BlockState state) {
+        if (!(state.getBlock() instanceof BaseRailBlock rail)) {
+            return false;
+        }
+        if (state.getValue(rail.getShapeProperty()).isAscending()) {
+            return false;
+        }
+        return cart.getY() - ahead.getY() > 1.0D;
+    }
+
+    /**
+     * Keep diving on open-air descent while a slope/stair is ahead. Brief look-ahead misses shouldn't immediately level
+     * us out.
+     */
+    public static boolean shouldKeepOpenAirDescent(AbstractMinecart cart) {
+        return MinecartFloatStateHelper.getIncline(cart) < 0
+                && (hasOpenAirSlopeTarget(cart) || ((MinecartFloatPoseAccess) cart).paradiseLost$getOpenAirClimbGrace() > 0);
+    }
+
+    /**
+     * Open-air climb while incline is live and we still have a target: continuing rail/stair, a short grace after
+     * takeoff (sky launch), or a ceiling that is about to be hit. Climb memory alone or far-away solids (trees) used to
+     * keep one-block launches tilted forever.
+     */
+    public static boolean shouldKeepOpenAirClimb(AbstractMinecart cart) {
+        if (MinecartFloatStateHelper.getIncline(cart) <= 0) {
+            return false;
+        }
+        if (hasContinuingAscendingRailAhead(cart)
+                || hasContinuingSlopeSolidAhead(cart)
+                || hasNearUnsettledFlatLanding(cart)
+                || isBelowContinuingFlatLanding(cart)) {
+            return true;
+        }
+        if (((MinecartFloatPoseAccess) cart).paradiseLost$getOpenAirClimbGrace() > 0) {
+            return true;
+        }
+        // After the grace only a close ceiling keeps the cart rising, not foliage 8 or more blocks up.
+        return distanceToSolidAbove(cart, MinecartFlightHelper.IMMINENT_CEILING_BLOCKS) > 0;
+    }
+
+    /**
+     * Number of blocks up to the first collidable block above, or 0 if there is none within maxBlocks.
+     */
+    static int distanceToSolidAbove(AbstractMinecart cart, int maxBlocks) {
+        BlockPos.MutableBlockPos cursor = cart.blockPosition().mutable();
+        for (int i = 1; i <= maxBlocks; i++) {
+            cursor.move(0, 1, 0);
+            BlockState state = cart.level().getBlockState(cursor);
+            if (!state.getCollisionShape(cart.level(), cursor).isEmpty()) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * Rail, solid stair, or remembered slope still worth aiming at.
+     */
+    static boolean hasOpenAirSlopeTarget(AbstractMinecart cart) {
+        if (hasContinuingRailAhead(cart) || hasContinuingSlopeSolidAhead(cart)) {
+            return true;
+        }
+        if (MinecartFloatStateHelper.getIncline(cart) >= 0) {
+            return false;
+        }
+        RailShape shape = MinecartFloatStateHelper.getRailShape(cart);
+        return shape != null && shape.isAscending();
+    }
+
+    /**
+     * Walking-stair diagonal ahead (two piers at different Y). Flat floors don't count.
+     */
+    public static boolean hasContinuingSlopeSolidAhead(AbstractMinecart cart) {
+        int incline = MinecartFloatStateHelper.getIncline(cart);
+        if (incline == 0) {
+            return false;
+        }
+        int dx = 0;
+        int dz = 0;
+        Vec3 motion = cart.getDeltaMovement();
+        if (motion.horizontalDistanceSqr() > MinecartRailMotionHelper.MOTION_EPSILON * MinecartRailMotionHelper.MOTION_EPSILON) {
+            if (Math.abs(motion.x) >= Math.abs(motion.z)) {
+                dx = motion.x > 0.0D ? 1 : -1;
+            } else {
+                dz = motion.z > 0.0D ? 1 : -1;
+            }
+        } else {
+            float railYaw = MinecartFloatStateHelper.getSyncedFloatYaw(cart);
+            MinecartFloatPoseAccess pose = (MinecartFloatPoseAccess) cart;
+            if (pose.paradiseLost$hasRailRenderPose()) {
+                railYaw = pose.paradiseLost$getRailRenderYaw();
+            }
+            Vec3 along = MinecartFloatPoseHelper.railYawDirection(railYaw);
+            if (along.lengthSqr() <= 1.0E-8D) {
+                return false;
+            }
+            // Climb looks up-rail, descend looks down-rail.
+            if (incline < 0) {
+                along = along.scale(-1.0D);
+            }
+            if (Math.abs(along.x) >= Math.abs(along.z)) {
+                dx = along.x > 0.0D ? 1 : -1;
+            } else {
+                dz = along.z > 0.0D ? 1 : -1;
+            }
+        }
+        if (dx == 0 && dz == 0) {
+            return false;
+        }
+        Level level = cart.level();
+        int firstPierY = Integer.MIN_VALUE;
+        int distinctY = 0;
+        int sign = incline > 0 ? 1 : -1;
+        // Use feet, carts often sit inside the pier cell.
+        // Pier sits one below the path cell ahead.
+        // +/-1 Y covers skimming a bit high/low off a lip.
+        // Do not skip "head-height" piers: on a climb the next tread is often at headY, and
+        // isWalkableStairPier already rejects face-walls (solid with solid above).
+        double feetY = cart.getY();
+        for (int step = 1; step <= 6; step++) {
+            if (isFullWallOnPath(cart, dx, dz, step)) {
+                break;
+            }
+            boolean found = false;
+            int foundY = 0;
+            for (int yOff = -1; yOff <= 1; yOff++) {
+                BlockPos pier = BlockPos.containing(
+                        cart.getX() + dx * step,
+                        feetY + sign * step - 1.0D + yOff,
+                        cart.getZ() + dz * step);
+                if (!isWalkableStairPier(level, pier)) {
+                    continue;
+                }
+                found = true;
+                foundY = pier.getY();
+                break;
+            }
+            if (!found) {
+                continue;
+            }
+            if (firstPierY == Integer.MIN_VALUE) {
+                firstPierY = foundY;
+                distinctY = 1;
+            } else if (foundY != firstPierY) {
+                distinctY = 2;
+                break;
+            }
+        }
+        return distinctY >= 2;
+    }
+
+    /**
+     * Solid underfoot with air above, a tread, not a wall. Pistons that shove the cart are not stairs.
+     */
+    private static boolean isWalkableStairPier(Level level, BlockPos pier) {
+        if (!isBlockingSolid(level, pier)) {
+            return false;
+        }
+        BlockState state = level.getBlockState(pier);
+        if (state.getBlock() instanceof PistonBaseBlock
+                || state.getBlock() instanceof PistonHeadBlock
+                || state.getBlock() instanceof MovingPistonBlock) {
+            return false;
+        }
+        return !isBlockingSolid(level, pier.above());
+    }
+
+    private static boolean isFullWallOnPath(AbstractMinecart cart, int dx, int dz, int step) {
+        Level level = cart.level();
+        double midY = cart.getY() + cart.getBbHeight() / 2.0D;
+        for (int s = 1; s < step; s++) {
+            BlockPos at = BlockPos.containing(cart.getX() + dx * s, midY, cart.getZ() + dz * s);
+            if (!isBlockingSolid(level, at) || !isBlockingSolid(level, at.above())) {
+                continue;
+            }
+            // A rail on top of this column is the landing we are climbing onto, not a wall in front of it.
+            if (BaseRailBlock.isRail(level.getBlockState(at.above(2)))) {
+                continue;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean isBlockingSolid(Level level, BlockPos pos) {
+        BlockState state = level.getBlockState(pos);
+        if (state.isAir() || BaseRailBlock.isRail(state)) {
+            return false;
+        }
+        return !state.getCollisionShape(level, pos).isEmpty();
+    }
+}
