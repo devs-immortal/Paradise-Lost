@@ -215,7 +215,9 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
 
         }
         //if it's falling dripstone, diffferent math
-        float f = flagDripstone ? Math.min(Mth.floor((float) (i) * 6), this.fallHurtMax) : Math.min(Mth.floor((float) i * this.fallHurtAmount), this.fallHurtMax);
+        float f = flagDripstone
+                ? Math.min(Mth.floor((float) (i) * 6), this.fallHurtMax)
+                : Math.min(Mth.floor((float) i * this.fallHurtAmount), this.fallHurtMax);
 
         //get entities in the damage area and hurt them
         this.level().getEntities(this, getBoundingBox().minmax(getBoundingBox().move(0, 1 + -2 * this.getDeltaMovement().y(), 0))).forEach(entity -> entity.hurt(damageSource2, f));
@@ -252,7 +254,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
             this.fallHurtAmount = compound.getFloat("FallHurtAmount");
             this.fallHurtMax = compound.getInt("FallHurtMax");
             //if anvil or dripstone, mark as dangerous
-        } else if (this.blockState.is(BlockTags.ANVIL) ) {
+        } else if (this.blockState.is(BlockTags.ANVIL)) {
 
             this.hurtEntities = true;
         }
@@ -311,10 +313,16 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
 
         if (!this.canSetBlock || !canPlace || !canReplace)
             return false;
-
-        if (this.blockState.hasProperty(BlockStateProperties.WATERLOGGED) && this.level().getFluidState(blockPos).getType() == Fluids.WATER) {
-            this.blockState = this.blockState.setValue(BlockStateProperties.WATERLOGGED, true);
+        //if can waterlog and block is water, set waterlogged
+        if (this.blockState.hasProperty(BlockStateProperties.WATERLOGGED)) {
+            if (this.level().getFluidState(blockPos).getType() == Fluids.WATER) {
+                this.blockState = this.blockState.setValue(BlockStateProperties.WATERLOGGED, true);
+                // if the saved state is waterlogged, but the new spot isn't watered, no water for u
+            } else if (this.blockState.getValue(BlockStateProperties.WATERLOGGED)) {
+                this.blockState = this.blockState.setValue(BlockStateProperties.WATERLOGGED, false);
+            }
         }
+
 
         if (this.level().setBlock(blockPos, this.blockState, Block.UPDATE_ALL)) {
             this.discard();
