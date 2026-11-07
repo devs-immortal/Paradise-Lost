@@ -18,6 +18,7 @@ import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import net.minecraft.world.entity.vehicle.Minecart;
 import net.minecraft.world.entity.vehicle.MinecartFurnace;
 import net.minecraft.world.level.block.BaseRailBlock;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeverBlock;
 import net.minecraft.world.level.block.PoweredRailBlock;
@@ -1456,6 +1457,33 @@ public final class LevitaTests {
                     check(world.getBlockState(body).getCollisionShape(world, body).isEmpty(),
                             "cart is inside " + world.getBlockState(body).getBlock() + describe(cart) + floatState(cart));
                     return ++ticks >= 40 && along(cart) < -1.0D;
+                })
+        );
+    }
+
+    @ServerTest("a cart leaving an ascending rail downward does not phase through the ground (#984)")
+    private static List<Step> descendingOffAscendingRailDoesNotEnterGround() {
+        return List.of(
+                setup(world -> {
+                    fill(world, start.relative(dir, -2).below(2), start.relative(dir, 2).above(2), Blocks.AIR.defaultBlockState());
+                    // High end needs a block under the slope or the rail breaks as soon as it updates.
+                    world.setBlockAndUpdate(start.relative(dir), Blocks.STONE.defaultBlockState());
+                    placePoweredLevitaRail(world, start);
+                    slope(world, start);
+                    BlockPos low = start.relative(dir.getOpposite());
+                    world.setBlock(low, Blocks.STONE.defaultBlockState(), Block.UPDATE_CLIENTS);
+                    world.setBlock(low.below(), Blocks.STONE.defaultBlockState(), Block.UPDATE_CLIENTS);
+                    entityId = launch(world, EntityType.MINECART, start, -0.4);
+                    ticks = 0;
+                }),
+                Step.until("cart to meet the ground at the low end", 80, () -> {
+                    AbstractMinecart cart = serverCart(entityId);
+                    ServerLevel world = level();
+                    BlockPos body = BlockPos.containing(cart.getX(), cart.getY() + cart.getBbHeight() * 0.5D, cart.getZ());
+                    check(cart.getY() >= start.getY() - 0.2D, "cart sank into the ground" + describe(cart) + floatState(cart));
+                    check(world.getBlockState(body).getCollisionShape(world, body).isEmpty(),
+                            "cart is inside " + world.getBlockState(body).getBlock() + describe(cart) + floatState(cart));
+                    return ++ticks >= 30;
                 })
         );
     }

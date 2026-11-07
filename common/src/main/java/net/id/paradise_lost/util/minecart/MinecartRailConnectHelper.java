@@ -169,6 +169,10 @@ public final class MinecartRailConnectHelper {
         // Re-arm climb if levelFlight wiped incline mid-gap.
         MinecartFlightHelper.maintainClimbTowardFlatLanding(cart);
         int incline = MinecartFloatStateHelper.getIncline(cart);
+        // Going down into dirt. Noclip would carry the cart through that block. Climbs still pass stair treads.
+        if (incline < 0 && MinecartRailLookaheadHelper.wouldPhaseThroughSolid(cart)) {
+            return false;
+        }
         BlockPos railPos = MinecartRailLocatorHelper.findRailPos(cart);
         if (railPos != null) {
             BlockState railState = cart.level().getBlockState(railPos);
@@ -205,7 +209,9 @@ public final class MinecartRailConnectHelper {
      * Brief noclip after leaving a rail so we clear the lip without digging into the pier.
      */
     public static boolean shouldUseExitGraceNoclip(AbstractMinecart cart) {
-        if (MinecartRailLookaheadHelper.descendingIntoFloor(cart)) {
+        if (MinecartRailLookaheadHelper.descendingIntoFloor(cart)
+                || (MinecartFloatStateHelper.getIncline(cart) < 0
+                && MinecartRailLookaheadHelper.wouldPhaseThroughSolid(cart))) {
             return false;
         }
         if (MinecartFloatStateHelper.getIncline(cart) < 0) {

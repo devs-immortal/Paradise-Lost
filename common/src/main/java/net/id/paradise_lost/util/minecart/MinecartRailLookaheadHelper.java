@@ -3,6 +3,7 @@ package net.id.paradise_lost.util.minecart;
 import com.mojang.datafixers.util.Pair;
 import net.id.paradise_lost.entity.MinecartFloatPoseAccess;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import net.minecraft.world.level.Level;
@@ -12,7 +13,9 @@ import net.minecraft.world.level.block.piston.PistonBaseBlock;
 import net.minecraft.world.level.block.piston.PistonHeadBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.RailShape;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -552,6 +555,82 @@ public final class MinecartRailLookaheadHelper {
                 continue;
             }
             return true;
+        }
+        return false;
+    }
+
+    /**
+     * Chest is inside a full block, or the next move would put it there. Fences and stair treads don't count.
+     */
+    public static boolean wouldPhaseThroughSolid(AbstractMinecart cart) {
+        if (cartInsideSolid(cart, cart.getX(), cart.getY(), cart.getZ())) {
+            return true;
+        }
+        Vec3 motion = cart.getDeltaMovement();
+        return cartInsideSolid(cart, cart.getX() + motion.x, cart.getY() + motion.y, cart.getZ() + motion.z);
+    }
+
+    /**
+     * Sit the cart on top of the solid it's buried in. A couple of passes covers a short dive into the ground.
+     */
+    public static boolean liftOutOfSolid(AbstractMinecart cart) {
+        boolean lifted = false;
+        Level level = cart.level();
+        for (int i = 0; i < 4; i++) {
+            double chestY = cart.getY() + cart.getBbHeight() * 0.5D;
+            BlockPos pos = BlockPos.containing(cart.getX(), chestY, cart.getZ());
+            BlockState state = level.getBlockState(pos);
+            if (state.isAir() || BaseRailBlock.isRail(state)) {
+                break;
+            }
+            VoxelShape shape = state.getCollisionShape(level, pos);
+            if (shape.isEmpty()) {
+                break;
+            }
+            double top = pos.getY() + shape.max(Direction.Axis.Y);
+            if (cart.getY() >= top - 1.0E-4D) {
+                break;
+            }
+            if (!pointInsideSolid(level, cart.getX(), chestY, cart.getZ())) {
+                break;
+            }
+            cart.setPos(cart.getX(), top, cart.getZ());
+            lifted = true;
+        }
+        if (lifted) {
+            Vec3 motion = cart.getDeltaMovement();
+            if (motion.y < 0.0D) {
+                cart.setDeltaMovement(motion.x, 0.0D, motion.z);
+            }
+        }
+        return lifted;
+    }
+
+    private static boolean cartInsideSolid(AbstractMinecart cart, double x, double y, double z) {
+        return pointInsideSolid(cart.level(), x, y + cart.getBbHeight() * 0.5D, z);
+    }
+
+    private static boolean pointInsideSolid(Level level, double x, double y, double z) {
+        BlockPos pos = BlockPos.containing(x, y, z);
+        BlockState state = level.getBlockState(pos);
+        if (state.isAir() || BaseRailBlock.isRail(state) || !state.isCollisionShapeFullBlock(level, pos)) {
+            return false;
+        }
+        VoxelShape shape = state.getCollisionShape(level, pos);
+        if (shape.isEmpty()) {
+            return false;
+        }
+        double localY = y - pos.getY();
+        if (localY >= shape.max(Direction.Axis.Y) - 0.05D) {
+            return false;
+        }
+        double localX = x - pos.getX();
+        double localZ = z - pos.getZ();
+        AABB point = new AABB(localX, localY, localZ, localX, localY, localZ);
+        for (AABB box : shape.toAabbs()) {
+            if (box.intersects(point)) {
+                return true;
+            }
         }
         return false;
     }

@@ -365,6 +365,11 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
             }
         }
         this.setDeltaMovement(x, y, z);
+        if (MinecartFloatStateHelper.getIncline(cart) < 0 && MinecartRailLookaheadHelper.liftOutOfSolid(cart)) {
+            MinecartFlightHelper.levelOpenAirFlight(cart);
+            Vec3 lifted = this.getDeltaMovement();
+            this.setDeltaMovement(lifted.x, 0.0D, lifted.z);
+        }
 
         Vec3 intended = this.getDeltaMovement();
         boolean noclip = MinecartRailConnectHelper.shouldUseSlopeNoclip(cart)
