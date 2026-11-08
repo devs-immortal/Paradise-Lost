@@ -8,6 +8,8 @@ public final class ParadiseLostGameRules {
             Services.REGISTRATION.registerBooleanGameRule("paradiseVoidKills", GameRules.Category.PLAYER, false);
     public static final GameRules.Key<GameRules.BooleanValue> PARADISE_PORTAL_ENABLED =
             Services.REGISTRATION.registerBooleanGameRule("paradisePortalEnabled", GameRules.Category.UPDATES, true);
+    public static final GameRules.Key<GameRules.BooleanValue> BLOOMED_CALCITE_TRANSFORMATION =
+            Services.REGISTRATION.registerBooleanGameRule("bloomedCalciteTransformation", GameRules.Category.UPDATES, true);
 
     private ParadiseLostGameRules() {}
 
