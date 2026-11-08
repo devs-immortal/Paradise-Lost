@@ -130,7 +130,6 @@ public class PalaceDoorBlock extends BaseEntityBlock implements LiquidBlockConta
         return new PalaceDoorBlockEntity(pos, state);
     }
 
-
     @Override
     public boolean canPlaceLiquid(@org.jspecify.annotations.Nullable Player player, BlockGetter blockGetter, BlockPos blockPos, BlockState blockState, Fluid fluid) {
         return false;
