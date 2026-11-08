@@ -20,8 +20,8 @@ public abstract class CatalystListenerMixin {
     @Definition(id = "livingEntity", type = LivingEntity.class)
     @Expression("? instanceof livingEntity")
     @ModifyExpressionValue(
-           method = "handleGameEvent",
-           at = @At("MIXINEXTRAS:EXPRESSION")
+            method = "handleGameEvent",
+            at = @At("MIXINEXTRAS:EXPRESSION")
     )
 
     private boolean paradiseLost$filterDeathSource(boolean original,
