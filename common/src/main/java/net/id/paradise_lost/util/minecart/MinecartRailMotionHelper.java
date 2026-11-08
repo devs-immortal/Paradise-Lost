@@ -23,6 +23,11 @@ public final class MinecartRailMotionHelper {
 
     static final double MOTION_EPSILON = 0.05D;
 
+    /**
+     * Smallest along-axis speed that still counts as up or down a slope. Creeping carts are slower than 0.05.
+     */
+    private static final double SLOW_SLOPE_MOTION = 1.0E-3D;
+
     private static final double SLOPE_ASSIST_MIN_ALONG = MOTION_EPSILON;
 
     private static final double SIDEWAYS_DOT = 0.1D;
@@ -51,18 +56,19 @@ public final class MinecartRailMotionHelper {
             MinecartFloatStateHelper.setIncline(cart, 0);
             return;
         }
+        // 0.05 missed a cart that was only creeping. That one stayed flat and then left the slope level.
         boolean goingUp = switch (shape) {
-            case ASCENDING_EAST -> motion.x > MOTION_EPSILON;
-            case ASCENDING_WEST -> motion.x < -MOTION_EPSILON;
-            case ASCENDING_NORTH -> motion.z < -MOTION_EPSILON;
-            case ASCENDING_SOUTH -> motion.z > MOTION_EPSILON;
+            case ASCENDING_EAST -> motion.x > SLOW_SLOPE_MOTION;
+            case ASCENDING_WEST -> motion.x < -SLOW_SLOPE_MOTION;
+            case ASCENDING_NORTH -> motion.z < -SLOW_SLOPE_MOTION;
+            case ASCENDING_SOUTH -> motion.z > SLOW_SLOPE_MOTION;
             default -> false;
         };
         boolean goingDown = switch (shape) {
-            case ASCENDING_EAST -> motion.x < -MOTION_EPSILON;
-            case ASCENDING_WEST -> motion.x > MOTION_EPSILON;
-            case ASCENDING_NORTH -> motion.z > MOTION_EPSILON;
-            case ASCENDING_SOUTH -> motion.z < -MOTION_EPSILON;
+            case ASCENDING_EAST -> motion.x < -SLOW_SLOPE_MOTION;
+            case ASCENDING_WEST -> motion.x > SLOW_SLOPE_MOTION;
+            case ASCENDING_NORTH -> motion.z > SLOW_SLOPE_MOTION;
+            case ASCENDING_SOUTH -> motion.z < -SLOW_SLOPE_MOTION;
             default -> false;
         };
         if (goingUp) {

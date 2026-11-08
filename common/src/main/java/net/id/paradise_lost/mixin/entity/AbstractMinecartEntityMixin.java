@@ -289,6 +289,14 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
                 this.noPhysics = false;
                 this.paradiseLost$cornerNoclip = false;
             }
+            // Normal carts never get a float incline, so the descent stop has to run after vanilla places them.
+            if (!this.level().isClientSide()) {
+                AbstractMinecart cart = (AbstractMinecart) (Object) this;
+                if (MinecartRailLookaheadHelper.stopDeadEndDescent(cart)
+                        && MinecartFloatStateHelper.isFloating(cart)) {
+                    MinecartFlightHelper.levelOpenAirFlight(cart);
+                }
+            }
             if (!this.paradiseLost$vanillaTrack) {
                 return;
             }
@@ -403,7 +411,12 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
             }
         }
         this.setDeltaMovement(x, y, z);
-        if (MinecartFloatStateHelper.getIncline(cart) < 0 && MinecartRailLookaheadHelper.liftOutOfSolid(cart)) {
+        // Stopped against a dead-end block. Don't lift onto its top, that bounce carries the cart over it.
+        if (MinecartFloatStateHelper.getIncline(cart) < 0
+                && MinecartRailLookaheadHelper.stopDeadEndDescent(cart)) {
+            MinecartFlightHelper.levelOpenAirFlight(cart);
+            this.setDeltaMovement(0.0D, 0.0D, 0.0D);
+        } else if (MinecartFloatStateHelper.getIncline(cart) < 0 && MinecartRailLookaheadHelper.liftOutOfSolid(cart)) {
             MinecartFlightHelper.levelOpenAirFlight(cart);
             Vec3 lifted = this.getDeltaMovement();
             this.setDeltaMovement(lifted.x, 0.0D, lifted.z);

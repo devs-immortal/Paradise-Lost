@@ -1645,6 +1645,88 @@ public final class LevitaTests {
         );
     }
 
+    @ServerTest("a slow cart on a downward slope keeps descending (#987)")
+    private static List<Step> slowCartOnDownwardSlopeKeepsDescending() {
+        return List.of(
+                setup(world -> {
+                    world.setBlockAndUpdate(start.relative(dir.getOpposite()), Blocks.STONE.defaultBlockState());
+                    placePoweredLevitaRail(world, start);
+                    forceShape(world, start, ascending(dir.getOpposite()));
+                    entityId = launch(world, EntityType.MINECART, start, 0.02D);
+                    ticks = 0;
+                    seen = start.getY();
+                    speedA = 0;
+                }),
+                Step.until("cart to creep down the slope", 80, () -> {
+                    AbstractMinecart cart = serverCart(entityId);
+                    seen = Math.max(seen, cart.getY());
+                    check(seen < start.getY() + 0.98D,
+                            "slow cart levitated off the downward slope" + describe(cart) + floatState(cart));
+                    if (MinecartFloatStateHelper.getIncline(cart) < 0 && cart.getY() < start.getY() + 0.9D) {
+                        speedA = 1;
+                    }
+                    return ++ticks >= 30 && speedA == 1 && along(cart) > 0.4D;
+                })
+        );
+    }
+
+    @ServerTest("a descending cart stops against a block instead of entering or bouncing over it (#988 #989)")
+    private static List<Step> descendingCartStopsAgainstBlock() {
+        return List.of(
+                setup(world -> {
+                    world.setBlockAndUpdate(start.relative(dir.getOpposite()), Blocks.STONE.defaultBlockState());
+                    placePoweredLevitaRail(world, start);
+                    BlockPos wall = start.relative(dir);
+                    world.setBlock(wall, Blocks.STONE.defaultBlockState(), Block.UPDATE_CLIENTS);
+                    world.setBlock(wall.above(), Blocks.STONE.defaultBlockState(), Block.UPDATE_CLIENTS);
+                    forceShape(world, start, ascending(dir.getOpposite()));
+                    entityId = launch(world, EntityType.MINECART, start, 0.4D);
+                    ticks = 0;
+                    speedA = -99;
+                }),
+                Step.until("cart to meet the block", 80, () -> {
+                    AbstractMinecart cart = serverCart(entityId);
+                    ServerLevel world = level();
+                    BlockPos body = BlockPos.containing(cart.getX(), cart.getY() + cart.getBbHeight() * 0.5D, cart.getZ());
+                    check(world.getBlockState(body).getCollisionShape(world, body).isEmpty(),
+                            "cart is inside " + world.getBlockState(body).getBlock() + describe(cart) + floatState(cart));
+                    speedA = Math.max(speedA, along(cart));
+                    check(speedA < 0.75D, "cart went through or over the block" + describe(cart) + floatState(cart));
+                    check(cart.getY() < start.getY() + 1.05D,
+                            "cart bounced onto the block" + describe(cart) + floatState(cart));
+                    return ++ticks >= 30;
+                })
+        );
+    }
+
+    @ServerTest("a normal cart on a downward rail does not enter the block it slopes into (#990)")
+    private static List<Step> normalCartDoesNotEnterBlockAtLowEnd() {
+        return List.of(
+                setup(world -> {
+                    world.setBlockAndUpdate(start.below(), Blocks.STONE.defaultBlockState());
+                    world.setBlockAndUpdate(start.relative(dir.getOpposite()), Blocks.STONE.defaultBlockState());
+                    world.setBlockAndUpdate(start, Blocks.RAIL.defaultBlockState());
+                    BlockPos wall = start.relative(dir);
+                    world.setBlock(wall, Blocks.STONE.defaultBlockState(), Block.UPDATE_CLIENTS);
+                    world.setBlock(wall.above(), Blocks.STONE.defaultBlockState(), Block.UPDATE_CLIENTS);
+                    forceShape(world, start, ascending(dir.getOpposite()));
+                    entityId = launch(world, EntityType.MINECART, start, 0.4D);
+                    ticks = 0;
+                    speedA = -99;
+                }),
+                Step.until("cart to meet the block", 80, () -> {
+                    AbstractMinecart cart = serverCart(entityId);
+                    ServerLevel world = level();
+                    BlockPos body = BlockPos.containing(cart.getX(), cart.getY() + cart.getBbHeight() * 0.5D, cart.getZ());
+                    check(world.getBlockState(body).getCollisionShape(world, body).isEmpty(),
+                            "cart is inside " + world.getBlockState(body).getBlock() + describe(cart));
+                    speedA = Math.max(speedA, along(cart));
+                    check(speedA < 0.75D, "cart went into the block" + describe(cart));
+                    return ++ticks >= 30;
+                })
+        );
+    }
+
     private static Step setup(Consumer<ServerLevel> builder) {
         return Step.run(0, () -> {
             ServerTestRunner.server().tickRateManager().setFrozen(false);

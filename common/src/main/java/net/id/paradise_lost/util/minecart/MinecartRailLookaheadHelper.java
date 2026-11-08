@@ -388,46 +388,156 @@ public final class MinecartRailLookaheadHelper {
     }
 
     /**
-     * Cart is already overlapping the block its descent runs into. Sit it back on the face and stop.
+     * Descent has run into a solid with no rail through it. Sit the cart back on the face and stop.
+     * A stair tread with a rail on top is the track, so that one stays.
+     * Lifting onto the top is what bounced carts over the block.
      */
-    public static void pullBackFromFloor(AbstractMinecart cart) {
+    public static boolean stopDeadEndDescent(AbstractMinecart cart) {
+        if (!headingDownIntoDeadEnd(cart)) {
+            return false;
+        }
+        // A clipped corner is a stair or a gap pier. Only a center buried in the block is a dead end.
+        if (!ejectCenterFromDeadEnd(cart)) {
+            return false;
+        }
+        cart.setDeltaMovement(0.0D, 0.0D, 0.0D);
+        return true;
+    }
+
+    private static boolean ejectCenterFromDeadEnd(AbstractMinecart cart) {
+        Level level = cart.level();
+        double x = cart.getX();
+        double z = cart.getZ();
+        double half = cart.getBbWidth() * 0.5D;
+        Vec3 motion = cart.getDeltaMovement();
+        int minY = (int) Math.floor(cart.getY() + 0.05D);
+        int maxY = (int) Math.floor(cart.getY() + cart.getBbHeight() * 0.5D);
+        for (int by = minY; by <= maxY; by++) {
+            BlockPos solid = BlockPos.containing(x, by, z);
+            if (!isFullCube(level, solid) || solidContinuesTrack(cart, solid)) {
+                continue;
+            }
+            double mx = motion.x;
+            double mz = motion.z;
+            if (Math.abs(mx) >= Math.abs(mz) && Math.abs(mx) > 1.0E-4D) {
+                x = mx > 0.0D ? solid.getX() - half - 0.01D : solid.getX() + 1.0D + half + 0.01D;
+            } else if (Math.abs(mz) > 1.0E-4D) {
+                z = mz > 0.0D ? solid.getZ() - half - 0.01D : solid.getZ() + 1.0D + half + 0.01D;
+            } else if ((x - solid.getX()) <= (solid.getX() + 1.0D - x)) {
+                x = solid.getX() - half - 0.01D;
+            } else {
+                x = solid.getX() + 1.0D + half + 0.01D;
+            }
+            cart.setPos(x, cart.getY(), z);
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean headingDownIntoDeadEnd(AbstractMinecart cart) {
+        if (MinecartFloatStateHelper.getIncline(cart) < 0) {
+            return true;
+        }
+        BlockPos railPos = MinecartRailLocatorHelper.findRailPos(cart);
+        if (railPos == null) {
+            return false;
+        }
+        BlockState state = cart.level().getBlockState(railPos);
+        if (!(state.getBlock() instanceof BaseRailBlock rail)) {
+            return false;
+        }
+        RailShape shape = state.getValue(rail.getShapeProperty());
+        return shape.isAscending() && MinecartRailMotionHelper.headingDownSlope(shape, cart.getDeltaMovement());
+    }
+
+    /**
+     * Cart is already overlapping the block its descent runs into. Sit it back on the face.
+     * Returns whether it had to move the cart.
+     */
+    public static boolean pullBackFromFloor(AbstractMinecart cart) {
         Level level = cart.level();
         AABB box = cart.getBoundingBox();
-        int y = (int) Math.floor(cart.getY() + 0.05D);
         double half = cart.getBbWidth() * 0.5D;
         double x = cart.getX();
         double z = cart.getZ();
         Vec3 motion = cart.getDeltaMovement();
         double mx = motion.x;
         double mz = motion.z;
+        boolean moved = false;
         int minX = (int) Math.floor(box.minX + 1.0E-4D);
         int maxX = (int) Math.floor(box.maxX - 1.0E-4D);
+        int minY = (int) Math.floor(cart.getY() + 0.05D);
+        int maxY = (int) Math.floor(cart.getY() + cart.getBbHeight() * 0.5D);
         int minZ = (int) Math.floor(box.minZ + 1.0E-4D);
         int maxZ = (int) Math.floor(box.maxZ - 1.0E-4D);
-        for (int bx = minX; bx <= maxX; bx++) {
-            for (int bz = minZ; bz <= maxZ; bz++) {
-                if (!isFullCube(level, new BlockPos(bx, y, bz))) {
-                    continue;
-                }
-                // Only the axis the center hasn't entered. A cart aimed at the face is centered on the other one.
-                if (x < bx && box.maxX > bx) {
-                    x = bx - half - 0.01D;
-                    mx = Math.min(mx, 0.0D);
-                } else if (x > bx + 1.0D && box.minX < bx + 1.0D) {
-                    x = bx + 1.0D + half + 0.01D;
-                    mx = Math.max(mx, 0.0D);
-                }
-                if (z < bz && box.maxZ > bz) {
-                    z = bz - half - 0.01D;
-                    mz = Math.min(mz, 0.0D);
-                } else if (z > bz + 1.0D && box.minZ < bz + 1.0D) {
-                    z = bz + 1.0D + half + 0.01D;
-                    mz = Math.max(mz, 0.0D);
+        for (int by = minY; by <= maxY; by++) {
+            for (int bx = minX; bx <= maxX; bx++) {
+                for (int bz = minZ; bz <= maxZ; bz++) {
+                    BlockPos solid = new BlockPos(bx, by, bz);
+                    if (!isFullCube(level, solid) || solidContinuesTrack(cart, solid)) {
+                        continue;
+                    }
+                    boolean insideX = x >= bx && x <= bx + 1.0D;
+                    boolean insideZ = z >= bz && z <= bz + 1.0D;
+                    if (insideX && insideZ) {
+                        // Vanilla already put the center in the block. Step back out the way we came.
+                        boolean alongX = Math.abs(mx) >= Math.abs(mz);
+                        if (alongX && Math.abs(mx) > 1.0E-4D) {
+                            x = mx > 0.0D ? bx - half - 0.01D : bx + 1.0D + half + 0.01D;
+                            mx = 0.0D;
+                        } else if (!alongX && Math.abs(mz) > 1.0E-4D) {
+                            z = mz > 0.0D ? bz - half - 0.01D : bz + 1.0D + half + 0.01D;
+                            mz = 0.0D;
+                        } else if ((x - bx) <= (bx + 1.0D - x)) {
+                            x = bx - half - 0.01D;
+                        } else {
+                            x = bx + 1.0D + half + 0.01D;
+                        }
+                        moved = true;
+                        continue;
+                    }
+                    // Only the axis the center hasn't entered. A cart aimed at the face is centered on the other one.
+                    if (x < bx && box.maxX > bx) {
+                        x = bx - half - 0.01D;
+                        mx = Math.min(mx, 0.0D);
+                        moved = true;
+                    } else if (x > bx + 1.0D && box.minX < bx + 1.0D) {
+                        x = bx + 1.0D + half + 0.01D;
+                        mx = Math.max(mx, 0.0D);
+                        moved = true;
+                    }
+                    if (z < bz && box.maxZ > bz) {
+                        z = bz - half - 0.01D;
+                        mz = Math.min(mz, 0.0D);
+                        moved = true;
+                    } else if (z > bz + 1.0D && box.minZ < bz + 1.0D) {
+                        z = bz + 1.0D + half + 0.01D;
+                        mz = Math.max(mz, 0.0D);
+                        moved = true;
+                    }
                 }
             }
         }
+        if (!moved) {
+            return false;
+        }
         cart.setPos(x, cart.getY(), z);
         cart.setDeltaMovement(mx, motion.y, mz);
+        return true;
+    }
+
+    private static boolean solidContinuesTrack(AbstractMinecart cart, BlockPos solid) {
+        BlockPos upper = solid.above();
+        Level level = cart.level();
+        BlockState upperState = level.getBlockState(upper);
+        if (!(upperState.getBlock() instanceof BaseRailBlock upperRail)) {
+            return false;
+        }
+        BlockPos current = MinecartRailLocatorHelper.findRailPos(cart);
+        if (current == null) {
+            return false;
+        }
+        return MinecartRailMotionHelper.railsConnect(level, current, upper);
     }
 
     /**

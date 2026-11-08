@@ -112,6 +112,12 @@ public final class MinecartRailLocatorHelper {
         if (!shape.isAscending() || Mth.floor(y) <= railPos.getY()) {
             return false;
         }
+        // Creeping along this slope, still inside its column. A fast cart one block up is flying over a different rail.
+        if (Mth.floor(x) == railPos.getX() && Mth.floor(z) == railPos.getZ()
+                && y - railPos.getY() <= 1.0D
+                && motion.horizontalDistanceSqr() < MinecartRailMotionHelper.MOTION_EPSILON * MinecartRailMotionHelper.MOTION_EPSILON) {
+            return false;
+        }
         // High end of the slope we're pitched on sits in the block above it. Still this rail.
         if (Math.abs(approachPitch(cart)) >= LEVEL_PITCH) {
             int incline = MinecartFloatStateHelper.getIncline(cart);
