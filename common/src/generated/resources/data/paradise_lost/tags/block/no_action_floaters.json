@@ -4,6 +4,9 @@
     "minecraft:detector_rail",
     "minecraft:big_dripleaf",
     "minecraft:tripwire",
-    "paradise_lost:levita_rail"
+    "paradise_lost:levita_rail",
+    "#minecraft:redstone_ores",
+    "minecraft:turtle_egg",
+    "minecraft:pitcher_crop"
   ]
 }

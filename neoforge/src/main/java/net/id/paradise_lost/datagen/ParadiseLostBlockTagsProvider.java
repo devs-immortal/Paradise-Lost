@@ -252,7 +252,10 @@ public class ParadiseLostBlockTagsProvider extends BlockTagsProvider {
                 .add(Blocks.DETECTOR_RAIL)
                 .add(Blocks.BIG_DRIPLEAF)
                 .add(Blocks.TRIPWIRE)
-                .add(BlockRegistry.LEVITA_RAIL.get());
+                .add(BlockRegistry.LEVITA_RAIL.get())
+                .addTag(BlockTags.REDSTONE_ORES)
+                .add(Blocks.TURTLE_EGG)
+                .add(Blocks.PITCHER_CROP);
         tag(ParadiseLostBlockTags.NON_FLOATERS);
         tag(ParadiseLostBlockTags.FUNGI_CLINGABLES)
                 .addTag(BlockTags.LOGS)
