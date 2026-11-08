@@ -434,6 +434,31 @@ public final class MinecartRailLookaheadHelper {
         return false;
     }
 
+    /**
+     * Next cell along the move is a full block that does not continue the rail. Exit-grace noclip
+     * was carrying a leveled descent through that block (#988).
+     */
+    public static boolean deadEndCubeAhead(AbstractMinecart cart) {
+        Vec3 motion = cart.getDeltaMovement();
+        if (motion.horizontalDistanceSqr() < 1.0E-8D) {
+            return false;
+        }
+        Level level = cart.level();
+        double x = cart.getX() + motion.x;
+        double z = cart.getZ() + motion.z;
+        int minY = (int) Math.floor(cart.getY() + 0.05D);
+        int maxY = (int) Math.floor(cart.getY() + cart.getBbHeight() * 0.5D);
+        int bx = (int) Math.floor(x);
+        int bz = (int) Math.floor(z);
+        for (int by = minY; by <= maxY; by++) {
+            BlockPos solid = new BlockPos(bx, by, bz);
+            if (isFullCube(level, solid) && !solidContinuesTrack(cart, solid)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private static boolean headingDownIntoDeadEnd(AbstractMinecart cart) {
         if (MinecartFloatStateHelper.getIncline(cart) < 0) {
             return true;

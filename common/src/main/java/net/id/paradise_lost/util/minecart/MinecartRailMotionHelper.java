@@ -179,11 +179,12 @@ public final class MinecartRailMotionHelper {
     }
 
     public static boolean headingDownSlope(RailShape shape, Vec3 motion) {
+        // 0.05 missed the cart in the #987 log (about 0.03) and the joined downhill slope was treated as a ghost.
         return switch (shape) {
-            case ASCENDING_EAST -> motion.x < -MOTION_EPSILON;
-            case ASCENDING_WEST -> motion.x > MOTION_EPSILON;
-            case ASCENDING_NORTH -> motion.z > MOTION_EPSILON;
-            case ASCENDING_SOUTH -> motion.z < -MOTION_EPSILON;
+            case ASCENDING_EAST -> motion.x < -SLOW_SLOPE_MOTION;
+            case ASCENDING_WEST -> motion.x > SLOW_SLOPE_MOTION;
+            case ASCENDING_NORTH -> motion.z > SLOW_SLOPE_MOTION;
+            case ASCENDING_SOUTH -> motion.z < -SLOW_SLOPE_MOTION;
             default -> false;
         };
     }

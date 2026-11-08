@@ -46,39 +46,52 @@ public class LevitaRailBlock extends PoweredRailBlock {
         }
         // Piston copies TRIGGERED over, but the reset tick stays at the old spot.
         // A rail placed already triggered has the same problem.
-        BlockState now = level.getBlockState(pos);
-        if (now.is(this) && now.getValue(TRIGGERED) && !level.getBlockTicks().hasScheduledTick(pos, this)) {
+        if (state.getValue(TRIGGERED) && !level.getBlockTicks().hasScheduledTick(pos, this)) {
             level.scheduleTick(pos, this, TRIGGER_DELAY_TICKS);
         }
     }
 
     @Override
     protected void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
-        // A lifted rail calls this too, as a floating block entity, for carts in the cell it left. It is not in the world
-        // then, so it must neither charge a cart nor write its state back as a copy of the rail.
-        if (!world.isClientSide && world.getBlockState(pos).is(this) && entity instanceof AbstractMinecart cart
-                && isOnRail(cart, pos)) {
-            apply(state, world, pos, cart);
+        // A lifted rail calls this too, for carts in the cell it left. It is not in the world then.
+        if (world.isClientSide() || !world.getBlockState(pos).is(this) || !(entity instanceof AbstractMinecart cart)
+                || !isOnRail(cart, pos)) {
+            return;
         }
+        // Like detector rail, bails once it is already on. Triggered is that latch: the tick releases it.
+        if (state.getValue(TRIGGERED)) {
+            trackIncline(state, pos, cart);
+            if (!state.getValue(POWERED)) {
+                MinecartFloatStateHelper.stopFloating(cart);
+            }
+            return;
+        }
+        trigger(state, world, pos, cart);
     }
 
-    private void apply(BlockState state, Level world, BlockPos pos, AbstractMinecart cart) {
-        // AABB overlap is enough to charge, but not to adopt this rail. The next levita in a valley used
-        // to flip incline to climb while the cart was still on the descent, which drew an early rotation.
+    private void trigger(BlockState state, Level world, BlockPos pos, AbstractMinecart cart) {
+        trackIncline(state, pos, cart);
+        if (!state.getValue(POWERED)) {
+            MinecartFloatStateHelper.stopFloating(cart);
+            return;
+        }
+        if (state.getValue(TRIGGERED)) {
+            return;
+        }
+        // One charge, then nothing for 80 ticks, whatever float the cart already has.
+        MinecartFloatStateHelper.addFloating(cart);
+        // Clients need TRIGGERED, neighbors must not: UPDATE_ALL reshaped a descending powered
+        // rail in a valley into a climb, which looked like an early rotation on the cart.
+        world.setBlock(pos, state.setValue(TRIGGERED, true), Block.UPDATE_CLIENTS);
+        world.scheduleTick(pos, this, TRIGGER_DELAY_TICKS);
+    }
+
+    private static void trackIncline(BlockState state, BlockPos pos, AbstractMinecart cart) {
+        // Overlap is enough to notice the rail, not to adopt it. The next levita in a valley used
+        // to flip incline to climb while the cart was still on the descent.
         BlockPos riding = MinecartRailLocatorHelper.findRailPos(cart);
         if (pos.equals(riding) && MinecartRailLocatorHelper.isSettledOnRail(cart, pos)) {
             MinecartRailMotionHelper.updateInclineFromRail(cart, state.getValue(SHAPE), cart.getDeltaMovement());
-        }
-        if (!state.getValue(POWERED)) {
-            MinecartFloatStateHelper.stopFloating(cart);
-        } else if (!state.getValue(TRIGGERED)) {
-            // TRIGGERED is the rail's off state: it gives one charge, then does nothing at all for 80 ticks,
-            // no matter which cart is on it or how much float that cart has left.
-            MinecartFloatStateHelper.addFloating(cart);
-            // Clients need TRIGGERED, neighbors must not: UPDATE_ALL reshaped a descending powered
-            // rail in a valley into a climb, which looked like an early rotation on the cart.
-            world.setBlock(pos, state.setValue(TRIGGERED, true), Block.UPDATE_CLIENTS);
-            world.scheduleTick(pos, this, TRIGGER_DELAY_TICKS);
         }
     }
 
@@ -87,13 +100,24 @@ public class LevitaRailBlock extends PoweredRailBlock {
         if (!state.getValue(TRIGGERED)) {
             return;
         }
-        BlockState reset = state.setValue(TRIGGERED, false);
-        world.setBlock(pos, reset, Block.UPDATE_CLIENTS);
-        if (!reset.getValue(POWERED)) {
+        // Delay is over. Release with the state this tick already has, then one press if someone is still on it.
+        BlockState open = state.setValue(TRIGGERED, false);
+        world.setBlock(pos, open, Block.UPDATE_CLIENTS);
+        if (!open.getValue(POWERED)) {
             return;
         }
+        BlockState latched = open.setValue(TRIGGERED, true);
+        boolean charged = false;
         for (AbstractMinecart cart : world.getEntitiesOfClass(AbstractMinecart.class, detectionBox(pos))) {
-            apply(world.getBlockState(pos), world, pos, cart);
+            if (!isOnRail(cart, pos)) {
+                continue;
+            }
+            if (!charged) {
+                trigger(open, world, pos, cart);
+                charged = true;
+            } else {
+                trackIncline(latched, pos, cart);
+            }
         }
     }
 

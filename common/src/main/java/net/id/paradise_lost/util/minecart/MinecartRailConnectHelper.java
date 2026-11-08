@@ -215,7 +215,8 @@ public final class MinecartRailConnectHelper {
         int incline = MinecartFloatStateHelper.getIncline(cart);
         // Takeoff clears incline, so a descent already aimed at a full block still has to collide.
         if (MinecartRailLookaheadHelper.descendingIntoFloor(cart)
-                || (incline <= 0 && MinecartRailLookaheadHelper.wouldPhaseThroughSolid(cart))) {
+                || (incline <= 0 && MinecartRailLookaheadHelper.wouldPhaseThroughSolid(cart))
+                || MinecartRailLookaheadHelper.deadEndCubeAhead(cart)) {
             return false;
         }
         if (MinecartFloatStateHelper.getIncline(cart) < 0) {

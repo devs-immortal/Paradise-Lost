@@ -415,9 +415,12 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
         if (MinecartFloatStateHelper.getIncline(cart) < 0
                 && MinecartRailLookaheadHelper.stopDeadEndDescent(cart)) {
             MinecartFlightHelper.levelOpenAirFlight(cart);
+            this.paradiseLost$exitGrace = 0;
             this.setDeltaMovement(0.0D, 0.0D, 0.0D);
         } else if (MinecartFloatStateHelper.getIncline(cart) < 0 && MinecartRailLookaheadHelper.liftOutOfSolid(cart)) {
             MinecartFlightHelper.levelOpenAirFlight(cart);
+            // The lift put us on the block. Grace noclip would then slide us into the next one.
+            this.paradiseLost$exitGrace = 0;
             Vec3 lifted = this.getDeltaMovement();
             this.setDeltaMovement(lifted.x, 0.0D, lifted.z);
         }
@@ -446,6 +449,7 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
                 && MinecartFlightHelper.shouldLevelAgainstSolidBarrier(cart, this.onGround(), this.verticalCollision,
                 this.horizontalCollision, intended)) {
             MinecartFlightHelper.levelOpenAirFlight(cart);
+            this.paradiseLost$exitGrace = 0;
             MinecartFloatDebugHelper.debugEvent(cart, "solidBarrier",
                     "onGround=" + this.onGround() + " vertCol=" + this.verticalCollision
                             + " horCol=" + this.horizontalCollision);
