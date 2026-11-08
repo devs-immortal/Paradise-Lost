@@ -20,12 +20,12 @@ public abstract class CatalystListenerMixin {
     @Definition(id = "livingEntity", type = LivingEntity.class)
     @Expression("? instanceof livingEntity")
     @ModifyExpressionValue(
-        method = "handleGameEvent",
-        at = @At("MIXINEXTRAS:EXPRESSION")
+           method = "handleGameEvent",
+           at = @At("MIXINEXTRAS:EXPRESSION")
     )
 
     private boolean paradiseLost$filterDeathSource(boolean original,
-            @Local(argsOnly = true) GameEvent.Context context) {
+                                                   @Local(argsOnly = true) GameEvent.Context context) {
         Entity source = context.sourceEntity();
         if (source instanceof LivingEntity livingEntity) {
             return StreamSupport.stream(livingEntity.getArmorSlots().spliterator(), false)
