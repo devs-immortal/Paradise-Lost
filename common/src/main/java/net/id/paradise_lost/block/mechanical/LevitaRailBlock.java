@@ -67,6 +67,15 @@ public class LevitaRailBlock extends PoweredRailBlock {
     }
 
     @Override
+    protected void onPlace(BlockState state, Level world, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+        super.onPlace(state, world, pos, oldState, movedByPiston);
+        // A rail lifted while TRIGGERED loses its scheduled tick, so it would stay off for good after it lands.
+        if (!oldState.is(this) && state.getValue(TRIGGERED)) {
+            world.scheduleTick(pos, this, TRIGGER_DELAY_TICKS);
+        }
+    }
+
+    @Override
     protected void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         if (!state.getValue(TRIGGERED)) {
             return;
