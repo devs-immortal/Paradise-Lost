@@ -41,11 +41,11 @@ public class LevitaRailBlock extends PoweredRailBlock {
     @Override
     protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
         super.onPlace(state, level, pos, oldState, movedByPiston);
-        if (level.isClientSide() || !movedByPiston) {
+        if (level.isClientSide() || (oldState.is(this) && !movedByPiston)) {
             return;
         }
         // Piston copies TRIGGERED over, but the reset tick stays at the old spot.
-        // No new tick and the rail never charges another cart.
+        // A rail placed already triggered has the same problem.
         BlockState now = level.getBlockState(pos);
         if (now.is(this) && now.getValue(TRIGGERED) && !level.getBlockTicks().hasScheduledTick(pos, this)) {
             level.scheduleTick(pos, this, TRIGGER_DELAY_TICKS);

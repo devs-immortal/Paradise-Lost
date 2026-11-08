@@ -15,7 +15,8 @@ public class GravityWandItem extends Item {
 
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity entity, InteractionHand hand) {
-        return GravityTool.flipEntity(stack, player, entity, hand);
+        if (entity instanceof Player) return GravityTool.flipEntity(stack, player, entity, hand);
+        return super.interactLivingEntity(stack, player, entity, hand);
     }
 
     @Override
