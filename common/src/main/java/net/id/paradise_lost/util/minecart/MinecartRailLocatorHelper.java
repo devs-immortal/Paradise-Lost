@@ -125,16 +125,14 @@ public final class MinecartRailLocatorHelper {
                 && motion.horizontalDistanceSqr() < MinecartRailMotionHelper.MOTION_EPSILON * MinecartRailMotionHelper.MOTION_EPSILON) {
             return false;
         }
-        // High end of the slope we're pitched on sits in the block above it. Still this rail.
-        if (Math.abs(approachPitch(cart)) >= LEVEL_PITCH) {
-            int incline = MinecartFloatStateHelper.getIncline(cart);
-            if (incline > 0 || (incline < 0 && MinecartRailMotionHelper.headingDownSlope(shape, motion))) {
-                return false;
-            }
-        }
         // Level pose over a slope. Down a joined exit is the track. Up that slope is the yank.
         if (Math.abs(approachPitch(cart)) < LEVEL_PITCH) {
             return !headingDownJoinedSlope(cart, railPos, shape, x, y, z, motion);
+        }
+        // High end of the slope we're pitched on sits in the block above it. Still this rail.
+        int incline = MinecartFloatStateHelper.getIncline(cart);
+        if (incline > 0 || (incline < 0 && MinecartRailMotionHelper.headingDownSlope(shape, motion))) {
+            return false;
         }
         BlockPos above = BlockPos.containing(x, y, z);
         BlockState aboveState = cart.level().getBlockState(above);

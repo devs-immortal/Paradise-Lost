@@ -12,7 +12,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.RailShape;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.Collections;
 import java.util.Locale;
+import java.util.Map;
 import java.util.WeakHashMap;
 
 /**
@@ -24,7 +26,7 @@ public final class MinecartFloatDebugHelper {
 
     private static final String DEBUG_PREFIX = "[PL-MinecartFloat]";
 
-    private static final WeakHashMap<AbstractMinecart, OnRailSample> ON_RAIL = new WeakHashMap<>();
+    private static final Map<AbstractMinecart, OnRailSample> ON_RAIL = Collections.synchronizedMap(new WeakHashMap<>());
 
     public static void debugTick(AbstractMinecart cart, boolean wasOffRail, boolean midair, String phase) {
         if (!DebugFlags.MINECART_FLOAT || !MinecartFloatStateHelper.isFloating(cart)) {
@@ -64,10 +66,6 @@ public final class MinecartFloatDebugHelper {
                         + " pos=" + fmt(cart.position())
                         + motion(cart)
                         + " rail=" + railInfo);
-    }
-
-    public static void debugEvent(AbstractMinecart cart, String event, String detail) {
-        debug(cart, event, detail);
     }
 
     static void debug(AbstractMinecart cart, String event, String detail) {

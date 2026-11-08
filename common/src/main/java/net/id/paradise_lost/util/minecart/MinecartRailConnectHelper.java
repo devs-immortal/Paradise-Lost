@@ -201,7 +201,7 @@ public final class MinecartRailConnectHelper {
                 || MinecartRailLookaheadHelper.deadEndCubeAhead(cart)) {
             return false;
         }
-        if (MinecartFloatStateHelper.getIncline(cart) < 0) {
+        if (incline < 0) {
             return MinecartRailLookaheadHelper.hasContinuingAscendingRailAhead(cart)
                     || MinecartRailLookaheadHelper.hasContinuingSlopeSolidAhead(cart)
                     || MinecartRailLocatorHelper.findRailPos(cart) != null;

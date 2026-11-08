@@ -584,10 +584,7 @@ public final class MinecartRailLookaheadHelper {
         // A descent aimed at the underside is a floor.
         if (BaseRailBlock.isRail(level.getBlockState(upper))) {
             BlockPos current = MinecartRailLocatorHelper.findRailPos(cart);
-            if (current != null && !MinecartRailMotionHelper.railsConnect(level, current, upper)) {
-                return true;
-            }
-            return false;
+            return current != null && !MinecartRailMotionHelper.railsConnect(level, current, upper);
         }
         BlockPos chest = BlockPos.containing(
                 cart.getX() + motion.x, cart.getY() + cart.getBbHeight() * 0.5D, cart.getZ() + motion.z);

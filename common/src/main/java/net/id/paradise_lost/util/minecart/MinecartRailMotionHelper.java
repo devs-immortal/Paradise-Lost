@@ -55,25 +55,11 @@ public final class MinecartRailMotionHelper {
             return;
         }
         // 0.05 missed a cart that was only creeping. That one stayed flat and then left the slope level.
-        boolean goingUp = switch (shape) {
-            case ASCENDING_EAST -> motion.x > SLOW_SLOPE_MOTION;
-            case ASCENDING_WEST -> motion.x < -SLOW_SLOPE_MOTION;
-            case ASCENDING_NORTH -> motion.z < -SLOW_SLOPE_MOTION;
-            case ASCENDING_SOUTH -> motion.z > SLOW_SLOPE_MOTION;
-            default -> false;
-        };
-        boolean goingDown = switch (shape) {
-            case ASCENDING_EAST -> motion.x < -SLOW_SLOPE_MOTION;
-            case ASCENDING_WEST -> motion.x > SLOW_SLOPE_MOTION;
-            case ASCENDING_NORTH -> motion.z > SLOW_SLOPE_MOTION;
-            case ASCENDING_SOUTH -> motion.z < -SLOW_SLOPE_MOTION;
-            default -> false;
-        };
-        if (goingUp) {
+        if (headingDownSlope(shape, motion.reverse())) {
             MinecartFloatStateHelper.setIncline(cart, 1);
             return;
         }
-        if (goingDown) {
+        if (headingDownSlope(shape, motion)) {
             MinecartFloatStateHelper.setIncline(cart, -1);
             return;
         }

@@ -58,14 +58,6 @@ public class LevitaRailBlock extends PoweredRailBlock {
                 || !isOnRail(cart, pos)) {
             return;
         }
-        // Like detector rail, bails once it is already on. Triggered is that latch: the tick releases it.
-        if (state.getValue(TRIGGERED)) {
-            trackIncline(state, pos, cart);
-            if (!state.getValue(POWERED)) {
-                MinecartFloatStateHelper.stopFloating(cart);
-            }
-            return;
-        }
         trigger(state, world, pos, cart);
     }
 
@@ -75,6 +67,7 @@ public class LevitaRailBlock extends PoweredRailBlock {
             MinecartFloatStateHelper.stopFloating(cart);
             return;
         }
+        // Like detector rail, bails once it is already on. Triggered is that latch: the tick releases it.
         if (state.getValue(TRIGGERED)) {
             return;
         }
@@ -106,17 +99,13 @@ public class LevitaRailBlock extends PoweredRailBlock {
         if (!open.getValue(POWERED)) {
             return;
         }
-        BlockState latched = open.setValue(TRIGGERED, true);
         boolean charged = false;
         for (AbstractMinecart cart : world.getEntitiesOfClass(AbstractMinecart.class, detectionBox(pos))) {
-            if (!isOnRail(cart, pos)) {
-                continue;
-            }
             if (!charged) {
                 trigger(open, world, pos, cart);
                 charged = true;
             } else {
-                trackIncline(latched, pos, cart);
+                trackIncline(open, pos, cart);
             }
         }
     }
