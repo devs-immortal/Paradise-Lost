@@ -1,7 +1,6 @@
 package net.id.paradise_lost.util;
 
 import net.id.paradise_lost.registry.BlockRegistry;
-import net.id.paradise_lost.world.ParadiseLostGameRules;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ColorParticleOption;
@@ -13,7 +12,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 import static net.id.paradise_lost.world.ParadiseLostGameRules.BLOOMED_CALCITE_TRANSFORMATION;
-import static net.id.paradise_lost.world.ParadiseLostGameRules.PARADISE_VOID_KILLS;
 
 public class BloomedCalciteUtil {
 
