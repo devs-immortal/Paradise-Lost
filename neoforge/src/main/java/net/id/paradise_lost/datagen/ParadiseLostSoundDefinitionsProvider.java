@@ -87,6 +87,19 @@ public class ParadiseLostSoundDefinitionsProvider extends SoundDefinitionsProvid
                 .subtitle("subtitles.paradise_lost.item.soul_blade.harvest")
                 .with(event("entity.allay.item_taken")));
 
+        add(ParadiseLostSoundEvents.ITEM_WARDED_JAR_IN, SoundDefinition.definition()
+                .subtitle("subtitles.paradise_lost.item.warded_jar.in")
+                .with(
+                        sound("paradise_lost:item/warded_jar/warded_jar_in_1"),
+                        sound("paradise_lost:item/warded_jar/warded_jar_in_2")
+                ));
+        add(ParadiseLostSoundEvents.ITEM_WARDED_JAR_OUT, SoundDefinition.definition()
+                .subtitle("subtitles.paradise_lost.item.warded_jar.out")
+                .with(
+                        sound("paradise_lost:item/warded_jar/warded_jar_out_1"),
+                        sound("paradise_lost:item/warded_jar/warded_jar_out_2")
+                ));
+
         add(ParadiseLostSoundEvents.ENTITY_MOA_AMBIENT, SoundDefinition.definition()
                 .subtitle("subtitles.paradise_lost.entity.moa.ambient")
                 .with(

@@ -404,6 +404,20 @@
     ],
     "subtitle": "subtitles.paradise_lost.item.soul_blade.harvest"
   },
+  "item.warded_jar.in": {
+    "sounds": [
+      "paradise_lost:item/warded_jar/warded_jar_in_1",
+      "paradise_lost:item/warded_jar/warded_jar_in_2"
+    ],
+    "subtitle": "subtitles.paradise_lost.item.warded_jar.in"
+  },
+  "item.warded_jar.out": {
+    "sounds": [
+      "paradise_lost:item/warded_jar/warded_jar_out_1",
+      "paradise_lost:item/warded_jar/warded_jar_out_2"
+    ],
+    "subtitle": "subtitles.paradise_lost.item.warded_jar.out"
+  },
   "music.paradise": {
     "sounds": [
       {

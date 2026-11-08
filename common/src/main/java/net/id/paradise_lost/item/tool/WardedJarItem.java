@@ -2,9 +2,11 @@ package net.id.paradise_lost.item.tool;
 
 import net.id.paradise_lost.registry.EntityRegistry;
 import net.id.paradise_lost.registry.ItemRegistry;
+import net.id.paradise_lost.util.ParadiseLostSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -49,10 +51,12 @@ public class WardedJarItem extends Item {
             itemEntity.setDefaultPickUpDelay();
             entity.discard();
             world.addFreshEntity(itemEntity);
+            player.playSound(ParadiseLostSoundEvents.ITEM_WARDED_JAR_IN, 1.0F, 1.0F);
             fillJar(stack, player, hand, new ItemStack(ItemRegistry.WARDED_JAR_ALLAY.get()));
             return InteractionResult.SUCCESS;
         } else if (entity.getType().equals(EntityRegistry.QUINT.get())) {
             entity.discard();
+            player.playSound(ParadiseLostSoundEvents.ITEM_WARDED_JAR_IN, 1.0F, 1.0F);
             fillJar(stack, player, hand, new ItemStack(ItemRegistry.WARDED_JAR_QUINT.get()));
             return InteractionResult.SUCCESS;
         }
@@ -85,6 +89,7 @@ public class WardedJarItem extends Item {
             }
             if (containedEntityType.spawn((ServerLevel) world, itemStack, context.getPlayer(), blockPos2, MobSpawnType.MOB_SUMMONED, true, false) != null) {
                 itemStack.consume(1, user);
+                user.playSound(ParadiseLostSoundEvents.ITEM_WARDED_JAR_OUT, 1.0F, 1.0F);
                 context.getPlayer().addItem(new ItemStack(ItemRegistry.WARDED_JAR.get()));
                 world.gameEvent(context.getPlayer(), GameEvent.ENTITY_PLACE, blockPos);
             }
@@ -111,6 +116,7 @@ public class WardedJarItem extends Item {
                 } else {
                     itemStack.consume(1, user);
                     user.awardStat(Stats.ITEM_USED.get(this));
+                    user.playSound(ParadiseLostSoundEvents.ITEM_WARDED_JAR_OUT, 1.0F, 1.0F);
                     world.gameEvent(user, GameEvent.ENTITY_PLACE, entity.position());
                     return new InteractionResultHolder<>(InteractionResult.SUCCESS, new ItemStack(ItemRegistry.WARDED_JAR.get()));
                 }

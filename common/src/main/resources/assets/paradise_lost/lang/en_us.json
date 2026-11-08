@@ -554,8 +554,10 @@
 
   "subtitles.paradise_lost.item.bloodstone.prick": "Bloodstone pricks",
   
-  "subtitles.paradise_lost.item.soul_blade.harvest": "Soul is Absorbed",
-  
+  "subtitles.paradise_lost.item.soul_blade.harvest": "Soul is absorbed",
+
+  "subtitles.paradise_lost.item.warded_jar.in": "Warded Jar captures",
+  "subtitles.paradise_lost.item.warded_jar.out": "Warded Jar releases",
   
   "filled_map.paradise_lost.vault": "Vault Explorer Map",
   "filled_map.paradise_lost.palace": "Palace Explorer Map",

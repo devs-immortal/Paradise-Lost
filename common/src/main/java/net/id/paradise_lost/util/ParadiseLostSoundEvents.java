@@ -33,6 +33,8 @@ public final class ParadiseLostSoundEvents {
     public static final Holder<SoundEvent> ITEM_ARMOR_EQUIP_FLAXWEAVE = registerReference("item.armor.equip.flaxweave");
     public static final SoundEvent ITEM_BLOODSTONE_PRICK = register("item.bloodstone.prick");
     public static final SoundEvent SOUL_BLADE_HARVEST = register("item.soul_blade.harvest");
+    public static final SoundEvent ITEM_WARDED_JAR_OUT = register("item.warded_jar.out");
+    public static final SoundEvent ITEM_WARDED_JAR_IN = register("item.warded_jar.in");
 
     public static final SoundEvent ENTITY_MOA_AMBIENT = register("entity.moa.ambient");
     public static final SoundEvent ENTITY_MOA_AMBIENT_SING = register("entity.moa.ambient.sing");
