@@ -25,7 +25,7 @@ public class LiquidBlockPortalMixin {
         if (level.isClientSide) {
             return;
         }
-        if (state.getFluidState().is(Fluids.WATER) || state.getFluidState().is(Fluids.FLOWING_WATER)) {
+        if (state.getFluidState().is(Fluids.WATER)) {
             ParadiseLostPortalHelper.tryLightPortal(level, pos);
         }
     }
