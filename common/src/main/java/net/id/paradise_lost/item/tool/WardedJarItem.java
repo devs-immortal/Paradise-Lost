@@ -7,6 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -75,8 +76,8 @@ public class WardedJarItem extends Item {
     public InteractionResult useOn(UseOnContext context) {
         if (this.containedEntityType == null) return InteractionResult.PASS;
         Level world = context.getLevel();
-        if (world instanceof ServerLevel) {
-            Player user = context.getPlayer();
+        Player user = context.getPlayer();
+        if (world instanceof ServerLevel slevel) {
             ItemStack itemStack = context.getItemInHand();
             BlockPos blockPos = context.getClickedPos();
             Direction direction = context.getClickedFace();
@@ -89,11 +90,12 @@ public class WardedJarItem extends Item {
             }
             if (containedEntityType.spawn((ServerLevel) world, itemStack, context.getPlayer(), blockPos2, MobSpawnType.MOB_SUMMONED, true, false) != null) {
                 itemStack.consume(1, user);
-                user.playSound(ParadiseLostSoundEvents.ITEM_WARDED_JAR_OUT, 1.0F, 1.0F);
+                slevel.playSound(user, user.blockPosition(),ParadiseLostSoundEvents.ITEM_WARDED_JAR_OUT, SoundSource.PLAYERS, 1.0F, 1.0F);
                 context.getPlayer().addItem(new ItemStack(ItemRegistry.WARDED_JAR.get()));
                 world.gameEvent(context.getPlayer(), GameEvent.ENTITY_PLACE, blockPos);
             }
         }
+        world.playSound(user, user.blockPosition(),ParadiseLostSoundEvents.ITEM_WARDED_JAR_OUT, SoundSource.PLAYERS, 1.0F, 1.0F);
         return InteractionResult.SUCCESS;
     }
 
@@ -103,7 +105,8 @@ public class WardedJarItem extends Item {
         BlockHitResult blockHitResult = getPlayerPOVHitResult(world, user, ClipContext.Fluid.SOURCE_ONLY);
         if (blockHitResult.getType() != HitResult.Type.BLOCK) {
             return InteractionResultHolder.pass(itemStack);
-        } else if (!(world instanceof ServerLevel)) {
+        } else if (world.isClientSide) {
+            world.playSound(user, user.blockPosition(),ParadiseLostSoundEvents.ITEM_WARDED_JAR_OUT, SoundSource.PLAYERS, 1.0F, 1.0F);
             return InteractionResultHolder.success(itemStack);
         } else {
             BlockPos blockPos = blockHitResult.getBlockPos();
@@ -116,7 +119,7 @@ public class WardedJarItem extends Item {
                 } else {
                     itemStack.consume(1, user);
                     user.awardStat(Stats.ITEM_USED.get(this));
-                    user.playSound(ParadiseLostSoundEvents.ITEM_WARDED_JAR_OUT, 1.0F, 1.0F);
+                    world.playSound(user, user.blockPosition(),ParadiseLostSoundEvents.ITEM_WARDED_JAR_OUT, SoundSource.PLAYERS, 1.0F, 1.0F);
                     world.gameEvent(user, GameEvent.ENTITY_PLACE, entity.position());
                     return new InteractionResultHolder<>(InteractionResult.SUCCESS, new ItemStack(ItemRegistry.WARDED_JAR.get()));
                 }
