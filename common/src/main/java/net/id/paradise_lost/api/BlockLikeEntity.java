@@ -291,18 +291,24 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
     }
 
     public boolean trySetBlock() {
+        //get blockpos & blockstate
         BlockPos blockPos = this.blockPosition();
         BlockState blockState = this.level().getBlockState(blockPos);
+        //if this block could be placed from above at its current location
         boolean canReplace = blockState.canBeReplaced(new DirectionalPlaceContext(this.level(), blockPos, Direction.UP, ItemStack.EMPTY, Direction.DOWN));
+        // if this spot is a spot that won't kill the block (crops on stone)
         boolean canPlace = this.blockState.canSurvive(this.level(), blockPos);
 
+        //if none are true, return false
         if (!this.canSetBlock || !canPlace || !canReplace)
             return false;
 
+        //waterlogging logic
         if (this.blockState.hasProperty(BlockStateProperties.WATERLOGGED)) {
             boolean water = this.level().getFluidState(blockPos).getType() == Fluids.WATER;
             this.blockState = this.blockState.setValue(BlockStateProperties.WATERLOGGED, water);
         }
+
 
         if (this.level().setBlock(blockPos, this.blockState, Block.UPDATE_ALL)) {
             this.discard();
