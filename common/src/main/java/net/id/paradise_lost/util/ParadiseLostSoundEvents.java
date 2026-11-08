@@ -22,6 +22,9 @@ public final class ParadiseLostSoundEvents {
     public static final SoundEvent BLOCK_PALACE_DOOR_UNLOCK = register("block.palace_door.unlock");
     public static final SoundEvent BLOCK_SURTRUM_RUSH = register("block.surtrum_air.rush");
     public static final SoundEvent BLOCK_SURTRUM_CRACKLE = register("block.surtrum_air.crackle");
+    public static final SoundEvent BLOCK_CLOUD_BREAK = register("block.cloud.break");
+    public static final SoundEvent BLOCK_CLOUD_PLACE = register("block.cloud.place");
+    public static final SoundEvent BLOCK_CLOUD_STEP = register("block.cloud.step");
 
     public static final Holder<SoundEvent> ITEM_ARMOR_EQUIP_OLVITE = registerReference("item.armor.equip.olvite");
     public static final Holder<SoundEvent> ITEM_ARMOR_EQUIP_GLAZED_GOLD = registerReference("item.armor.equip.glazed_gold");

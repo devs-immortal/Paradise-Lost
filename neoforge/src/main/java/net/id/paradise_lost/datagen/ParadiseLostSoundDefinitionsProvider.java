@@ -43,6 +43,27 @@ public class ParadiseLostSoundDefinitionsProvider extends SoundDefinitionsProvid
                 .subtitle("subtitles.paradise_lost.block.surtrum_air.crackle")
                 .with(event("block.fire.ambient")));
 
+        add(ParadiseLostSoundEvents.BLOCK_CLOUD_STEP, SoundDefinition.definition()
+                .subtitle("subtitles.paradise_lost.block.cloud.step")
+                .with(sound("paradise_lost:block/cloud/cloud_step")));
+        add(ParadiseLostSoundEvents.BLOCK_CLOUD_BREAK, SoundDefinition.definition()
+                .subtitle("subtitles.paradise_lost.block.cloud.break")
+                .with(
+                        sound("paradise_lost:block/cloud/cloud_break_1"),
+                        sound("paradise_lost:block/cloud/cloud_break_2"),
+                        sound("paradise_lost:block/cloud/cloud_break_3"),
+                        sound("paradise_lost:block/cloud/cloud_break_4")
+                ));
+        add(ParadiseLostSoundEvents.BLOCK_CLOUD_PLACE, SoundDefinition.definition()
+                .subtitle("subtitles.paradise_lost.block.cloud.place")
+                .with(
+                        sound("paradise_lost:block/cloud/cloud_place_1"),
+                        sound("paradise_lost:block/cloud/cloud_place_2"),
+                        sound("paradise_lost:block/cloud/cloud_place_3"),
+                        sound("paradise_lost:block/cloud/cloud_place_4")
+                ));
+
+
         add(ParadiseLostSoundEvents.ITEM_ARMOR_EQUIP_OLVITE.value(), SoundDefinition.definition()
                 .subtitle("subtitles.paradise_lost.item.armor.equip.olvite")
                 .with(event("item.armor.equip_iron")));

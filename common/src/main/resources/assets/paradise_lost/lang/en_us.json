@@ -492,6 +492,9 @@
   "info.paradise_lost.soul_blade.soul_count_1": "Contains 1 Soul",
   "info.paradise_lost.soul_blade.soul_count_n": "Contains %1$s Souls",
 
+  "subtitles.paradise_lost.block.cloud.place": "Clouds are formed",
+  "subtitles.paradise_lost.block.cloud.break": "Clouds dissapate",
+  "subtitles.paradise_lost.block.cloud.step": "Cloudstep",
 
   "subtitles.paradise_lost.block.blackcurrant_bush.pick_blueberries": "Blackcurrants pop",
 
