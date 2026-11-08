@@ -114,7 +114,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
     public abstract void postTickMovement();
 
     public void postTickEntityCollision(Entity entity) {
-        if(this.blockState.is(ParadiseLostBlockTags.NO_ACTION_FLOATERS)) return;
+        if (this.blockState.is(ParadiseLostBlockTags.NO_ACTION_FLOATERS)) return;
         if (!(entity instanceof BlockLikeEntity ble && ble.partOfSet)) {
             this.blockState.entityInside(level(), this.blockPosition(), entity);
         }
