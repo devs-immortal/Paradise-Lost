@@ -186,9 +186,7 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
             // Still climbing past a floor/corner, don't seat yet or the tilt drops out.
             if (MinecartFloatRotationHelper.shouldDeferSlopeToCornerHardSeat(cart, pos, state)) {
                 MinecartFloatRotationHelper.keepSlopeFloatThroughCorner(cart, pos, state);
-                MinecartFloatDebugHelper.debugEvent(cart, "deferSeat",
-                        "keep slope over corner/flat at " + pos
-                                + " shape=" + MinecartFloatStateHelper.getRailShapeName(cart));
+                MinecartFloatDebugHelper.deferSeat(cart, "keep slope over corner/flat", pos);
                 this.paradiseLost$moveFloating(cart, false);
                 ci.cancel();
                 return;
@@ -205,17 +203,14 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
             if (MinecartFloatStateHelper.isOffRail(cart)) {
                 // prepareReconnect decided this isn't a real landing yet.
                 this.paradiseLost$wasOffRail = true;
-                MinecartFloatDebugHelper.debugEvent(cart, "deferSeat",
-                        "reconnect kept float at " + pos
-                                + " shape=" + MinecartFloatStateHelper.getRailShapeName(cart));
+                MinecartFloatDebugHelper.deferSeat(cart, "reconnect kept float", pos);
                 this.paradiseLost$moveFloating(cart, false);
                 ci.cancel();
                 return;
             }
             this.paradiseLost$wasOffRail = false;
             this.paradiseLost$beginCornerNoclip(state);
-            MinecartFloatDebugHelper.debugEvent(cart, "reconnect",
-                    "hard seat at " + pos + " shape=" + MinecartFloatStateHelper.getRailShapeName(cart));
+            MinecartFloatDebugHelper.hardSeat(cart, pos);
             return;
         }
         if (MinecartRailConnectHelper.shouldCancelTrackWhileFloating(cart, pos, state, leftRails)) {
@@ -225,12 +220,17 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
                 ci.cancel();
                 return;
             }
-            if (!this.level().isClientSide() && !MinecartRailLocatorHelper.isGhostSlopeBelow(cart, pos, state)) {
+            // Too high to seat: adopting this slope's incline here is what pitched the cart up
+            // and then cancelled the track move, so it never connected.
+            boolean tooHighToAdopt = state.getBlock() instanceof BaseRailBlock slopeRail
+                    && state.getValue(slopeRail.getShapeProperty()).isAscending()
+                    && MinecartRailLocatorHelper.isAboveAscendingSeat(cart, pos);
+            if (!this.level().isClientSide() && !tooHighToAdopt
+                    && !MinecartRailLocatorHelper.isGhostSlopeBelow(cart, pos, state)) {
                 MinecartRailConnectHelper.adaptFloatWhileGhosting(cart, state);
             }
-            MinecartFloatDebugHelper.debugEvent(cart, "skipTrack",
-                    "midair cancel moveAlongTrack at " + pos + " leftRails=" + leftRails
-                            + " unsettledFlat=" + MinecartRailLocatorHelper.isUnsettledAboveFlatRail(cart));
+            MinecartFloatDebugHelper.skipTrack(cart, pos, leftRails,
+                    MinecartRailLocatorHelper.isUnsettledAboveFlatRail(cart));
             this.paradiseLost$moveFloating(cart, false);
             ci.cancel();
         } else if (MinecartRailConnectHelper.shouldWaitToEnterRail(cart, pos, state)) {
@@ -343,7 +343,7 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
         // A cart that has basically stopped isn't taking off, so don't lock in a flat takeoff.
         Vec3 exitMotion = this.getDeltaMovement();
         if (exitMotion.horizontalDistanceSqr() <= 0.0025D) {
-            MinecartFloatDebugHelper.debugEvent(cart, reason, "hold takeoff near-zero motion");
+            MinecartFloatDebugHelper.holdTakeoff(cart, reason);
             return;
         }
         // Capture incline before prepareTakeoff; flat takeoff clears it.
@@ -356,11 +356,7 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
         this.paradiseLost$exitGrace = grace;
         this.paradiseLost$wasOffRail = true;
         MinecartFloatStateHelper.setOffRail(cart, true);
-        MinecartFloatDebugHelper.debugEvent(cart, reason,
-                "first exit grace=" + grace
-                        + " incline=" + inclineAtExit
-                        + " shape=" + MinecartFloatStateHelper.getRailShapeName(cart)
-                        + " motion=" + this.getDeltaMovement());
+        MinecartFloatDebugHelper.airTakeoff(cart, reason, grace, inclineAtExit);
     }
 
     @Unique
@@ -450,9 +446,7 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
                 this.horizontalCollision, intended)) {
             MinecartFlightHelper.levelOpenAirFlight(cart);
             this.paradiseLost$exitGrace = 0;
-            MinecartFloatDebugHelper.debugEvent(cart, "solidBarrier",
-                    "onGround=" + this.onGround() + " vertCol=" + this.verticalCollision
-                            + " horCol=" + this.horizontalCollision);
+            MinecartFloatDebugHelper.solidBarrier(cart, this.onGround(), this.verticalCollision, this.horizontalCollision);
         }
 
         if (tickFloatTime) {

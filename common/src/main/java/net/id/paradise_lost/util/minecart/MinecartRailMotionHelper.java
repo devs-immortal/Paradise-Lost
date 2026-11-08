@@ -10,8 +10,6 @@ import net.minecraft.world.level.block.BaseRailBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.RailShape;
 import net.minecraft.world.phys.Vec3;
-
-import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -266,7 +264,7 @@ public final class MinecartRailMotionHelper {
             return;
         }
         cart.setDeltaMovement(second.x * speed, motion.y, second.z * speed);
-        MinecartFloatDebugHelper.debug(cart, "sideways", "shape=" + shape + " motion " + MinecartFloatDebugHelper.fmt(motion) + "->" + MinecartFloatDebugHelper.fmt(cart.getDeltaMovement()));
+        MinecartFloatDebugHelper.sideways(cart, shape, motion, cart.getDeltaMovement());
     }
 
     /**
@@ -307,7 +305,7 @@ public final class MinecartRailMotionHelper {
         RailShape shape = railState.getValue(rail.getShapeProperty());
         if (isCornerRail(shape)) {
             MinecartFloatStateHelper.setRailShape(cart, shape);
-            MinecartFloatDebugHelper.debug(cart, "nudge", "skip corner shape=" + shape);
+            MinecartFloatDebugHelper.nudgeCorner(cart, shape);
             return;
         }
         // Already parallel, keep XZ, just refresh incline/Y.
@@ -324,8 +322,7 @@ public final class MinecartRailMotionHelper {
                 MinecartFloatPoseHelper.captureRailRenderPose(cart, true);
                 MinecartFloatRotationHelper.applyFloatingRotation(cart);
             }
-            MinecartFloatDebugHelper.debug(cart, "nudge", "parallel skip XZ shape=" + shape
-                    + " incline " + before + "->" + incline);
+            MinecartFloatDebugHelper.nudgeParallel(cart, shape, before, incline);
             return;
         }
         Pair<Vec3i, Vec3i> exits = RAIL_EXITS.get(shape);
@@ -375,14 +372,7 @@ public final class MinecartRailMotionHelper {
             updateInclineFromRail(cart, shape, newMotion);
         }
         cart.setDeltaMovement(newMotion);
-        MinecartFloatDebugHelper.debug(cart, "nudge",
-                "block=" + MinecartFloatDebugHelper.blockId(railState)
-                        + " shape=" + shape
-                        + " approach=" + MinecartFloatDebugHelper.fmt(approach)
-                        + " along=" + MinecartFloatDebugHelper.fmt(flatAlong)
-                        + " dots=" + String.format(Locale.ROOT, "%.2f/%.2f", dotA, dotB)
-                        + " motion " + MinecartFloatDebugHelper.fmt(motion) + "->" + MinecartFloatDebugHelper.fmt(newMotion)
-                        + " incline=" + MinecartFloatStateHelper.getIncline(cart));
+        MinecartFloatDebugHelper.nudge(cart, railState, shape, approach, flatAlong, dotA, dotB, motion, newMotion);
     }
 
     static double horizontalDot(Vec3 a, Vec3 b) {

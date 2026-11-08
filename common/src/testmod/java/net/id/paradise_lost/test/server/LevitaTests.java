@@ -1512,6 +1512,49 @@ public final class LevitaTests {
         );
     }
 
+    @ServerTest("a descending cart does not climb a slope it has not reached")
+    private static List<Step> descendingCartDoesNotClimbUnconnectedSlope() {
+        boolean[] seatedClimb = {false};
+        return List.of(
+                setup(world -> {
+                    fill(world, start.relative(dir, -8).below(4), start.relative(dir, 2).above(6), Blocks.AIR.defaultBlockState());
+                    // High end of the slope the cart leaves.
+                    world.setBlockAndUpdate(start.relative(dir), Blocks.STONE.defaultBlockState());
+                    placePoweredLevitaRail(world, start);
+                    slope(world, start);
+                    // The next cell at this height is empty. Two blocks down, a slope climbs the way the cart is
+                    // already going, and the stair continues. That rail is not the one the cart is leaving.
+                    BlockPos gap = start.relative(dir.getOpposite());
+                    BlockPos lower = gap.below(2);
+                    BlockPos step = gap.relative(dir.getOpposite()).below();
+                    BlockPos step2 = gap.relative(dir.getOpposite(), 2);
+                    for (BlockPos at : List.of(lower, step, step2)) {
+                        placePoweredLevitaRail(world, at);
+                        world.setBlockAndUpdate(at.relative(dir.getOpposite()), Blocks.STONE.defaultBlockState());
+                        forceShape(world, at, ascending(dir.getOpposite()));
+                    }
+                    entityId = launch(world, EntityType.MINECART, start, -0.4);
+                    ticks = 0;
+                    seatedClimb[0] = false;
+                }),
+                Step.until("cart to pass the slope it is leaving", 80, () -> {
+                    AbstractMinecart cart = serverCart(entityId);
+                    BlockPos rail = MinecartRailLocatorHelper.findRailPos(cart);
+                    double above = rail == null ? 99.0D : cart.getY() - rail.getY();
+                    if (MinecartFloatStateHelper.getIncline(cart) > 0 && rail != null && above <= 1.05D) {
+                        seatedClimb[0] = true;
+                    }
+                    // The neoforge cart pitched up almost two blocks above a slope, then flew off with no rail under it.
+                    // Leaving a slope it already sat on is a normal takeoff.
+                    if (MinecartFloatStateHelper.getIncline(cart) > 0 && !seatedClimb[0]) {
+                        check(false, "climbed a slope it had not reached, yAbove=" + above
+                                + describe(cart) + floatState(cart));
+                    }
+                    return along(cart) < -1.0D && ++ticks >= 20;
+                })
+        );
+    }
+
     @ServerTest("a piston-moved levita rail does not stay triggered forever (#977)")
     private static List<Step> pistonMovedRailKeepsReset() {
         return List.of(

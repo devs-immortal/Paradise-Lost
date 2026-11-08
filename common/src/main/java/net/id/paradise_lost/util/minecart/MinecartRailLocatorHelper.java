@@ -25,6 +25,13 @@ public final class MinecartRailLocatorHelper {
     static final double ASCENDING_SEAT_HEIGHT = 1.05D;
 
     /**
+     * Above the band where an ascending rail can still be the one under the cart.
+     */
+    public static boolean isAboveAscendingSeat(AbstractMinecart cart, BlockPos railPos) {
+        return cart.getY() - railPos.getY() > ASCENDING_SEAT_HEIGHT;
+    }
+
+    /**
      * Pitch from before moveAlongTrack rewrites the pose. A level cart is not on the slope under its rail.
      */
     public static void noteApproachPitch(AbstractMinecart cart) {
@@ -135,7 +142,10 @@ public final class MinecartRailLocatorHelper {
                 && !MinecartRailMotionHelper.railsConnect(above, aboveState.getValue(aboveRail.getShapeProperty()), railPos, shape)) {
             return true;
         }
-        if (motion.y < -0.05D) {
+        // Falling is not enough. The cart in the neoforge log was a block and a half above an
+        // unconnected slope, already dropping, and this treated that slope as the one it was on.
+        if (motion.y < -0.05D && (y - railPos.getY() <= ASCENDING_SEAT_HEIGHT
+                || MinecartRailMotionHelper.headingDownSlope(shape, motion))) {
             return false;
         }
         Direction high = switch (shape) {

@@ -8,8 +8,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.RailShape;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.Locale;
-
 /**
  * Takeoff, open-air climb and descent, noclip, and leveling into a solid barrier.
  */
@@ -38,10 +36,7 @@ public final class MinecartFlightHelper {
                 MinecartFloatPoseHelper.ensureAscendingFloatPose(cart, shape);
                 MinecartFloatRotationHelper.applyFloatingRotation(cart);
                 armOpenAirClimbGrace(cart, priorIncline);
-                MinecartFloatDebugHelper.debug(cart, "takeoff", "slopeKeep incline=" + MinecartFloatStateHelper.getIncline(cart)
-                        + " shape=" + MinecartFloatStateHelper.getRailShapeName(cart)
-                        + " railPose=" + MinecartFloatDebugHelper.formatRailPose(cart)
-                        + " ignoredUnderfootFlat");
+                MinecartFloatDebugHelper.takeoffSlopeKeep(cart);
                 return;
             }
         }
@@ -61,17 +56,14 @@ public final class MinecartFlightHelper {
             MinecartFloatStateHelper.setSyncedFloatPose(cart, yaw, 0.0F);
             MinecartFloatRotationHelper.snapEntityRotation(cart, yaw, 0.0F);
             pose.paradiseLost$setRailRenderPose(yaw, 0.0F);
-            MinecartFloatDebugHelper.debug(cart, "takeoff", "flat pitch=0 yaw=" + String.format(Locale.ROOT, "%.1f", yaw)
-                    + " shape=" + MinecartFloatStateHelper.getRailShapeName(cart));
+            MinecartFloatDebugHelper.takeoffFlat(cart, yaw);
         } else {
             // Short ascending rails often never settle long enough for gated capture, force
             // seat-sample / synthesize before freezing the air pose.
             MinecartFloatPoseHelper.ensureAscendingFloatPose(cart, shape);
             MinecartFloatRotationHelper.applyFloatingRotation(cart);
             armOpenAirClimbGrace(cart, MinecartFloatStateHelper.getIncline(cart));
-            MinecartFloatDebugHelper.debug(cart, "takeoff", "slope incline=" + MinecartFloatStateHelper.getIncline(cart)
-                    + " shape=" + MinecartFloatStateHelper.getRailShapeName(cart)
-                    + " railPose=" + MinecartFloatDebugHelper.formatRailPose(cart));
+            MinecartFloatDebugHelper.takeoffSlope(cart);
         }
     }
 
@@ -138,16 +130,14 @@ public final class MinecartFlightHelper {
             }
             MinecartFloatStateHelper.setIncline(cart, 1);
             MinecartFloatPoseHelper.maintainSlopeFloatPose(cart);
-            MinecartFloatDebugHelper.debug(cart, "climbRestore", "flatTarget=" + flatTarget
-                    + " yAbove=" + String.format(Locale.ROOT, "%.3f", height)
-                    + " memory=" + MinecartFloatStateHelper.getRailShapeName(cart));
+            MinecartFloatDebugHelper.climbRestore(cart, flatTarget, height);
             return;
         }
         // Still aiming at an ascending lip in open air.
         if (MinecartRailLookaheadHelper.hasContinuingAscendingRailAhead(cart) || MinecartRailLookaheadHelper.hasContinuingSlopeSolidAhead(cart)) {
             MinecartFloatStateHelper.setIncline(cart, 1);
             MinecartFloatPoseHelper.maintainSlopeFloatPose(cart);
-            MinecartFloatDebugHelper.debug(cart, "climbRestore", "ascendingAhead memory=" + MinecartFloatStateHelper.getRailShapeName(cart));
+            MinecartFloatDebugHelper.climbRestoreAhead(cart);
         }
     }
 
@@ -186,9 +176,7 @@ public final class MinecartFlightHelper {
         MinecartFloatStateHelper.setSyncedFloatPose(cart, yaw, 0.0F);
         MinecartFloatRotationHelper.snapEntityRotation(cart, yaw, 0.0F);
         pose.paradiseLost$setRailRenderPose(yaw, 0.0F);
-        MinecartFloatDebugHelper.debug(cart, "levelFlight", "pitch=0 dy=0 yaw=" + String.format(Locale.ROOT, "%.1f", yaw)
-                + " shape=" + shape
-                + " motion=" + MinecartFloatDebugHelper.fmt(cart.getDeltaMovement()));
+        MinecartFloatDebugHelper.levelFlight(cart, yaw, shape);
     }
 
     /**

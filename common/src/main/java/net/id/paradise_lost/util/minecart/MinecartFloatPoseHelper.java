@@ -10,8 +10,6 @@ import net.minecraft.world.level.block.state.properties.RailShape;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Locale;
-
 /**
  * Captures and computes the yaw and pitch a floating cart should hold.
  */
@@ -31,22 +29,16 @@ public final class MinecartFloatPoseHelper {
         }
         if (state.getBlock() instanceof BaseRailBlock rail) {
             if (MinecartRailLocatorHelper.isGhostSlopeBelow(cart, railPos, state)) {
-                MinecartFloatDebugHelper.debug(cart, "captureRail", "ghost slope at " + railPos);
+                MinecartFloatDebugHelper.captureGhost(cart, railPos);
                 return;
             }
             RailShape shape = state.getValue(rail.getShapeProperty());
             int beforeIncline = MinecartFloatStateHelper.getIncline(cart);
             String beforeShape = MinecartFloatStateHelper.getRailShapeName(cart);
             MinecartRailMotionHelper.updateInclineFromRail(cart, shape, cart.getDeltaMovement());
-            MinecartFloatDebugHelper.debug(cart, "captureRail",
-                    "railPos=" + railPos
-                            + " block=" + MinecartFloatDebugHelper.blockId(state)
-                            + " shape=" + shape
-                            + " incline " + beforeIncline + "->" + MinecartFloatStateHelper.getIncline(cart)
-                            + " storedShape " + beforeShape + "->" + MinecartFloatStateHelper.getRailShapeName(cart)
-                            + " yAboveRail=" + String.format(Locale.ROOT, "%.3f", cart.getY() - railPos.getY()));
+            MinecartFloatDebugHelper.captureRail(cart, railPos, state, shape, beforeIncline, beforeShape);
         } else {
-            MinecartFloatDebugHelper.debug(cart, "captureRail", "no rail at " + pos + " / below");
+            MinecartFloatDebugHelper.captureNone(cart, pos);
         }
     }
 
@@ -165,19 +157,8 @@ public final class MinecartFloatPoseHelper {
                                 || Math.abs(Mth.wrapDegrees(yaw - prior.paradiseLost$getRailRenderYaw())) > 5.0F
                                 || Math.abs(pitch - prior.paradiseLost$getRailRenderPitch()) > 5.0F;
                         if (poseJump || usedMotionDir || allowUnsettledAscending) {
-                            MinecartFloatDebugHelper.debug(cart, "slopeCapture",
-                                    "shape=" + shape
-                                            + " offs=" + String.format(Locale.ROOT, "%.1f/%.1f", offsYaw, pitch)
-                                            + " motionYaw=" + String.format(Locale.ROOT, "%.1f", motionYaw)
-                                            + " final=" + String.format(Locale.ROOT, "%.1f/%.1f", yaw, pitch)
-                                            + " dir=" + MinecartFloatDebugHelper.fmt(dir)
-                                            + " usedMotionDir=" + usedMotionDir
-                                            + " motionDisagree=" + motionDisagrees
-                                            + " unsettledForce=" + allowUnsettledAscending
-                                            + " incline=" + MinecartFloatStateHelper.getIncline(cart)
-                                            + " motion=" + MinecartFloatDebugHelper.fmt(cart.getDeltaMovement())
-                                            + " yAbove=" + String.format(Locale.ROOT, "%.3f",
-                                            cart.getY() - railPos.getY()));
+                            MinecartFloatDebugHelper.slopeCapture(cart, shape, offsYaw, pitch, motionYaw, yaw, pitch,
+                                    dir, usedMotionDir, motionDisagrees, allowUnsettledAscending, railPos);
                         }
                     } else if (shape == RailShape.EAST_WEST || shape == RailShape.NORTH_SOUTH) {
                         // Straight flat: offs near corners sampled yaw=-16.5 (carousel reconnect).
@@ -238,9 +219,7 @@ public final class MinecartFloatPoseHelper {
         float yaw = yawAlongMotion(cart, axis);
         float pitch = pitchFromAscendingShape(shape, yaw);
         pose.paradiseLost$setRailRenderPose(yaw, pitch);
-        MinecartFloatDebugHelper.debug(cart, "slopeSynth", "shape=" + shape
-                + " yaw/pitch=" + String.format(Locale.ROOT, "%.1f/%.1f", yaw, pitch)
-                + " incline=" + MinecartFloatStateHelper.getIncline(cart));
+        MinecartFloatDebugHelper.slopeSynth(cart, shape, yaw, pitch);
     }
 
     /**
@@ -385,8 +364,7 @@ public final class MinecartFloatPoseHelper {
                     && Math.abs(pose.paradiseLost$getRailRenderPitch()) > 0.01F)) {
                 MinecartFloatStateHelper.setSyncedFloatPose(cart, yaw, 0.0F);
                 pose.paradiseLost$setRailRenderPose(yaw, 0.0F);
-                MinecartFloatDebugHelper.debug(cart, "cornerClear", "drop slope pitch yaw=" + String.format(Locale.ROOT, "%.1f", yaw)
-                        + " shape=" + shape);
+                MinecartFloatDebugHelper.cornerClear(cart, yaw, shape);
             }
             return;
         }
