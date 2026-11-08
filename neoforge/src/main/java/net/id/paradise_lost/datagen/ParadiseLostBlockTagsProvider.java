@@ -246,12 +246,14 @@ public class ParadiseLostBlockTagsProvider extends BlockTagsProvider {
                 MOTHER_AUREL_WOODSTUFF.log().get(), MOTHER_AUREL_WOODSTUFF.wood().get(),
                 MOTHER_AUREL_WOODSTUFF.strippedLog().get(), MOTHER_AUREL_WOODSTUFF.strippedWood().get()
         );
-        tag(ParadiseLostBlockTags.NON_FLOATERS)
+
+        tag(ParadiseLostBlockTags.NO_ACTION_FLOATERS)
                 .addTag(BlockTags.PRESSURE_PLATES)
                 .add(Blocks.DETECTOR_RAIL)
                 .add(Blocks.BIG_DRIPLEAF)
                 .add(Blocks.TRIPWIRE)
                 .add(BlockRegistry.LEVITA_RAIL.get());
+        tag(ParadiseLostBlockTags.NON_FLOATERS);
         tag(ParadiseLostBlockTags.FUNGI_CLINGABLES)
                 .addTag(BlockTags.LOGS)
                 .addTag(BlockTags.PLANKS);

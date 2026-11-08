@@ -21,6 +21,7 @@ public class ParadiseLostBlockTags {
 
     public static final TagKey<Block> FAST_FLOATERS = register("fast_floaters");
     public static final TagKey<Block> NON_FLOATERS = register("non_floaters");
+    public static final TagKey<Block> NO_ACTION_FLOATERS = register("no_action_floaters");
     public static final TagKey<Block> PUSH_FLOATERS = register("push_floaters");
     public static final TagKey<Block> HURTABLE_FLOATERS = register("hurtable_floaters");
     public static final TagKey<Block> DECAYING_FLOATERS = register("decaying_floaters");

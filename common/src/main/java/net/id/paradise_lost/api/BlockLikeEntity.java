@@ -1,6 +1,7 @@
 package net.id.paradise_lost.api;
 
 import net.id.paradise_lost.entity.util.PostTickEntity;
+import net.id.paradise_lost.tag.ParadiseLostBlockTags;
 import net.minecraft.CrashReportCategory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -113,6 +114,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
     public abstract void postTickMovement();
 
     public void postTickEntityCollision(Entity entity) {
+        if(this.blockState.is(ParadiseLostBlockTags.NO_ACTION_FLOATERS)) return;
         if (!(entity instanceof BlockLikeEntity ble && ble.partOfSet)) {
             this.blockState.entityInside(level(), this.blockPosition(), entity);
         }
