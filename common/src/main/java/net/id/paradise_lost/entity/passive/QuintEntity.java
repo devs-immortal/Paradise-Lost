@@ -285,7 +285,12 @@ public class QuintEntity extends PathfinderMob implements Enemy {
     }
 
     @Override
+    protected SoundEvent getDeathSound() {
+        return ParadiseLostSoundEvents.ENTITY_QUINT_DEATH;
+    }
+
+    @Override
     protected float getSoundVolume() {
-        return 0.5F;
+        return 0.25F;
     }
 }

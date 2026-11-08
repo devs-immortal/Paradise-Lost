@@ -138,6 +138,9 @@ public class ParadiseLostSoundDefinitionsProvider extends SoundDefinitionsProvid
                         sound("paradise_lost:entity/passive/quint/quint_ambient_3"),
                         sound("paradise_lost:entity/passive/quint/quint_ambient_4")
                 ));
+        add(ParadiseLostSoundEvents.ENTITY_QUINT_DEATH, SoundDefinition.definition()
+                .subtitle("subtitles.paradise_lost.entity.quint.death")
+                .with(sound("paradise_lost:entity/passive/quint/quint_death")));
 
         add(ParadiseLostSoundEvents.ENTITY_POPOM_AMBIENT, SoundDefinition.definition()
                 .subtitle("subtitles.paradise_lost.entity.popom.ambient")

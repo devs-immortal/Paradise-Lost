@@ -311,6 +311,12 @@
     ],
     "subtitle": "subtitles.paradise_lost.entity.quint.ambient"
   },
+  "entity.quint.death": {
+    "sounds": [
+      "paradise_lost:entity/passive/quint/quint_death"
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.quint.death"
+  },
   "entity.sentinel.death": {
     "sounds": [
       "paradise_lost:entity/hostile/sentinel/sentinel_death"

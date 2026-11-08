@@ -45,6 +45,7 @@ public final class ParadiseLostSoundEvents {
     public static final SoundEvent ENTITY_MOA_STEP = register("entity.moa.step");
 
     public static final SoundEvent ENTITY_QUINT_AMBIENT = register(("entity.quint.ambient"));
+    public static final SoundEvent ENTITY_QUINT_DEATH = register(("entity.quint.death"));
 
     public static final SoundEvent ENTITY_POPOM_AMBIENT = register(("entity.popom.ambient"));
     public static final SoundEvent ENTITY_POPOM_HURT = register(("entity.popom.hurt"));
