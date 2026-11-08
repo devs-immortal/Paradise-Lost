@@ -173,6 +173,7 @@ public class ParadiseLostPortalShape {
             this.level.setBlock(pos, blockState, 2 | 16);
             if (this.level instanceof ServerLevel serverLevel) {
                 serverLevel.getPoiManager().add(pos.immutable(), ParadiseLostPoi.BLUE_PORTAL.asHolder());
+                serverLevel.updateNeighborsAt(pos,Blocks.WATER);
             }
         });
     }
