@@ -309,24 +309,9 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
             this.blockState = this.blockState.setValue(BlockStateProperties.WATERLOGGED, water);
         }
 
-
+        //if this can place a block, delete the entity
         if (this.level().setBlock(blockPos, this.blockState, Block.UPDATE_ALL)) {
             this.discard();
-            if (this.blockEntityData != null && this.blockState.hasBlockEntity()) {
-                BlockEntity blockEntity = this.level().getBlockEntity(blockPos);
-                if (blockEntity != null) {
-                    CompoundTag compoundTag = blockEntity.saveWithoutMetadata(this.level().registryAccess());
-                    for (String keyName : this.blockEntityData.getAllKeys()) {
-                        Tag tag = this.blockEntityData.get(keyName);
-                        if (tag != null && !"x".equals(keyName) && !"y".equals(keyName) && !"z".equals(keyName)) {
-                            compoundTag.put(keyName, tag.copy());
-                        }
-                    }
-
-                    blockEntity.loadWithComponents(compoundTag, this.level().registryAccess());
-                    blockEntity.setChanged();
-                }
-            }
             for (Direction dir : Direction.stream().toList()) {
                 var newState = this.blockState.updateShape(
                         dir,
