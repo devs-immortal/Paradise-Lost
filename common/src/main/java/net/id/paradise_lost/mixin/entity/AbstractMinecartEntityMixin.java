@@ -171,6 +171,17 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
     private void paradiseLost$skipMidairRailResnap(BlockPos pos, BlockState state, CallbackInfo ci) {
         AbstractMinecart cart = (AbstractMinecart) (Object) this;
         MinecartRailLocatorHelper.noteApproachPitch(cart);
+        try {
+            this.paradiseLost$beforeTrack(cart, pos, state, ci);
+        } finally {
+            if (ci.isCancelled()) {
+                MinecartRailLocatorHelper.clearApproachPitch();
+            }
+        }
+    }
+
+    @Unique
+    private void paradiseLost$beforeTrack(AbstractMinecart cart, BlockPos pos, BlockState state, CallbackInfo ci) {
         this.paradiseLost$vanillaTrack = false;
         this.paradiseLost$enterX = this.getX();
         this.paradiseLost$enterY = this.getY();
@@ -270,10 +281,11 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
     /**
      * Corner curve clips the inside fence post, and that collision kills the new heading.
      * Ignore blocks for this one move.
+     * Skip it when noPhysics is already on, so the reset does not turn someone else noclip off
      */
     @Unique
     private void paradiseLost$beginCornerNoclip(BlockState state) {
-        if (!MinecartRailConnectHelper.isCornerShape(state)) {
+        if (this.noPhysics || !MinecartFloatStateHelper.isFloating((AbstractMinecart) (Object) this) || !MinecartRailConnectHelper.isCornerShape(state)) {
             return;
         }
         this.noPhysics = true;
@@ -407,18 +419,19 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
             }
         }
         this.setDeltaMovement(x, y, z);
-        // Stopped against a dead-end block. Don't lift onto its top, that bounce carries the cart over it.
-        if (MinecartFloatStateHelper.getIncline(cart) < 0
-                && MinecartRailLookaheadHelper.stopDeadEndDescent(cart)) {
-            MinecartFlightHelper.levelOpenAirFlight(cart);
-            this.paradiseLost$exitGrace = 0;
-            this.setDeltaMovement(0.0D, 0.0D, 0.0D);
-        } else if (MinecartFloatStateHelper.getIncline(cart) < 0 && MinecartRailLookaheadHelper.liftOutOfSolid(cart)) {
-            MinecartFlightHelper.levelOpenAirFlight(cart);
-            // The lift put us on the block. Grace noclip would then slide us into the next one.
-            this.paradiseLost$exitGrace = 0;
-            Vec3 lifted = this.getDeltaMovement();
-            this.setDeltaMovement(lifted.x, 0.0D, lifted.z);
+        if (MinecartFloatStateHelper.getIncline(cart) < 0) {
+            // Stopped against a dead-end block. Don't lift onto its top, that bounce carries the cart over it.
+            if (MinecartRailLookaheadHelper.stopDeadEndDescent(cart)) {
+                MinecartFlightHelper.levelOpenAirFlight(cart);
+                this.paradiseLost$exitGrace = 0;
+                this.setDeltaMovement(0.0D, 0.0D, 0.0D);
+            } else if (MinecartRailLookaheadHelper.liftOutOfSolid(cart)) {
+                MinecartFlightHelper.levelOpenAirFlight(cart);
+                // The lift put us on the block. Grace noclip would then slide us into the next one.
+                this.paradiseLost$exitGrace = 0;
+                Vec3 lifted = this.getDeltaMovement();
+                this.setDeltaMovement(lifted.x, 0.0D, lifted.z);
+            }
         }
 
         Vec3 intended = this.getDeltaMovement();
@@ -487,9 +500,9 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
                 boolean settled = railPos != null && MinecartRailLocatorHelper.isSettledOnRail(cart, railPos);
                 if (settled && !this.level().isClientSide()) {
                     BlockState seatState = this.level().getBlockState(railPos);
-                    if (MinecartFloatRotationHelper.shouldDeferSlopeToCornerHardSeat(cart, railPos, seatState)
-                            || MinecartRailConnectHelper.shouldWaitToEnterRail(cart, railPos, seatState)) {
-                        if (MinecartFloatRotationHelper.shouldDeferSlopeToCornerHardSeat(cart, railPos, seatState)) {
+                    boolean deferToCorner = MinecartFloatRotationHelper.shouldDeferSlopeToCornerHardSeat(cart, railPos, seatState);
+                    if (deferToCorner || MinecartRailConnectHelper.shouldWaitToEnterRail(cart, railPos, seatState)) {
+                        if (deferToCorner) {
                             MinecartFloatRotationHelper.keepSlopeFloatThroughCorner(cart, railPos, seatState);
                         }
                         MinecartFloatRotationHelper.applyFloatingRotation(cart);
