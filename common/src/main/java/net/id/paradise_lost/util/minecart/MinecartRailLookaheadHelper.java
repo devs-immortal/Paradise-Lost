@@ -274,6 +274,23 @@ public final class MinecartRailLookaheadHelper {
         if (buriedSlopeTarget(cart.level(), railPos, state, dx, dz)) {
             return false;
         }
+        // Level cart. A slope in the block below is not the rail it's on.
+        if (state.getBlock() instanceof BaseRailBlock railBlock) {
+            RailShape shape = state.getValue(railBlock.getShapeProperty());
+            if (shape.isAscending()
+                    && railPos.getY() < cart.blockPosition().getY()
+                    && Math.abs(MinecartRailLocatorHelper.approachPitch(cart)) < MinecartRailLocatorHelper.LEVEL_PITCH) {
+                BlockPos here = cart.blockPosition();
+                BlockState hereState = cart.level().getBlockState(here);
+                boolean joinedDown = hereState.getBlock() instanceof BaseRailBlock hereRail
+                        && MinecartRailMotionHelper.headingDownSlope(shape, cart.getDeltaMovement())
+                        && MinecartRailMotionHelper.railsConnect(
+                        here, hereState.getValue(hereRail.getShapeProperty()), railPos, shape);
+                if (!joinedDown) {
+                    return false;
+                }
+            }
+        }
         // Climbs noclip stair piers and the stone under a landing, so the straight line hits those on purpose.
         // Only a descent treats ground in the way as unreachable.
         if (MinecartFloatStateHelper.getIncline(cart) < 0 && !pathToRailOpen(cart, railPos, step, dx, dz)) {
@@ -350,6 +367,70 @@ public final class MinecartRailLookaheadHelper {
     }
 
     /**
+     * Low end is about to enter a block that isn't the next rail. Vanilla sets the position straight in.
+     * Same for a snap onto a rail that doesn't share an end, when a full block sits under that rail.
+     */
+    public static boolean shouldRefuseTrackPhase(AbstractMinecart cart, BlockPos pos, BlockState state) {
+        if (MinecartFloatStateHelper.getIncline(cart) >= 0) {
+            return false;
+        }
+        Level level = cart.level();
+        BlockPos current = MinecartRailLocatorHelper.findRailPos(cart);
+        if (current != null && !current.equals(pos)
+                && !MinecartRailMotionHelper.railsConnect(level, current, pos)
+                && isFullCube(level, pos.below())) {
+            return true;
+        }
+        if (!(state.getBlock() instanceof BaseRailBlock rail) || !state.getValue(rail.getShapeProperty()).isAscending()) {
+            return false;
+        }
+        return descendingIntoFloor(cart);
+    }
+
+    /**
+     * Cart is already overlapping the block its descent runs into. Sit it back on the face and stop.
+     */
+    public static void pullBackFromFloor(AbstractMinecart cart) {
+        Level level = cart.level();
+        AABB box = cart.getBoundingBox();
+        int y = (int) Math.floor(cart.getY() + 0.05D);
+        double half = cart.getBbWidth() * 0.5D;
+        double x = cart.getX();
+        double z = cart.getZ();
+        Vec3 motion = cart.getDeltaMovement();
+        double mx = motion.x;
+        double mz = motion.z;
+        int minX = (int) Math.floor(box.minX + 1.0E-4D);
+        int maxX = (int) Math.floor(box.maxX - 1.0E-4D);
+        int minZ = (int) Math.floor(box.minZ + 1.0E-4D);
+        int maxZ = (int) Math.floor(box.maxZ - 1.0E-4D);
+        for (int bx = minX; bx <= maxX; bx++) {
+            for (int bz = minZ; bz <= maxZ; bz++) {
+                if (!isFullCube(level, new BlockPos(bx, y, bz))) {
+                    continue;
+                }
+                // Only the axis the center hasn't entered. A cart aimed at the face is centered on the other one.
+                if (x < bx && box.maxX > bx) {
+                    x = bx - half - 0.01D;
+                    mx = Math.min(mx, 0.0D);
+                } else if (x > bx + 1.0D && box.minX < bx + 1.0D) {
+                    x = bx + 1.0D + half + 0.01D;
+                    mx = Math.max(mx, 0.0D);
+                }
+                if (z < bz && box.maxZ > bz) {
+                    z = bz - half - 0.01D;
+                    mz = Math.min(mz, 0.0D);
+                } else if (z > bz + 1.0D && box.minZ < bz + 1.0D) {
+                    z = bz + 1.0D + half + 0.01D;
+                    mz = Math.max(mz, 0.0D);
+                }
+            }
+        }
+        cart.setPos(x, cart.getY(), z);
+        cart.setDeltaMovement(mx, motion.y, mz);
+    }
+
+    /**
      * Next move would put us inside a floor. A tread with air above is a stair lip and doesn't count.
      * Ground under an open descent does, or noclip carries the cart through it.
      */
@@ -360,7 +441,17 @@ public final class MinecartRailLookaheadHelper {
         Vec3 motion = cart.getDeltaMovement();
         BlockPos next = BlockPos.containing(cart.getX() + motion.x, cart.getY() + motion.y, cart.getZ() + motion.z);
         Level level = cart.level();
-        if (!isBlockingSolid(level, next) || BaseRailBlock.isRail(level.getBlockState(next.above()))) {
+        if (!isBlockingSolid(level, next)) {
+            return false;
+        }
+        BlockPos upper = next.above();
+        // Rail on top of this block only counts when it actually continues the rail we're on.
+        // A descent aimed at the underside is a floor.
+        if (BaseRailBlock.isRail(level.getBlockState(upper))) {
+            BlockPos current = MinecartRailLocatorHelper.findRailPos(cart);
+            if (current != null && !MinecartRailMotionHelper.railsConnect(level, current, upper)) {
+                return true;
+            }
             return false;
         }
         BlockPos chest = BlockPos.containing(
@@ -633,6 +724,11 @@ public final class MinecartRailLookaheadHelper {
             }
         }
         return false;
+    }
+
+    private static boolean isFullCube(Level level, BlockPos pos) {
+        BlockState state = level.getBlockState(pos);
+        return !state.isAir() && !BaseRailBlock.isRail(state) && state.isCollisionShapeFullBlock(level, pos);
     }
 
     private static boolean isBlockingSolid(Level level, BlockPos pos) {

@@ -1,8 +1,10 @@
 package net.id.paradise_lost.util.minecart;
 
 import com.mojang.datafixers.util.Pair;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import net.minecraft.world.level.block.BaseRailBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -98,6 +100,86 @@ public final class MinecartRailMotionHelper {
             MinecartFloatStateHelper.setIncline(cart, dotUpper >= dotLower ? 1 : -1);
         }
         // else keep current incline (ambiguous motion)
+    }
+
+    /**
+     * The two rails share an end. A slope's high end meets the rail one block up on that side, the low end meets the
+     * rail straight ahead at the same height.
+     */
+    public static boolean railsConnect(Level level, BlockPos aPos, BlockPos bPos) {
+        BlockState aState = level.getBlockState(aPos);
+        BlockState bState = level.getBlockState(bPos);
+        if (!(aState.getBlock() instanceof BaseRailBlock aRail) || !(bState.getBlock() instanceof BaseRailBlock bRail)) {
+            return false;
+        }
+        return railsConnect(aPos, aState.getValue(aRail.getShapeProperty()), bPos, bState.getValue(bRail.getShapeProperty()));
+    }
+
+    public static boolean railsConnect(BlockPos aPos, RailShape aShape, BlockPos bPos, RailShape bShape) {
+        Face[] aFaces = exitFaces(aPos, aShape);
+        Face[] bFaces = exitFaces(bPos, bShape);
+        for (Face a : aFaces) {
+            if (a == null) {
+                continue;
+            }
+            for (Face b : bFaces) {
+                if (a.matches(b)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static Face[] exitFaces(BlockPos pos, RailShape shape) {
+        Pair<Vec3i, Vec3i> exits = RAIL_EXITS.get(shape);
+        if (exits == null) {
+            return new Face[0];
+        }
+        Vec3i first = exits.getFirst();
+        Vec3i second = exits.getSecond();
+        boolean ascending = shape.isAscending();
+        boolean firstHigh = ascending && first.getY() >= second.getY();
+        boolean secondHigh = ascending && second.getY() >= first.getY();
+        return new Face[] { exitFace(pos, first, firstHigh), exitFace(pos, second, secondHigh) };
+    }
+
+    private static Face exitFace(BlockPos pos, Vec3i exit, boolean highEnd) {
+        int dx = Integer.signum(exit.getX());
+        int dz = Integer.signum(exit.getZ());
+        if (dx == 0 && dz == 0) {
+            return null;
+        }
+        BlockPos here = highEnd ? pos.above() : pos;
+        return new Face(here, here.offset(dx, 0, dz));
+    }
+
+    private static final class Face {
+        private final BlockPos a;
+        private final BlockPos b;
+
+        private Face(BlockPos a, BlockPos b) {
+            this.a = a;
+            this.b = b;
+        }
+
+        private boolean matches(Face other) {
+            if (other == null) {
+                return false;
+            }
+            return this.a.equals(other.a) && this.b.equals(other.b)
+                    || this.a.equals(other.b) && this.b.equals(other.a);
+        }
+    }
+
+    public static boolean headingDownSlope(RailShape shape, Vec3 motion) {
+        return switch (shape) {
+            case ASCENDING_EAST -> motion.x < -MOTION_EPSILON;
+            case ASCENDING_WEST -> motion.x > MOTION_EPSILON;
+            case ASCENDING_NORTH -> motion.z > MOTION_EPSILON;
+            case ASCENDING_SOUTH -> motion.z < -MOTION_EPSILON;
+            default -> false;
+        };
     }
 
     static boolean isCornerRail(RailShape shape) {

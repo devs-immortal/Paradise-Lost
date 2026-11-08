@@ -20,6 +20,7 @@ import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import net.minecraft.world.entity.vehicle.VehicleEntity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseRailBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
@@ -62,6 +63,12 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
 
     @Unique
     private boolean paradiseLost$vanillaTrack;
+
+    @Unique
+    private boolean paradiseLost$ghostRedirect;
+
+    @Shadow
+    protected abstract void moveAlongTrack(BlockPos pos, BlockState state);
 
     @Unique
     private boolean paradiseLost$cornerNoclip;
@@ -163,6 +170,7 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
     @Inject(method = "moveAlongTrack", at = @At("HEAD"), cancellable = true)
     private void paradiseLost$skipMidairRailResnap(BlockPos pos, BlockState state, CallbackInfo ci) {
         AbstractMinecart cart = (AbstractMinecart) (Object) this;
+        MinecartRailLocatorHelper.noteApproachPitch(cart);
         this.paradiseLost$vanillaTrack = false;
         this.paradiseLost$enterX = this.getX();
         this.paradiseLost$enterY = this.getY();
@@ -228,6 +236,30 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
         } else if (MinecartRailConnectHelper.shouldWaitToEnterRail(cart, pos, state)) {
             this.paradiseLost$moveFloating(cart, false);
             ci.cancel();
+        } else if (MinecartRailLocatorHelper.isGhostSlopeBelow(cart, pos, state)) {
+            // Slope under the rail we're on. Ride that rail instead of dropping, or keep floating if there isn't one.
+            BlockPos above = pos.above();
+            BlockState aboveState = this.level().getBlockState(above);
+            if (!this.paradiseLost$ghostRedirect
+                    && aboveState.getBlock() instanceof BaseRailBlock
+                    && !MinecartRailLocatorHelper.isGhostSlopeBelow(cart, above, aboveState)) {
+                this.paradiseLost$ghostRedirect = true;
+                // Same inject runs again for the rail above. Clear the flag if that throws,
+                // or every later slope skips the redirect and the cart floats off.
+                try {
+                    this.moveAlongTrack(above, aboveState);
+                } finally {
+                    this.paradiseLost$ghostRedirect = false;
+                }
+            } else {
+                this.paradiseLost$moveFloating(cart, false);
+            }
+            ci.cancel();
+        } else if (MinecartRailLookaheadHelper.shouldRefuseTrackPhase(cart, pos, state)) {
+            // Descent pointed at a block. Don't let the track move set us inside it.
+            MinecartRailLookaheadHelper.pullBackFromFloor(cart);
+            this.paradiseLost$moveFloating(cart, false);
+            ci.cancel();
         } else {
             this.paradiseLost$vanillaTrack = true;
             this.paradiseLost$beginCornerNoclip(state);
@@ -250,17 +282,23 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
 
     @Inject(method = "moveAlongTrack", at = @At("RETURN"))
     private void paradiseLost$correctVanillaTrackSnap(BlockPos pos, BlockState state, CallbackInfo ci) {
-        if (this.paradiseLost$cornerNoclip) {
-            this.noPhysics = false;
-            this.paradiseLost$cornerNoclip = false;
+        // Pitch was saved for this thread at the start of the move. The return below still has to clear it,
+        // or the next cart on this thread keeps the old pose and the ghost check reads the wrong tilt.
+        try {
+            if (this.paradiseLost$cornerNoclip) {
+                this.noPhysics = false;
+                this.paradiseLost$cornerNoclip = false;
+            }
+            if (!this.paradiseLost$vanillaTrack) {
+                return;
+            }
+            this.paradiseLost$vanillaTrack = false;
+            MinecartRailConnectHelper.correctVanillaTrackSnap((AbstractMinecart) (Object) this,
+                    this.paradiseLost$enterX, this.paradiseLost$enterY, this.paradiseLost$enterZ,
+                    this.paradiseLost$enterMotion);
+        } finally {
+            MinecartRailLocatorHelper.clearApproachPitch();
         }
-        if (!this.paradiseLost$vanillaTrack) {
-            return;
-        }
-        this.paradiseLost$vanillaTrack = false;
-        MinecartRailConnectHelper.correctVanillaTrackSnap((AbstractMinecart) (Object) this,
-                this.paradiseLost$enterX, this.paradiseLost$enterY, this.paradiseLost$enterZ,
-                this.paradiseLost$enterMotion);
     }
 
     @Inject(method = "comeOffTrack", at = @At("HEAD"), cancellable = true)
@@ -380,6 +418,7 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
         if (noclip) {
             boolean previousNoPhysics = this.noPhysics;
             this.noPhysics = true;
+            // One move with collision off. Put noPhysics back if move throws, or the cart keeps phasing.
             try {
                 this.move(MoverType.SELF, this.getDeltaMovement());
             } finally {

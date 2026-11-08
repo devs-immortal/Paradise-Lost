@@ -1,5 +1,6 @@
 package net.id.paradise_lost.util.minecart;
 
+import net.id.paradise_lost.entity.MinecartFloatPoseAccess;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
@@ -22,6 +23,37 @@ public final class MinecartRailLocatorHelper {
      * Max Y above an ascending rail block while still on its seat curve (~0 at low end, ~1 at high).
      */
     static final double ASCENDING_SEAT_HEIGHT = 1.05D;
+
+    /**
+     * Pitch from before moveAlongTrack rewrites the pose. A level cart is not on the slope under its rail.
+     */
+    public static void noteApproachPitch(AbstractMinecart cart) {
+        APPROACH_PITCH.set(livePitch(cart));
+    }
+
+    public static void clearApproachPitch() {
+        APPROACH_PITCH.remove();
+    }
+
+    public static float approachPitch(AbstractMinecart cart) {
+        Float saved = APPROACH_PITCH.get();
+        return saved != null ? saved : livePitch(cart);
+    }
+
+    public static float livePitch(AbstractMinecart cart) {
+        MinecartFloatPoseAccess pose = (MinecartFloatPoseAccess) cart;
+        if (pose.paradiseLost$hasRailRenderPose()) {
+            return pose.paradiseLost$getRailRenderPitch();
+        }
+        return MinecartFloatStateHelper.getSyncedFloatPitch(cart);
+    }
+
+    /**
+     * Flat enough that the cart is not riding a slope.
+     */
+    public static final float LEVEL_PITCH = 12.0F;
+
+    private static final ThreadLocal<Float> APPROACH_PITCH = new ThreadLocal<>();
 
     /**
      * Roughly over the rail cell (within half a block sideways).
@@ -69,7 +101,7 @@ public final class MinecartRailLocatorHelper {
      */
     public static boolean isGhostSlopeBelow(AbstractMinecart cart, BlockPos railPos, BlockState railState,
                                             double x, double y, double z, Vec3 motion) {
-        if (!MinecartFloatStateHelper.isFloating(cart) || MinecartFloatStateHelper.getIncline(cart) != 0) {
+        if (!MinecartFloatStateHelper.isFloating(cart)) {
             return false;
         }
         if (!(railState.getBlock() instanceof BaseRailBlock rail)) {
@@ -79,6 +111,23 @@ public final class MinecartRailLocatorHelper {
         // High end of a slope we're on is still inside that block. Ghost means the block above it.
         if (!shape.isAscending() || Mth.floor(y) <= railPos.getY()) {
             return false;
+        }
+        // High end of the slope we're pitched on sits in the block above it. Still this rail.
+        if (Math.abs(approachPitch(cart)) >= LEVEL_PITCH) {
+            int incline = MinecartFloatStateHelper.getIncline(cart);
+            if (incline > 0 || (incline < 0 && MinecartRailMotionHelper.headingDownSlope(shape, motion))) {
+                return false;
+            }
+        }
+        // Level pose over a slope. Down a joined exit is the track. Up that slope is the yank.
+        if (Math.abs(approachPitch(cart)) < LEVEL_PITCH) {
+            return !headingDownJoinedSlope(cart, railPos, shape, x, y, z, motion);
+        }
+        BlockPos above = BlockPos.containing(x, y, z);
+        BlockState aboveState = cart.level().getBlockState(above);
+        if (aboveState.getBlock() instanceof BaseRailBlock aboveRail
+                && !MinecartRailMotionHelper.railsConnect(above, aboveState.getValue(aboveRail.getShapeProperty()), railPos, shape)) {
+            return true;
         }
         if (motion.y < -0.05D) {
             return false;
@@ -109,6 +158,43 @@ public final class MinecartRailLocatorHelper {
             default -> false;
         };
         return !headingDown;
+    }
+
+    private static boolean headingDownJoinedSlope(AbstractMinecart cart, BlockPos railPos, RailShape shape,
+                                                  double x, double y, double z, Vec3 motion) {
+        if (!MinecartRailMotionHelper.headingDownSlope(shape, motion) && motion.y >= -0.05D) {
+            return false;
+        }
+        BlockPos above = BlockPos.containing(x, y, z);
+        BlockState aboveState = cart.level().getBlockState(above);
+        if (!(aboveState.getBlock() instanceof BaseRailBlock aboveRail)) {
+            // Air over the slope. Ours if we're already dropping, or its high end meets a rail at this height.
+            return motion.y < -0.05D || joinedToRailAtHeight(cart.level(), railPos, shape, above.getY());
+        }
+        return MinecartRailMotionHelper.railsConnect(
+                above, aboveState.getValue(aboveRail.getShapeProperty()), railPos, shape);
+    }
+
+    private static boolean joinedToRailAtHeight(Level level, BlockPos slopePos, RailShape shape, int y) {
+        BlockPos up = slopePos.above();
+        if (up.getY() == y && railConnectsAt(level, slopePos, shape, up)) {
+            return true;
+        }
+        for (Direction dir : Direction.Plane.HORIZONTAL) {
+            BlockPos beside = up.relative(dir);
+            if (beside.getY() == y && railConnectsAt(level, slopePos, shape, beside)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean railConnectsAt(Level level, BlockPos slopePos, RailShape shape, BlockPos other) {
+        BlockState state = level.getBlockState(other);
+        if (!(state.getBlock() instanceof BaseRailBlock rail)) {
+            return false;
+        }
+        return MinecartRailMotionHelper.railsConnect(slopePos, shape, other, state.getValue(rail.getShapeProperty()));
     }
 
     /**

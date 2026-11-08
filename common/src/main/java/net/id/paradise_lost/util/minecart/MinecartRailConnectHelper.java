@@ -179,6 +179,9 @@ public final class MinecartRailConnectHelper {
             if (railState.getBlock() instanceof BaseRailBlock rail) {
                 RailShape shape = railState.getValue(rail.getShapeProperty());
                 if (shape.isAscending()) {
+                    if (incline < 0 && MinecartRailLookaheadHelper.descendingIntoFloor(cart)) {
+                        return false;
+                    }
                     return incline != 0;
                 }
                 if (MinecartRailMotionHelper.isCornerRail(shape)) {
@@ -209,9 +212,10 @@ public final class MinecartRailConnectHelper {
      * Brief noclip after leaving a rail so we clear the lip without digging into the pier.
      */
     public static boolean shouldUseExitGraceNoclip(AbstractMinecart cart) {
+        int incline = MinecartFloatStateHelper.getIncline(cart);
+        // Takeoff clears incline, so a descent already aimed at a full block still has to collide.
         if (MinecartRailLookaheadHelper.descendingIntoFloor(cart)
-                || (MinecartFloatStateHelper.getIncline(cart) < 0
-                && MinecartRailLookaheadHelper.wouldPhaseThroughSolid(cart))) {
+                || (incline <= 0 && MinecartRailLookaheadHelper.wouldPhaseThroughSolid(cart))) {
             return false;
         }
         if (MinecartFloatStateHelper.getIncline(cart) < 0) {
@@ -658,9 +662,6 @@ public final class MinecartRailConnectHelper {
 
     private static void keepFlightHeightOverGhostSlope(AbstractMinecart cart,
                                                        double enterX, double enterY, double enterZ, Vec3 enterMotion) {
-        if (MinecartFloatStateHelper.getIncline(cart) != 0) {
-            return;
-        }
         BlockPos snapped = MinecartRailLocatorHelper.railAtOrBelow(cart.level(), cart.getX(), cart.getY(), cart.getZ());
         if (snapped == null) {
             return;
@@ -672,6 +673,14 @@ public final class MinecartRailConnectHelper {
         cart.setPos(cart.getX(), enterY, cart.getZ());
         cart.setDeltaMovement(enterMotion.x, 0.0D, enterMotion.z);
         MinecartFloatStateHelper.setIncline(cart, 0);
+        MinecartFloatPoseAccess pose = (MinecartFloatPoseAccess) cart;
+        float yaw = pose.paradiseLost$hasRailRenderPose()
+                ? pose.paradiseLost$getRailRenderYaw()
+                : MinecartFloatStateHelper.getSyncedFloatYaw(cart);
+        float pitch = MinecartRailLocatorHelper.approachPitch(cart);
+        pose.paradiseLost$setRailRenderPose(yaw, pitch);
+        MinecartFloatStateHelper.setSyncedFloatPose(cart, yaw, pitch);
+        cart.setXRot(pitch);
         MinecartFloatDebugHelper.debug(cart, "ghostSlope", "kept flight height over " + snapped);
     }
 

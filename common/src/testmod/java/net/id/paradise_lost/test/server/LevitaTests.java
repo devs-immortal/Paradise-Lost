@@ -1588,6 +1588,63 @@ public final class LevitaTests {
         );
     }
 
+    @ServerTest("a level cart stays on the upper rail when a slope joins it from below (#979)")
+    private static List<Step> slopeJoinedUnderUpperRailDoesNotClimb() {
+        return List.of(
+                setup(world -> {
+                    fill(world, start, start.relative(dir, 8), Blocks.STONE.defaultBlockState());
+                    track(world, start.above(), "rLrrrr");
+                    // Slope sits in the gap under the track and its high end meets the next upper rail.
+                    BlockPos slope = start.relative(dir, 3);
+                    world.setBlock(slope.above(), Blocks.AIR.defaultBlockState(), Block.UPDATE_CLIENTS);
+                    placePoweredLevitaRail(world, slope);
+                    forceShape(world, slope, ascending(dir));
+                    entityId = launch(world, EntityType.MINECART, start.above(), 0.4);
+                    ticks = 0;
+                }),
+                Step.until("cart to pass the slope under the rail", 80, () -> {
+                    AbstractMinecart cart = serverCart(entityId);
+                    double a = along(cart);
+                    if (a > 2.2D && a < 4.8D) {
+                        check(Math.abs(cart.getY() - (start.getY() + 1)) < 0.45D,
+                                "slope under the rail pulled the cart down" + describe(cart) + floatState(cart));
+                        check(MinecartFloatStateHelper.getIncline(cart) <= 0,
+                                "slope under the rail turned the cart upward" + describe(cart) + floatState(cart));
+                        check(Math.abs(cart.getXRot()) < MinecartRailLocatorHelper.LEVEL_PITCH,
+                                "slope under the rail tilted the cart" + describe(cart) + floatState(cart));
+                    }
+                    return a > 5.6D;
+                })
+        );
+    }
+
+    @ServerTest("a descending cart does not phase into a block that only has a rail on top (#985)")
+    private static List<Step> descendingCartDoesNotPhaseUnderRail() {
+        return List.of(
+                setup(world -> {
+                    world.setBlockAndUpdate(start.relative(dir.getOpposite()), Blocks.STONE.defaultBlockState());
+                    placePoweredLevitaRail(world, start);
+                    BlockPos wall = start.relative(dir);
+                    world.setBlock(wall, Blocks.STONE.defaultBlockState(), Block.UPDATE_CLIENTS);
+                    world.setBlock(wall.above(), BlockRegistry.LEVITA_RAIL.get().defaultBlockState(), Block.UPDATE_CLIENTS);
+                    forceShape(world, start, ascending(dir.getOpposite()));
+                    entityId = launch(world, EntityType.MINECART, start, 0.4);
+                    ticks = 0;
+                    speedA = -99;
+                }),
+                Step.until("cart to meet the block under the rail", 80, () -> {
+                    AbstractMinecart cart = serverCart(entityId);
+                    ServerLevel world = level();
+                    BlockPos body = BlockPos.containing(cart.getX(), cart.getY() + cart.getBbHeight() * 0.5D, cart.getZ());
+                    check(world.getBlockState(body).getCollisionShape(world, body).isEmpty(),
+                            "cart is inside " + world.getBlockState(body).getBlock() + describe(cart) + floatState(cart));
+                    speedA = Math.max(speedA, along(cart));
+                    check(speedA < 0.75D, "cart went through the block under the rail" + describe(cart) + floatState(cart));
+                    return ++ticks >= 30;
+                })
+        );
+    }
+
     private static Step setup(Consumer<ServerLevel> builder) {
         return Step.run(0, () -> {
             ServerTestRunner.server().tickRateManager().setFrozen(false);
