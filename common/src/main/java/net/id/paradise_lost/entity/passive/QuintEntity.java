@@ -4,8 +4,10 @@ import net.id.paradise_lost.particle.ParadiseLostParticleTypes;
 import net.id.paradise_lost.entity.hostile.EnvoyEntity;
 import net.id.paradise_lost.entity.hostile.IEnlightenable;
 import net.id.paradise_lost.entity.hostile.SentinelEntity;
+import net.id.paradise_lost.util.ParadiseLostSoundEvents;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -275,5 +277,10 @@ public class QuintEntity extends PathfinderMob implements Enemy {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 6.0)
                 .add(Attributes.FLYING_SPEED, 0.5)
                 .add(Attributes.MOVEMENT_SPEED, 0.3);
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return ParadiseLostSoundEvents.ENTITY_QUINT_AMBIENT;
     }
 }

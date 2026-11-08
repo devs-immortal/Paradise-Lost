@@ -130,6 +130,15 @@ public class ParadiseLostSoundDefinitionsProvider extends SoundDefinitionsProvid
                 .subtitle("subtitles.paradise_lost.entity.moa.step")
                 .with(event("entity.pig.step")));
 
+        add(ParadiseLostSoundEvents.ENTITY_QUINT_AMBIENT, SoundDefinition.definition()
+                .subtitle("subtitles.paradise_lost.entity.quint.ambient")
+                .with(
+                        sound("paradise_lost:entity/passive/quint/quint_ambient_1"),
+                        sound("paradise_lost:entity/passive/quint/quint_ambient_2"),
+                        sound("paradise_lost:entity/passive/quint/quint_ambient_3"),
+                        sound("paradise_lost:entity/passive/quint/quint_ambient_4")
+                ));
+
         add(ParadiseLostSoundEvents.ENTITY_POPOM_AMBIENT, SoundDefinition.definition()
                 .subtitle("subtitles.paradise_lost.entity.popom.ambient")
                 .with(

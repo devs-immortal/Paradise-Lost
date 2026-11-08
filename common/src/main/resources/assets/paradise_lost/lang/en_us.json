@@ -517,7 +517,9 @@
   "subtitles.paradise_lost.entity.moa.lay_egg": "Moa lays egg",
   "subtitles.paradise_lost.entity.moa.egg_hatch": "Moa egg hatches",
   "subtitles.paradise_lost.entity.moa.step": "Moa walks",
-  
+
+  "subtitles.paradise_lost.entity.quint.ambient": "Quint whooshes",
+
   "subtitles.paradise_lost.entity.popom.ambient": "Popom peeps",
   "subtitles.paradise_lost.entity.popom.hurt": "Popom hurts",
   "subtitles.paradise_lost.entity.popom.death": "Popom dies",
