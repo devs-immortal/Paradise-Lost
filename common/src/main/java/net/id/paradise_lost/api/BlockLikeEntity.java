@@ -35,7 +35,6 @@ import net.minecraft.world.level.block.Fallable;
 import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.PointedDripstoneBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluids;
@@ -324,7 +323,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
                         blockPos.relative(dir)
                 );
                 // if the blockstate has changed, update the block at this position
-                if (newState != this.blockState) {this.level().setBlockAndUpdate(blockPos, newState);}
+                if (newState != this.blockState) this.level().setBlockAndUpdate(blockPos, newState);
                 this.blockState = newState;
             }
             // schedule a tick
