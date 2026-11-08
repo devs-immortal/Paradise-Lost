@@ -49,14 +49,4 @@ public abstract class MobMixin extends LivingEntity {
         }
     }
 
-
-
-
-
-    /*@Inject(method = "mobInteract", at = @At("HEAD"), cancellable = true)
-    public void wandGoFloat(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
-        ModConstants.LOGGER.info("wandGoFloat");
-        GravityTool.flipEntity(player.getItemInHand(hand), player, this, hand);
-    }*/
-
 }
