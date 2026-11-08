@@ -112,6 +112,9 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
 
     public void postTickEntityCollision(Entity entity) {
         if (!(entity instanceof BlockLikeEntity ble && ble.partOfSet)) {
+            if (entity.getY() > this.getY() + 0.49D) {
+                this.blockState.getBlock().stepOn(level(),this.blockPosition(),this.blockState, entity);
+            }
             this.blockState.entityInside(level(), this.blockPosition(), entity);
         }
     }
