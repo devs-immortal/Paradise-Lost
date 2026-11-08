@@ -35,7 +35,6 @@ import net.minecraft.world.level.block.Fallable;
 import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.PointedDripstoneBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluids;
@@ -292,37 +291,31 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
     }
 
     public boolean trySetBlock() {
+        //get blockpos & blockstate
         BlockPos blockPos = this.blockPosition();
         BlockState blockState = this.level().getBlockState(blockPos);
+        //if this block could be placed from above at its current location
         boolean canReplace = blockState.canBeReplaced(new DirectionalPlaceContext(this.level(), blockPos, Direction.UP, ItemStack.EMPTY, Direction.DOWN));
+        // if this spot is a spot that won't kill the block (crops on stone)
         boolean canPlace = this.blockState.canSurvive(this.level(), blockPos);
 
+        //if none are true, return false
         if (!this.canSetBlock || !canPlace || !canReplace)
             return false;
 
+        //waterlogging logic
         if (this.blockState.hasProperty(BlockStateProperties.WATERLOGGED)) {
             boolean water = this.level().getFluidState(blockPos).getType() == Fluids.WATER;
             this.blockState = this.blockState.setValue(BlockStateProperties.WATERLOGGED, water);
         }
 
+        //if this can place a block, delete the entity
         if (this.level().setBlock(blockPos, this.blockState, Block.UPDATE_ALL)) {
             this.discard();
-            if (this.blockEntityData != null && this.blockState.hasBlockEntity()) {
-                BlockEntity blockEntity = this.level().getBlockEntity(blockPos);
-                if (blockEntity != null) {
-                    CompoundTag compoundTag = blockEntity.saveWithoutMetadata(this.level().registryAccess());
-                    for (String keyName : this.blockEntityData.getAllKeys()) {
-                        Tag tag = this.blockEntityData.get(keyName);
-                        if (tag != null && !"x".equals(keyName) && !"y".equals(keyName) && !"z".equals(keyName)) {
-                            compoundTag.put(keyName, tag.copy());
-                        }
-                    }
-
-                    blockEntity.loadWithComponents(compoundTag, this.level().registryAccess());
-                    blockEntity.setChanged();
-                }
-            }
+            // for each direction:
             for (Direction dir : Direction.stream().toList()) {
+                if (!this.level().getBlockState(blockPos).is(this.blockState.getBlock())) continue;
+                // update the blockstate of this block based on its neighbours
                 var newState = this.blockState.updateShape(
                         dir,
                         this.level().getBlockState(blockPos.relative(dir)),
@@ -330,9 +323,11 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
                         blockPos,
                         blockPos.relative(dir)
                 );
-                this.level().setBlockAndUpdate(blockPos, newState);
+                // if the blockstate has changed, update the block at this position
+                if (newState != this.blockState) this.level().setBlockAndUpdate(blockPos, newState);
                 this.blockState = newState;
             }
+            // schedule a tick
             level().scheduleTick(blockPos, this.blockState.getBlock(), 1);
 
             this.postTickMoveEntities();
