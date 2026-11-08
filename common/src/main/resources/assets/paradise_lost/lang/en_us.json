@@ -553,8 +553,8 @@
   
   "filled_map.paradise_lost.vault": "Vault Explorer Map",
   "filled_map.paradise_lost.palace": "Palace Explorer Map",
-  
-  
+
+  "gamerule.bloomedCalciteTransformation": "Bloomed Calcite will transform",
   "gamerule.paradiseVoidKills": "Paradise's void kills entities",
   "gamerule.paradisePortalEnabled": "Paradise Portal is enabled",
 

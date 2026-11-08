@@ -11,9 +11,12 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
+import static net.id.paradise_lost.world.ParadiseLostGameRules.BLOOMED_CALCITE_TRANSFORMATION;
+
 public class BloomedCalciteUtil {
 
     public static void applyHealing(Entity applier, Level world, BlockPos blockPos, RandomSource random, ItemStack itemStack) {
+        if (!world.getGameRules().getBoolean(BLOOMED_CALCITE_TRANSFORMATION)) return;
         if (applier instanceof ServerPlayer) {
             CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer) applier, blockPos, itemStack);
         }
