@@ -58,19 +58,15 @@
   },
   "entity.envoy.ambient": {
     "sounds": [
-      {
-        "type": "event",
-        "name": "entity.skeleton.ambient"
-      }
+      "paradise_lost:entity/hostile/envoy/envoy_ambient_1",
+      "paradise_lost:entity/hostile/envoy/envoy_ambient_2",
+      "paradise_lost:entity/hostile/envoy/envoy_ambient_3"
     ],
     "subtitle": "subtitles.paradise_lost.entity.envoy.ambient"
   },
   "entity.envoy.death": {
     "sounds": [
-      {
-        "type": "event",
-        "name": "entity.wither_skeleton.death"
-      }
+      "paradise_lost:entity/hostile/envoy/envoy_death"
     ],
     "subtitle": "subtitles.paradise_lost.entity.envoy.death"
   },
@@ -121,19 +117,19 @@
   },
   "entity.envoy.hurt": {
     "sounds": [
-      {
-        "type": "event",
-        "name": "entity.skeleton.hurt"
-      }
+      "paradise_lost:entity/hostile/envoy/envoy_hurt_1",
+      "paradise_lost:entity/hostile/envoy/envoy_hurt_2",
+      "paradise_lost:entity/hostile/envoy/envoy_hurt_3",
+      "paradise_lost:entity/hostile/envoy/envoy_hurt_4"
     ],
     "subtitle": "subtitles.paradise_lost.entity.envoy.hurt"
   },
   "entity.envoy.step": {
     "sounds": [
-      {
-        "type": "event",
-        "name": "entity.skeleton.step"
-      }
+      "paradise_lost:entity/hostile/envoy/envoy_step_1",
+      "paradise_lost:entity/hostile/envoy/envoy_step_2",
+      "paradise_lost:entity/hostile/envoy/envoy_step_3",
+      "paradise_lost:entity/hostile/envoy/envoy_step_4"
     ],
     "subtitle": "subtitles.paradise_lost.entity.envoy.step"
   },
@@ -284,7 +280,7 @@
   },
   "entity.sentinel.death": {
     "sounds": [
-      "paradise_lost:entity/hostile/sentinel/sentinel_death_1"
+      "paradise_lost:entity/hostile/sentinel/sentinel_death"
     ],
     "subtitle": "subtitles.paradise_lost.entity.sentinel.death"
   },
