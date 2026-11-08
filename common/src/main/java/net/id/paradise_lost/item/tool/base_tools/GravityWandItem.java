@@ -13,10 +13,6 @@ public class GravityWandItem extends Item {
         super(settings);
     }
 
-    @Override
-    public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity entity, InteractionHand hand) {
-        return GravityTool.flipEntity(stack, player, entity, hand);
-    }
 
     @Override
     public InteractionResult useOn(UseOnContext context) {

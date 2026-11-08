@@ -21,6 +21,7 @@
     "entity.EntityMixin",
     "entity.EntityTypeDataFixMixin",
     "entity.LivingEntityMixin",
+    "entity.MobMixin",
     "entity.PiglinBrainMixin",
     "entity.PlayerEntityMixin",
     "entity.PotionEntityMixin",
