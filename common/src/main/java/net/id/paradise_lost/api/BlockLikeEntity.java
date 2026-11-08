@@ -312,7 +312,10 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
         //if this can place a block, delete the entity
         if (this.level().setBlock(blockPos, this.blockState, Block.UPDATE_ALL)) {
             this.discard();
+            // for each direction:
             for (Direction dir : Direction.stream().toList()) {
+                if (!this.level().getBlockState(blockPos).is(this.blockState.getBlock())) {continue;}
+                // update the blockstate of this block based on its neighbours
                 var newState = this.blockState.updateShape(
                         dir,
                         this.level().getBlockState(blockPos.relative(dir)),
@@ -320,7 +323,8 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
                         blockPos,
                         blockPos.relative(dir)
                 );
-                this.level().setBlockAndUpdate(blockPos, newState);
+                // if the blockstate has changed, update the block at this position
+                if (newState != this.blockState) {this.level().setBlockAndUpdate(blockPos, newState);}
                 this.blockState = newState;
             }
             level().scheduleTick(blockPos, this.blockState.getBlock(), 1);
