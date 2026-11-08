@@ -1,6 +1,7 @@
 package net.id.paradise_lost.datagen;
 
 import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.registry.BlockRegistry;
 import net.id.paradise_lost.registry.BlockRegistry.SignSet;
 import net.id.paradise_lost.registry.BlockRegistry.WoodBlockSet;
 import net.id.paradise_lost.tag.ParadiseLostBlockTags;
@@ -245,6 +246,13 @@ public class ParadiseLostBlockTagsProvider extends BlockTagsProvider {
                 MOTHER_AUREL_WOODSTUFF.log().get(), MOTHER_AUREL_WOODSTUFF.wood().get(),
                 MOTHER_AUREL_WOODSTUFF.strippedLog().get(), MOTHER_AUREL_WOODSTUFF.strippedWood().get()
         );
+
+        tag(ParadiseLostBlockTags.NO_ACTION_FLOATERS)
+                .addTag(BlockTags.PRESSURE_PLATES)
+                .add(Blocks.DETECTOR_RAIL)
+                .add(Blocks.BIG_DRIPLEAF)
+                .add(Blocks.TRIPWIRE)
+                .add(BlockRegistry.LEVITA_RAIL.get());
         tag(ParadiseLostBlockTags.NON_FLOATERS);
         tag(ParadiseLostBlockTags.FUNGI_CLINGABLES)
                 .addTag(BlockTags.LOGS)

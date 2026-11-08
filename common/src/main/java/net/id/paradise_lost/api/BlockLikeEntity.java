@@ -1,6 +1,7 @@
 package net.id.paradise_lost.api;
 
 import net.id.paradise_lost.entity.util.PostTickEntity;
+import net.id.paradise_lost.tag.ParadiseLostBlockTags;
 import net.minecraft.CrashReportCategory;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -30,8 +31,10 @@ import net.minecraft.world.level.block.AnvilBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ConcretePowderBlock;
+import net.minecraft.world.level.block.Fallable;
 import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.LevelEvent;
+import net.minecraft.world.level.block.PointedDripstoneBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -111,6 +114,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
     public abstract void postTickMovement();
 
     public void postTickEntityCollision(Entity entity) {
+        if (this.blockState.is(ParadiseLostBlockTags.NO_ACTION_FLOATERS)) return;
         if (!(entity instanceof BlockLikeEntity ble && ble.partOfSet)) {
             if (entity.getY() > this.getY() + 0.49D) {
                 this.blockState.getBlock().stepOn(level(),this.blockPosition(),this.blockState, entity);
@@ -195,19 +199,21 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
 
     @Override
     public boolean causeFallDamage(float distance, float multiplier, DamageSource damageSource) {
-        int i = Mth.ceil(distance - 1.0F);
+        boolean flagDripstone = this.blockState.is(Blocks.POINTED_DRIPSTONE) && this.blockState.getValue(PointedDripstoneBlock.TIP_DIRECTION) == Direction.DOWN;
 
-        if (!this.hurtEntities || i <= 0) {
+        int i = flagDripstone ? Mth.ceil(distance - 2.0F) : Mth.ceil(distance - 1.0F);
+        if (!(this.hurtEntities || flagDripstone) || i <= 0) {
             return false;
         }
 
-        boolean flag = this.blockState.is(BlockTags.ANVIL);
-        DamageSource damageSource2 = flag ? this.level().damageSources().anvil(this) : this.level().damageSources().fallingBlock(this);
-        float f = Math.min(Mth.floor((float) i * this.fallHurtAmount), this.fallHurtMax);
+        DamageSource damageSource2 = this.blockState.getBlock() instanceof Fallable fallable
+                ? fallable.getFallDamageSource(this)
+                : this.level().damageSources().fallingBlock(this);
+        float f = Math.min(Mth.floor((float) i * (flagDripstone ? 6 : this.fallHurtAmount)), this.fallHurtMax);
 
         this.level().getEntities(this, getBoundingBox().minmax(getBoundingBox().move(0, 1 + -2 * this.getDeltaMovement().y(), 0))).forEach(entity -> entity.hurt(damageSource2, f));
 
-        if (flag && f > 0.0F && this.random.nextFloat() < 0.05F + i * 0.05F) {
+        if (this.blockState.is(BlockTags.ANVIL) && f > 0.0F && this.random.nextFloat() < 0.05F + i * 0.05F) {
             BlockState blockstate = AnvilBlock.damage(this.blockState);
             if (blockstate == null) {
                 this.canSetBlock = false;
@@ -296,8 +302,9 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
         if (!this.canSetBlock || !canPlace || !canReplace)
             return false;
 
-        if (this.blockState.hasProperty(BlockStateProperties.WATERLOGGED) && this.level().getFluidState(blockPos).getType() == Fluids.WATER) {
-            this.blockState = this.blockState.setValue(BlockStateProperties.WATERLOGGED, true);
+        if (this.blockState.hasProperty(BlockStateProperties.WATERLOGGED)) {
+            boolean water = this.level().getFluidState(blockPos).getType() == Fluids.WATER;
+            this.blockState = this.blockState.setValue(BlockStateProperties.WATERLOGGED, water);
         }
 
         if (this.level().setBlock(blockPos, this.blockState, Block.UPDATE_ALL)) {
