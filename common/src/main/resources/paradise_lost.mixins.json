@@ -8,6 +8,7 @@
   },
   "mixins": [
     "block.BlockMixin",
+    "block.CatalystListenerMixin",
     "block.CropBlockMixin",
     "block.FlowerPotBlockMixin",
     "block.PowderSnowBlockMixin",
