@@ -284,19 +284,16 @@
   },
   "entity.sentinel.death": {
     "sounds": [
-      {
-        "type": "event",
-        "name": "entity.snow_golem.death"
-      }
+      "paradise_lost:entity/hostile/sentinel/sentinel_death_1"
     ],
     "subtitle": "subtitles.paradise_lost.entity.sentinel.death"
   },
   "entity.sentinel.hurt": {
     "sounds": [
-      {
-        "type": "event",
-        "name": "block.basalt.place"
-      }
+      "paradise_lost:entity/hostile/sentinel/sentinel_hurt_1",
+      "paradise_lost:entity/hostile/sentinel/sentinel_hurt_2",
+      "paradise_lost:entity/hostile/sentinel/sentinel_hurt_3",
+      "paradise_lost:entity/hostile/sentinel/sentinel_hurt_4"
     ],
     "subtitle": "subtitles.paradise_lost.entity.sentinel.hurt"
   },
