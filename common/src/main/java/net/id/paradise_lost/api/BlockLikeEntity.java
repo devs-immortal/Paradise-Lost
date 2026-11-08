@@ -327,6 +327,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
                 if (newState != this.blockState) {this.level().setBlockAndUpdate(blockPos, newState);}
                 this.blockState = newState;
             }
+            // schedule a tick
             level().scheduleTick(blockPos, this.blockState.getBlock(), 1);
 
             this.postTickMoveEntities();
