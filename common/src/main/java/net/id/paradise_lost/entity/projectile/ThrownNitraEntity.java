@@ -49,6 +49,7 @@ public class ThrownNitraEntity extends ThrowableItemProjectile {
     private void doDamage() {
         var hit = this.level().getEntities(this, new AABB(this.getX() - 1.5, this.getY() - 1.5, this.getZ() - 1.5, this.getX() + 1.5, this.getY() + 1.5, this.getZ() + 1.5));
         for (Entity e : hit) {
+            if (e.getType() == EntityType.TNT) { continue; }
             Vec3 diff = this.position().subtract(e.position()).reverse().normalize();
             e.push(diff.x, diff.y, diff.z);
             e.hurt(this.level().damageSources().explosion(null, e), 2);
