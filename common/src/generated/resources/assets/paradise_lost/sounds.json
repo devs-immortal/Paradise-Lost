@@ -126,10 +126,10 @@
   },
   "entity.envoy.step": {
     "sounds": [
-      "paradise_lost:entity/hostile/envoy/envoy_step_1",
-      "paradise_lost:entity/hostile/envoy/envoy_step_2",
-      "paradise_lost:entity/hostile/envoy/envoy_step_3",
-      "paradise_lost:entity/hostile/envoy/envoy_step_4"
+      {
+        "type": "event",
+        "name": "entity.skeleton.step"
+      }
     ],
     "subtitle": "subtitles.paradise_lost.entity.envoy.step"
   },

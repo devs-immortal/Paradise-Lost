@@ -149,16 +149,25 @@ public class ParadiseLostSoundDefinitionsProvider extends SoundDefinitionsProvid
 
         add(ParadiseLostSoundEvents.ENTITY_ENVOY_AMBIENT, SoundDefinition.definition()
                 .subtitle("subtitles.paradise_lost.entity.envoy.ambient")
-                .with(event("entity.skeleton.ambient")));
+                .with(
+                        sound("paradise_lost:entity/hostile/envoy/envoy_ambient_1"),
+                        sound("paradise_lost:entity/hostile/envoy/envoy_ambient_2"),
+                        sound("paradise_lost:entity/hostile/envoy/envoy_ambient_3")
+                ));
         add(ParadiseLostSoundEvents.ENTITY_ENVOY_STEP, SoundDefinition.definition()
                 .subtitle("subtitles.paradise_lost.entity.envoy.step")
                 .with(event("entity.skeleton.step")));
         add(ParadiseLostSoundEvents.ENTITY_ENVOY_HURT, SoundDefinition.definition()
                 .subtitle("subtitles.paradise_lost.entity.envoy.hurt")
-                .with(event("entity.skeleton.hurt")));
+                .with(
+                        sound("paradise_lost:entity/hostile/envoy/envoy_hurt_1"),
+                        sound("paradise_lost:entity/hostile/envoy/envoy_hurt_2"),
+                        sound("paradise_lost:entity/hostile/envoy/envoy_hurt_3"),
+                        sound("paradise_lost:entity/hostile/envoy/envoy_hurt_4")
+                ));
         add(ParadiseLostSoundEvents.ENTITY_ENVOY_DEATH, SoundDefinition.definition()
                 .subtitle("subtitles.paradise_lost.entity.envoy.death")
-                .with(event("entity.wither_skeleton.death")));
+                .with(sound("paradise_lost:entity/hostile/envoy/envoy_death")));
         add(ParadiseLostSoundEvents.ENTITY_ENVOY_GETS_ENLIGHTENED, SoundDefinition.definition()
                 .subtitle("subtitles.paradise_lost.entity.envoy.enlightened.ambient")
                 .with(event("entity.zombie_villager.converted")));
@@ -180,10 +189,15 @@ public class ParadiseLostSoundDefinitionsProvider extends SoundDefinitionsProvid
                 .with(event("block.calcite.step")));
         add(ParadiseLostSoundEvents.ENTITY_SENTINEL_HURT, SoundDefinition.definition()
                 .subtitle("subtitles.paradise_lost.entity.sentinel.hurt")
-                .with(event("block.basalt.place")));
+                .with(
+                        sound("paradise_lost:entity/hostile/sentinel/sentinel_hurt_1"),
+                        sound("paradise_lost:entity/hostile/sentinel/sentinel_hurt_2"),
+                        sound("paradise_lost:entity/hostile/sentinel/sentinel_hurt_3"),
+                        sound("paradise_lost:entity/hostile/sentinel/sentinel_hurt_4")
+                ));
         add(ParadiseLostSoundEvents.ENTITY_SENTINEL_DEATH, SoundDefinition.definition()
                 .subtitle("subtitles.paradise_lost.entity.sentinel.death")
-                .with(event("entity.snow_golem.death")));
+                .with(sound("paradise_lost:entity/hostile/sentinel/sentinel_death")));
 
         add(ParadiseLostSoundEvents.ENTITY_MINECART_INSIDE_LEVITATING, SoundDefinition.definition()
                 .subtitle("subtitles.paradise_lost.entity.minecart.inside_levitating")
