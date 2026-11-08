@@ -314,7 +314,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
             this.discard();
             // for each direction:
             for (Direction dir : Direction.stream().toList()) {
-                if (!this.level().getBlockState(blockPos).is(this.blockState.getBlock())) {continue;}
+                if (!this.level().getBlockState(blockPos).is(this.blockState.getBlock())) continue;
                 // update the blockstate of this block based on its neighbours
                 var newState = this.blockState.updateShape(
                         dir,
