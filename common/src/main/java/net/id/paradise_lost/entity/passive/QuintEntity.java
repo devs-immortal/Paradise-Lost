@@ -283,4 +283,9 @@ public class QuintEntity extends PathfinderMob implements Enemy {
     protected SoundEvent getAmbientSound() {
         return ParadiseLostSoundEvents.ENTITY_QUINT_AMBIENT;
     }
+
+    @Override
+    protected float getSoundVolume() {
+        return 0.5F;
+    }
 }
