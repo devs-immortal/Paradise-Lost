@@ -6,6 +6,7 @@
     "minecraft:tripwire",
     "paradise_lost:levita_rail",
     "#minecraft:redstone_ores",
-    "minecraft:turtle_egg"
+    "minecraft:turtle_egg",
+    "minecraft:pitcher_crop"
   ]
 }
