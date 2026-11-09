@@ -45,7 +45,7 @@ public class ParadiseLostBoulderFeature extends Feature<BoulderFeatureConfig> {
                 int j = random.nextInt(size);
                 int k = random.nextInt(size);
                 int l = random.nextInt(size);
-                float f = (float) (j + k + l) * 0.333F + 0.5F;
+                float f = (j + k + l) * 0.333F + 0.5F;
 
                 for (BlockPos bodyPos : BlockPos.betweenClosed(blockPos.offset(-j, -k, -l), blockPos.offset(j, k, l))) {
                     if (bodyPos.distSqr(blockPos) <= (double) (f * f)) {
