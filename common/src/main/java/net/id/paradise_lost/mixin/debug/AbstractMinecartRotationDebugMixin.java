@@ -2,7 +2,8 @@ package net.id.paradise_lost.mixin.debug;
 
 import net.id.paradise_lost.debug.MinecartRotationDebug;
 import net.id.paradise_lost.entity.MinecartFloatPoseAccess;
-import net.id.paradise_lost.util.MinecartFloatingHelper;
+import net.id.paradise_lost.util.minecart.MinecartFloatRenderHelper;
+import net.id.paradise_lost.util.minecart.MinecartFloatStateHelper;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -23,12 +24,12 @@ public abstract class AbstractMinecartRotationDebugMixin {
     @Inject(method = "tick", at = @At("TAIL"))
     private void paradiseLost$logTick(CallbackInfo ci) {
         AbstractMinecart cart = (AbstractMinecart) (Object) this;
-        if (!MinecartFloatingHelper.isFloating(cart)) {
+        if (!MinecartFloatStateHelper.isFloating(cart)) {
             return;
         }
         MinecartFloatPoseAccess pose = (MinecartFloatPoseAccess) cart;
         boolean moved = MinecartRotationDebug.moved(cart, "tickEntityYaw", cart.getYRot(), THRESHOLD);
-        moved |= MinecartRotationDebug.moved(cart, "tickSyncYaw", MinecartFloatingHelper.getSyncedFloatYaw(cart), THRESHOLD);
+        moved |= MinecartRotationDebug.moved(cart, "tickSyncYaw", MinecartFloatStateHelper.getSyncedFloatYaw(cart), THRESHOLD);
         moved |= MinecartRotationDebug.moved(cart, "tickRailPoseYaw",
                 pose.paradiseLost$hasRailRenderPose() ? pose.paradiseLost$getRailRenderYaw() : Float.NaN, THRESHOLD);
         if (!moved && cart.tickCount % HEARTBEAT_TICKS != 0) {
@@ -38,8 +39,8 @@ public abstract class AbstractMinecartRotationDebugMixin {
         if (cart.level().isClientSide()) {
             client = " lerpSteps=" + this.lerpSteps
                     + " lerpTargetYRot=" + MinecartRotationDebug.deg(cart.lerpTargetYRot())
-                    + " renderYaw=" + MinecartRotationDebug.deg(MinecartFloatingHelper.getFloatRenderYaw(cart))
-                    + " useFloatPose=" + MinecartFloatingHelper.shouldUseFloatRenderPose(cart);
+                    + " renderYaw=" + MinecartRotationDebug.deg(MinecartFloatRenderHelper.getFloatRenderYaw(cart))
+                    + " useFloatPose=" + MinecartFloatRenderHelper.shouldUseFloatRenderPose(cart);
         }
         MinecartRotationDebug.log("Tick", cart, "changed=" + moved + client + " " + MinecartRotationDebug.state(cart));
     }
@@ -48,7 +49,7 @@ public abstract class AbstractMinecartRotationDebugMixin {
     private void paradiseLost$logRotationTarget(
             double x, double y, double z, float yRot, float xRot, int steps, CallbackInfo ci) {
         AbstractMinecart cart = (AbstractMinecart) (Object) this;
-        if (!cart.level().isClientSide() || !MinecartFloatingHelper.isFloating(cart)) {
+        if (!cart.level().isClientSide() || !MinecartFloatStateHelper.isFloating(cart)) {
             return;
         }
         MinecartRotationDebug.log("LerpTo", cart,

@@ -1,7 +1,7 @@
 package net.id.paradise_lost.mixin.client.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.id.paradise_lost.util.MinecartFloatingHelper;
+import net.id.paradise_lost.util.minecart.MinecartFloatRenderHelper;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.MinecartRenderer;
 import net.minecraft.util.Mth;
@@ -58,12 +58,12 @@ public class MinecartRendererMixin {
         if (entity == null) {
             return degrees;
         }
-        boolean floatPose = MinecartFloatingHelper.shouldUseFloatRenderPose(entity);
+        boolean floatPose = MinecartFloatRenderHelper.shouldUseFloatRenderPose(entity);
         float wanted = floatPose
-                ? 180.0F - MinecartFloatingHelper.getFloatRenderYaw(entity)
+                ? 180.0F - MinecartFloatRenderHelper.getFloatRenderYaw(entity)
                 : degrees;
         Float partial = PARADISE_LOST$RENDER_PARTIAL.get();
-        return MinecartFloatingHelper.smoothRenderYawDegrees(entity, wanted, partial == null ? 0.0F : partial, floatPose);
+        return MinecartFloatRenderHelper.smoothRenderYawDegrees(entity, wanted, partial == null ? 0.0F : partial, floatPose);
     }
 
     /**
@@ -84,11 +84,11 @@ public class MinecartRendererMixin {
             return degrees;
         }
         float wanted = degrees;
-        if (MinecartFloatingHelper.shouldUseFloatRenderPose(entity)) {
-            wanted = -MinecartFloatingHelper.getFloatRenderPitch(entity);
+        if (MinecartFloatRenderHelper.shouldUseFloatRenderPose(entity)) {
+            wanted = -MinecartFloatRenderHelper.getFloatRenderPitch(entity);
             Float partial = PARADISE_LOST$RENDER_PARTIAL.get();
             float t = partial == null ? 1.0F : partial;
-            Float scale = MinecartFloatingHelper.railSlopeScale(entity,
+            Float scale = MinecartFloatRenderHelper.railSlopeScale(entity,
                     Mth.lerp(t, entity.xOld, entity.getX()),
                     Mth.lerp(t, entity.yOld, entity.getY()),
                     Mth.lerp(t, entity.zOld, entity.getZ()));
@@ -96,6 +96,6 @@ public class MinecartRendererMixin {
                 wanted *= scale;
             }
         }
-        return wanted * MinecartFloatingHelper.smoothRenderPitchSign(entity);
+        return wanted * MinecartFloatRenderHelper.smoothRenderPitchSign(entity);
     }
 }
