@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(SurtrumAxeItem.class)
 public abstract class SurtrumAxeMixin extends AxeItem {
-    public SurtrumAxeMixin(Tier tier, Properties properties) {
+    protected SurtrumAxeMixin(Tier tier, Properties properties) {
         super(tier, properties);
     }
 

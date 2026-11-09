@@ -17,7 +17,7 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 
 public abstract class BloodstoneItem extends Item {
-    public BloodstoneItem(Item.Properties settings) {
+    protected BloodstoneItem(Item.Properties settings) {
         super(settings);
     }
 

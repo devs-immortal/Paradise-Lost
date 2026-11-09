@@ -85,7 +85,7 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
     @Unique
     private Vec3 paradiseLost$enterMotion = Vec3.ZERO;
 
-    public AbstractMinecartEntityMixin(EntityType<?> entityType, Level world) {
+    protected AbstractMinecartEntityMixin(EntityType<?> entityType, Level world) {
         super(entityType, world);
     }
 

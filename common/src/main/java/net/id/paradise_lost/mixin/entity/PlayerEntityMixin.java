@@ -52,7 +52,7 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
     @Shadow
     public int experienceLevel;
 
-    public PlayerEntityMixin(EntityType<? extends LivingEntity> type, Level world) {
+    protected PlayerEntityMixin(EntityType<? extends LivingEntity> type, Level world) {
         super(type, world);
     }
 

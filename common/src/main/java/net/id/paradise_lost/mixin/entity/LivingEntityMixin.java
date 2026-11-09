@@ -60,7 +60,7 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
     private boolean flipped = false;
     private int gravFlipTime;
 
-    public LivingEntityMixin(EntityType<?> type, Level world) {
+    protected LivingEntityMixin(EntityType<?> type, Level world) {
         super(type, world);
     }
 

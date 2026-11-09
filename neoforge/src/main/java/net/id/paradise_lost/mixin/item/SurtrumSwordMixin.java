@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(SurtrumSwordItem.class)
 public abstract class SurtrumSwordMixin extends SwordItem {
-    public SurtrumSwordMixin(Tier tier, Properties properties) {
+    protected SurtrumSwordMixin(Tier tier, Properties properties) {
         super(tier, properties);
     }
 

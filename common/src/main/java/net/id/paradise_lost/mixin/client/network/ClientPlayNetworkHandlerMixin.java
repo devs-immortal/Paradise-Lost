@@ -26,7 +26,7 @@ public abstract class ClientPlayNetworkHandlerMixin extends ClientCommonPacketLi
     @Shadow
     private ClientLevel level;
 
-    public ClientPlayNetworkHandlerMixin(Minecraft client, Connection connection, CommonListenerCookie connectionState) {
+    protected ClientPlayNetworkHandlerMixin(Minecraft client, Connection connection, CommonListenerCookie connectionState) {
         super(client, connection, connectionState);
     }
 
