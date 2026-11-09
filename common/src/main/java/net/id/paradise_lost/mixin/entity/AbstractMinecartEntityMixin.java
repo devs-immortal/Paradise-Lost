@@ -529,7 +529,7 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
                         paradiseLost$applyClientFloatPose(cart);
                     }
                     MinecartFloatDebugHelper.debugTick(cart, leftRails, midair,
-                            settled ? "ghostRailLerp" : (midair ? "ghostRail" : "ghostRailLerp"));
+                            midair && !settled ? "ghostRail" : "ghostRailLerp");
                 }
             } else if (keepFloat) {
                 // Still high even though offRail is already false, keep the float pose.

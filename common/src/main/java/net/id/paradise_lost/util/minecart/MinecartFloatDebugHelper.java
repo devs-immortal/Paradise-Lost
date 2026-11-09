@@ -7,10 +7,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseRailBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.RailShape;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.Locale;
@@ -32,10 +34,7 @@ public final class MinecartFloatDebugHelper {
         if (!DebugFlags.MINECART_FLOAT || !MinecartFloatStateHelper.isFloating(cart)) {
             return;
         }
-        BlockPos pos = cart.blockPosition();
-        BlockState at = cart.level().getBlockState(pos);
-        BlockState below = cart.level().getBlockState(pos.below());
-        BlockPos railPos = BaseRailBlock.isRail(at) ? pos : (BaseRailBlock.isRail(below) ? pos.below() : null);
+        BlockPos railPos = findRailPos(cart.level(), cart.blockPosition());
         String railInfo = "none";
         if (railPos != null) {
             BlockState railState = cart.level().getBlockState(railPos);
@@ -66,6 +65,17 @@ public final class MinecartFloatDebugHelper {
                         + " pos=" + fmt(cart.position())
                         + motion(cart)
                         + " rail=" + railInfo);
+    }
+
+    @Nullable
+    private static BlockPos findRailPos(Level level, BlockPos pos) {
+        if (BaseRailBlock.isRail(level.getBlockState(pos))) {
+            return pos;
+        }
+        if (BaseRailBlock.isRail(level.getBlockState(pos.below()))) {
+            return pos.below();
+        }
+        return null;
     }
 
     static void debug(AbstractMinecart cart, String event, String detail) {

@@ -122,10 +122,11 @@ public class MoaAPI {
 
         public float configure(MoaAttributes attribute, MoaRace race, RandomSource random) {
             AttributeWeighting statData = forAttribute(attribute);
-            return Math.min(attribute.max, attribute.min + (statData.base() + (random.nextFloat() * statData.variance()) * (
-                    race.defaultAffinity() == attribute
-                            ? (attribute == MoaAttributes.DROP_MULTIPLIER ? 2F : 1.05F)
-                            : 1F)));
+            float affinity = 1F;
+            if (race.defaultAffinity() == attribute) {
+                affinity = attribute == MoaAttributes.DROP_MULTIPLIER ? 2F : 1.05F;
+            }
+            return Math.min(attribute.max, attribute.min + (statData.base() + random.nextFloat() * statData.variance() * affinity));
         }
     }
 
