@@ -20,7 +20,6 @@ public class HoneyNettleFeature extends Feature<NoneFeatureConfiguration> {
     @Override
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
         var world = context.level();
-        var config = context.config();
         var origin = context.origin();
         var random = context.random();
 

@@ -85,7 +85,7 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
     @Unique
     private Vec3 paradiseLost$enterMotion = Vec3.ZERO;
 
-    public AbstractMinecartEntityMixin(EntityType<?> entityType, Level world) {
+    protected AbstractMinecartEntityMixin(EntityType<?> entityType, Level world) {
         super(entityType, world);
     }
 
@@ -529,7 +529,7 @@ public abstract class AbstractMinecartEntityMixin extends VehicleEntity implemen
                         paradiseLost$applyClientFloatPose(cart);
                     }
                     MinecartFloatDebugHelper.debugTick(cart, leftRails, midair,
-                            settled ? "ghostRailLerp" : (midair ? "ghostRail" : "ghostRailLerp"));
+                            midair && !settled ? "ghostRail" : "ghostRailLerp");
                 }
             } else if (keepFloat) {
                 // Still high even though offRail is already false, keep the float pose.

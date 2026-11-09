@@ -46,8 +46,10 @@ public final class MinecartFloatRenderHelper {
             lastIncline[0] = liveIncline;
             lastIncline[1] = now;
         }
-        int recentIncline = liveIncline != 0 ? liveIncline
-                : (now - lastIncline[1] <= CLIENT_INCLINE_MEMORY_TICKS ? (int) lastIncline[0] : 0);
+        int recentIncline = liveIncline;
+        if (liveIncline == 0 && now - lastIncline[1] <= CLIENT_INCLINE_MEMORY_TICKS) {
+            recentIncline = (int) lastIncline[0];
+        }
         double dx = cart.getX() - cart.xOld;
         double dy = cart.getY() - cart.yOld;
         double dz = cart.getZ() - cart.zOld;
@@ -79,9 +81,7 @@ public final class MinecartFloatRenderHelper {
             pitch = 0.0F;
         } else {
             // Seated on a flat landing, including the last lerp onto it. Leftover dy from the climb is not a slope.
-            boolean eastWest = near == RailShape.EAST_WEST;
-            double along = eastWest ? dx : dz;
-            yaw = eastWest ? (along >= 0.0D ? 0.0F : 180.0F) : (along >= 0.0D ? 90.0F : -90.0F);
+            yaw = flatRailYaw(near, dx, dz);
             pitch = 0.0F;
         }
         float[] last = CLIENT_MOTION_POSE.computeIfAbsent(cart, c -> new float[2]);
@@ -106,6 +106,13 @@ public final class MinecartFloatRenderHelper {
             return -44.9F;
         }
         return 0.0F;
+    }
+
+    private static float flatRailYaw(RailShape shape, double dx, double dz) {
+        if (shape == RailShape.EAST_WEST) {
+            return dx >= 0.0D ? 0.0F : 180.0F;
+        }
+        return dz >= 0.0D ? 90.0F : -90.0F;
     }
 
     private static boolean isNearAxis(float yaw) {

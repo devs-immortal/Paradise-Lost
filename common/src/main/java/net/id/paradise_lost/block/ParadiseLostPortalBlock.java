@@ -105,16 +105,13 @@ public class ParadiseLostPortalBlock extends Block implements Portal {
 
     @Override
     public int getPortalTransitionTime(ServerLevel level, Entity entity) {
-        return entity instanceof Player player
-                ? Math.max(
-                        1,
-                        level.getGameRules().getInt(
-                                player.getAbilities().invulnerable
-                                        ? GameRules.RULE_PLAYERS_NETHER_PORTAL_CREATIVE_DELAY
-                                        : GameRules.RULE_PLAYERS_NETHER_PORTAL_DEFAULT_DELAY
-                        )
-                )
-                : 0;
+        if (!(entity instanceof Player player)) {
+            return 0;
+        }
+        GameRules.Key<GameRules.IntegerValue> delayRule = player.getAbilities().invulnerable
+                ? GameRules.RULE_PLAYERS_NETHER_PORTAL_CREATIVE_DELAY
+                : GameRules.RULE_PLAYERS_NETHER_PORTAL_DEFAULT_DELAY;
+        return Math.max(1, level.getGameRules().getInt(delayRule));
     }
 
     @Override

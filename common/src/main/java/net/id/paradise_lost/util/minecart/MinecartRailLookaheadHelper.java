@@ -209,11 +209,10 @@ public final class MinecartRailLookaheadHelper {
         // Look far enough for stair gaps; a wall on the path still stops the search.
         RailShape currentShape = MinecartFloatStateHelper.getRailShape(cart);
         boolean slopePath = MinecartFloatStateHelper.getIncline(cart) != 0 || (currentShape != null && currentShape.isAscending());
-        boolean descending = MinecartFloatStateHelper.getIncline(cart) < 0;
         boolean ascending = MinecartFloatStateHelper.getIncline(cart) > 0;
         int maxStep = slopePath ? 8 : 3;
         int maxDyUp = slopePath ? 4 : 1;
-        int maxDyDown = descending ? 8 : (ascending ? 1 : (slopePath ? 4 : 1));
+        int maxDyDown = maxDropDepth(MinecartFloatStateHelper.getIncline(cart), slopePath);
         for (int step = 1; step <= maxStep; step++) {
             if (isFullWallOnPath(cart, dx, dz, step)) {
                 break;
@@ -263,6 +262,16 @@ public final class MinecartRailLookaheadHelper {
             }
         }
         return null;
+    }
+
+    private static int maxDropDepth(int incline, boolean slopePath) {
+        if (incline < 0) {
+            return 8;
+        }
+        if (incline == 0 && slopePath) {
+            return 4;
+        }
+        return 1;
     }
 
     /**

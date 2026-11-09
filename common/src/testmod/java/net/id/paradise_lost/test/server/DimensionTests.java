@@ -112,7 +112,12 @@ public final class DimensionTests {
 
     private static String placementSpots(ServerLevel paradise, Holder<Structure> structure) {
         var chunks = paradise.getChunkSource();
-        int spots = 0, land = 0, biome = 0, start = 0, startInBiome = 0, stored = 0;
+        int spots = 0;
+        int land = 0;
+        int biome = 0;
+        int start = 0;
+        int startInBiome = 0;
+        int stored = 0;
 
         for (var placement : chunks.getGeneratorState().getPlacementsForStructure(structure)) {
             if (!(placement instanceof RandomSpreadStructurePlacement spread)) continue;

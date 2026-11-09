@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 @Mixin(LevitaRailBlock.class)
 public abstract class LevitaRailBlockMixin extends PoweredRailBlock {
 
-    public LevitaRailBlockMixin(Properties properties) {
+    protected LevitaRailBlockMixin(Properties properties) {
         super(properties);
     }
 

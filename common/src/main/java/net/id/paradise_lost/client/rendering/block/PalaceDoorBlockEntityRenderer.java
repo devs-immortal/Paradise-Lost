@@ -35,7 +35,7 @@ public class PalaceDoorBlockEntityRenderer implements BlockEntityRenderer<Palace
         MeshDefinition modelData = new MeshDefinition();
         PartDefinition modelPartData = modelData.getRoot();
 
-        PartDefinition door = modelPartData.addOrReplaceChild("door", CubeListBuilder.create()
+        modelPartData.addOrReplaceChild("door", CubeListBuilder.create()
                         .texOffs(0, 116).addBox(0.0F, -51.0F, -0.5F, 24.0F, 32.0F, 1.0F, CubeDeformation.NONE)
                         .texOffs(0, 0).addBox(0.0F, -112.0F, -2.0F, 24.0F, 112.0F, 4.0F, CubeDeformation.NONE),
                 PartPose.offset(-24.0F, 24.0F, 0.0F));

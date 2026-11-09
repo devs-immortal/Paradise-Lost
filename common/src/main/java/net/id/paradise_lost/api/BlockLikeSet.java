@@ -19,9 +19,6 @@ public record BlockLikeSet(Map<Vec3i, BlockLikeEntity> entries) {
         ));
     }
 
-    public BlockLikeSet {
-    }
-
     public static Iterator<BlockLikeSet> getAllSets() {
         return Set.copyOf(structures).iterator();
     }

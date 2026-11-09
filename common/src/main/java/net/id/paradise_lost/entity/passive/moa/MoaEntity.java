@@ -83,7 +83,9 @@ public class MoaEntity extends SaddleMountEntity implements PlayerRideableJumpin
     private static final EntityDataAccessor<ItemStack> CHEST = SynchedEntityData.defineId(MoaEntity.class, EntityDataSerializers.ITEM_STACK);
 
     private static final EntityDataAccessor<CompoundTag> GENES = SynchedEntityData.defineId(MoaEntity.class, EntityDataSerializers.COMPOUND_TAG);
-    public float curWingRoll, curWingYaw, curLegPitch;
+    public float curWingRoll;
+    public float curWingYaw;
+    public float curLegPitch;
     public float jumpStrength;
     public boolean isInAir;
     protected int secsUntilEgg;
@@ -203,7 +205,10 @@ public class MoaEntity extends SaddleMountEntity implements PlayerRideableJumpin
 
     float wingFlapSpeed = 2.5f;
     float idleFlapSpeed = 12;
-    float randFlapSpeed, randFlapTimer = 200f, prevWingRoll, prevWingYaw;
+    float randFlapSpeed;
+    float randFlapTimer = 200f;
+    float prevWingRoll;
+    float prevWingYaw;
     private int flapCount = 0;
     private int prevFlapCount = 0;
     private boolean atWingBottom;
@@ -406,10 +411,8 @@ public class MoaEntity extends SaddleMountEntity implements PlayerRideableJumpin
         }
         MoaGenes genes = getGenes();
         float hunger = genes.getHunger();
-        if (genes.isTamed()) {
-            if (random.nextBoolean()) {
-                genes.setHunger(hunger - (1F / 12000F));
-            }
+        if (genes.isTamed() && random.nextBoolean()) {
+            genes.setHunger(hunger - (1F / 12000F));
         }
         if (getHealth() < getMaxHealth() && hunger > 65F && level().getGameTime() % 20 == 0 && random.nextBoolean()) {
             heal(1);
@@ -486,11 +489,15 @@ public class MoaEntity extends SaddleMountEntity implements PlayerRideableJumpin
         return new Vec3(f, 0.0, g);
     }
 
-    float curGroundSpeed, curFlyingSpeed;
+    float curGroundSpeed;
+    float curFlyingSpeed;
     float groundAcceleration = 0.004F;
     float flyingAcceleration = 0.04F;
 
-    float genGroundSpeed, genGlidingSpeed, genGlidingDecay, genJumpHeight;
+    float genGroundSpeed;
+    float genGlidingSpeed;
+    float genGlidingDecay;
+    float genJumpHeight;
 
     private void calcGeneSpeeds() {
         genGroundSpeed = (getGenes().getAttribute(MoaAttributes.GROUND_SPEED) - 0.24f) * 0.072f + 0.1f;

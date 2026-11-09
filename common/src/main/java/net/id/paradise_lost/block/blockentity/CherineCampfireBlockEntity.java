@@ -104,9 +104,9 @@ public class CherineCampfireBlockEntity extends BlockEntity implements Clearable
         for (int j = 0; j < campfire.itemsBeingCooked.size(); ++j) {
             if (!(campfire.itemsBeingCooked.get(j)).isEmpty() && random.nextFloat() < 0.2F) {
                 Direction direction = Direction.from2DDataValue(Math.floorMod(j + i, 4));
-                double d = (double) pos.getX() + 0.5 - (double) ((float) direction.getStepX() * 0.3125F) + (double) ((float) direction.getClockWise().getStepX() * 0.3125F);
-                double e = (double) pos.getY() + 0.5;
-                double g = (double) pos.getZ() + 0.5 - (double) ((float) direction.getStepZ() * 0.3125F) + (double) ((float) direction.getClockWise().getStepZ() * 0.3125F);
+                double d = pos.getX() + 0.5 - direction.getStepX() * 0.3125F + direction.getClockWise().getStepX() * 0.3125F;
+                double e = pos.getY() + 0.5;
+                double g = pos.getZ() + 0.5 - direction.getStepZ() * 0.3125F + direction.getClockWise().getStepZ() * 0.3125F;
 
                 for (int k = 0; k < 4; ++k) {
                     world.addParticle(ParticleTypes.SMOKE, d, e, g, 0.0, 5.0E-4, 0.0);

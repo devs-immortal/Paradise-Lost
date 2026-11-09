@@ -23,11 +23,11 @@ public abstract class SaddleMountEntity extends MountableEntity implements Saddl
 
     private static final EntityDataAccessor<Boolean> SADDLED = SynchedEntityData.defineId(SaddleMountEntity.class, EntityDataSerializers.BOOLEAN);
 
-    public SaddleMountEntity(EntityType<? extends Animal> type, Level world) {
+    protected SaddleMountEntity(EntityType<? extends Animal> type, Level world) {
         super(type, world);
     }
 
-    public SaddleMountEntity(Level world) {
+    protected SaddleMountEntity(Level world) {
         this(null, world);
     }
 

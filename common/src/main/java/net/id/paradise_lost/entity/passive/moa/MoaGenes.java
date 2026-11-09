@@ -25,7 +25,8 @@ public class MoaGenes {
     private ResourceLocation raceId = MoaRaceRegistry.FALLBACK_ID;
     private MoaAPI.MoaRace race = MoaRaceRegistry.FALLBACK_VALUE;
     private MoaAttributes affinity;
-    private boolean legendary, initialized;
+    private boolean legendary;
+    private boolean initialized;
     private UUID owner;
     private float hunger = 100F;
 

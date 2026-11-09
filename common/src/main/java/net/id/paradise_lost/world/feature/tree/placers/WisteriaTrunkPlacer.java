@@ -27,8 +27,10 @@ public class WisteriaTrunkPlacer extends TrunkPlacer {
             FloatProvider.CODEC.fieldOf("branch_height").forGetter(placer -> placer.branchHeight)
     ).and(TrunkPlacer.trunkPlacerParts(instance)).apply(instance, WisteriaTrunkPlacer::new));
 
-    private final IntProvider maxBranchRange, branchCount;
-    private final FloatProvider branchHeight, branchRange;
+    private final IntProvider maxBranchRange;
+    private final IntProvider branchCount;
+    private final FloatProvider branchHeight;
+    private final FloatProvider branchRange;
 
     public WisteriaTrunkPlacer(IntProvider maxBranchRange, IntProvider branchCount, FloatProvider branchRange, FloatProvider branchHeight, int baseHeight, int firstRandomHeight, int secondRandomHeight) {
         super(baseHeight, firstRandomHeight, secondRandomHeight);
@@ -57,9 +59,12 @@ public class WisteriaTrunkPlacer extends TrunkPlacer {
 
         nodes.add(new FoliagePlacer.FoliageAttachment(trunkTop.above(3), 0, false));
 
-        int offset, previous;
-        float a, b;
-        Direction dir, dir2;
+        int offset;
+        int previous;
+        float a;
+        float b;
+        Direction dir;
+        Direction dir2;
         int yOffset = 0;
 
         for (int i = 0; i < branchCount.sample(random); i++) {

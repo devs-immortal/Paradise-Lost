@@ -11,7 +11,8 @@ public class MotherAurelLeafParticle extends TextureSheetParticle {
 
     private static final SplittableRandom random = new SplittableRandom();
     private final float rotateFactor;
-    private final double velocityComposite, velocityDown;
+    private final double velocityComposite;
+    private final double velocityDown;
 
     protected MotherAurelLeafParticle(ClientLevel clientWorld, double d, double e, double f, double g, double h, double i, SpriteSet provider) {
         super(clientWorld, d, e, f);

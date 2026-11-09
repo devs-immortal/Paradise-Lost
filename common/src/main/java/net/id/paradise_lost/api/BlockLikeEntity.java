@@ -58,12 +58,12 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
     protected boolean collides;
     protected boolean partOfSet = false;
 
-    public BlockLikeEntity(EntityType<? extends BlockLikeEntity> entityType, Level world) {
+    protected BlockLikeEntity(EntityType<? extends BlockLikeEntity> entityType, Level world) {
         super(entityType, world);
         this.moveTime = 0;
     }
 
-    public BlockLikeEntity(EntityType<? extends BlockLikeEntity> entityType, Level world, double x, double y, double z, BlockState blockState) {
+    protected BlockLikeEntity(EntityType<? extends BlockLikeEntity> entityType, Level world, double x, double y, double z, BlockState blockState) {
         this(entityType, world);
         this.blockState = blockState;
         this.blocksBuilding = true;
@@ -75,7 +75,7 @@ public abstract class BlockLikeEntity extends Entity implements PostTickEntity {
         this.setOrigin(this.blockPosition());
     }
 
-    public BlockLikeEntity(EntityType<? extends BlockLikeEntity> entityType, Level world, BlockPos pos, BlockState blockState, boolean partOfSet) {
+    protected BlockLikeEntity(EntityType<? extends BlockLikeEntity> entityType, Level world, BlockPos pos, BlockState blockState, boolean partOfSet) {
         this(entityType, world, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, blockState);
         this.partOfSet = partOfSet;
     }

@@ -49,28 +49,28 @@ public class PopomEntityModel<T extends PopomEntity> extends AgeableListModel<T>
         MeshDefinition ModelData = new MeshDefinition();
         PartDefinition root = ModelData.getRoot();
 
-        PartDefinition body0 = root.addOrReplaceChild("body0", CubeListBuilder.create().texOffs(0, 78).addBox(-5.0F, -9.0F, -8.0F, 10.0F, 6.0F, 15.0F, new CubeDeformation(1F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+        root.addOrReplaceChild("body0", CubeListBuilder.create().texOffs(0, 78).addBox(-5.0F, -9.0F, -8.0F, 10.0F, 6.0F, 15.0F, new CubeDeformation(1F)), PartPose.offset(0.0F, 24.0F, 0.0F));
 
-        PartDefinition body1 = root.addOrReplaceChild("body1", CubeListBuilder.create().texOffs(0, 54).addBox(-5.5F, -11.0F, -8.0F, 11.0F, 8.0F, 16.0F, new CubeDeformation(1.05F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+        root.addOrReplaceChild("body1", CubeListBuilder.create().texOffs(0, 54).addBox(-5.5F, -11.0F, -8.0F, 11.0F, 8.0F, 16.0F, new CubeDeformation(1.05F)), PartPose.offset(0.0F, 24.0F, 0.0F));
 
-        PartDefinition body2 = root.addOrReplaceChild("body2", CubeListBuilder.create().texOffs(0, 28).addBox(-6.0F, -12.0F, -8.0F, 12.0F, 9.0F, 17.0F, new CubeDeformation(1.1F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+        root.addOrReplaceChild("body2", CubeListBuilder.create().texOffs(0, 28).addBox(-6.0F, -12.0F, -8.0F, 12.0F, 9.0F, 17.0F, new CubeDeformation(1.1F)), PartPose.offset(0.0F, 24.0F, 0.0F));
 
-        PartDefinition body3 = root.addOrReplaceChild("body3", CubeListBuilder.create().texOffs(0, 0).addBox(-7.0F, -13.0F, -8.0F, 14.0F, 10.0F, 18.0F, new CubeDeformation(1.15F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+        root.addOrReplaceChild("body3", CubeListBuilder.create().texOffs(0, 0).addBox(-7.0F, -13.0F, -8.0F, 14.0F, 10.0F, 18.0F, new CubeDeformation(1.15F)), PartPose.offset(0.0F, 24.0F, 0.0F));
 
-        PartDefinition head = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(38, 54).addBox(-4.0F, -2.0F, -4.0F, 8.0F, 4.0F, 4.0F)
+        root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(38, 54).addBox(-4.0F, -2.0F, -4.0F, 8.0F, 4.0F, 4.0F)
                 .texOffs(38, 62).addBox(-3.0F, -5.0F, -5.0F, 6.0F, 3.0F, 3.0F), PartPose.offset(0.0F, 19.0F, -8.0F));
 
-        PartDefinition frleg = root.addOrReplaceChild("frleg", CubeListBuilder.create().texOffs(0, 116).addBox(-2.99F, 0.0F, -1.0F, 3.0F, 3.0F, 3.0F), PartPose.offset(-2.0F, 21.0F, -6.0F));
+        root.addOrReplaceChild("frleg", CubeListBuilder.create().texOffs(0, 116).addBox(-2.99F, 0.0F, -1.0F, 3.0F, 3.0F, 3.0F), PartPose.offset(-2.0F, 21.0F, -6.0F));
 
-        PartDefinition flleg = root.addOrReplaceChild("flleg", CubeListBuilder.create().texOffs(0, 122).addBox(-0.01F, 0.0F, -1.0F, 3.0F, 3.0F, 3.0F), PartPose.offset(2.0F, 21.0F, -6.0F));
+        root.addOrReplaceChild("flleg", CubeListBuilder.create().texOffs(0, 122).addBox(-0.01F, 0.0F, -1.0F, 3.0F, 3.0F, 3.0F), PartPose.offset(2.0F, 21.0F, -6.0F));
 
-        PartDefinition brleg = root.addOrReplaceChild("brleg", CubeListBuilder.create().texOffs(12, 116).addBox(-2.99F, 0.0F, -1.0F, 3.0F, 3.0F, 3.0F), PartPose.offset(-2.0F, 21.0F, 4.0F));
+        root.addOrReplaceChild("brleg", CubeListBuilder.create().texOffs(12, 116).addBox(-2.99F, 0.0F, -1.0F, 3.0F, 3.0F, 3.0F), PartPose.offset(-2.0F, 21.0F, 4.0F));
 
-        PartDefinition blleg = root.addOrReplaceChild("blleg", CubeListBuilder.create().texOffs(12, 122).addBox(-0.01F, 0.0F, -1.0F, 3.0F, 3.0F, 3.0F), PartPose.offset(2.0F, 21.0F, 4.0F));
+        root.addOrReplaceChild("blleg", CubeListBuilder.create().texOffs(12, 122).addBox(-0.01F, 0.0F, -1.0F, 3.0F, 3.0F, 3.0F), PartPose.offset(2.0F, 21.0F, 4.0F));
 
-        PartDefinition mrleg = root.addOrReplaceChild("mrleg", CubeListBuilder.create().texOffs(12, 116).addBox(-2.99F, 0.0F, -1.0F, 3.0F, 3.0F, 3.0F), PartPose.offset(-2.0F, 21.0F, -1.0F));
+        root.addOrReplaceChild("mrleg", CubeListBuilder.create().texOffs(12, 116).addBox(-2.99F, 0.0F, -1.0F, 3.0F, 3.0F, 3.0F), PartPose.offset(-2.0F, 21.0F, -1.0F));
 
-        PartDefinition mlleg = root.addOrReplaceChild("mlleg", CubeListBuilder.create().texOffs(12, 122).addBox(-0.01F, 0.0F, -1.0F, 3.0F, 3.0F, 3.0F), PartPose.offset(2.0F, 21.0F, -1.0F));
+        root.addOrReplaceChild("mlleg", CubeListBuilder.create().texOffs(12, 122).addBox(-0.01F, 0.0F, -1.0F, 3.0F, 3.0F, 3.0F), PartPose.offset(2.0F, 21.0F, -1.0F));
 
         return LayerDefinition.create(ModelData, 64, 128);
     }

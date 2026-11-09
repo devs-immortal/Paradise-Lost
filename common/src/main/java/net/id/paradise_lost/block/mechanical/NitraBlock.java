@@ -31,11 +31,8 @@ public class NitraBlock extends Block {
     }
 
     public void onPlace(BlockState state, Level world, BlockPos pos, BlockState oldState, boolean notify) {
-        if (!oldState.is(state.getBlock())) {
-            if (world.hasNeighborSignal(pos)) {
-                world.scheduleTick(pos, this, 1);
-            }
-
+        if (!oldState.is(state.getBlock()) && world.hasNeighborSignal(pos)) {
+            world.scheduleTick(pos, this, 1);
         }
     }
 

@@ -13,7 +13,9 @@ public enum MoaAttributes implements StringRepresentable {
 
     public static final Codec<MoaAttributes> CODEC = StringRepresentable.fromEnum(MoaAttributes::values);
 
-    public final float min, max, gradeInterval;
+    public final float min;
+    public final float max;
+    public final float gradeInterval;
 
     MoaAttributes(float min, float max, float gradeInterval) {
         this.min = min;

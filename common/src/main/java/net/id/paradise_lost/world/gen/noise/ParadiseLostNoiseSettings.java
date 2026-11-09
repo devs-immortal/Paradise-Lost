@@ -16,7 +16,6 @@ import net.minecraft.world.level.levelgen.NoiseSettings;
 import net.minecraft.world.level.levelgen.SurfaceRules;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.placement.CaveSurface;
-import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
 import java.util.List;
 
@@ -33,7 +32,6 @@ public final class ParadiseLostNoiseSettings {
 
     public static void bootstrap(BootstrapContext<NoiseGeneratorSettings> context) {
         HolderGetter<DensityFunction> densityFunctions = context.lookup(Registries.DENSITY_FUNCTION);
-        HolderGetter<NormalNoise.NoiseParameters> noiseParameters = context.lookup(Registries.NOISE);
 
         NoiseRouter router = new NoiseRouter(
                 DensityFunctions.constant(0.0d),

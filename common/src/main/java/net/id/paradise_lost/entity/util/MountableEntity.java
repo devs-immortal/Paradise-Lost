@@ -17,11 +17,11 @@ public abstract class MountableEntity extends ParadiseLostAnimalEntity {
     protected boolean playStepSound = false;
     protected boolean canJumpMidAir = false;
 
-    public MountableEntity(EntityType<? extends Animal> type, Level world) {
+    protected MountableEntity(EntityType<? extends Animal> type, Level world) {
         super(type, world);
     }
 
-    public MountableEntity(Level world) {
+    protected MountableEntity(Level world) {
         this(null, world);
     }
 

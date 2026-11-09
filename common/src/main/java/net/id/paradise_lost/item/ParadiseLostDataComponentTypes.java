@@ -59,30 +59,6 @@ public class ParadiseLostDataComponentTypes {
             );
         }
 
-        public ResourceLocation race() {
-            return this.race;
-        }
-
-        public String affinity() {
-            return this.affinity;
-        }
-
-        public boolean isBaby() {
-            return this.isBaby;
-        }
-
-        public float hunger() {
-            return this.hunger;
-        }
-
-        public UUID ownerId() {
-            return this.ownerId;
-        }
-
-        public MoaAttributeComponent attributes() {
-            return this.attributes;
-        }
-
     }
 
     public record MoaAttributeComponent(float groundSpeed, float glidingSpeed, float glidingDecay, float jumpStrength, float dropMultiplier, float maxHealth) {
@@ -107,30 +83,6 @@ public class ParadiseLostDataComponentTypes {
                     ByteBufCodecs.FLOAT, MoaAttributeComponent::maxHealth,
                     MoaAttributeComponent::new
             );
-        }
-
-        public float groundSpeed() {
-            return this.groundSpeed;
-        }
-
-        public float glidingSpeed() {
-            return this.glidingSpeed;
-        }
-
-        public float glidingDecay() {
-            return this.glidingDecay;
-        }
-
-        public float jumpStrength() {
-            return this.jumpStrength;
-        }
-
-        public float dropMultiplier() {
-            return this.dropMultiplier;
-        }
-
-        public float maxHealth() {
-            return this.maxHealth;
         }
 
     }
@@ -159,30 +111,6 @@ public class ParadiseLostDataComponentTypes {
             );
         }
 
-        public UUID uuid() {
-            return this.uuid;
-        }
-
-        public Component name() {
-            return this.name;
-        }
-
-        public String health() {
-            return this.health;
-        }
-
-        public String defense() {
-            return this.defense;
-        }
-
-        public String toughness() {
-            return this.toughness;
-        }
-
-        public String owner() {
-            return this.owner;
-        }
-
     }
 
     public record XpCircletChargeComponent(int storedXp) {
@@ -197,10 +125,6 @@ public class ParadiseLostDataComponentTypes {
                     ByteBufCodecs.INT, XpCircletChargeComponent::storedXp,
                     XpCircletChargeComponent::new
             );
-        }
-
-        public int storedXp() {
-            return this.storedXp;
         }
 
         public boolean charged() {
@@ -221,10 +145,6 @@ public class ParadiseLostDataComponentTypes {
                     ByteBufCodecs.STRING_UTF8.apply(ByteBufCodecs.list()), CollectedSoulsComponent::soulIds,
                     CollectedSoulsComponent::new
             );
-        }
-
-        public List<String> soulIds() {
-            return this.soulIds;
         }
 
         public int soulCount() {

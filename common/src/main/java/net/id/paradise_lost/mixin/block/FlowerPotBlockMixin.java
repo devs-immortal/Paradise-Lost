@@ -39,7 +39,7 @@ public abstract class FlowerPotBlockMixin extends Block {
     @Shadow
     protected abstract boolean isEmpty();
 
-    public FlowerPotBlockMixin(Properties settings) {
+    protected FlowerPotBlockMixin(Properties settings) {
         super(settings);
     }
 

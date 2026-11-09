@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.Mixin;
 @Mixin(FloatyLeggingsItem.class)
 public abstract class FloatyLeggingsItemMixin extends ArmorItem {
 
-    public FloatyLeggingsItemMixin(Holder<ArmorMaterial> material, Type type, Properties properties) {
+    protected FloatyLeggingsItemMixin(Holder<ArmorMaterial> material, Type type, Properties properties) {
         super(material, type, properties);
     }
 
