@@ -194,10 +194,6 @@ public class MoaScreenHandler extends AbstractContainerMenu {
             );
         }
 
-        public int entityId() {
-            return this.entityId;
-        }
-
         @Override
         public Type<? extends CustomPacketPayload> type() {
             return ID;
