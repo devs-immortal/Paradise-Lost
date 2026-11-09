@@ -54,7 +54,7 @@ public class ThrownNitraEntity extends ThrowableItemProjectile {
             }
             Vec3 diff = this.position().subtract(e.position()).reverse().normalize();
             e.push(diff.x, diff.y, diff.z);
-            e.hurt(this.level().damageSources().explosion(null, e), 2);
+            e.hurt(this.level().damageSources().explosion(this.getOwner(), this), 4);
         }
     }
 
