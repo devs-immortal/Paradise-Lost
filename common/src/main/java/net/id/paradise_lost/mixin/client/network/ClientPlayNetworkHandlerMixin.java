@@ -40,13 +40,11 @@ public abstract class ClientPlayNetworkHandlerMixin extends ClientCommonPacketLi
     @Inject(method = "handleEntityEvent", at = @At("RETURN"))
     public void onEntityStatus(ClientboundEntityEventPacket packet, CallbackInfo ci) {
         Entity entity = packet.getEntity(this.level);
-        if (entity != null) {
-            if (packet.getEventId() == ParadiseLostEvents.LEVITATION_TOTEM_USED) {
-                this.minecraft.particleEngine.createTrackingEmitter(entity, ParadiseLostParticleTypes.LEVITATION_TOTEM, 30);
-                this.level.playLocalSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.TOTEM_USE, entity.getSoundSource(), 1.0F, 1.0F, false);
-                if (entity == this.minecraft.player) {
-                    this.minecraft.gameRenderer.displayItemActivation(ItemRegistry.TOTEM_OF_LEVITATION.get().getDefaultInstance());
-                }
+        if (entity != null && packet.getEventId() == ParadiseLostEvents.LEVITATION_TOTEM_USED) {
+            this.minecraft.particleEngine.createTrackingEmitter(entity, ParadiseLostParticleTypes.LEVITATION_TOTEM, 30);
+            this.level.playLocalSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.TOTEM_USE, entity.getSoundSource(), 1.0F, 1.0F, false);
+            if (entity == this.minecraft.player) {
+                this.minecraft.gameRenderer.displayItemActivation(ItemRegistry.TOTEM_OF_LEVITATION.get().getDefaultInstance());
             }
         }
     }

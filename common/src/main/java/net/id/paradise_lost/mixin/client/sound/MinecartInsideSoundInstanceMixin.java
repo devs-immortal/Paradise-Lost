@@ -28,10 +28,9 @@ public abstract class MinecartInsideSoundInstanceMixin extends AbstractTickableS
 
     @Inject(method = "tick", at = @At("TAIL"))
     public void tick(CallbackInfo ci) {
-        if (!this.minecart.isRemoved()) {
-            if (MinecartFloatStateHelper.isFloating(this.minecart) && !MinecartRailLocatorHelper.isCartOnRail(this.minecart)) {
-                this.volume = 0.0F;
-            }
+        if (!this.minecart.isRemoved() && MinecartFloatStateHelper.isFloating(this.minecart)
+                && !MinecartRailLocatorHelper.isCartOnRail(this.minecart)) {
+            this.volume = 0.0F;
         }
     }
 }

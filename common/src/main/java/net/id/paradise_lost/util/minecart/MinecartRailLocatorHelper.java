@@ -259,12 +259,11 @@ public final class MinecartRailLocatorHelper {
         BlockPos pos = cart.blockPosition();
         boolean climbFloat = MinecartFloatStateHelper.isFloating(cart) && MinecartFloatStateHelper.getIncline(cart) > 0;
         BlockState at = cart.level().getBlockState(pos);
-        if (BaseRailBlock.isRail(at) && !isGhostSlopeBelow(cart, pos, at)) {
-            // High above a through-flat with a higher target, ignore it. Otherwise it's the landing.
-            if (!(climbFloat && isFlatStraightRail(at) && cart.getY() - pos.getY() > 0.45D
-                    && hasHigherClimbTarget(cart, pos))) {
-                return pos;
-            }
+        // High above a through-flat with a higher target, ignore it. Otherwise it's the landing.
+        if (BaseRailBlock.isRail(at) && !isGhostSlopeBelow(cart, pos, at)
+                && !(climbFloat && isFlatStraightRail(at) && cart.getY() - pos.getY() > 0.45D
+                && hasHigherClimbTarget(cart, pos))) {
+            return pos;
         }
         BlockPos below = pos.below();
         BlockState belowState = cart.level().getBlockState(below);

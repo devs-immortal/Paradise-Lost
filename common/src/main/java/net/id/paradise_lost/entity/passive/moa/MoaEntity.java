@@ -411,10 +411,8 @@ public class MoaEntity extends SaddleMountEntity implements PlayerRideableJumpin
         }
         MoaGenes genes = getGenes();
         float hunger = genes.getHunger();
-        if (genes.isTamed()) {
-            if (random.nextBoolean()) {
-                genes.setHunger(hunger - (1F / 12000F));
-            }
+        if (genes.isTamed() && random.nextBoolean()) {
+            genes.setHunger(hunger - (1F / 12000F));
         }
         if (getHealth() < getMaxHealth() && hunger > 65F && level().getGameTime() % 20 == 0 && random.nextBoolean()) {
             heal(1);

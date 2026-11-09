@@ -256,11 +256,9 @@ public class FloatingBlockHelperImpls {
 
                 }) {
                     BlockState adjacentState = world.getBlockState(newPos);
-                    if (isAdjacentBlockStuck(state, adjacentState)) {
-
-                        if (!continueTree(world, newPos, builder, overrideBlacklist)) {
-                            return false;
-                        }
+                    if (isAdjacentBlockStuck(state, adjacentState)
+                            && !continueTree(world, newPos, builder, overrideBlacklist)) {
+                        return false;
                     }
                 }
             }

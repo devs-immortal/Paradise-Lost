@@ -25,10 +25,9 @@ public class FluidRendererMixin {
     @Inject(method = "tesselate", at = @At("HEAD"))
     private void render(BlockAndTintGetter world, BlockPos pos, VertexConsumer vertexConsumer, BlockState blockState, FluidState fluidState, CallbackInfo ci) {
         fadeAlpha = 1F;
-        if (Minecraft.getInstance().level.dimension() == ParadiseLostDimension.PARADISE_LOST_WORLD_KEY) {
-            if (fluidState.getType().isSame(Fluids.WATER)) {
-                fadeAlpha = Math.min((pos.getY() - world.getMinBuildHeight()) / 32F, 1);
-            }
+        if (Minecraft.getInstance().level.dimension() == ParadiseLostDimension.PARADISE_LOST_WORLD_KEY
+                && fluidState.getType().isSame(Fluids.WATER)) {
+            fadeAlpha = Math.min((pos.getY() - world.getMinBuildHeight()) / 32F, 1);
         }
     }
 

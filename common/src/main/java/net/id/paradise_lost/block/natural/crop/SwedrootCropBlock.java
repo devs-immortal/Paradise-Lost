@@ -40,10 +40,8 @@ public class SwedrootCropBlock extends CropBlock {
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         if (world.getBlockState(pos.above().above()).is(Blocks.WATER) && world.getRawBrightness(pos, 0) >= 9) {
             int i = this.getAge(state);
-            if (i < this.getMaxAge()) {
-                if (random.nextInt(4) == 0) {
-                    world.setBlock(pos, this.getStateForAge(i + 1), 2);
-                }
+            if (i < this.getMaxAge() && random.nextInt(4) == 0) {
+                world.setBlock(pos, this.getStateForAge(i + 1), 2);
             }
         }
     }
