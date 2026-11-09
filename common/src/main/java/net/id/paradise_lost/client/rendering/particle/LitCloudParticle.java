@@ -17,7 +17,6 @@ public class LitCloudParticle extends TextureSheetParticle {
         super(world, x, y, z, 0.0, 0.0, 0.0);
         this.friction = 0.96F;
         this.spriteProvider = spriteProvider;
-        float f = 2.5F;
         this.xd *= 0.10000000149011612;
         this.yd *= 0.10000000149011612;
         this.zd *= 0.10000000149011612;

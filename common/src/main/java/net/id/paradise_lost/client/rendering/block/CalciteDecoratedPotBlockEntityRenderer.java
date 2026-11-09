@@ -142,7 +142,6 @@ public class CalciteDecoratedPotBlockEntityRenderer implements BlockEntityRender
             float g = ((float) (decoratedPotBlockEntity.getLevel().getGameTime() - decoratedPotBlockEntity.wobbleStartedAtTick) + f) / (float) wobbleType.duration;
             if (g >= 0.0F && g <= 1.0F) {
                 if (wobbleType == DecoratedPotBlockEntity.WobbleStyle.POSITIVE) {
-                    float h = 0.015625F;
                     float k = g * (float) (Math.PI * 2);
                     float l = -1.5F * (Mth.cos(k) + 0.5F) * Mth.sin(k / 2.0F);
                     matrixStack.rotateAround(Axis.XP.rotation(l * 0.015625F), 0.5F, 0.0F, 0.5F);

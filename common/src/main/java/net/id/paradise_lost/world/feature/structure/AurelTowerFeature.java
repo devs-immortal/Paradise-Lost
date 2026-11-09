@@ -32,7 +32,6 @@ public class AurelTowerFeature extends Structure {
         ChunkPos pos = context.chunkPos();
         BlockPos pivot = new BlockPos(structure.getSize().getX() / 2, 0, structure.getSize().getZ() / 2);
         BoundingBox boundingBox = structure.getBoundingBox(pos.getWorldPosition(), blockRotation, pivot, Mirror.NONE);
-        BlockPos center = boundingBox.getCenter();
         int y = context.chunkGenerator().getBaseHeight(pos.getWorldPosition().getX() - X_OFFSET, pos.getWorldPosition().getZ() - Z_OFFSET, Heightmap.Types.WORLD_SURFACE_WG, context.heightAccessor(), context.randomState());
         if (y < 0) {
             return;

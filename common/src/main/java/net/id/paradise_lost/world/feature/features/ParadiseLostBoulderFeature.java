@@ -38,7 +38,8 @@ public class ParadiseLostBoulderFeature extends Feature<BoulderFeatureConfig> {
             return false;
         } else {
 
-            var tries = config.tries().sample(random);
+            // unused, but removing it would move boulders for the same seed
+            config.tries().sample(random);
             var size = config.size().sample(random);
 
             for (int i = 0; i < 3; ++i) {
