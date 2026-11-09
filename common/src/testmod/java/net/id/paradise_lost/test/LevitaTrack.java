@@ -2,7 +2,8 @@ package net.id.paradise_lost.test;
 
 import net.id.paradise_lost.entity.MinecartFloatPoseAccess;
 import net.id.paradise_lost.registry.BlockRegistry;
-import net.id.paradise_lost.util.MinecartFloatingHelper;
+import net.id.paradise_lost.util.minecart.MinecartFloatRenderHelper;
+import net.id.paradise_lost.util.minecart.MinecartFloatStateHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -173,22 +174,22 @@ public final class LevitaTrack {
     }
 
     public static void checkFloatRotation(AbstractMinecart cart, String where) {
-        if (!MinecartFloatingHelper.isFloating(cart)) {
+        if (!MinecartFloatStateHelper.isFloating(cart)) {
             return;
         }
         MinecartFloatPoseAccess pose = (MinecartFloatPoseAccess) cart;
-        int incline = MinecartFloatingHelper.getIncline(cart);
-        boolean offRail = MinecartFloatingHelper.isOffRail(cart) || MinecartFloatingHelper.shouldSkipRailRenderSnap(cart);
+        int incline = MinecartFloatStateHelper.getIncline(cart);
+        boolean offRail = MinecartFloatStateHelper.isOffRail(cart) || MinecartFloatRenderHelper.shouldSkipRailRenderSnap(cart);
         boolean hasPose = pose.paradiseLost$hasRailRenderPose();
 
         if (incline != 0) {
             if (offRail) {
                 float pitch = hasPose
                         ? pose.paradiseLost$getRailRenderPitch()
-                        : MinecartFloatingHelper.getSyncedFloatPitch(cart);
+                        : MinecartFloatStateHelper.getSyncedFloatPitch(cart);
                 float yaw = hasPose
                         ? pose.paradiseLost$getRailRenderYaw()
-                        : MinecartFloatingHelper.getSyncedFloatYaw(cart);
+                        : MinecartFloatStateHelper.getSyncedFloatYaw(cart);
                 check(Math.abs(pitch) > 1 || hasPose, where + " floating slope has no pitch pose/sync"
                         + describe(cart) + floatState(cart));
                 check(Math.abs(Math.abs(pitch) - 45) < 8, where + " floating slope pitch is " + fmt(pitch)
@@ -197,7 +198,7 @@ public final class LevitaTrack {
                         + ", expected about +-45" + describe(cart) + floatState(cart));
                 check(Math.abs(cart.getXRot() - pitch) < 5, where + " entity pitch " + fmt(cart.getXRot())
                         + " != float pitch " + fmt(pitch) + describe(cart) + floatState(cart));
-                if (hasPose || Math.abs(MinecartFloatingHelper.getSyncedFloatPitch(cart)) > 1) {
+                if (hasPose || Math.abs(MinecartFloatStateHelper.getSyncedFloatPitch(cart)) > 1) {
                     check(Math.abs(Mth.wrapDegrees(cart.getYRot() - yaw)) < 8, where + " entity yaw " + fmt(cart.getYRot())
                             + " != float yaw " + fmt(yaw) + describe(cart) + floatState(cart));
                 }
@@ -215,8 +216,8 @@ public final class LevitaTrack {
                 check(Math.abs(pose.paradiseLost$getRailRenderPitch()) < 2, where + " flat float pose pitch is "
                         + fmt(pose.paradiseLost$getRailRenderPitch()) + describe(cart) + floatState(cart));
             }
-            check(Math.abs(MinecartFloatingHelper.getSyncedFloatPitch(cart)) < 2, where + " flat float sync pitch is "
-                    + fmt(MinecartFloatingHelper.getSyncedFloatPitch(cart)) + describe(cart) + floatState(cart));
+            check(Math.abs(MinecartFloatStateHelper.getSyncedFloatPitch(cart)) < 2, where + " flat float sync pitch is "
+                    + fmt(MinecartFloatStateHelper.getSyncedFloatPitch(cart)) + describe(cart) + floatState(cart));
         }
     }
 
@@ -228,7 +229,7 @@ public final class LevitaTrack {
         check(Math.abs(facing.dot(alongTrack)) > 0.85, where + " cart yaw is not along the track (diagonal float), poseYaw="
                 + fmt(railYaw) + describe(cart) + floatState(cart));
         check(Math.abs(facing.dot(sideways)) < 0.15, where + " cart renders across the track, shape "
-                + MinecartFloatingHelper.getRailShapeName(cart) + describe(cart) + floatState(cart));
+                + MinecartFloatStateHelper.getRailShapeName(cart) + describe(cart) + floatState(cart));
 
         Vec3 motion = cart.getDeltaMovement().multiply(1, 0, 1);
         if (motion.lengthSqr() > 0.01) {
@@ -256,9 +257,9 @@ public final class LevitaTrack {
         String railPose = pose.paradiseLost$hasRailRenderPose()
                 ? fmt(pose.paradiseLost$getRailRenderYaw()) + "/" + fmt(pose.paradiseLost$getRailRenderPitch())
                 : "none";
-        return " [float=" + MinecartFloatingHelper.getFloatTime(cart) + ", incline=" + MinecartFloatingHelper.getIncline(cart)
-                + ", shape=" + MinecartFloatingHelper.getRailShapeName(cart)
-                + ", offRail=" + MinecartFloatingHelper.isOffRail(cart)
+        return " [float=" + MinecartFloatStateHelper.getFloatTime(cart) + ", incline=" + MinecartFloatStateHelper.getIncline(cart)
+                + ", shape=" + MinecartFloatStateHelper.getRailShapeName(cart)
+                + ", offRail=" + MinecartFloatStateHelper.isOffRail(cart)
                 + ", yaw/pitch=" + fmt(cart.getYRot()) + "/" + fmt(cart.getXRot())
                 + ", railPose=" + railPose + "]";
     }

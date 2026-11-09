@@ -2,7 +2,7 @@ package net.id.paradise_lost.debug;
 
 import net.id.paradise_lost.ModConstants;
 import net.id.paradise_lost.entity.MinecartFloatPoseAccess;
-import net.id.paradise_lost.util.MinecartFloatingHelper;
+import net.id.paradise_lost.util.minecart.MinecartFloatStateHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -62,15 +62,15 @@ public final class MinecartRotationDebug {
                 + " game=" + cart.level().getGameTime()
                 + " yRot=" + deg(cart.getYRot()) + " yRotO=" + deg(cart.yRotO)
                 + " xRot=" + deg(cart.getXRot())
-                + " sync=" + deg(MinecartFloatingHelper.getSyncedFloatYaw(cart))
-                + "/" + deg(MinecartFloatingHelper.getSyncedFloatPitch(cart))
+                + " sync=" + deg(MinecartFloatStateHelper.getSyncedFloatYaw(cart))
+                + "/" + deg(MinecartFloatStateHelper.getSyncedFloatPitch(cart))
                 + " railPose=" + (pose.paradiseLost$hasRailRenderPose()
                 ? deg(pose.paradiseLost$getRailRenderYaw()) + "/" + deg(pose.paradiseLost$getRailRenderPitch())
                 : "none")
-                + " floatT=" + MinecartFloatingHelper.getFloatTime(cart)
-                + " offRail=" + MinecartFloatingHelper.isOffRail(cart)
-                + " incline=" + MinecartFloatingHelper.getIncline(cart)
-                + " storedShape=" + MinecartFloatingHelper.getRailShapeName(cart)
+                + " floatT=" + MinecartFloatStateHelper.getFloatTime(cart)
+                + " offRail=" + MinecartFloatStateHelper.isOffRail(cart)
+                + " incline=" + MinecartFloatStateHelper.getIncline(cart)
+                + " storedShape=" + MinecartFloatStateHelper.getRailShapeName(cart)
                 + " motionYaw=" + deg((float) (Math.atan2(motion.z, motion.x) * 180.0D / Math.PI))
                 + " motionH=" + String.format(Locale.ROOT, "%.3f", motion.horizontalDistance())
                 + " travelYaw=" + deg((float) (Math.atan2(dz, dx) * 180.0D / Math.PI))
