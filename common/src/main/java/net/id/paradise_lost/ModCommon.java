@@ -20,6 +20,7 @@ import net.id.paradise_lost.registry.StructureProcessorsRegistry;
 import net.id.paradise_lost.screen.ParadiseLostScreens;
 import net.id.paradise_lost.util.ParadiseLostCriteria;
 import net.id.paradise_lost.util.ParadiseLostDamageTypes;
+import net.id.paradise_lost.util.ParadiseLostMapColorUtil;
 import net.id.paradise_lost.util.ParadiseLostSoundEvents;
 import net.id.paradise_lost.particle.ParadiseLostParticleTypes;
 import net.id.paradise_lost.world.ParadiseLostGameRules;
@@ -53,6 +54,7 @@ public final class ModCommon {
         StructureProcessorsRegistry.init();
         ParadiseLostBlockEntityTypes.init();
         ParadiseLostMapDecorationTypes.init();
+        ParadiseLostMapColorUtil.init();
         ParadiseLostRecipeTypes.init();
         ParadiseLostCommands.init();
         ParadiseLostGameRules.init();
