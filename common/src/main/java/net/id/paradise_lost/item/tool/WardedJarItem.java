@@ -16,10 +16,10 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import org.jetbrains.annotations.Nullable;
 
 public class WardedJarItem extends Item {
     private final EntityType<?> containedEntityType;
@@ -45,38 +46,41 @@ public class WardedJarItem extends Item {
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity entity, InteractionHand hand) {
         if (this.containedEntityType != null) return InteractionResult.PASS;
-        Level world = player.level();
-        if (entity.getType().equals(EntityType.ALLAY)) {
-            ItemEntity itemEntity = new ItemEntity(world, entity.getX(), entity.getY(), entity.getZ(), entity.getItemInHand(InteractionHand.MAIN_HAND));
-            itemEntity.setDefaultPickUpDelay();
-            entity.discard();
-            world.addFreshEntity(itemEntity);
-            player.playSound(ParadiseLostSoundEvents.ITEM_WARDED_JAR_IN, 1.0F, 1.0F);
-            fillJar(stack, player, hand, new ItemStack(ItemRegistry.WARDED_JAR_ALLAY.get()));
-            return InteractionResult.SUCCESS;
-        } else if (entity.getType().equals(EntityRegistry.QUINT.get())) {
-            entity.discard();
-            player.playSound(ParadiseLostSoundEvents.ITEM_WARDED_JAR_IN, 1.0F, 1.0F);
-            fillJar(stack, player, hand, new ItemStack(ItemRegistry.WARDED_JAR_QUINT.get()));
+        EntityType<?> type = entity.getType();
+        if (type.equals(EntityType.ALLAY) || type.equals(EntityRegistry.QUINT.get())) {
+            fillJar(stack, player, hand, entity);
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
     }
 
-    private static void fillJar(ItemStack stack, Player player, InteractionHand hand, ItemStack filled) {
-        if (stack.getCount() == 1 && !player.hasInfiniteMaterials()) {
-            player.setItemInHand(hand, filled);
+    private static void fillJar(ItemStack stack, Player player, InteractionHand hand, LivingEntity entity) {
+        ItemStack filled = new ItemStack(entity.getType().equals(EntityType.ALLAY)
+                ? ItemRegistry.WARDED_JAR_ALLAY.get()
+                : ItemRegistry.WARDED_JAR_QUINT.get());
+        if (player.hasInfiniteMaterials()) {
+            player.getInventory().add(filled);
         } else {
-            stack.consume(1, player);
-            if (!player.getInventory().add(filled)) player.drop(filled, false);
+            player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, filled, false));
         }
+        player.playSound(ParadiseLostSoundEvents.ITEM_WARDED_JAR_IN, 1.0F, 1.0F);
+        entity.discard();
+    }
+
+    @Nullable
+    private Entity release(ServerLevel level, ItemStack stack, @Nullable Player player, BlockPos pos, boolean alignPosition, boolean invertY) {
+        return this.containedEntityType.spawn(level, stack, player, pos, MobSpawnType.MOB_SUMMONED, alignPosition, invertY);
+    }
+
+    private static ItemStack emptyJar(ItemStack held, Player player) {
+        return player.hasInfiniteMaterials() ? held : new ItemStack(ItemRegistry.WARDED_JAR.get());
     }
 
     public InteractionResult useOn(UseOnContext context) {
         if (this.containedEntityType == null) return InteractionResult.PASS;
         Level world = context.getLevel();
         Player user = context.getPlayer();
-        if (world instanceof ServerLevel slevel) {
+        if (world instanceof ServerLevel serverLevel) {
             ItemStack itemStack = context.getItemInHand();
             BlockPos blockPos = context.getClickedPos();
             Direction direction = context.getClickedFace();
@@ -87,11 +91,9 @@ public class WardedJarItem extends Item {
             } else {
                 blockPos2 = blockPos.relative(direction);
             }
-            if (containedEntityType.spawn((ServerLevel) world, itemStack, context.getPlayer(), blockPos2, MobSpawnType.MOB_SUMMONED, true, false) != null) {
-                itemStack.consume(1, user);
-                slevel.playSound(user, user.blockPosition(), ParadiseLostSoundEvents.ITEM_WARDED_JAR_OUT, SoundSource.PLAYERS, 1.0F, 1.0F);
-                context.getPlayer().addItem(new ItemStack(ItemRegistry.WARDED_JAR.get()));
-                world.gameEvent(context.getPlayer(), GameEvent.ENTITY_PLACE, blockPos);
+            if (this.release(serverLevel, itemStack, user, blockPos2, true, false) != null && user != null) {
+                user.setItemInHand(context.getHand(), emptyJar(itemStack, user));
+                world.gameEvent(user, GameEvent.ENTITY_PLACE, blockPos);
             }
         }
         world.playSound(user, user.blockPosition(), ParadiseLostSoundEvents.ITEM_WARDED_JAR_OUT, SoundSource.PLAYERS, 1.0F, 1.0F);
@@ -112,15 +114,14 @@ public class WardedJarItem extends Item {
             if (!(world.getBlockState(blockPos).getBlock() instanceof LiquidBlock)) {
                 return InteractionResultHolder.pass(itemStack);
             } else if (world.mayInteract(user, blockPos) && user.mayUseItemAt(blockPos, blockHitResult.getDirection(), itemStack)) {
-                Entity entity = this.containedEntityType.spawn((ServerLevel) world, itemStack, user, blockPos, MobSpawnType.MOB_SUMMONED, false, false);
+                Entity entity = this.release((ServerLevel) world, itemStack, user, blockPos, false, false);
                 if (entity == null) {
                     return InteractionResultHolder.pass(itemStack);
                 } else {
-                    itemStack.consume(1, user);
                     user.awardStat(Stats.ITEM_USED.get(this));
                     world.playSound(user, user.blockPosition(), ParadiseLostSoundEvents.ITEM_WARDED_JAR_OUT, SoundSource.PLAYERS, 1.0F, 1.0F);
                     world.gameEvent(user, GameEvent.ENTITY_PLACE, entity.position());
-                    return new InteractionResultHolder<>(InteractionResult.SUCCESS, new ItemStack(ItemRegistry.WARDED_JAR.get()));
+                    return new InteractionResultHolder<>(InteractionResult.SUCCESS, emptyJar(itemStack, user));
                 }
             } else {
                 return InteractionResultHolder.fail(itemStack);
