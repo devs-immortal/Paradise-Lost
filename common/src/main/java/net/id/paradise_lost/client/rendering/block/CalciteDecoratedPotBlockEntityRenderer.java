@@ -60,28 +60,28 @@ public class CalciteDecoratedPotBlockEntityRenderer implements BlockEntityRender
     private final ModelPart right;
     private final ModelPart top;
     private final ModelPart bottom;
-    private static final float field_46728 = 0.125F;
+    private static final float WOBBLE_AMPLITUDE = 0.125F;
 
     public CalciteDecoratedPotBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
-        ModelPart modelPart = context.bakeLayer(ModelLayers.DECORATED_POT_BASE);
-        this.neck = modelPart.getChild(PartNames.NECK);
-        this.top = modelPart.getChild("top");
-        this.bottom = modelPart.getChild("bottom");
-        ModelPart modelPart2 = context.bakeLayer(ModelLayers.DECORATED_POT_SIDES);
-        this.front = modelPart2.getChild("front");
-        this.back = modelPart2.getChild("back");
-        this.left = modelPart2.getChild("left");
-        this.right = modelPart2.getChild("right");
+        ModelPart baseRoot = context.bakeLayer(ModelLayers.DECORATED_POT_BASE);
+        this.neck = baseRoot.getChild(PartNames.NECK);
+        this.top = baseRoot.getChild("top");
+        this.bottom = baseRoot.getChild("bottom");
+        ModelPart sidesRoot = context.bakeLayer(ModelLayers.DECORATED_POT_SIDES);
+        this.front = sidesRoot.getChild("front");
+        this.back = sidesRoot.getChild("back");
+        this.left = sidesRoot.getChild("left");
+        this.right = sidesRoot.getChild("right");
     }
 
     public static LayerDefinition getTopBottomNeckTexturedModelData() {
         MeshDefinition modelData = new MeshDefinition();
         PartDefinition modelPartData = modelData.getRoot();
-        CubeDeformation dilation = new CubeDeformation(0.2F);
-        CubeDeformation dilation2 = new CubeDeformation(-0.1F);
+        CubeDeformation rimDeformation = new CubeDeformation(0.2F);
+        CubeDeformation neckDeformation = new CubeDeformation(-0.1F);
         modelPartData.addOrReplaceChild(
                 PartNames.NECK,
-                CubeListBuilder.create().texOffs(0, 0).addBox(4.0F, 17.0F, 4.0F, 8.0F, 3.0F, 8.0F, dilation2).texOffs(0, 5).addBox(5.0F, 20.0F, 5.0F, 6.0F, 1.0F, 6.0F, dilation),
+                CubeListBuilder.create().texOffs(0, 0).addBox(4.0F, 17.0F, 4.0F, 8.0F, 3.0F, 8.0F, neckDeformation).texOffs(0, 5).addBox(5.0F, 20.0F, 5.0F, 6.0F, 1.0F, 6.0F, rimDeformation),
                 PartPose.offsetAndRotation(0.0F, 37.0F, 16.0F, (float) Math.PI, 0.0F, 0.0F)
         );
         CubeListBuilder modelPartBuilder = CubeListBuilder.create().texOffs(-14, 13).addBox(0.0F, 0.0F, 0.0F, 14.0F, 0.0F, 14.0F);
@@ -130,7 +130,7 @@ public class CalciteDecoratedPotBlockEntityRenderer implements BlockEntityRender
     }
 
     public void render(
-            CalciteDecoratedPotBlockEntity decoratedPotBlockEntity, float f, PoseStack matrixStack, MultiBufferSource vertexConsumerProvider, int i, int j
+            CalciteDecoratedPotBlockEntity decoratedPotBlockEntity, float partialTick, PoseStack matrixStack, MultiBufferSource vertexConsumerProvider, int light, int overlay
     ) {
         matrixStack.pushPose();
         Direction direction = decoratedPotBlockEntity.getDirection();
@@ -139,31 +139,31 @@ public class CalciteDecoratedPotBlockEntityRenderer implements BlockEntityRender
         matrixStack.translate(-0.5, 0.0, -0.5);
         DecoratedPotBlockEntity.WobbleStyle wobbleType = decoratedPotBlockEntity.lastWobbleStyle;
         if (wobbleType != null && decoratedPotBlockEntity.getLevel() != null) {
-            float g = ((float) (decoratedPotBlockEntity.getLevel().getGameTime() - decoratedPotBlockEntity.wobbleStartedAtTick) + f) / (float) wobbleType.duration;
-            if (g >= 0.0F && g <= 1.0F) {
+            float wobbleProgress = ((float) (decoratedPotBlockEntity.getLevel().getGameTime() - decoratedPotBlockEntity.wobbleStartedAtTick) + partialTick) / (float) wobbleType.duration;
+            if (wobbleProgress >= 0.0F && wobbleProgress <= 1.0F) {
                 if (wobbleType == DecoratedPotBlockEntity.WobbleStyle.POSITIVE) {
-                    float k = g * (float) (Math.PI * 2);
-                    float l = -1.5F * (Mth.cos(k) + 0.5F) * Mth.sin(k / 2.0F);
-                    matrixStack.rotateAround(Axis.XP.rotation(l * 0.015625F), 0.5F, 0.0F, 0.5F);
-                    float m = Mth.sin(k);
-                    matrixStack.rotateAround(Axis.ZP.rotation(m * 0.015625F), 0.5F, 0.0F, 0.5F);
+                    float angle = wobbleProgress * (float) (Math.PI * 2);
+                    float tiltX = -1.5F * (Mth.cos(angle) + 0.5F) * Mth.sin(angle / 2.0F);
+                    matrixStack.rotateAround(Axis.XP.rotation(tiltX * 0.015625F), 0.5F, 0.0F, 0.5F);
+                    float tiltZ = Mth.sin(angle);
+                    matrixStack.rotateAround(Axis.ZP.rotation(tiltZ * 0.015625F), 0.5F, 0.0F, 0.5F);
                 } else {
-                    float h = Mth.sin(-g * 3.0F * (float) Math.PI) * 0.125F;
-                    float k = 1.0F - g;
-                    matrixStack.rotateAround(Axis.YP.rotation(h * k), 0.5F, 0.0F, 0.5F);
+                    float twist = Mth.sin(-wobbleProgress * 3.0F * (float) Math.PI) * WOBBLE_AMPLITUDE;
+                    float fade = 1.0F - wobbleProgress;
+                    matrixStack.rotateAround(Axis.YP.rotation(twist * fade), 0.5F, 0.0F, 0.5F);
                 }
             }
         }
 
         VertexConsumer vertexConsumer = CALCITE_DECORATED_POT_BASE.buffer(vertexConsumerProvider, RenderType::entitySolid);
-        this.neck.render(matrixStack, vertexConsumer, i, j);
-        this.top.render(matrixStack, vertexConsumer, i, j);
-        this.bottom.render(matrixStack, vertexConsumer, i, j);
+        this.neck.render(matrixStack, vertexConsumer, light, overlay);
+        this.top.render(matrixStack, vertexConsumer, light, overlay);
+        this.bottom.render(matrixStack, vertexConsumer, light, overlay);
         PotDecorations sherds = decoratedPotBlockEntity.getDecorations();
-        this.renderDecoratedSide(this.front, matrixStack, vertexConsumerProvider, i, j, getTextureIdFromSherd(sherds.front()));
-        this.renderDecoratedSide(this.back, matrixStack, vertexConsumerProvider, i, j, getTextureIdFromSherd(sherds.back()));
-        this.renderDecoratedSide(this.left, matrixStack, vertexConsumerProvider, i, j, getTextureIdFromSherd(sherds.left()));
-        this.renderDecoratedSide(this.right, matrixStack, vertexConsumerProvider, i, j, getTextureIdFromSherd(sherds.right()));
+        this.renderDecoratedSide(this.front, matrixStack, vertexConsumerProvider, light, overlay, getTextureIdFromSherd(sherds.front()));
+        this.renderDecoratedSide(this.back, matrixStack, vertexConsumerProvider, light, overlay, getTextureIdFromSherd(sherds.back()));
+        this.renderDecoratedSide(this.left, matrixStack, vertexConsumerProvider, light, overlay, getTextureIdFromSherd(sherds.left()));
+        this.renderDecoratedSide(this.right, matrixStack, vertexConsumerProvider, light, overlay, getTextureIdFromSherd(sherds.right()));
         matrixStack.popPose();
     }
 

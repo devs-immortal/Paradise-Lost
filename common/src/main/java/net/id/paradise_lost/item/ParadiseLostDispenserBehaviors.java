@@ -64,8 +64,8 @@ public class ParadiseLostDispenserBehaviors {
 
             try {
                 entityType.spawn(pointer.level(), stack, null, pointer.pos().relative(direction), MobSpawnType.DISPENSER, direction != Direction.UP, false);
-            } catch (Exception var6) {
-                LOGGER.error("Error while dispensing spawn egg from dispenser at {}", pointer.pos(), var6);
+            } catch (Exception e) {
+                LOGGER.error("Error while dispensing spawn egg from dispenser at {}", pointer.pos(), e);
                 return ItemStack.EMPTY;
             }
 

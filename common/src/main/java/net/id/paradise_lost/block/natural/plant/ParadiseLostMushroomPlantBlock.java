@@ -46,31 +46,31 @@ public class ParadiseLostMushroomPlantBlock extends BushBlock implements Bonemea
     @Override
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         if (random.nextInt(25) == 0) {
-            int i = 5;
-            Iterator var7 = BlockPos.betweenClosed(pos.offset(-4, -1, -4), pos.offset(4, 1, 4)).iterator();
+            int remaining = 5;
+            Iterator nearby = BlockPos.betweenClosed(pos.offset(-4, -1, -4), pos.offset(4, 1, 4)).iterator();
 
-            while (var7.hasNext()) {
-                BlockPos blockPos = (BlockPos) var7.next();
+            while (nearby.hasNext()) {
+                BlockPos blockPos = (BlockPos) nearby.next();
                 if (world.getBlockState(blockPos).is(this)) {
-                    --i;
-                    if (i <= 0) {
+                    --remaining;
+                    if (remaining <= 0) {
                         return;
                     }
                 }
             }
 
-            BlockPos blockPos2 = pos.offset(random.nextInt(3) - 1, random.nextInt(2) - random.nextInt(2), random.nextInt(3) - 1);
+            BlockPos spreadPos = pos.offset(random.nextInt(3) - 1, random.nextInt(2) - random.nextInt(2), random.nextInt(3) - 1);
 
-            for (int k = 0; k < 4; ++k) {
-                if (world.isEmptyBlock(blockPos2) && state.canSurvive(world, blockPos2)) {
-                    pos = blockPos2;
+            for (int attempt = 0; attempt < 4; ++attempt) {
+                if (world.isEmptyBlock(spreadPos) && state.canSurvive(world, spreadPos)) {
+                    pos = spreadPos;
                 }
 
-                blockPos2 = pos.offset(random.nextInt(3) - 1, random.nextInt(2) - random.nextInt(2), random.nextInt(3) - 1);
+                spreadPos = pos.offset(random.nextInt(3) - 1, random.nextInt(2) - random.nextInt(2), random.nextInt(3) - 1);
             }
 
-            if (world.isEmptyBlock(blockPos2) && state.canSurvive(world, blockPos2)) {
-                world.setBlock(blockPos2, state, 2);
+            if (world.isEmptyBlock(spreadPos) && state.canSurvive(world, spreadPos)) {
+                world.setBlock(spreadPos, state, 2);
             }
         }
 

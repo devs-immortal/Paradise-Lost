@@ -465,14 +465,14 @@ public class MoaEntity extends SaddleMountEntity implements PlayerRideableJumpin
 
     @Nullable
     public LivingEntity getControllingPassenger() {
-        Entity var3 = this.getFirstPassenger();
-        if (var3 instanceof Mob mobEntity) {
+        Entity passenger = this.getFirstPassenger();
+        if (passenger instanceof Mob mobEntity) {
             return mobEntity;
         } else {
             if (this.isSaddled()) {
-                var3 = this.getFirstPassenger();
-                if (var3 instanceof Player) {
-                    Player playerEntity = (Player) var3;
+                passenger = this.getFirstPassenger();
+                if (passenger instanceof Player) {
+                    Player playerEntity = (Player) passenger;
                     return playerEntity;
                 }
             }
@@ -481,12 +481,12 @@ public class MoaEntity extends SaddleMountEntity implements PlayerRideableJumpin
     }
 
     protected Vec3 getRiddenInput(Player controllingPlayer, Vec3 movementInput) {
-        float f = controllingPlayer.xxa * 0.5F;
-        float g = controllingPlayer.zza;
-        if (g <= 0.0F) {
-            g *= 0.25F;
+        float strafe = controllingPlayer.xxa * 0.5F;
+        float forward = controllingPlayer.zza;
+        if (forward <= 0.0F) {
+            forward *= 0.25F;
         }
-        return new Vec3(f, 0.0, g);
+        return new Vec3(strafe, 0.0, forward);
     }
 
     float curGroundSpeed;
@@ -510,11 +510,11 @@ public class MoaEntity extends SaddleMountEntity implements PlayerRideableJumpin
     }
 
     private void calcAcceleration(Player controllingPlayer) {
-        float f = controllingPlayer.xxa * 0.5F;
-        float g = controllingPlayer.zza;
+        float strafe = controllingPlayer.xxa * 0.5F;
+        float forward = controllingPlayer.zza;
         calcGeneSpeeds();
 
-        if (g == 0 && f == 0) {
+        if (forward == 0 && strafe == 0) {
             curGroundSpeed = Math.clamp(curGroundSpeed - 0.1f, genGroundSpeed * 0.07f, genGroundSpeed);
             curFlyingSpeed = Math.clamp(curFlyingSpeed - 0.05f, genGlidingSpeed * 0.1f, genGlidingSpeed);
         } else {
@@ -550,9 +550,9 @@ public class MoaEntity extends SaddleMountEntity implements PlayerRideableJumpin
 
                     if (movement.z > 0.0F) {
                         float adjVel = jumpStrength / 3F;
-                        float i = Mth.sin(this.getYRot() * 0.017453292F);
-                        float j = Mth.cos(this.getYRot() * 0.017453292F);
-                        this.setDeltaMovement(this.getDeltaMovement().add(-0.3F * i * adjVel, 0.0D, 0.3F * j * adjVel));
+                        float sinYaw = Mth.sin(this.getYRot() * 0.017453292F);
+                        float cosYaw = Mth.cos(this.getYRot() * 0.017453292F);
+                        this.setDeltaMovement(this.getDeltaMovement().add(-0.3F * sinYaw * adjVel, 0.0D, 0.3F * cosYaw * adjVel));
                     }
                     this.jumpStrength = 0.0F;
                 }
@@ -583,11 +583,11 @@ public class MoaEntity extends SaddleMountEntity implements PlayerRideableJumpin
     @Override
     protected void updateWalkAnimation(float posDelta) {
         if (isVehicle()) {
-            float f = Math.min(posDelta * 2.0F, 0.5F);
-            this.walkAnimation.update(f, 0.4F);
+            float speed = Math.min(posDelta * 2.0F, 0.5F);
+            this.walkAnimation.update(speed, 0.4F);
         } else {
-            float f = Math.min(posDelta * 4.0F, 3F);
-            this.walkAnimation.update(f, 0.5F);
+            float speed = Math.min(posDelta * 4.0F, 3F);
+            this.walkAnimation.update(speed, 0.5F);
         }
 
     }
