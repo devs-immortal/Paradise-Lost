@@ -37,7 +37,7 @@ public abstract class MappedRegistryAliasMixin {
             at = @At("RETURN")
     )
     private Optional<?> paradiseLost$aliasGetHolderByLocation(Optional<?> original, ResourceLocation id) {
-        if (original != null && !original.isEmpty()) {
+        if (original.isPresent()) {
             return original;
         }
         ResourceLocation mapped = ParadiseLostAliasFix.resolve(id);
@@ -79,7 +79,7 @@ public abstract class MappedRegistryAliasMixin {
             at = @At("RETURN")
     )
     private Optional<?> paradiseLost$aliasGetHolderByKey(Optional<?> original, ResourceKey<?> key) {
-        if ((original != null && !original.isEmpty()) || key == null) {
+        if (original.isPresent() || key == null) {
             return original;
         }
         ResourceLocation mapped = ParadiseLostAliasFix.resolve(key.location());
