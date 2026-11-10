@@ -557,6 +557,7 @@
   "gamerule.bloomedCalciteTransformation": "Bloomed Calcite will transform",
   "gamerule.paradiseVoidKills": "Paradise's void kills entities",
   "gamerule.paradisePortalEnabled": "Paradise Portal is enabled",
+  "gamerule.anchoredRunMidair": "Players can start running mid-air while anchored",
 
 
   "tag.item.paradise_lost.aurel_logs": "Aurel Logs",

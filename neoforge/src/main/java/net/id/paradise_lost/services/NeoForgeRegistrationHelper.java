@@ -2,8 +2,11 @@ package net.id.paradise_lost.services;
 
 import net.id.paradise_lost.platform.services.IRegistrationHelper;
 import net.id.paradise_lost.registry.ItemRegistry;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.GameRules;
+
+import java.util.function.BiConsumer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FireBlock;
@@ -70,8 +73,13 @@ public class NeoForgeRegistrationHelper implements IRegistrationHelper {
     }
 
     @Override
-    public GameRules.Key<GameRules.BooleanValue> registerBooleanGameRule(String name, GameRules.Category category, boolean defaultValue) {
-        return GameRules.register(name, category, GameRules.BooleanValue.create(defaultValue));
+    public GameRules.Key<GameRules.BooleanValue> registerBooleanGameRule(
+            String name,
+            GameRules.Category category,
+            boolean defaultValue,
+            BiConsumer<MinecraftServer, GameRules.BooleanValue> onChanged
+    ) {
+        return GameRules.register(name, category, GameRules.BooleanValue.create(defaultValue, onChanged));
     }
 
     @Override
