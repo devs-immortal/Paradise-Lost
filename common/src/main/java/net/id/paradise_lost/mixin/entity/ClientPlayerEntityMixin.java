@@ -83,7 +83,7 @@ public abstract class ClientPlayerEntityMixin extends Player {
 
     @Unique
     private boolean paradiseLost$anchoredRunAllowed() {
-        return this.level().getGameRules().getBoolean(ParadiseLostGameRules.RUN_MIDAIR) &&
-                FloatyLeggingsItem.isAnchored(this);
+        return this.level().getGameRules().getBoolean(ParadiseLostGameRules.RUN_MIDAIR)
+                && FloatyLeggingsItem.isAnchored(this);
     }
 }
