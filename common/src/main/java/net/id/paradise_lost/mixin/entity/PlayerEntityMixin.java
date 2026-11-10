@@ -151,6 +151,21 @@ public abstract class PlayerEntityMixin extends LivingEntity implements Paradise
         return player.position().add(offset.yRot((float) Math.toRadians(-player.yBodyRot)));
     }
 
+    @Inject(method = "updateSwimming", at = @At("HEAD"), cancellable = true)
+    private void paradiseLost$anchoredDoesNotSwim(CallbackInfo ci) {
+        if (FloatyLeggingsItem.isAnchored((Player) (Object) this)) {
+            this.setSwimming(false);
+            ci.cancel();
+        }
+    }
+
+    @Inject(method = "isSwimming", at = @At("HEAD"), cancellable = true)
+    private void paradiseLost$anchoredIsNotSwimming(CallbackInfoReturnable<Boolean> cir) {
+        if (FloatyLeggingsItem.isAnchored((Player) (Object) this)) {
+            cir.setReturnValue(false);
+        }
+    }
+
     @Inject(method = "travel", at = @At("HEAD"), cancellable = true)
     private void paradiseLost$floatyTravel(Vec3 movementInput, CallbackInfo ci) {
         Player player = (Player) (Object) this;
