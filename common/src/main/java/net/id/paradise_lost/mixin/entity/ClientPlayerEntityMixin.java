@@ -67,7 +67,7 @@ public abstract class ClientPlayerEntityMixin {
 
     @WrapOperation(
             method = "aiStep",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;onGround()Z")
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;onGround()Z", ordinal = 0)
     )
     private boolean paradiseLost$anchoredCanStartRunning(LocalPlayer player, Operation<Boolean> onGround) {
         return onGround.call(player) || GameRuleHelper.clientAnchoredRun() && FloatyLeggingsItem.isAnchored(player);
