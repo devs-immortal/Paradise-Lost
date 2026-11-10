@@ -554,10 +554,10 @@
   "filled_map.paradise_lost.vault": "Vault Explorer Map",
   "filled_map.paradise_lost.palace": "Palace Explorer Map",
 
-  "gamerule.bloomedCalciteTransformation": "Bloomed Calcite will transform",
+  "gamerule.bloomedCalciteTransformation": "Bloomed Calcite transforms via Health Potions",
   "gamerule.paradiseVoidKills": "Paradise's void kills entities",
   "gamerule.paradisePortalEnabled": "Paradise Portal is enabled",
-  "gamerule.anchoredRunMidair": "Players can start running mid-air while anchored",
+  "gamerule.anchoredRunMidair": "Players can run mid-air while anchored",
 
 
   "tag.item.paradise_lost.aurel_logs": "Aurel Logs",
