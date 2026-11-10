@@ -2,17 +2,13 @@ package net.id.paradise_lost.mixin.entity;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.mojang.authlib.GameProfile;
 import net.id.paradise_lost.block.blockentity.ParadiseHangingSignBlockEntity;
 import net.id.paradise_lost.item.armor.FloatyLeggingsItem;
-import net.id.paradise_lost.world.ParadiseLostGameRules;
+import net.id.paradise_lost.util.GameRuleHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.HangingSignEditScreen;
 import net.minecraft.client.player.Input;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LocalPlayer.class)
-public abstract class ClientPlayerEntityMixin extends Player {
+public abstract class ClientPlayerEntityMixin {
 
     @Shadow
     @Final
@@ -31,10 +27,6 @@ public abstract class ClientPlayerEntityMixin extends Player {
 
     @Shadow
     public Input input;
-
-    protected ClientPlayerEntityMixin(Level level, BlockPos pos, float yRot, GameProfile profile) {
-        super(level, pos, yRot, profile);
-    }
 
     @Unique
     private int paradiseLost$floatyJumpToggleTimer = 0;
@@ -78,12 +70,6 @@ public abstract class ClientPlayerEntityMixin extends Player {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;onGround()Z")
     )
     private boolean paradiseLost$anchoredCanStartRunning(LocalPlayer player, Operation<Boolean> onGround) {
-        return onGround.call(player) || paradiseLost$anchoredRunAllowed();
-    }
-
-    @Unique
-    private boolean paradiseLost$anchoredRunAllowed() {
-        return this.level().getGameRules().getBoolean(ParadiseLostGameRules.RUN_MIDAIR)
-                && FloatyLeggingsItem.isAnchored(this);
+        return onGround.call(player) || GameRuleHelper.clientAnchoredRun() && FloatyLeggingsItem.isAnchored(player);
     }
 }

@@ -2,6 +2,7 @@ package net.id.paradise_lost.test.client;
 
 import net.id.paradise_lost.test.Recorder;
 import net.id.paradise_lost.test.Step;
+import net.id.paradise_lost.util.GameRuleHelper;
 import net.id.paradise_lost.world.ParadiseLostGameRules;
 import net.id.paradise_lost.entity.ParadiseLostEntityExtensions;
 import net.id.paradise_lost.item.ParadiseLostDataComponentTypes;
@@ -407,7 +408,7 @@ public final class ItemTests {
                 Step.until("anchored under the water with water breathing", 40, () -> {
                     var player = client().player;
                     MobEffectInstance breathing = player.getEffect(MobEffects.WATER_BREATHING);
-                    return client().level.getGameRules().getBoolean(ParadiseLostGameRules.RUN_MIDAIR)
+                    return GameRuleHelper.clientAnchoredRun()
                             && ((ParadiseLostEntityExtensions) player).isFloatyAnchored()
                             && !player.onGround()
                             && player.isInWater()
@@ -472,7 +473,7 @@ public final class ItemTests {
             });
         }));
         steps.add(Step.until(allow ? "client rule on" : "client rule off", 40,
-                () -> client().level.getGameRules().getBoolean(ParadiseLostGameRules.RUN_MIDAIR) == allow));
+                () -> GameRuleHelper.clientAnchoredRun() == allow));
         steps.add(Step.run(5, () -> onServer(server -> ((ParadiseLostEntityExtensions) player(server)).setFloatyAnchored(true))));
         steps.add(Step.until("anchored in the air", 20,
                 () -> ((ParadiseLostEntityExtensions) client().player).isFloatyAnchored() && !client().player.onGround()));

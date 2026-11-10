@@ -1,8 +1,7 @@
 package net.id.paradise_lost.networking.packet;
 
 import net.id.paradise_lost.ModConstants;
-import net.id.paradise_lost.world.ParadiseLostGameRules;
-import net.minecraft.client.Minecraft;
+import net.id.paradise_lost.util.GameRuleHelper;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -22,11 +21,6 @@ public record AnchoredRunMidairS2CPacket(boolean enabled) implements S2CModPacke
 
     @Override
     public void handleClient() {
-        Minecraft minecraft = Minecraft.getInstance();
-        minecraft.execute(() -> {
-            if (minecraft.level != null) {
-                minecraft.level.getGameRules().getRule(ParadiseLostGameRules.RUN_MIDAIR).set(enabled, null);
-            }
-        });
+        GameRuleHelper.setClientAnchoredRun(this.enabled);
     }
 }

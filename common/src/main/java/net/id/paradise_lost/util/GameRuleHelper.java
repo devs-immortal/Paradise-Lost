@@ -9,6 +9,19 @@ import net.minecraft.world.level.GameRules;
 import static net.id.paradise_lost.world.ParadiseLostGameRules.RUN_MIDAIR;
 
 public final class GameRuleHelper {
+    private static boolean clientAnchoredRun;
+
+    private GameRuleHelper() {
+    }
+
+    public static boolean clientAnchoredRun() {
+        return clientAnchoredRun;
+    }
+
+    public static void setClientAnchoredRun(boolean enabled) {
+        clientAnchoredRun = enabled;
+    }
+
     public static void syncAnchoredRun(ServerPlayer player) {
         PacketHandler.sendToClient(new AnchoredRunMidairS2CPacket(player.server.getGameRules().getBoolean(RUN_MIDAIR)), player);
     }

@@ -9,7 +9,6 @@ import net.minecraft.server.level.ClientInformation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.CommonListenerCookie;
 import net.minecraft.server.players.PlayerList;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -32,13 +31,5 @@ public class PlayerManagerMixin {
     @Inject(method = "placeNewPlayer", at = @At("TAIL"))
     private void paradiseLost$syncAnchoredRunOnJoin(Connection connection, ServerPlayer player, CommonListenerCookie cookie, CallbackInfo ci) {
         GameRuleHelper.syncAnchoredRun(player);
-    }
-
-    @Inject(method = "respawn", at = @At("RETURN"))
-    private void paradiseLost$syncAnchoredRunOnRespawn(ServerPlayer player, boolean keepInventory, Entity.RemovalReason reason, CallbackInfoReturnable<ServerPlayer> cir) {
-        ServerPlayer respawned = cir.getReturnValue();
-        if (respawned != null) {
-            GameRuleHelper.syncAnchoredRun(respawned);
-        }
     }
 }
