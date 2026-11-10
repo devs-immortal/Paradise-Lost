@@ -394,7 +394,6 @@ public final class ItemTests {
                     client().options.keySprint.setDown(false);
                     client().player.setSprinting(false);
                     client().player.setSwimming(false);
-                    ((ParadiseLostEntityExtensions) client().player).setFloatyAnchored(true);
                     onServer(server -> {
                         ServerPlayer player = player(server);
                         player.setSprinting(false);
@@ -402,9 +401,9 @@ public final class ItemTests {
                         player.setItemSlot(EquipmentSlot.LEGS, new ItemStack(FLOATY_LEGGINGS.get()));
                         server.getGameRules().getRule(ParadiseLostGameRules.RUN_MIDAIR).set(true, server);
                         buildGlassWaterTank(player);
-                        ((ParadiseLostEntityExtensions) player).setFloatyAnchored(true);
                     });
                 }),
+                Step.run(5, () -> onServer(server -> ((ParadiseLostEntityExtensions) player(server)).setFloatyAnchored(true))),
                 Step.until("anchored under the water with water breathing", 40, () -> {
                     var player = client().player;
                     MobEffectInstance breathing = player.getEffect(MobEffects.WATER_BREATHING);
@@ -509,8 +508,9 @@ public final class ItemTests {
 
     private static void buildGlassWaterTank(ServerPlayer player) {
         BlockPos center = player.blockPosition();
-        tankFrom = center.offset(-2, -1, -2);
-        tankTo = center.offset(2, 4, 2);
+        BlockPos far = center.relative(player.getDirection(), 10);
+        tankFrom = new BlockPos(Math.min(center.getX(), far.getX()) - 2, center.getY() - 1, Math.min(center.getZ(), far.getZ()) - 2);
+        tankTo = new BlockPos(Math.max(center.getX(), far.getX()) + 2, center.getY() + 4, Math.max(center.getZ(), far.getZ()) + 2);
         ServerLevel world = player.serverLevel();
         BlockState glass = Blocks.GLASS.defaultBlockState();
         BlockState water = Blocks.WATER.defaultBlockState();
