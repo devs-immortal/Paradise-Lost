@@ -32,6 +32,7 @@ import net.id.paradise_lost.block.natural.tree.*;
 import net.id.paradise_lost.block.natural.tree.ParadiseLostLeavesBlock;
 import net.id.paradise_lost.registration.RegistrationProvider;
 import net.id.paradise_lost.registration.RegistryObject;
+import net.id.paradise_lost.sounds.ParadiseSoundTypes;
 import net.id.paradise_lost.tag.ParadiseLostBlockTags;
 import net.id.paradise_lost.world.feature.configured_features.ParadiseLostTreeConfiguredFeatures;
 import net.id.paradise_lost.world.feature.tree.ParadiseLostSaplingGenerators;
@@ -436,7 +437,7 @@ public final class BlockRegistry {
     public static final SimpleBlockSet THATCH_SET = registerSimpleBlockSet("thatch", of().mapColor(MapColor.SAND).strength(0.3f).sound(SoundType.GRASS).instrument(NoteBlockInstrument.BANJO), List.of(compostable15, fuel(100)), List.of(compostable15, fuel(100)), List.of(compostable15, fuel(50)));
 
     private static Properties cloud() {
-        return of().strength(0.2F).sound(SoundType.WOOL).noOcclusion().isRedstoneConductor(never).isSuffocating(never).isViewBlocking(never);
+        return of().strength(0.2F).sound(ParadiseSoundTypes.CLOUD).noOcclusion().isRedstoneConductor(never).isSuffocating(never).isViewBlocking(never);
     }
 
     public static final RegistryObject<Block, ParadiseLostCloudBlock> COLD_CLOUD = add("cold_cloud", () -> new ParadiseLostCloudBlock(cloud().mapColor(MapColor.CLAY)), translucentRenderLayer);

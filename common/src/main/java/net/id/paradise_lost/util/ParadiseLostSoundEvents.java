@@ -22,6 +22,9 @@ public final class ParadiseLostSoundEvents {
     public static final SoundEvent BLOCK_PALACE_DOOR_UNLOCK = register("block.palace_door.unlock");
     public static final SoundEvent BLOCK_SURTRUM_RUSH = register("block.surtrum_air.rush");
     public static final SoundEvent BLOCK_SURTRUM_CRACKLE = register("block.surtrum_air.crackle");
+    public static final SoundEvent BLOCK_CLOUD_BREAK = register("block.cloud.break");
+    public static final SoundEvent BLOCK_CLOUD_PLACE = register("block.cloud.place");
+    public static final SoundEvent BLOCK_CLOUD_STEP = register("block.cloud.step");
 
     public static final Holder<SoundEvent> ITEM_ARMOR_EQUIP_OLVITE = registerReference("item.armor.equip.olvite");
     public static final Holder<SoundEvent> ITEM_ARMOR_EQUIP_GLAZED_GOLD = registerReference("item.armor.equip.glazed_gold");
@@ -30,6 +33,8 @@ public final class ParadiseLostSoundEvents {
     public static final Holder<SoundEvent> ITEM_ARMOR_EQUIP_FLAXWEAVE = registerReference("item.armor.equip.flaxweave");
     public static final SoundEvent ITEM_BLOODSTONE_PRICK = register("item.bloodstone.prick");
     public static final SoundEvent SOUL_BLADE_HARVEST = register("item.soul_blade.harvest");
+    public static final SoundEvent ITEM_WARDED_JAR_OUT = register("item.warded_jar.out");
+    public static final SoundEvent ITEM_WARDED_JAR_IN = register("item.warded_jar.in");
 
     public static final SoundEvent ENTITY_MOA_AMBIENT = register("entity.moa.ambient");
     public static final SoundEvent ENTITY_MOA_AMBIENT_SING = register("entity.moa.ambient.sing");
@@ -40,6 +45,9 @@ public final class ParadiseLostSoundEvents {
     public static final SoundEvent ENTITY_MOA_LAY_EGG = register("entity.moa.lay_egg");
     public static final SoundEvent ENTITY_MOA_EGG_HATCH = register("entity.moa.egg_hatch");
     public static final SoundEvent ENTITY_MOA_STEP = register("entity.moa.step");
+
+    public static final SoundEvent ENTITY_QUINT_AMBIENT = register(("entity.quint.ambient"));
+    public static final SoundEvent ENTITY_QUINT_DEATH = register(("entity.quint.death"));
 
     public static final SoundEvent ENTITY_POPOM_AMBIENT = register(("entity.popom.ambient"));
     public static final SoundEvent ENTITY_POPOM_HURT = register(("entity.popom.hurt"));
