@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.BaseRailBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.RailShape;
 import net.minecraft.world.phys.Vec3;
+
 import java.util.Map;
 
 /**
@@ -131,7 +132,7 @@ public final class MinecartRailMotionHelper {
         boolean ascending = shape.isAscending();
         boolean firstHigh = ascending && first.getY() >= second.getY();
         boolean secondHigh = ascending && second.getY() >= first.getY();
-        return new Face[] { exitFace(pos, first, firstHigh), exitFace(pos, second, secondHigh) };
+        return new Face[]{exitFace(pos, first, firstHigh), exitFace(pos, second, secondHigh)};
     }
 
     private static Face exitFace(BlockPos pos, Vec3i exit, boolean highEnd) {
