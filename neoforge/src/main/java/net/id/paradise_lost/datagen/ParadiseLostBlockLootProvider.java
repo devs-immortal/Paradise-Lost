@@ -26,12 +26,14 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.DynamicLoot;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
+import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
 import net.minecraft.world.level.storage.loot.predicates.LocationCheck;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
@@ -200,7 +202,7 @@ public class ParadiseLostBlockLootProvider extends BlockLootSubProvider {
         addDropsWithShears(BUSH.get());
         addDropsWithShears(SHAMROCK.get());
         addDropsWithShears(MALT_SPRIG.get());
-        addDrop(HONEY_NETTLE.get(), block -> shearsWeightedDrops(HONEY_NETTLE.get(), ItemRegistry.AMADRYS_BUSHEL.get(), UniformGenerator.between(2, 4)));
+        addDrop(HONEY_NETTLE.get(), block -> shearsWeightedDropsTall(HONEY_NETTLE.get(), ItemRegistry.AMADRYS_BUSHEL.get(), UniformGenerator.between(2, 4)));
         addDrop(LIVERWORT.get());
         addDrop(LIVERWORT_CARPET.get());
 
@@ -215,9 +217,9 @@ public class ParadiseLostBlockLootProvider extends BlockLootSubProvider {
                 LootItemBlockStatePropertyCondition.hasBlockStateProperties(AMADRYS.get())
                         .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CropBlock.AGE, 7))));
 
-        addDrop(FLAX.get(), block -> createCropDrops(FLAX.get(), ItemRegistry.FLAXSEED.get(), ItemRegistry.FLAX_THREAD.get(),
+        addDrop(FLAX.get(), block -> tallCropDrops(FLAX.get(), ItemRegistry.FLAX_THREAD.get(), ItemRegistry.FLAXSEED.get(),
                 LootItemBlockStatePropertyCondition.hasBlockStateProperties(FLAX.get())
-                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CropBlock.AGE, 7).hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER))));
+                        .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CropBlock.AGE, 7))));
 
         addDrop(SWEDROOT.get(), block -> createCropDrops(SWEDROOT.get(), ItemRegistry.SWEDROOT.get(), ItemRegistry.SWEDROOT.get(),
                 LootItemBlockStatePropertyCondition.hasBlockStateProperties(SWEDROOT.get())
@@ -276,31 +278,35 @@ public class ParadiseLostBlockLootProvider extends BlockLootSubProvider {
         LootPoolEntryContainer.Builder<?> builder = LootItem.lootTableItem(shortPlant)
                 .apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)))
                 .when(HAS_SHEARS);
+        return tallBlockDrops(tallPlant, builder);
+    }
+
+    private LootTable.Builder tallBlockDrops(Block block, LootPoolEntryContainer.Builder<?> dropBuilder) {
         return LootTable.lootTable()
                 .withPool(
                         LootPool.lootPool()
-                                .add(builder)
+                                .add(dropBuilder)
                                 .when(
-                                        LootItemBlockStatePropertyCondition.hasBlockStateProperties(tallPlant).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER))
+                                        LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER))
                                 )
                                 .when(
                                         LocationCheck.checkLocation(
                                                 LocationPredicate.Builder.location()
-                                                        .setBlock(BlockPredicate.Builder.block().of(tallPlant).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER))),
+                                                        .setBlock(BlockPredicate.Builder.block().of(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER))),
                                                 new BlockPos(0, 1, 0)
                                         )
                                 )
                 )
                 .withPool(
                         LootPool.lootPool()
-                                .add(builder)
+                                .add(dropBuilder)
                                 .when(
-                                        LootItemBlockStatePropertyCondition.hasBlockStateProperties(tallPlant).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER))
+                                        LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER))
                                 )
                                 .when(
                                         LocationCheck.checkLocation(
                                                 LocationPredicate.Builder.location()
-                                                        .setBlock(BlockPredicate.Builder.block().of(tallPlant).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER))),
+                                                        .setBlock(BlockPredicate.Builder.block().of(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER))),
                                                 new BlockPos(0, -1, 0)
                                         )
                                 )
@@ -322,15 +328,17 @@ public class ParadiseLostBlockLootProvider extends BlockLootSubProvider {
         );
     }
 
-    private LootTable.Builder shearsWeightedDrops(Block block, ItemLike drop, NumberProvider provider) {
+    private LootTable.Builder shearsWeightedDropsTall(Block block, ItemLike drop, NumberProvider provider) {
         HolderLookup.RegistryLookup<Enchantment> impl = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
-        LootPoolEntryContainer.Builder<?> builder = this.applyExplosionDecay(
-                block,
-                LootItem.lootTableItem(drop)
-                        .apply(SetItemCountFunction.setCount(provider))
-                        .apply(ApplyBonusCount.addBonusBinomialDistributionCount(impl.getOrThrow(Enchantments.FORTUNE), 0.5714286F, 3))
-        );
-        return createShearsDispatchTable(block, builder);
+        LootPoolEntryContainer.Builder<?> builder = (
+                LootItem.lootTableItem(block)
+                        .when(HAS_SHEARS))
+                .otherwise(
+                                LootItem.lootTableItem(drop)
+                                        .apply(SetItemCountFunction.setCount(provider))
+                                        .apply(ApplyBonusCount.addBonusBinomialDistributionCount(impl.getOrThrow(Enchantments.FORTUNE), 0.5714286F, 3))
+                );
+        return tallBlockDrops(block, builder);
     }
 
     private LootTable.Builder campfireDrops(Block block) {
@@ -371,6 +379,33 @@ public class ParadiseLostBlockLootProvider extends BlockLootSubProvider {
                                 LootPool.lootPool()
                                         .when(condition)
                                         .add(LootItem.lootTableItem(ItemRegistry.FLAXSEED.get()).apply(ApplyBonusCount.addBonusBinomialDistributionCount(impl.getOrThrow(Enchantments.FORTUNE), 0.5714286F, 3)))
+                        )
+        );
+    }
+
+    protected LootTable.Builder tallCropDrops(Block cropBlock, Item grownCropItem, Item seedsItem, LootItemCondition.Builder dropGrownCropCondition) {
+        HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
+        var halfCondition = LootItemBlockStatePropertyCondition.hasBlockStateProperties(cropBlock)
+                .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
+        return this.applyExplosionDecay(
+                cropBlock,
+                LootTable.lootTable()
+                        .withPool(
+                                LootPool.lootPool()
+                                        .when(halfCondition)
+                                        .add((LootItem.lootTableItem(grownCropItem)
+                                                .when(dropGrownCropCondition))
+                                                .otherwise(LootItem.lootTableItem(seedsItem)))
+                        ).withPool(
+                                LootPool.lootPool()
+                                        .when(halfCondition)
+                                        .when(dropGrownCropCondition)
+                                        .add(LootItem.lootTableItem(grownCropItem).apply(ApplyBonusCount.addBonusBinomialDistributionCount(registrylookup.getOrThrow(Enchantments.FORTUNE), 0.5714286F, 3)))
+                        ).withPool(
+                                LootPool.lootPool()
+                                        .when(halfCondition)
+                                        .when(dropGrownCropCondition)
+                                        .add(LootItem.lootTableItem(seedsItem).apply(ApplyBonusCount.addBonusBinomialDistributionCount(registrylookup.getOrThrow(Enchantments.FORTUNE), 0.5714286F, 1)))
                         )
         );
     }

@@ -8,6 +8,15 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "paradise_lost:flax",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "half": "lower"
+          }
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:alternatives",
@@ -19,16 +28,15 @@
                   "block": "paradise_lost:flax",
                   "condition": "minecraft:block_state_property",
                   "properties": {
-                    "age": "7",
-                    "half": "lower"
+                    "age": "7"
                   }
                 }
               ],
-              "name": "paradise_lost:flaxseed"
+              "name": "paradise_lost:flax_thread"
             },
             {
               "type": "minecraft:item",
-              "name": "paradise_lost:flax_thread"
+              "name": "paradise_lost:flaxseed"
             }
           ]
         }
@@ -42,8 +50,14 @@
           "block": "paradise_lost:flax",
           "condition": "minecraft:block_state_property",
           "properties": {
-            "age": "7",
             "half": "lower"
+          }
+        },
+        {
+          "block": "paradise_lost:flax",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "7"
           }
         }
       ],
@@ -62,6 +76,43 @@
             }
           ],
           "name": "paradise_lost:flax_thread"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "paradise_lost:flax",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "half": "lower"
+          }
+        },
+        {
+          "block": "paradise_lost:flax",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "7"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "enchantment": "minecraft:fortune",
+              "formula": "minecraft:binomial_with_bonus_count",
+              "function": "minecraft:apply_bonus",
+              "parameters": {
+                "extra": 1,
+                "probability": 0.5714286
+              }
+            }
+          ],
+          "name": "paradise_lost:flaxseed"
         }
       ],
       "rolls": 1.0
