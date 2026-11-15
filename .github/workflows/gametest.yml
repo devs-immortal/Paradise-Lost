@@ -16,7 +16,7 @@ on:
 jobs:
   game_test:
     name: ${{ matrix.name }} tests
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2604
     timeout-minutes: 30
     env:
       # Read by buildSrc (project-setup.gradle.kts), they win over gradle.properties. Always false on pull requests.
