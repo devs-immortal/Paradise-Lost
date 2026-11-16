@@ -45,8 +45,8 @@ public class IncubatorBlock extends ParadiseLostBlockWithEntity {
     @Override
     public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (!player.isShiftKeyDown() && world.getBlockEntity(pos) instanceof IncubatorBlockEntity incubator) {
-            incubator.handleUse(player, hand, player.getItemInHand(hand));
-            return ItemInteractionResult.sidedSuccess(world.isClientSide());
+            if (incubator.handleUse(player, hand, player.getItemInHand(hand)))
+                return ItemInteractionResult.sidedSuccess(world.isClientSide());
         }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
