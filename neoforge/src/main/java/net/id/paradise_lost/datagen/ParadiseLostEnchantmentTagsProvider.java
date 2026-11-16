@@ -23,6 +23,5 @@ public class ParadiseLostEnchantmentTagsProvider extends EnchantmentTagsProvider
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         tag(EnchantmentTags.TREASURE).add(ParadiseLostEnchantments.RENDING);
-        tag(EnchantmentTags.ON_RANDOM_LOOT).add(ParadiseLostEnchantments.RENDING);
     }
 }
