@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Deque;
 import java.util.List;
 import java.util.Locale;
@@ -27,17 +26,8 @@ public final class TestRun {
         this.log = LoggerFactory.getLogger(loggerName);
         this.hooks = hooks;
         testClasses.forEach(type -> tests.addAll(TestLoader.load(type)));
-        String only = System.getenv("RUN_ONLY");
-        if (only != null) {
-            String[] filters = Arrays.stream(only.split(";"))
-                    .map(String::trim)
-                    .filter(s -> !s.isEmpty())
-                    .toArray(String[]::new);
-            tests.removeIf(test -> Arrays.stream(filters).noneMatch(filter ->
-                    test.group().equalsIgnoreCase(filter)
-                            || test.fullName().equalsIgnoreCase(filter)
-                            || test.name().toLowerCase(Locale.ROOT).contains(filter.toLowerCase(Locale.ROOT))));
-        }
+        TestFilter filter = TestFilter.parse(System.getenv("RUN_ONLY"));
+        tests.removeIf(test -> !filter.accepts(test));
         testCount = tests.size();
         wait = startDelay;
     }
@@ -163,6 +153,35 @@ public final class TestRun {
 
         Step currentStep() {
             return test.steps().get(step);
+        }
+    }
+
+    private record TestFilter(List<String> include, List<String> exclude) {
+        static TestFilter parse(String value) {
+            List<String> include = new ArrayList<>();
+            List<String> exclude = new ArrayList<>();
+            if (value == null) return new TestFilter(include, exclude);
+            for (String part : value.split(";")) {
+                String filter = part.trim();
+                if (filter.startsWith("!")) {
+                    exclude.add(filter.substring(1).trim());
+                } else if (!filter.isEmpty()) {
+                    include.add(filter);
+                }
+            }
+            return new TestFilter(include, exclude);
+        }
+
+        boolean accepts(Test test) {
+            boolean included = include.isEmpty() || include.stream().anyMatch(filter -> matches(test, filter));
+            boolean excluded = exclude.stream().anyMatch(filter -> matches(test, filter));
+            return included && !excluded;
+        }
+
+        private static boolean matches(Test test, String filter) {
+            return test.group().equalsIgnoreCase(filter)
+                    || test.fullName().equalsIgnoreCase(filter)
+                    || test.name().toLowerCase(Locale.ROOT).contains(filter.toLowerCase(Locale.ROOT));
         }
     }
 }

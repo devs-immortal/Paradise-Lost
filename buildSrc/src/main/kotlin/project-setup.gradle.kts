@@ -39,14 +39,14 @@ tasks.withType<JavaCompile>().configureEach {
     this.options.release.set(java.toolchain.languageVersion.get().asInt())
 }
 
-val modId               : String by project
-val modDisplayName      : String by project
-val modAuthors          : String by project
-val modLicense          : String by project
-val modDescription      : String by project
-val modHomepage         : String by project
-val modIssuesTracker    : String by project
-val modGitRepo          : String by project
+val modId               = providers.gradleProperty("modId").get()
+val modDisplayName      = providers.gradleProperty("modDisplayName").get()
+val modAuthors          = providers.gradleProperty("modAuthors").get()
+val modLicense          = providers.gradleProperty("modLicense").get()
+val modDescription      = providers.gradleProperty("modDescription").get()
+val modHomepage         = providers.gradleProperty("modHomepage").get()
+val modIssuesTracker    = providers.gradleProperty("modIssuesTracker").get()
+val modGitRepo          = providers.gradleProperty("modGitRepo").get()
 
 base {
     archivesName = "$modId-${project.name}-${getVersion("minecraft")}"

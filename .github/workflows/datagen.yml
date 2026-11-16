@@ -13,6 +13,11 @@ jobs:
           distribution: microsoft
           java-version: 21
 
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+        with:
+          cache-read-only: false
+
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
