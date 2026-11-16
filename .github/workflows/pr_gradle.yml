@@ -3,7 +3,7 @@ name: Java CI with Gradle
 on: [ pull_request ]
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2604
     env:
       # Appended to the mod version by buildSrc, e.g. 2.5.1+abc1234. PRs use the head commit, not the merge commit.
       COMMIT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}

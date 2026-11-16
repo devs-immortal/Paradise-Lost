@@ -12,7 +12,7 @@ on:
       - '*/*/master'
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-4vcpu-ubuntu-2604
     env:
       # Appended to the mod version by buildSrc, e.g. 2.5.1+abc1234.
       COMMIT_SHA: ${{ github.sha }}
