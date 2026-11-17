@@ -26,6 +26,7 @@ public final class Recorder {
     public static final AtomicInteger sips = new AtomicInteger();
     public static final AtomicInteger finalSips = new AtomicInteger();
     public static final AtomicInteger cloudCalls = new AtomicInteger();
+    public static final AtomicInteger cloudBuilds = new AtomicInteger();
     public static final AtomicInteger frames = new AtomicInteger();
     public static final List<DamageSource> playerDamage = new CopyOnWriteArrayList<>();
     public static final List<DamageSource> playerDeaths = new CopyOnWriteArrayList<>();
@@ -65,7 +66,7 @@ public final class Recorder {
     }
 
     public static void reset() {
-        Stream.of(sips, finalSips, cloudCalls, frames).forEach(counter -> counter.set(0));
+        Stream.of(sips, finalSips, cloudCalls, cloudBuilds, frames).forEach(counter -> counter.set(0));
         explosions.clear();
         playerDamage.clear();
         playerDeaths.clear();

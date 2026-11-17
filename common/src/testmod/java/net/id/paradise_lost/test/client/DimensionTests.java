@@ -138,13 +138,16 @@ public final class DimensionTests {
                 Step.until("client in Paradise Lost", 200, () -> client().level.dimension() == ParadiseLostDimension.PARADISE_LOST_WORLD_KEY && client().screen == null),
                 Step.run(60, () -> {
                     Recorder.cloudCalls.set(0);
+                    Recorder.cloudBuilds.set(0);
                     Recorder.frames.set(0);
                 }),
                 Step.run(20, () -> screenshot("skylands_sky.png")),
                 Step.run(0, () -> {
                     int frames = Recorder.frames.get();
                     int clouds = Recorder.cloudCalls.get();
+                    int builds = Recorder.cloudBuilds.get();
                     check(frames > 0 && clouds >= 3 * frames, clouds + " cloud draws in " + frames + " frames, expected 3 layers per frame");
+                    check(builds < frames, builds + " cloud mesh builds in " + frames + " frames, expected layers to reuse their meshes");
                 })
         );
     }
