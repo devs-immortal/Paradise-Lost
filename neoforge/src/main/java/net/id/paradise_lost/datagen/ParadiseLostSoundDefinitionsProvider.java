@@ -43,6 +43,27 @@ public class ParadiseLostSoundDefinitionsProvider extends SoundDefinitionsProvid
                 .subtitle("subtitles.paradise_lost.block.surtrum_air.crackle")
                 .with(event("block.fire.ambient")));
 
+        add(ParadiseLostSoundEvents.BLOCK_CLOUD_STEP, SoundDefinition.definition()
+                .subtitle("subtitles.paradise_lost.block.cloud.step")
+                .with(sound("paradise_lost:block/cloud/cloud_step")));
+        add(ParadiseLostSoundEvents.BLOCK_CLOUD_BREAK, SoundDefinition.definition()
+                .subtitle("subtitles.paradise_lost.block.cloud.break")
+                .with(
+                        sound("paradise_lost:block/cloud/cloud_break_1"),
+                        sound("paradise_lost:block/cloud/cloud_break_2"),
+                        sound("paradise_lost:block/cloud/cloud_break_3"),
+                        sound("paradise_lost:block/cloud/cloud_break_4")
+                ));
+        add(ParadiseLostSoundEvents.BLOCK_CLOUD_PLACE, SoundDefinition.definition()
+                .subtitle("subtitles.paradise_lost.block.cloud.place")
+                .with(
+                        sound("paradise_lost:block/cloud/cloud_place_1"),
+                        sound("paradise_lost:block/cloud/cloud_place_2"),
+                        sound("paradise_lost:block/cloud/cloud_place_3"),
+                        sound("paradise_lost:block/cloud/cloud_place_4")
+                ));
+
+
         add(ParadiseLostSoundEvents.ITEM_ARMOR_EQUIP_OLVITE.value(), SoundDefinition.definition()
                 .subtitle("subtitles.paradise_lost.item.armor.equip.olvite")
                 .with(event("item.armor.equip_iron")));
@@ -65,6 +86,19 @@ public class ParadiseLostSoundDefinitionsProvider extends SoundDefinitionsProvid
         add(ParadiseLostSoundEvents.SOUL_BLADE_HARVEST, SoundDefinition.definition()
                 .subtitle("subtitles.paradise_lost.item.soul_blade.harvest")
                 .with(event("entity.allay.item_taken")));
+
+        add(ParadiseLostSoundEvents.ITEM_WARDED_JAR_IN, SoundDefinition.definition()
+                .subtitle("subtitles.paradise_lost.item.warded_jar.in")
+                .with(
+                        sound("paradise_lost:item/warded_jar/warded_jar_in_1"),
+                        sound("paradise_lost:item/warded_jar/warded_jar_in_2")
+                ));
+        add(ParadiseLostSoundEvents.ITEM_WARDED_JAR_OUT, SoundDefinition.definition()
+                .subtitle("subtitles.paradise_lost.item.warded_jar.out")
+                .with(
+                        sound("paradise_lost:item/warded_jar/warded_jar_out_1"),
+                        sound("paradise_lost:item/warded_jar/warded_jar_out_2")
+                ));
 
         add(ParadiseLostSoundEvents.ENTITY_MOA_AMBIENT, SoundDefinition.definition()
                 .subtitle("subtitles.paradise_lost.entity.moa.ambient")
@@ -108,6 +142,18 @@ public class ParadiseLostSoundDefinitionsProvider extends SoundDefinitionsProvid
         add(ParadiseLostSoundEvents.ENTITY_MOA_STEP, SoundDefinition.definition()
                 .subtitle("subtitles.paradise_lost.entity.moa.step")
                 .with(event("entity.pig.step")));
+
+        add(ParadiseLostSoundEvents.ENTITY_QUINT_AMBIENT, SoundDefinition.definition()
+                .subtitle("subtitles.paradise_lost.entity.quint.ambient")
+                .with(
+                        sound("paradise_lost:entity/passive/quint/quint_ambient_1"),
+                        sound("paradise_lost:entity/passive/quint/quint_ambient_2"),
+                        sound("paradise_lost:entity/passive/quint/quint_ambient_3"),
+                        sound("paradise_lost:entity/passive/quint/quint_ambient_4")
+                ));
+        add(ParadiseLostSoundEvents.ENTITY_QUINT_DEATH, SoundDefinition.definition()
+                .subtitle("subtitles.paradise_lost.entity.quint.death")
+                .with(sound("paradise_lost:entity/passive/quint/quint_death")));
 
         add(ParadiseLostSoundEvents.ENTITY_POPOM_AMBIENT, SoundDefinition.definition()
                 .subtitle("subtitles.paradise_lost.entity.popom.ambient")

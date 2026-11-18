@@ -8,6 +8,30 @@
     ],
     "subtitle": "subtitles.paradise_lost.block.blackcurrant_bush.pick_blueberries"
   },
+  "block.cloud.break": {
+    "sounds": [
+      "paradise_lost:block/cloud/cloud_break_1",
+      "paradise_lost:block/cloud/cloud_break_2",
+      "paradise_lost:block/cloud/cloud_break_3",
+      "paradise_lost:block/cloud/cloud_break_4"
+    ],
+    "subtitle": "subtitles.paradise_lost.block.cloud.break"
+  },
+  "block.cloud.place": {
+    "sounds": [
+      "paradise_lost:block/cloud/cloud_place_1",
+      "paradise_lost:block/cloud/cloud_place_2",
+      "paradise_lost:block/cloud/cloud_place_3",
+      "paradise_lost:block/cloud/cloud_place_4"
+    ],
+    "subtitle": "subtitles.paradise_lost.block.cloud.place"
+  },
+  "block.cloud.step": {
+    "sounds": [
+      "paradise_lost:block/cloud/cloud_step"
+    ],
+    "subtitle": "subtitles.paradise_lost.block.cloud.step"
+  },
   "block.palace_door.open": {
     "sounds": [
       "paradise_lost:block/palace_door/click_open"
@@ -278,6 +302,21 @@
     ],
     "subtitle": "subtitles.paradise_lost.entity.popom.hurt"
   },
+  "entity.quint.ambient": {
+    "sounds": [
+      "paradise_lost:entity/passive/quint/quint_ambient_1",
+      "paradise_lost:entity/passive/quint/quint_ambient_2",
+      "paradise_lost:entity/passive/quint/quint_ambient_3",
+      "paradise_lost:entity/passive/quint/quint_ambient_4"
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.quint.ambient"
+  },
+  "entity.quint.death": {
+    "sounds": [
+      "paradise_lost:entity/passive/quint/quint_death"
+    ],
+    "subtitle": "subtitles.paradise_lost.entity.quint.death"
+  },
   "entity.sentinel.death": {
     "sounds": [
       "paradise_lost:entity/hostile/sentinel/sentinel_death"
@@ -364,6 +403,20 @@
       }
     ],
     "subtitle": "subtitles.paradise_lost.item.soul_blade.harvest"
+  },
+  "item.warded_jar.in": {
+    "sounds": [
+      "paradise_lost:item/warded_jar/warded_jar_in_1",
+      "paradise_lost:item/warded_jar/warded_jar_in_2"
+    ],
+    "subtitle": "subtitles.paradise_lost.item.warded_jar.in"
+  },
+  "item.warded_jar.out": {
+    "sounds": [
+      "paradise_lost:item/warded_jar/warded_jar_out_1",
+      "paradise_lost:item/warded_jar/warded_jar_out_2"
+    ],
+    "subtitle": "subtitles.paradise_lost.item.warded_jar.out"
   },
   "music.paradise": {
     "sounds": [

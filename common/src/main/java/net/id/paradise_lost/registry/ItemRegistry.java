@@ -238,12 +238,12 @@ public final class ItemRegistry {
     public static final RegistryObject<Item, AurelBucketItem> AUREL_WATER_BUCKET = add("aurel_water_bucket", () -> new AurelBucketItem(Fluids.WATER, aurelBucket()), emptiableBucketBehavior);
     public static final RegistryObject<Item, AurelBucketItem> AUREL_POWDER_SNOW_BUCKET = add("aurel_powder_snow_bucket", () -> new AurelBucketItem(Blocks.POWDER_SNOW, aurelBucket()), emptiableBucketBehavior);
     public static final RegistryObject<Item, AurelMilkBucketItem> AUREL_MILK_BUCKET = add("aurel_milk_bucket", () -> new AurelMilkBucketItem(new Item.Properties().craftRemainder(AUREL_BUCKET.get()).stacksTo(1)));
-    public static final RegistryObject<Item, WardedJarItem> WARDED_JAR = add("warded_jar", () -> new WardedJarItem(new Properties()));
-    private static Properties wardedJar() {
+    public static final RegistryObject<Item, WardedJarItem> WARDED_JAR = add("warded_jar", () -> new WardedJarItem(new Properties().stacksTo(64)));
+    private static Properties filledWardedJar() {
         return new Properties().stacksTo(1).craftRemainder(WARDED_JAR.get());
     }
-    public static final RegistryObject<Item, WardedJarItem> WARDED_JAR_ALLAY = add("warded_jar_allay", () -> new WardedJarItem(EntityType.ALLAY, wardedJar()));
-    public static final RegistryObject<Item, WardedJarItem> WARDED_JAR_QUINT = add("warded_jar_quint", () -> new WardedJarItem(EntityRegistry.QUINT.get(), wardedJar()));
+    public static final RegistryObject<Item, WardedJarItem> WARDED_JAR_ALLAY = add("warded_jar_allay", () -> new WardedJarItem(EntityType.ALLAY, filledWardedJar()));
+    public static final RegistryObject<Item, WardedJarItem> WARDED_JAR_QUINT = add("warded_jar_quint", () -> new WardedJarItem(EntityRegistry.QUINT.get(), filledWardedJar()));
     public static final RegistryObject<Item, Item> PALACE_KEY = add("palace_key", () -> new Item(new Properties()));
 
     public static final RegistryObject<Item, SpawnEggItem> ENVOY_SPAWN_EGG = add("envoy_spawn_egg", () -> new SpawnEggItem(EntityRegistry.ENVOY.get(), 0xc5b1af, 0x993c3c, new Properties()), spawnEggBehavior);

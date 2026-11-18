@@ -492,6 +492,9 @@
   "info.paradise_lost.soul_blade.soul_count_1": "Contains 1 Soul",
   "info.paradise_lost.soul_blade.soul_count_n": "Contains %1$s Souls",
 
+  "subtitles.paradise_lost.block.cloud.place": "Clouds are formed",
+  "subtitles.paradise_lost.block.cloud.break": "Clouds dissapate",
+  "subtitles.paradise_lost.block.cloud.step": "Cloudstep",
 
   "subtitles.paradise_lost.block.blackcurrant_bush.pick_blueberries": "Blackcurrants pop",
 
@@ -514,7 +517,10 @@
   "subtitles.paradise_lost.entity.moa.lay_egg": "Moa lays egg",
   "subtitles.paradise_lost.entity.moa.egg_hatch": "Moa egg hatches",
   "subtitles.paradise_lost.entity.moa.step": "Moa walks",
-  
+
+  "subtitles.paradise_lost.entity.quint.ambient": "Quint whooshes",
+  "subtitles.paradise_lost.entity.quint.death": "Quint passes on",
+
   "subtitles.paradise_lost.entity.popom.ambient": "Popom peeps",
   "subtitles.paradise_lost.entity.popom.hurt": "Popom hurts",
   "subtitles.paradise_lost.entity.popom.death": "Popom dies",
@@ -548,8 +554,10 @@
 
   "subtitles.paradise_lost.item.bloodstone.prick": "Bloodstone pricks",
   
-  "subtitles.paradise_lost.item.soul_blade.harvest": "Soul is Absorbed",
-  
+  "subtitles.paradise_lost.item.soul_blade.harvest": "Soul is absorbed",
+
+  "subtitles.paradise_lost.item.warded_jar.in": "Warded Jar captures",
+  "subtitles.paradise_lost.item.warded_jar.out": "Warded Jar releases",
   
   "filled_map.paradise_lost.vault": "Vault Explorer Map",
   "filled_map.paradise_lost.palace": "Palace Explorer Map",
