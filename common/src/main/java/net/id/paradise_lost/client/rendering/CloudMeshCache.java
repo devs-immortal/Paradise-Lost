@@ -15,4 +15,20 @@ public final class CloudMeshCache {
     @Nullable
     public CloudStatus type;
     public boolean dirty = true;
+
+    public static CloudMeshCache[] createAll(int count) {
+        CloudMeshCache[] caches = new CloudMeshCache[count];
+        for (int i = 0; i < count; i++) {
+            caches[i] = new CloudMeshCache();
+        }
+        return caches;
+    }
+
+    public void close() {
+        if (this.buffer != null) {
+            this.buffer.close();
+            this.buffer = null;
+        }
+        this.dirty = true;
+    }
 }
