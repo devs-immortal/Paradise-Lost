@@ -37,6 +37,7 @@
     "server.ServerPlayNetworkHandlerMixin",
     "server.ServerWorldMixin",
     "util.SlotAccessor",
+    "util.VibrationMixin",
     "world.gen.SurfaceBuilderMixin",
     "world.gen.structure.JigsawStructureMixin"
   ],
