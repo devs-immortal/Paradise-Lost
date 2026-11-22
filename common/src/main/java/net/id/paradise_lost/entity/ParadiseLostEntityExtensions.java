@@ -2,20 +2,16 @@ package net.id.paradise_lost.entity;
 
 public interface ParadiseLostEntityExtensions {
 
-    boolean flipped = false;
-    boolean paradiseLostFallen = false;
-    int gravFlipTime = 0;
-
     default int getFlipTime() {
-        return gravFlipTime;
+        return 0;
     }
 
     default boolean getFlipped() {
-        return flipped;
+        return false;
     }
 
     default boolean isParadiseLostFallen() {
-        return paradiseLostFallen;
+        return false;
     }
 
     default void setParadiseLostFallen(boolean value) {
