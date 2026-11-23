@@ -36,10 +36,14 @@ import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.BaseRailBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CommandBlock;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.PoweredRailBlock;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.StructureBlock;
+import net.minecraft.world.level.block.TripWireBlock;
+import net.minecraft.world.level.block.TripWireHookBlock;
+import net.minecraft.world.level.block.entity.CommandBlockEntity;
 import net.minecraft.world.level.block.entity.StructureBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -649,6 +653,8 @@ public final class LevitaTests {
     private static final int COASTER_WIDTH = COASTER_END_RAILS * 2 + COASTER_FLAT_GAP + 1;
     private static final int COASTER_DEPTH = COASTER_RAMP * 2 + COASTER_DIAGONAL_GAP + 1;
     private static BlockPos[] coasterCorners;
+    private static final List<BlockPos> coasterPassed = new ArrayList<>();
+    private static final List<BlockPos> coasterOffTrack = new ArrayList<>();
     private static int coasterStage;
     private static final int[] coasterSamples = new int[4];
     private static final float COASTER_MAX_YAW_STEP = 25.0F;
@@ -670,34 +676,48 @@ public final class LevitaTests {
                     coasterLastYaw = Float.NaN;
                     coasterFilter = new MinecartFloatRenderHelper.RenderYawFilter();
                 }, true),
-                Step.run(0, () -> onServer(server -> teleport(player(server), world(server),
-                        start.getX() + COASTER_WIDTH / 2.0 + 0.5, start.getY() + 9, start.getZ() + COASTER_DEPTH + 18,
-                        180.0F, 12.0F))),
-                Step.until("cart to run the whole loop", 700, () -> {
-                    sampleCoasterCorners();
-                    return fromServer(server -> {
-                        AbstractMinecart cart = serverCart(server, entityId);
-                        check(cart.getY() > start.getY() - 3, "cart fell off the loop before corner " + coasterStage
-                                + describe(cart) + floatState(cart));
-                        check(++ticks < 650, "cart is stuck before corner " + coasterStage + describe(cart) + floatState(cart));
-                        BlockPos corner = coasterCorners[coasterStage];
-                        boolean there = Math.abs(cart.getX() - (corner.getX() + 0.5)) < 0.8
-                                && Math.abs(cart.getZ() - (corner.getZ() + 0.5)) < 0.8
-                                && Math.abs(cart.getY() - corner.getY()) < 1.2;
-                        if (there) {
-                            coasterStage++;
-                        }
-                        return coasterStage >= coasterCorners.length;
+                Step.run(0, () -> {
+                    onServer(server -> {
+                        ServerPlayer player = player(server);
+                        teleport(player, world(server),
+                                start.getX() + COASTER_WIDTH / 2.0 + 0.5, start.getY() + 14, start.getZ() - COASTER_DEPTH,
+                                COASTER_VIEW_YAW, COASTER_VIEW_PITCH);
+                        faceCoaster(player);
                     });
+                    faceCoaster(client().player);
+                }),
+                Step.until("one minute", 20 * 60 + 1, () -> {
+                    sampleCoasterCorners();
+                    return ++ticks >= 20 * 60;
                 }),
                 Step.run(0, () -> {
+                    int passed = fromServer(server -> commandSuccess(world(server), coasterPassed));
+                    int offTrack = fromServer(server -> commandSuccess(world(server), coasterOffTrack));
+                    List<String> wrong = new ArrayList<>();
+                    expect(wrong, offTrack < 1, "out of track " + offTrack + " time(s)");
+                    expect(wrong, passed >= 2, "passed block " + passed + " time(s)");
                     for (int i = 0; i < coasterSamples.length; i++) {
-                        check(coasterSamples[i] >= 3, "corner " + i + " was only sampled " + coasterSamples[i] + " times");
+                        expect(wrong, coasterSamples[i] >= 3, "corner " + i + " was only sampled " + coasterSamples[i] + " times");
                     }
-                    check(coasterJerks.isEmpty(), "cart did not turn like vanilla at the corners (" + coasterJerks.size()
+                    expect(wrong, coasterJerks.isEmpty(), "cart did not turn like vanilla at the corners (" + coasterJerks.size()
                             + " samples): " + String.join(" | ", coasterJerks.subList(0, Math.min(10, coasterJerks.size()))));
+                    checkAll(wrong);
                 })
         );
+    }
+
+    private static final float COASTER_VIEW_YAW = 0.0F;
+    private static final float COASTER_VIEW_PITCH = 12.0F;
+
+    private static void faceCoaster(Entity player) {
+        player.setYRot(COASTER_VIEW_YAW);
+        player.setXRot(COASTER_VIEW_PITCH);
+        player.yRotO = COASTER_VIEW_YAW;
+        player.xRotO = COASTER_VIEW_PITCH;
+        if (player instanceof net.minecraft.world.entity.LivingEntity living) {
+            living.setYHeadRot(COASTER_VIEW_YAW);
+            living.yHeadRotO = COASTER_VIEW_YAW;
+        }
     }
 
     private static BlockPos loopAt(int x, int y, int z) {
@@ -712,6 +732,8 @@ public final class LevitaTests {
         fill(world, loopAt(-1, 0, -1), loopAt(w + 1, top + 3, d + 1), Blocks.AIR.defaultBlockState());
 
         coasterCorners = new BlockPos[]{loopAt(w, 0, 0), loopAt(w, top, d), loopAt(0, top, d), loopAt(0, 0, 0)};
+        coasterPassed.clear();
+        coasterOffTrack.clear();
         RailShape[] cornerShapes = {RailShape.SOUTH_WEST, RailShape.NORTH_WEST, RailShape.NORTH_EAST, RailShape.SOUTH_EAST};
         for (BlockPos corner : coasterCorners) {
             world.setBlockAndUpdate(corner.below(), Blocks.STONE.defaultBlockState());
@@ -757,6 +779,57 @@ public final class LevitaTests {
         for (int i = 0; i < coasterCorners.length; i++) {
             forceRailShape(world, coasterCorners[i], cornerShapes[i]);
         }
+
+        int gapX = 2 + COASTER_FLAT_GAP / 2;
+        coasterPassed.add(tripwireDetector(world, loopAt(gapX, 0, 0), Direction.SOUTH,
+                BlockRegistry.COBBLED_FLOESTONE.get(), "/say passed block", false));
+        coasterPassed.add(tripwireDetector(world, loopAt(gapX, top, d), Direction.SOUTH,
+                BlockRegistry.COBBLED_FLOESTONE.get(), "/say passed block", false));
+        Direction[] overshoot = {Direction.EAST, Direction.SOUTH, Direction.WEST, Direction.NORTH};
+        for (int i = 0; i < coasterCorners.length; i++) {
+            Direction string = overshoot[i].getAxis() == Direction.Axis.X ? Direction.SOUTH : Direction.WEST;
+            coasterOffTrack.add(tripwireDetector(world, coasterCorners[i].relative(overshoot[i], 2), string,
+                    BlockRegistry.FLOESTONE.get(), "/say out of track", true));
+        }
+    }
+
+    private static BlockPos tripwireDetector(ServerLevel world, BlockPos string, Direction along, Block support,
+                                             String command, boolean commandOnPositive) {
+        BlockPos negative = string.relative(along.getOpposite());
+        BlockPos positive = string.relative(along);
+        BlockPos supportNegative = string.relative(along.getOpposite(), 2);
+        BlockPos supportPositive = string.relative(along, 2);
+        world.setBlockAndUpdate(supportNegative, support.defaultBlockState());
+        world.setBlockAndUpdate(supportPositive, support.defaultBlockState());
+        world.setBlockAndUpdate(negative, Blocks.TRIPWIRE_HOOK.defaultBlockState().setValue(TripWireHookBlock.FACING, along));
+        world.setBlockAndUpdate(positive, Blocks.TRIPWIRE_HOOK.defaultBlockState().setValue(TripWireHookBlock.FACING, along.getOpposite()));
+        BlockState wire = Blocks.TRIPWIRE.defaultBlockState().setValue(TripWireBlock.ATTACHED, true);
+        if (along.getAxis() == Direction.Axis.Z) {
+            wire = wire.setValue(TripWireBlock.NORTH, true).setValue(TripWireBlock.SOUTH, true);
+        } else {
+            wire = wire.setValue(TripWireBlock.EAST, true).setValue(TripWireBlock.WEST, true);
+        }
+        world.setBlockAndUpdate(string, wire);
+        BlockPos commandAt = (commandOnPositive ? supportPositive : supportNegative).above();
+        world.setBlockAndUpdate(commandAt, Blocks.COMMAND_BLOCK.defaultBlockState()
+                .setValue(CommandBlock.FACING, Direction.UP)
+                .setValue(CommandBlock.CONDITIONAL, false));
+        check(world.getBlockEntity(commandAt) instanceof CommandBlockEntity, "setup: no command block at " + commandAt.toShortString());
+        CommandBlockEntity block = (CommandBlockEntity) world.getBlockEntity(commandAt);
+        block.getCommandBlock().setCommand(command);
+        block.getCommandBlock().setSuccessCount(0);
+        block.setChanged();
+        return commandAt;
+    }
+
+    private static int commandSuccess(ServerLevel world, List<BlockPos> commands) {
+        int total = 0;
+        for (BlockPos at : commands) {
+            if (world.getBlockEntity(at) instanceof CommandBlockEntity block) {
+                total += block.getCommandBlock().getSuccessCount();
+            }
+        }
+        return total;
     }
 
     private static void forceRailShape(ServerLevel world, BlockPos at, RailShape shape) {
@@ -788,7 +861,7 @@ public final class LevitaTests {
                 yaw = vanilla != null ? vanilla[0] : Mth.rotLerp(partial, cart.yRotO, cart.getYRot());
             }
             float last = coasterLastYaw;
-            yaw = 180.0F - coasterFilter.apply(180.0F - yaw, cart.tickCount + partial);
+            yaw = 180.0F - coasterFilter.apply(180.0F - yaw, cart.tickCount + partial, useFloat);
             coasterLastYaw = yaw;
             for (int i = 0; i < coasterCorners.length; i++) {
                 BlockPos corner = coasterCorners[i];

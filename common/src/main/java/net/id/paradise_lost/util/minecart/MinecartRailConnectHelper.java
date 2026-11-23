@@ -633,6 +633,11 @@ public final class MinecartRailConnectHelper {
         if (!MinecartRailLocatorHelper.isGhostSlopeBelow(cart, snapped, snappedState, enterX, enterY, enterZ, enterMotion)) {
             return;
         }
+        // The corner's exit is this slope. Vanilla's snap is the turn onto it, not a yank down from a flyover.
+        BlockPos from = MinecartRailLocatorHelper.railAtOrBelow(cart.level(), enterX, enterY, enterZ);
+        if (from != null && !from.equals(snapped) && MinecartRailMotionHelper.railsConnect(cart.level(), from, snapped)) {
+            return;
+        }
         cart.setPos(cart.getX(), enterY, cart.getZ());
         cart.setDeltaMovement(enterMotion.x, 0.0D, enterMotion.z);
         MinecartFloatStateHelper.setIncline(cart, 0);
