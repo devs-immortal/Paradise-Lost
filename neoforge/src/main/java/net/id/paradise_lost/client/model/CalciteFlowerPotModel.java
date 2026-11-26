@@ -1,7 +1,7 @@
 package net.id.paradise_lost.client.model;
 
 import net.id.paradise_lost.ModConstants;
-import net.id.paradise_lost.block.decorative.PotMaterial;
+import net.id.paradise_lost.block.PotMaterial;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;

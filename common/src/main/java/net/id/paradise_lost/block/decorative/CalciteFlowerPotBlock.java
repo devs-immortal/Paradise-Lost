@@ -1,5 +1,6 @@
 package net.id.paradise_lost.block.decorative;
 
+import net.id.paradise_lost.block.PotMaterial;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;

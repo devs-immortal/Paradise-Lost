@@ -1,4 +1,4 @@
-package net.id.paradise_lost.block.decorative;
+package net.id.paradise_lost.block;
 
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.block.state.properties.EnumProperty;

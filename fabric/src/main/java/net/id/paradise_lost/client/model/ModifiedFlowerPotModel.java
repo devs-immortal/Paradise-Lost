@@ -10,7 +10,7 @@ import net.fabricmc.fabric.api.renderer.v1.model.ForwardingBakedModel;
 import net.fabricmc.fabric.api.renderer.v1.model.ModelHelper;
 import net.fabricmc.fabric.api.renderer.v1.render.RenderContext;
 import net.id.paradise_lost.ModConstants;
-import net.id.paradise_lost.block.decorative.PotMaterial;
+import net.id.paradise_lost.block.PotMaterial;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlas;

@@ -180,8 +180,8 @@ public abstract class LivingEntityMixin implements ParadiseLostEntityExtensions 
     @Inject(method = "onBelowWorld", at = @At("HEAD"), cancellable = true)
     private void paradiseLost$customVoidDamage(CallbackInfo ci) {
         LivingEntity self = paradiseLost$self();
-        if (self.level().isClientSide() ||
-                self.level().dimension() != ParadiseLostDimension.PARADISE_LOST_WORLD_KEY) {
+        if (self.level().isClientSide()
+                || self.level().dimension() != ParadiseLostDimension.PARADISE_LOST_WORLD_KEY) {
             return;
         }
         if (this.hasEffect(MobEffects.LEVITATION)) {
@@ -201,8 +201,8 @@ public abstract class LivingEntityMixin implements ParadiseLostEntityExtensions 
     @Inject(method = "hurt", at = @At("HEAD"), cancellable = true)
     public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         LivingEntity self = paradiseLost$self();
-        if (!self.isInvulnerableTo(source) &&
-                !self.level().isClientSide && !this.isDeadOrDying()) {
+        if (!self.isInvulnerableTo(source)
+                && !self.level().isClientSide && !this.isDeadOrDying()) {
             if (source.is(DamageTypeTags.ALWAYS_MOST_SIGNIFICANT_FALL)) {
                 float modified = paradiseLost$previewMagicAbsorb(source, amount);
                 if ((modified >= 10.0 || modified >= getHealth()) && MiscUtil.useLevitationTotem(self)) {
@@ -278,5 +278,4 @@ public abstract class LivingEntityMixin implements ParadiseLostEntityExtensions 
         }
         return self.spawnAtLocation(stack);
     }
-
 }

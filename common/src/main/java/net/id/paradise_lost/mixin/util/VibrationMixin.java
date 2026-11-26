@@ -16,8 +16,9 @@ import org.spongepowered.asm.mixin.Mixin;
 public class VibrationMixin {
     @WrapMethod(method = "handleGameEvent")
     private boolean handleFloatyBoots(ServerLevel level, Holder<GameEvent> event, GameEvent.Context context, Vec3 pos, Operation<Boolean> original) {
-        if (context.sourceEntity() instanceof LivingEntity livingEntity &&
-                FloatyBootsItem.isWearing(livingEntity) && event.is(ParadiseLostGameEventTags.FLOATY_BOOTS_DAMPENED)) {
+        if (context.sourceEntity() instanceof LivingEntity livingEntity
+                && FloatyBootsItem.isWearing(livingEntity)
+                && event.is(ParadiseLostGameEventTags.FLOATY_BOOTS_DAMPENED)) {
             return false;
         }
         return original.call(level, event, context, pos);

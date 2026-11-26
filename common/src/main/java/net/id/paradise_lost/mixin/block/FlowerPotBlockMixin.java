@@ -1,6 +1,6 @@
 package net.id.paradise_lost.mixin.block;
 
-import net.id.paradise_lost.block.decorative.PotMaterial;
+import net.id.paradise_lost.block.PotMaterial;
 import net.id.paradise_lost.registry.BlockRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
