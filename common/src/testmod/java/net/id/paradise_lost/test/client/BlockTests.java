@@ -3,7 +3,7 @@ package net.id.paradise_lost.test.client;
 import net.id.paradise_lost.block.blockentity.CherineCampfireBlockEntity;
 import net.id.paradise_lost.block.blockentity.ParadiseLostBlockEntityTypes;
 import net.id.paradise_lost.block.blockentity.TreeTapBlockEntity;
-import net.id.paradise_lost.block.decorative.CalciteFlowerPotBlock;
+import net.id.paradise_lost.block.PotMaterial;
 import net.id.paradise_lost.block.mechanical.PalaceDoorBlock;
 import net.id.paradise_lost.block.mechanical.TreeTapBlock;
 import net.id.paradise_lost.block.natural.crop.TallCropBlock;
@@ -380,7 +380,7 @@ public final class BlockTests {
                 Step.until("client and server to show the potted flower in calcite", 20, () -> {
                     BlockState clientState = client().level.getBlockState(pos);
                     BlockState serverState = fromServer(server -> world(server).getBlockState(pos));
-                    return clientState.equals(serverState) && clientState.is(BlockRegistry.POTTED_ANCIENT_FLOWER.get()) && clientState.getValue(CalciteFlowerPotBlock.IS_CALCITE);
+                    return clientState.equals(serverState) && clientState.is(BlockRegistry.POTTED_ANCIENT_FLOWER.get()) && clientState.getValue(PotMaterial.PROPERTY).equals(PotMaterial.CALCITE);
                 }),
                 Step.run(0, () -> onServer(server -> player(server).setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY))),
                 Step.run(10, () -> useOn(pos)),
@@ -409,8 +409,7 @@ public final class BlockTests {
                 Step.until("flower potted", 20, () -> fromServer(server -> world(server).getBlockState(pos).is(BlockRegistry.POTTED_ANCIENT_FLOWER.get()))),
                 Step.run(0, () -> onServer(server -> {
                     ServerPlayer player = player(server);
-                    check(!player.serverLevel().getBlockState(pos).getValue(CalciteFlowerPotBlock.IS_CALCITE), "vanilla pot became calcite");
-
+                    check(!player.serverLevel().getBlockState(pos).getValue(PotMaterial.PROPERTY).equals(PotMaterial.CALCITE), "vanilla pot became calcite");
                     player.gameMode.destroyBlock(pos);
                     Map<Item, Integer> drops = drops(player.serverLevel(), pos);
                     check(drops.equals(Map.of(Items.FLOWER_POT, 1, BlockRegistry.ANCIENT_FLOWER.get().asItem(), 1)), "potted flower dropped " + describe(drops));

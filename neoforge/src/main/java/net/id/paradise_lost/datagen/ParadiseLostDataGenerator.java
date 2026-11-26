@@ -52,6 +52,7 @@ public final class ParadiseLostDataGenerator {
 
         BlockTagsProvider blockTags = new ParadiseLostBlockTagsProvider(packOutput, withEnchantments, existing);
         generator.addProvider(event.includeServer(), blockTags);
+        generator.addProvider(event.includeServer(), new ParadiseLostGameEventTagsProvider(packOutput, withEnchantments, existing));
         generator.addProvider(event.includeServer(), new ParadiseLostItemTagsProvider(packOutput, withEnchantments, blockTags.contentsGetter(), existing));
         generator.addProvider(event.includeServer(), new ParadiseLostBiomeTagsProvider(packOutput, withEnchantments, existing));
         generator.addProvider(event.includeServer(), new ParadiseLostEntityTypeTagsProvider(packOutput, withEnchantments));

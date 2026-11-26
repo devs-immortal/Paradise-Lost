@@ -23,7 +23,6 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -34,7 +33,6 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
@@ -56,13 +54,14 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 @Mixin(LivingEntity.class)
-public abstract class LivingEntityMixin extends Entity implements ParadiseLostEntityExtensions {
-    private boolean flipped = false;
-    private int gravFlipTime;
+public abstract class LivingEntityMixin implements ParadiseLostEntityExtensions {
 
-    protected LivingEntityMixin(EntityType<?> type, Level world) {
-        super(type, world);
-    }
+    @Unique
+    private boolean paradiseLost$flipped = false;
+
+    @Unique
+    private int paradiseLost$gravFlipTime = 0;
+
 
     @Shadow
     public abstract boolean isDeadOrDying();
@@ -83,18 +82,23 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
 
     @Override
     public boolean getFlipped() {
-        return flipped;
+        return paradiseLost$flipped;
     }
 
     @Override
     public int getFlipTime() {
-        return gravFlipTime;
+        return paradiseLost$gravFlipTime;
     }
 
     @Override
     public void setFlipped() {
-        flipped = true;
-        gravFlipTime = 0;
+        paradiseLost$flipped = true;
+        paradiseLost$gravFlipTime = 0;
+    }
+
+    @Unique
+    private LivingEntity paradiseLost$self() {
+        return (LivingEntity) (Object) this;
     }
 
     @Inject(method = "handleEntityEvent", at = @At("HEAD"), cancellable = true)
@@ -112,17 +116,12 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
         }
     }
 
-    @Override
-    public boolean dampensVibrations() {
-        return FloatyBootsItem.isWearing((LivingEntity) (Object) this) || super.dampensVibrations();
-    }
-
     @ModifyReturnValue(method = "getAttributeValue", at = @At("RETURN"))
     private double paradiseLost$brokenFloatyLeggingsNoArmor(double original, Holder<Attribute> attribute) {
         if (!attribute.is(Attributes.ARMOR)) {
             return original;
         }
-        ItemStack legs = ((LivingEntity) (Object) this).getItemBySlot(EquipmentSlot.LEGS);
+        ItemStack legs = (paradiseLost$self()).getItemBySlot(EquipmentSlot.LEGS);
         if (legs.getItem() instanceof FloatyLeggingsItem leggings && FloatyLeggingsItem.isBroken(legs)) {
             return Math.max(0.0D, original - FloatyLeggingsItem.getDefensePoints(leggings));
         }
@@ -131,7 +130,7 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
 
     @ModifyVariable(method = "calculateFallDamage", at = @At("HEAD"), argsOnly = true, ordinal = 0)
     private float paradiseLost$floatyBootsFeatherFalling(float fallDistance) {
-        if (FloatyBootsItem.isWearing((LivingEntity) (Object) this)) {
+        if (FloatyBootsItem.isWearing(paradiseLost$self())) {
             return Math.max(0.0F, fallDistance - FloatyBootsItem.FEATHER_FALLING_BLOCKS);
         }
         return fallDistance;
@@ -139,15 +138,16 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void tick(CallbackInfo ci) {
-        if (flipped) {
-            gravFlipTime++;
-            if (gravFlipTime > 20) {
-                flipped = false;
-                this.fallDistance = 0;
+        if (paradiseLost$flipped) {
+            paradiseLost$gravFlipTime++;
+            LivingEntity self = paradiseLost$self();
+            if (paradiseLost$gravFlipTime > 20) {
+                paradiseLost$flipped = false;
+                self.fallDistance = 0;
             }
-            if (!this.isNoGravity()) {
+            if (!self.isNoGravity()) {
                 Vec3 antiGravity = new Vec3(0, 0.12D, 0);
-                this.setDeltaMovement(this.getDeltaMovement().add(antiGravity));
+                self.setDeltaMovement(self.getDeltaMovement().add(antiGravity));
             }
         }
     }
@@ -179,14 +179,16 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
 
     @Inject(method = "onBelowWorld", at = @At("HEAD"), cancellable = true)
     private void paradiseLost$customVoidDamage(CallbackInfo ci) {
-        if (this.level().isClientSide() || this.level().dimension() != ParadiseLostDimension.PARADISE_LOST_WORLD_KEY) {
+        LivingEntity self = paradiseLost$self();
+        if (self.level().isClientSide()
+                || self.level().dimension() != ParadiseLostDimension.PARADISE_LOST_WORLD_KEY) {
             return;
         }
         if (this.hasEffect(MobEffects.LEVITATION)) {
             ci.cancel();
             return;
         }
-        if (((LivingEntity) (Object) this).isHolding(ItemRegistry.TOTEM_OF_LEVITATION.get())) {
+        if (self.isHolding(ItemRegistry.TOTEM_OF_LEVITATION.get())) {
             return;
         }
         // Escape when paradiseVoidKills is false. When the rule is true (or escape fails),
@@ -198,32 +200,31 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
 
     @Inject(method = "hurt", at = @At("HEAD"), cancellable = true)
     public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        if (!this.isInvulnerableTo(source) && !this.level().isClientSide && !this.isDeadOrDying()) {
-            if (source.is(DamageTypeTags.IS_FALL)) {
+        LivingEntity self = paradiseLost$self();
+        if (!self.isInvulnerableTo(source)
+                && !self.level().isClientSide && !this.isDeadOrDying()) {
+            if (source.is(DamageTypeTags.ALWAYS_MOST_SIGNIFICANT_FALL)) {
                 float modified = paradiseLost$previewMagicAbsorb(source, amount);
-
-                if ((modified >= 10.0 || modified >= getHealth()) && MiscUtil.useLevitationTotem((LivingEntity) (Entity) this)) {
-
-                    level().broadcastEntityEvent(this, ParadiseLostEvents.LEVITATION_TOTEM_USED);
-                    setDeltaMovement(this.getDeltaMovement().x, 0.6d, this.getDeltaMovement().z);
-                    hurtMarked = true;
+                if ((modified >= 10.0 || modified >= getHealth()) && MiscUtil.useLevitationTotem(self)) {
+                    self.level().broadcastEntityEvent(self, ParadiseLostEvents.LEVITATION_TOTEM_USED);
+                    self.setDeltaMovement(self.getDeltaMovement().x, 0.6d,
+                            self.getDeltaMovement().z);
+                    self.hurtMarked = true;
                     addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 15, 1));
-
                     cir.setReturnValue(false);
                 }
-            } else if (this.level().dimension() == ParadiseLostDimension.PARADISE_LOST_WORLD_KEY
+            } else if (self.level().dimension() == ParadiseLostDimension.PARADISE_LOST_WORLD_KEY
                     && (ParadiseLostVoidEscape.isOutOfWorldDamage(source)
-                    || source == level().damageSources().fellOutOfWorld())) {
-                if (MiscUtil.useLevitationTotem((LivingEntity) (Entity) this)) {
-
-                    level().broadcastEntityEvent(this, ParadiseLostEvents.LEVITATION_TOTEM_USED);
-                    setDeltaMovement(this.getDeltaMovement().x, 0.6d, this.getDeltaMovement().z);
-                    hurtMarked = true;
+                    || source == self.level().damageSources().fellOutOfWorld())) {
+                if (MiscUtil.useLevitationTotem(self)) {
+                    self.level().broadcastEntityEvent(self, ParadiseLostEvents.LEVITATION_TOTEM_USED);
+                    self.setDeltaMovement(self.getDeltaMovement().x, 0.6d, self.getDeltaMovement().z);
+                    self.hurtMarked = true;
                     addEffect(new MobEffectInstance(MobEffects.LEVITATION, 110, 30));
                     addEffect(new MobEffectInstance(MobEffects.SLOW_FALLING, 320, 1));
 
                     cir.setReturnValue(false);
-                } else if (ParadiseLostVoidEscape.tryEscape((Entity) (Object) this)) {
+                } else if (ParadiseLostVoidEscape.tryEscape(self)) {
                     cir.setReturnValue(false);
                 }
             }
@@ -232,10 +233,11 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
 
     @Unique
     private float paradiseLost$previewMagicAbsorb(DamageSource source, float damageAmount) {
+        LivingEntity self = paradiseLost$self();
         if (source.is(DamageTypeTags.BYPASSES_EFFECTS)) {
             return damageAmount;
         }
-        if (this.hasEffect(MobEffects.DAMAGE_RESISTANCE) && !source.is(DamageTypeTags.BYPASSES_RESISTANCE)) {
+        if (hasEffect(MobEffects.DAMAGE_RESISTANCE) && !source.is(DamageTypeTags.BYPASSES_RESISTANCE)) {
             MobEffectInstance resistance = this.getEffect(MobEffects.DAMAGE_RESISTANCE);
             if (resistance != null) {
                 int reduction = (resistance.getAmplifier() + 1) * 5;
@@ -246,8 +248,8 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
             return damageAmount;
         }
         float protection = 0.0F;
-        if (this.level() instanceof ServerLevel serverLevel) {
-            protection = EnchantmentHelper.getDamageProtection(serverLevel, (LivingEntity) (Object) this, source);
+        if (self.level() instanceof ServerLevel serverLevel) {
+            protection = EnchantmentHelper.getDamageProtection(serverLevel, self, source);
         }
         if (protection > 0.0F) {
             damageAmount = CombatRules.getDamageAfterMagicAbsorb(damageAmount, protection);
@@ -257,7 +259,7 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
 
     @Inject(method = "onEquipItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;gameEvent(Lnet/minecraft/core/Holder;)V"))
     public void onEquipStack(EquipmentSlot slot, ItemStack oldStack, ItemStack newStack, CallbackInfo ci) {
-        if (slot == EquipmentSlot.HEAD && newStack.is(ItemRegistry.XP_CIRCLET.get()) && (Object) this instanceof Player player) {
+        if (slot == EquipmentSlot.HEAD && newStack.is(ItemRegistry.XP_CIRCLET.get()) && paradiseLost$self() instanceof Player player) {
             XpCircletItem.dischargeCirclet(newStack, player);
         }
     }
@@ -265,14 +267,15 @@ public abstract class LivingEntityMixin extends Entity implements ParadiseLostEn
     @Unique
     @Nullable
     private ItemEntity dropStackInternal(ItemStack stack) {
-        Optional<RecipeHolder<SmeltingRecipe>> optional = this.level().getRecipeManager().getRecipeFor(RecipeType.SMELTING, new SingleRecipeInput(stack), level());
+        LivingEntity self = paradiseLost$self();
+        Optional<RecipeHolder<SmeltingRecipe>> optional = self.level().getRecipeManager().getRecipeFor(RecipeType.SMELTING,
+                new SingleRecipeInput(stack), self.level());
         if (optional.isPresent()) {
-            ItemStack itemStack = ((optional.get()).value()).getResultItem(level().registryAccess());
+            ItemStack itemStack = ((optional.get()).value()).getResultItem(self.level().registryAccess());
             if (!itemStack.isEmpty()) {
-                return this.spawnAtLocation(itemStack.copyWithCount(stack.getCount()), 0.0F);
+                return self.spawnAtLocation(itemStack.copyWithCount(stack.getCount()), 0.0F);
             }
         }
-        return this.spawnAtLocation(stack);
+        return self.spawnAtLocation(stack);
     }
-
 }

@@ -117,10 +117,12 @@ loom {
 
     runs {
         configureEach {
-            runDirectory = file("runs/$name")
+            runDir("runs/$name")
+            ideConfigGenerated(true)
+            vmArgs(debugJvmArgs)
+            configName = "Fabric ${name.capitalized()}"
+            preferGradleTask = true
             generateRunConfig = true
-            jvmArguments.addAll(debugJvmArgs)
-            displayName = "Fabric ${name.capitalized()}"
         }
 
         named("client") {
