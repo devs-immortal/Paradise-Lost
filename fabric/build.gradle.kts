@@ -113,6 +113,7 @@ loom {
             ideConfigGenerated(true)
             vmArgs(debugJvmArgs)
             configName = "Fabric ${name.capitalized()}"
+            preferGradleTask = true
         }
 
         named("client") {
