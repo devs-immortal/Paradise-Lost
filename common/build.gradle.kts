@@ -4,8 +4,8 @@ plugins {
     alias(libs.plugins.moddevgradle)
 }
 
-val modId: String by project
-val sherdsApiVersion: String by project
+val modId = providers.gradleProperty("modId").get()
+val sherdsApiVersion = providers.gradleProperty("sherdsApiVersion").get()
 
 neoForge {
     neoFormVersion = libs.versions.neoform.get()

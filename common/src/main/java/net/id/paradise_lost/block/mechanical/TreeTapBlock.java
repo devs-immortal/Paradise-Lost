@@ -53,8 +53,8 @@ public class TreeTapBlock extends ParadiseLostBlockWithEntity {
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (!player.isShiftKeyDown() && world.getBlockEntity(pos) instanceof TreeTapBlockEntity treeTapBlockEntity) {
-			treeTapBlockEntity.handleUse(player, hand, player.getItemInHand(hand));
-            return ItemInteractionResult.sidedSuccess(world.isClientSide());
+			if (treeTapBlockEntity.handleUse(player, hand, player.getItemInHand(hand)))
+                return ItemInteractionResult.sidedSuccess(world.isClientSide());
         }
         return super.useItemOn(stack, state, world, pos, player, hand, hit);
     }

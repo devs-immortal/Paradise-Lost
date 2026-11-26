@@ -1,7 +1,10 @@
-package net.id.paradise_lost.mixin.client.network;
+package net.id.paradise_lost.mixin.entity;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.id.paradise_lost.block.blockentity.ParadiseHangingSignBlockEntity;
 import net.id.paradise_lost.item.armor.FloatyLeggingsItem;
+import net.id.paradise_lost.util.GameRuleHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.HangingSignEditScreen;
 import net.minecraft.client.player.Input;
@@ -62,4 +65,11 @@ public abstract class ClientPlayerEntityMixin {
         this.paradiseLost$floatyWasJumping = jumping;
     }
 
+    @WrapOperation(
+            method = "aiStep",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;onGround()Z", ordinal = 0)
+    )
+    private boolean paradiseLost$anchoredCanStartRunning(LocalPlayer player, Operation<Boolean> onGround) {
+        return onGround.call(player) || GameRuleHelper.clientAnchoredRun() && FloatyLeggingsItem.isAnchored(player);
+    }
 }

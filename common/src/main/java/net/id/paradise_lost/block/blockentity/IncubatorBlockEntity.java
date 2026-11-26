@@ -72,11 +72,11 @@ public class IncubatorBlockEntity extends BlockEntity {
         }
     }
 
-    public void handleUse(Player player, InteractionHand hand, ItemStack handStack) {
+    public boolean handleUse(Player player, InteractionHand hand, ItemStack handStack) {
         owner = player.getUUID();
         if (egg.isEmpty()) {
             if (handStack.isEmpty()) {
-                return;
+                return false;
             }
             placeFromHand(player, handStack);
         } else if (handStack.isEmpty()) {
@@ -90,6 +90,7 @@ public class IncubatorBlockEntity extends BlockEntity {
         }
         syncToClient();
         setChanged();
+        return true;
     }
 
     private void placeFromHand(Player player, ItemStack handStack) {

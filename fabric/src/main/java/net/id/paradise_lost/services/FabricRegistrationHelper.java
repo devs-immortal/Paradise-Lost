@@ -8,10 +8,13 @@ import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.TillableBlockRegistry;
 import net.id.paradise_lost.platform.services.IRegistrationHelper;
 import net.id.paradise_lost.registry.ItemRegistry;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.Block;
+
+import java.util.function.BiConsumer;
 
 public class FabricRegistrationHelper implements IRegistrationHelper {
     @Override
@@ -36,9 +39,14 @@ public class FabricRegistrationHelper implements IRegistrationHelper {
     }
 
     @Override
-    public GameRules.Key<GameRules.BooleanValue> registerBooleanGameRule(String name, GameRules.Category category, boolean defaultValue) {
+    public GameRules.Key<GameRules.BooleanValue> registerBooleanGameRule(
+            String name,
+            GameRules.Category category,
+            boolean defaultValue,
+            BiConsumer<MinecraftServer, GameRules.BooleanValue> onChanged
+    ) {
         return GameRuleRegistry.register(
-                name, category, GameRuleFactory.createBooleanRule(defaultValue));
+                name, category, GameRuleFactory.createBooleanRule(defaultValue, onChanged));
     }
 
     @Override

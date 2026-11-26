@@ -11,9 +11,10 @@ plugins {
     alias(libs.plugins.loom)
 }
 
-val modId: String by project
-val sherdsApiVersion: String by project
-val debugJvmArgs: List<String> by extra
+val modId = providers.gradleProperty("modId").get()
+val sherdsApiVersion = providers.gradleProperty("sherdsApiVersion").get()
+@Suppress("UNCHECKED_CAST")
+val debugJvmArgs = extra["debugJvmArgs"] as List<String>
 val wilderWildVersion = "4.2.1-mc1.21.1"
 val frozenLibVersion = "2.2.4-mc1.21.1"
 
@@ -58,6 +59,15 @@ afterEvaluate {
     reg.configureJarTask(tasks.named<Jar>("jar").get())
 }
 
+tasks.named<Jar>("jar") {
+    entryCompression = ZipEntryCompression.STORED
+}
+
+tasks.named<RemapJarTask>("remapJar") {
+    isPreserveFileTimestamps = true
+    isReproducibleFileOrder = false
+}
+
 sourceSets {
     create("testmod") {
         val main = sourceSets["main"]
@@ -78,13 +88,11 @@ sourceSets {
 
 loom.createRemapConfigurations(sourceSets["compat"])
 
-val modCompatRuntimeOnly by configurations.getting
-
 dependencies {
     modCompileOnly("maven.modrinth:wilder-wild:$wilderWildVersion")
     modCompileOnly("maven.modrinth:frozenlib:$frozenLibVersion")
-    modCompatRuntimeOnly("maven.modrinth:wilder-wild:$wilderWildVersion")
-    modCompatRuntimeOnly("maven.modrinth:frozenlib:$frozenLibVersion")
+    "modCompatRuntimeOnly"("maven.modrinth:wilder-wild:$wilderWildVersion")
+    "modCompatRuntimeOnly"("maven.modrinth:frozenlib:$frozenLibVersion")
 }
 
 tasks.named("check") {
@@ -114,11 +122,12 @@ loom {
             vmArgs(debugJvmArgs)
             configName = "Fabric ${name.capitalized()}"
             preferGradleTask = true
+            generateRunConfig = true
         }
 
         named("client") {
             client()
-            programArg("--username=Dev")
+            programArguments.add("--username=Dev")
         }
 
         named("server") {
@@ -127,32 +136,32 @@ loom {
 
         create("clientTest") {
             client()
-            configName = "Fabric Client Game Tests"
-            source(sourceSets["testmod"])
-            runDir("runs/clienttest")
-            programArg("--username=Tester")
+            displayName = "Fabric Client Game Tests"
+            sourceSet = "testmod"
+            runDirectory = file("runs/clienttest")
+            programArguments.add("--username=Tester")
         }
 
         create("clientCompatTest") {
             client()
-            configName = "Fabric Client Compat Tests"
-            source(sourceSets["compat"])
-            runDir("runs/compattest")
-            programArg("--username=Tester")
-            environmentVariable("RUN_ONLY", "Compat")
+            displayName = "Fabric Client Compat Tests"
+            sourceSet = "compat"
+            runDirectory = file("runs/compattest")
+            programArguments.add("--username=Tester")
+            environmentVars.put("RUN_ONLY", "Compat")
         }
 
         create("serverTest") {
             server()
-            configName = "Fabric Server Tests"
-            source(sourceSets["testmod"])
-            runDir("runs/servertest")
-            programArg("--nogui")
+            displayName = "Fabric Server Tests"
+            sourceSet = "testmod"
+            runDirectory = file("runs/servertest")
+            programArguments.add("--nogui")
         }
     }
 }
 
-val prepareServerTest by tasks.registering {
+val prepareServerTest = tasks.register("prepareServerTest") {
     val dir = file("runs/servertest")
     doLast {
         dir.resolve("world").deleteRecursively()
@@ -185,7 +194,7 @@ tasks.withType<ProcessResources>().configureEach {
 modrinth {
     token = System.getenv("MODRINTH_TOKEN") ?: "Invalid/No API Token Found"
     uploadFile.set(tasks.named<RemapJarTask>("remapJar"))
-    projectId.set(properties["modrinthProjectId"] as String)
+    projectId.set(providers.gradleProperty("modrinthProjectId"))
     versionName = "Fabric ${libs.versions.minecraft.asProvider().get()}"
     versionType = "release"
     loaders.set(listOf("fabric"))
@@ -209,8 +218,8 @@ tasks.register<TaskPublishCurseForge>("publishToCurseForge") {
     group = "publishing"
     apiToken = System.getenv("CURSEFORGE_TOKEN") ?: "Invalid/No API Token Found"
 
-    val mainFile = upload(properties["curseforgeProjectId"], tasks.remapJar)
-    mainFile.displayName = "${properties["modDisplayName"]} Fabric ${libs.versions.minecraft.asProvider().get()} ${project.version}"
+    val mainFile = upload(providers.gradleProperty("curseforgeProjectId").get(), tasks.remapJar)
+    mainFile.displayName = "${providers.gradleProperty("modDisplayName").get()} Fabric ${libs.versions.minecraft.asProvider().get()} ${project.version}"
     mainFile.releaseType = "release"
     mainFile.addModLoader("Fabric")
     mainFile.addGameVersion(libs.versions.minecraft.asProvider().get())

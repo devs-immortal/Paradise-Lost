@@ -8,9 +8,10 @@ plugins {
     alias(libs.plugins.moddevgradle)
 }
 
-val modId: String by project
-val sherdsApiVersion: String by project
-val debugJvmArgs: List<String> by extra
+val modId = providers.gradleProperty("modId").get()
+val sherdsApiVersion = providers.gradleProperty("sherdsApiVersion").get()
+@Suppress("UNCHECKED_CAST")
+val debugJvmArgs = extra["debugJvmArgs"] as List<String>
 
 val commonMainResources = rootProject.project(":common").layout.projectDirectory.dir("src/main/resources").asFile
 val commonGeneratedResources = rootProject.project(":common").layout.projectDirectory.dir("src/generated/resources").asFile
@@ -39,7 +40,7 @@ neoForge {
             logLevel = org.slf4j.event.Level.DEBUG
             jvmArguments.addAll(debugJvmArgs)
             // Match Warden Tools naming so IDEA run configs are easy to find
-            ideName = "NeoForge ${name.replaceFirstChar { it.uppercase() }} (${project.path})"
+            ideName = "NeoForge ${name.replaceFirstChar { it.uppercase() }} ($path)"
         }
 
         create("client") {
@@ -125,7 +126,7 @@ tasks.withType<ProcessResources>().configureEach {
 modrinth {
     token = System.getenv("MODRINTH_TOKEN") ?: "Invalid/No API Token Found"
     uploadFile.set(tasks.named<Jar>("jar"))
-    projectId.set(properties["modrinthProjectId"] as String)
+    projectId.set(providers.gradleProperty("modrinthProjectId"))
     versionName = "NeoForge ${libs.versions.minecraft.asProvider().get()}"
     versionType = "release"
     loaders.set(listOf("neoforge"))
@@ -145,8 +146,8 @@ tasks.register<TaskPublishCurseForge>("publishToCurseForge") {
     group = "publishing"
     apiToken = System.getenv("CURSEFORGE_TOKEN") ?: "Invalid/No API Token Found"
 
-    val mainFile = upload(properties["curseforgeProjectId"], tasks.jar)
-    mainFile.displayName = "${properties["modDisplayName"]} NeoForge ${libs.versions.minecraft.asProvider().get()} ${project.version}"
+    val mainFile = upload(providers.gradleProperty("curseforgeProjectId").get(), tasks.jar)
+    mainFile.displayName = "${providers.gradleProperty("modDisplayName").get()} NeoForge ${libs.versions.minecraft.asProvider().get()} ${project.version}"
     mainFile.releaseType = "release"
     mainFile.addModLoader("NeoForge")
     mainFile.addGameVersion(libs.versions.minecraft.asProvider().get())

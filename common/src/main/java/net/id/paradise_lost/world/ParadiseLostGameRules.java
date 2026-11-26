@@ -1,6 +1,7 @@
 package net.id.paradise_lost.world;
 
 import net.id.paradise_lost.platform.Services;
+import net.id.paradise_lost.util.GameRuleHelper;
 import net.minecraft.world.level.GameRules;
 
 public final class ParadiseLostGameRules {
@@ -10,6 +11,9 @@ public final class ParadiseLostGameRules {
             Services.REGISTRATION.registerBooleanGameRule("paradisePortalEnabled", GameRules.Category.UPDATES, true);
     public static final GameRules.Key<GameRules.BooleanValue> BLOOMED_CALCITE_TRANSFORMATION =
             Services.REGISTRATION.registerBooleanGameRule("bloomedCalciteTransformation", GameRules.Category.UPDATES, true);
+    public static final GameRules.Key<GameRules.BooleanValue> RUN_MIDAIR =
+            Services.REGISTRATION.registerBooleanGameRule(
+                    "anchoredRunMidair", GameRules.Category.PLAYER, false, GameRuleHelper::onAnchoredRunChanged);
 
     private ParadiseLostGameRules() {}
 

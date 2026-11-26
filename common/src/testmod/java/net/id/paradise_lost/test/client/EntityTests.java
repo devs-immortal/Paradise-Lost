@@ -84,24 +84,28 @@ public final class EntityTests {
     }
 
     @ClientTest(value = "immune until enlightened then drops quint when killed", group = "Sentinel")
-    private static Step sentinelImmuneUntilEnlightened() {
-        return Step.run(0, () -> onServer(server -> {
-            server.setDifficulty(Difficulty.EASY, true);
-            ServerPlayer player = player(server);
-            ServerLevel world = player.serverLevel();
+    private static List<Step> sentinelImmuneUntilEnlightened() {
+        return List.of(
+            Step.until("sentinel chunk to tick entities", 100, () -> fromServer(server ->
+                    world(server).isPositionEntityTicking(ahead(player(server), 3, 0)))),
+            Step.run(0, () -> onServer(server -> {
+                server.setDifficulty(Difficulty.EASY, true);
+                ServerPlayer player = player(server);
+                ServerLevel world = player.serverLevel();
 
-            BlockPos at = ahead(player, 3, 0);
-            SentinelEntity sentinel = EntityRegistry.SENTINEL.get().spawn(world, at, MobSpawnType.COMMAND);
-            float health = sentinel.getHealth();
-            sentinel.hurt(world.damageSources().playerAttack(player), 10);
-            check(sentinel.getHealth() == health, "dormant sentinel took damage");
-            sentinel.setEnlightened(true);
-            sentinel.hurt(world.damageSources().playerAttack(player), 1000);
-            check(!sentinel.isAlive(), "enlightened sentinel survived");
+                BlockPos at = ahead(player, 3, 0);
+                SentinelEntity sentinel = EntityRegistry.SENTINEL.get().spawn(world, at, MobSpawnType.COMMAND);
+                float health = sentinel.getHealth();
+                sentinel.hurt(world.damageSources().playerAttack(player), 10);
+                check(sentinel.getHealth() == health, "dormant sentinel took damage");
+                sentinel.setEnlightened(true);
+                sentinel.hurt(world.damageSources().playerAttack(player), 1000);
+                check(!sentinel.isAlive(), "enlightened sentinel survived");
 
-            List<QuintEntity> quints = world.getEntitiesOfClass(QuintEntity.class, new AABB(at).inflate(3), e -> true);
-            check(quints.size() == 1, quints.size() + " quints near the dead sentinel");
-        }));
+                List<QuintEntity> quints = world.getEntitiesOfClass(QuintEntity.class, new AABB(at).inflate(3), e -> true);
+                check(quints.size() == 1, quints.size() + " quints near the dead sentinel");
+            }))
+        );
     }
 
     @ClientTest(value = "captures allay and releases it", group = "Warded jar")

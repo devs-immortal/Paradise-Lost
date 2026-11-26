@@ -2,6 +2,8 @@ package net.id.paradise_lost.test.client;
 
 import net.id.paradise_lost.test.Recorder;
 import net.id.paradise_lost.test.Step;
+import net.id.paradise_lost.util.GameRuleHelper;
+import net.id.paradise_lost.world.ParadiseLostGameRules;
 import net.id.paradise_lost.entity.ParadiseLostEntityExtensions;
 import net.id.paradise_lost.item.ParadiseLostDataComponentTypes;
 import net.id.paradise_lost.item.armor.XpCircletItem;
@@ -14,10 +16,13 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
@@ -40,6 +45,8 @@ import static net.id.paradise_lost.registry.ItemRegistry.*;
 
 public final class ItemTests {
     private static BlockPos pos;
+    private static BlockPos tankFrom;
+    private static BlockPos tankTo;
     private static final List<Integer> entityIds = new ArrayList<>();
 
     private ItemTests() {
@@ -115,7 +122,9 @@ public final class ItemTests {
                     ItemStack blade = player.getMainHandItem();
 
                     var souls = blade.get(ParadiseLostDataComponentTypes.COLLECTED_SOULS);
-                    check(souls != null && souls.soulIds().size() == 2, "souls after killing cow, pig, cow: " + (souls == null ? "none" : souls.soulIds()));
+                    check(souls != null && souls.soulIds().size() == 2, "souls after killing cow, pig, cow: " + (souls == null
+                            ? "none"
+                            : souls.soulIds()));
 
                     float bonus = blade.getItem().getAttackDamageBonus(null, 0, player.serverLevel().damageSources().playerAttack(player));
                     check(bonus == 0.5F, "attack bonus " + bonus + ", expected 2 * 0.25");
@@ -246,7 +255,8 @@ public final class ItemTests {
                     hold(player, TOTEM_OF_LEVITATION.get());
                     player.teleportTo(player.getX(), player.getY() + 18, player.getZ());
                 })),
-                Step.run(5, () -> {}),
+                Step.run(5, () -> {
+                }),
                 Step.until("totem used", 100, () -> fromServer(server -> player(server).getMainHandItem().isEmpty())),
                 Step.until("totem animation on the client", 20, () -> Recorder.itemActivations.stream().anyMatch(s -> s.is(TOTEM_OF_LEVITATION.get()))),
                 Step.run(0, () -> check(!Recorder.playerHurtBy(DamageTypes.FALL), "took fall damage from the fall the totem stopped"))
@@ -261,7 +271,8 @@ public final class ItemTests {
                     player.setItemSlot(EquipmentSlot.FEET, new ItemStack(FLOATY_BOOTS.get()));
                     player.teleportTo(player.getX(), player.getY() + 14, player.getZ());
                 })),
-                Step.run(5, () -> {}),
+                Step.run(5, () -> {
+                }),
                 Step.until("landing", 100, () -> fromServer(server -> player(server).onGround())),
                 Step.run(5, () -> check(!Recorder.playerHurtBy(DamageTypes.FALL), "took fall damage"))
         );
@@ -363,5 +374,160 @@ public final class ItemTests {
                 Step.until("server to see the anchor", 20, () -> fromServer(server -> ((ParadiseLostEntityExtensions) player(server)).isFloatyAnchored())),
                 Step.run(0, () -> onServer(server -> ((ParadiseLostEntityExtensions) player(server)).setFloatyAnchored(false)))
         );
+    }
+
+    @ClientTest(value = "anchored player starts running midair when anchoredRunMidair is on", group = "Floaty")
+    private static List<Step> anchoredRunMidairAllowed() {
+        return anchoredRunAttempt(true);
+    }
+
+    @ClientTest(value = "anchored player cannot start running midair when anchoredRunMidair is off", group = "Floaty")
+    private static List<Step> anchoredRunMidairForbidden() {
+        return anchoredRunAttempt(false);
+    }
+
+    @ClientTest(value = "anchored player runs in water without swimming when anchoredRunMidair is on", group = "Floaty")
+    private static List<Step> anchoredRunInWaterDoesNotSwim() {
+        return List.of(
+                Step.run(0, () -> {
+                    client().options.keyUp.setDown(false);
+                    client().options.keySprint.setDown(false);
+                    client().player.setSprinting(false);
+                    client().player.setSwimming(false);
+                    onServer(server -> {
+                        ServerPlayer player = player(server);
+                        player.setSprinting(false);
+                        player.setSwimming(false);
+                        player.setItemSlot(EquipmentSlot.LEGS, new ItemStack(FLOATY_LEGGINGS.get()));
+                        server.getGameRules().getRule(ParadiseLostGameRules.RUN_MIDAIR).set(true, server);
+                        buildGlassWaterTank(player);
+                    });
+                }),
+                Step.run(5, () -> onServer(server -> ((ParadiseLostEntityExtensions) player(server)).setFloatyAnchored(true))),
+                Step.until("anchored under the water with water breathing", 40, () -> {
+                    var player = client().player;
+                    MobEffectInstance breathing = player.getEffect(MobEffects.WATER_BREATHING);
+                    return GameRuleHelper.clientAnchoredRun()
+                            && ((ParadiseLostEntityExtensions) player).isFloatyAnchored()
+                            && !player.onGround()
+                            && player.isInWater()
+                            && player.isUnderWater()
+                            && breathing != null
+                            && !breathing.isVisible();
+                }),
+                Step.run(0, () -> client().options.keyUp.setDown(true)),
+                Step.run(1, () -> client().options.keyUp.setDown(false)),
+                Step.run(1, () -> client().options.keyUp.setDown(true)),
+                Step.until("running while anchored underwater", 20, () -> client().player.isSprinting()
+                        && client().player.isUnderWater()
+                        && !client().player.isSwimming()
+                        && ((ParadiseLostEntityExtensions) client().player).isFloatyAnchored()
+                        && fromServer(server -> {
+                    ServerPlayer player = player(server);
+                    return player.isSprinting() && player.isUnderWater() && !player.isSwimming();
+                })),
+                Step.run(4, () -> {
+                    var player = client().player;
+                    MobEffectInstance breathing = player.getEffect(MobEffects.WATER_BREATHING);
+                    check(((ParadiseLostEntityExtensions) player).isFloatyAnchored(), "lost the anchor");
+                    check(player.isSprinting(), "stopped running");
+                    check(player.isInWater() && player.isUnderWater(), "left the water");
+                    check(breathing != null && !breathing.isVisible(), "water breathing particles are showing");
+                    check(!player.isSwimming(), "started swimming while anchored");
+                    check(player.getPose() != Pose.SWIMMING, "swimming pose while anchored");
+                    check(!fromServer(server -> player(server).isSwimming()), "server marked the player as swimming");
+                    check(fromServer(server -> player(server).getPose() != Pose.SWIMMING), "server used the swimming pose");
+                }),
+                Step.run(0, () -> {
+                    client().options.keyUp.setDown(false);
+                    client().options.keySprint.setDown(false);
+                    client().player.setSprinting(false);
+                    onServer(server -> {
+                        ServerPlayer player = player(server);
+                        player.setSprinting(false);
+                        player.setSwimming(false);
+                        ((ParadiseLostEntityExtensions) player).setFloatyAnchored(false);
+                        player.removeEffect(MobEffects.WATER_BREATHING);
+                        server.getGameRules().getRule(ParadiseLostGameRules.RUN_MIDAIR).set(false, server);
+                        if (tankFrom != null && tankTo != null) {
+                            fill(player.serverLevel(), tankFrom, tankTo, Blocks.AIR.defaultBlockState());
+                        }
+                    });
+                })
+        );
+    }
+
+    private static List<Step> anchoredRunAttempt(boolean allow) {
+        List<Step> steps = new ArrayList<>();
+        steps.add(Step.run(0, () -> {
+            client().options.keyUp.setDown(false);
+            client().options.keySprint.setDown(false);
+            client().player.setSprinting(false);
+            onServer(server -> {
+                ServerPlayer player = player(server);
+                player.setSprinting(false);
+                player.setItemSlot(EquipmentSlot.LEGS, new ItemStack(FLOATY_LEGGINGS.get()));
+                player.teleportTo(player.getX(), player.getY() + 24, player.getZ());
+                server.getGameRules().getRule(ParadiseLostGameRules.RUN_MIDAIR).set(allow, server);
+            });
+        }));
+        steps.add(Step.until(allow ? "client rule on" : "client rule off", 40,
+                () -> GameRuleHelper.clientAnchoredRun() == allow));
+        steps.add(Step.run(5, () -> onServer(server -> ((ParadiseLostEntityExtensions) player(server)).setFloatyAnchored(true))));
+        steps.add(Step.until("anchored in the air", 20,
+                () -> ((ParadiseLostEntityExtensions) client().player).isFloatyAnchored() && !client().player.onGround()));
+        steps.add(Step.run(0, () -> client().options.keyUp.setDown(true)));
+        steps.add(Step.run(1, () -> client().options.keyUp.setDown(false)));
+        steps.add(Step.run(1, () -> client().options.keyUp.setDown(true)));
+        if (allow) {
+            steps.add(Step.until("running while anchored", 20, () -> client().player.isSprinting()
+                    && ((ParadiseLostEntityExtensions) client().player).isFloatyAnchored()
+                    && !client().player.onGround()
+                    && fromServer(server -> player(server).isSprinting())));
+        } else {
+            steps.add(Step.run(12, () -> {
+                check(((ParadiseLostEntityExtensions) client().player).isFloatyAnchored() && !client().player.onGround(),
+                        "setup: no longer anchored in the air");
+                check(!client().player.isSprinting(), "started running while anchored with the rule off");
+                check(!fromServer(server -> player(server).isSprinting()), "server started the run with the rule off");
+            }));
+        }
+        steps.add(Step.run(0, () -> {
+            client().options.keyUp.setDown(false);
+            client().options.keySprint.setDown(false);
+            client().player.setSprinting(false);
+            onServer(server -> {
+                ServerPlayer player = player(server);
+                player.setSprinting(false);
+                ((ParadiseLostEntityExtensions) player).setFloatyAnchored(false);
+                server.getGameRules().getRule(ParadiseLostGameRules.RUN_MIDAIR).set(false, server);
+            });
+        }));
+        return steps;
+    }
+
+    private static void buildGlassWaterTank(ServerPlayer player) {
+        BlockPos center = player.blockPosition();
+        BlockPos far = center.relative(player.getDirection(), 10);
+        tankFrom = new BlockPos(Math.min(center.getX(), far.getX()) - 2, center.getY() - 1, Math.min(center.getZ(), far.getZ()) - 2);
+        tankTo = new BlockPos(Math.max(center.getX(), far.getX()) + 2, center.getY() + 4, Math.max(center.getZ(), far.getZ()) + 2);
+        ServerLevel world = player.serverLevel();
+        BlockState glass = Blocks.GLASS.defaultBlockState();
+        BlockState water = Blocks.WATER.defaultBlockState();
+        for (BlockPos at : BlockPos.betweenClosed(tankFrom, tankTo)) {
+            boolean shell = at.getX() == tankFrom.getX() || at.getX() == tankTo.getX()
+                    || at.getY() == tankFrom.getY() || at.getY() == tankTo.getY()
+                    || at.getZ() == tankFrom.getZ() || at.getZ() == tankTo.getZ();
+            world.setBlockAndUpdate(at, shell ? glass : water);
+        }
+        player.teleportTo(center.getX() + 0.5, center.getY() + 0.5, center.getZ() + 0.5);
+        player.setDeltaMovement(0.0, 0.0, 0.0);
+        player.addEffect(new MobEffectInstance(MobEffects.WATER_BREATHING, 600, 0, false, false, true));
+    }
+
+    private static void fill(ServerLevel world, BlockPos from, BlockPos to, BlockState state) {
+        for (BlockPos at : BlockPos.betweenClosed(from, to)) {
+            world.setBlockAndUpdate(at, state);
+        }
     }
 }

@@ -49,15 +49,18 @@ public class TreeTapBlockEntity extends RandomizableContainerBlockEntity impleme
         this.matchGetter = RecipeManager.createCheck(ParadiseLostRecipeTypes.TREE_TAP_RECIPE_TYPE);
     }
 
-	public void handleUse(Player player, InteractionHand hand, ItemStack handStack) {
+	public boolean handleUse(Player player, InteractionHand hand, ItemStack handStack) {
         ItemStack stored = inventory.getFirst();
         if (!handStack.isEmpty() && stored.isEmpty()) {
             inventory.set(0, handStack.split(1));
-        } else {
+        } else if (!stored.isEmpty()) {
             player.addItem(stored);
             inventory.set(0, ItemStack.EMPTY);
+        } else {
+            return false;
         }
         inventoryChanged();
+        return true;
 	}
 
     public int[] getSlotsForFace(Direction side) {
