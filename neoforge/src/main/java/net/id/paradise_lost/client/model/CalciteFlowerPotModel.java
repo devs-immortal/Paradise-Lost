@@ -1,6 +1,8 @@
 package net.id.paradise_lost.client.model;
 
 import net.id.paradise_lost.ModConstants;
+import net.id.paradise_lost.block.decorative.PotMaterial;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
@@ -12,7 +14,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.client.ChunkRenderTypeSet;
 import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.neoforge.client.model.data.ModelData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +28,10 @@ public class CalciteFlowerPotModel implements BakedModel {
     private static final ResourceLocation SOIL_TEXTURE = ModConstants.locate("block/dirt");
     private static final ResourceLocation VANILLA_POT_TEXTURE = ResourceLocation.withDefaultNamespace("block/flower_pot");
     private static final ResourceLocation VANILLA_SOIL_TEXTURE = ResourceLocation.withDefaultNamespace("block/dirt");
+
+    private static final String CALCITE_VARIANT = PotMaterial.PROPERTY.getName() + "=" + PotMaterial.CALCITE.getSerializedName();
+
+    private static final ChunkRenderTypeSet CUTOUT = ChunkRenderTypeSet.of(RenderType.cutout());
 
     private static final int STRIDE = 8;
 
@@ -52,7 +60,7 @@ public class CalciteFlowerPotModel implements BakedModel {
 
     private static boolean wantsCalcite(String variant) {
         for (String property : variant.split(",")) {
-            if ("calcite=true".equals(property)) {
+            if (CALCITE_VARIANT.equals(property)) {
                 return true;
             }
         }
@@ -103,6 +111,11 @@ public class CalciteFlowerPotModel implements BakedModel {
         }
 
         return out == null ? quads : out;
+    }
+
+    @Override
+    public ChunkRenderTypeSet getRenderTypes(BlockState state, RandomSource rand, ModelData data) {
+        return CUTOUT;
     }
 
     @Override
